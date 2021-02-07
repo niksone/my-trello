@@ -15,26 +15,17 @@ const ColumnWrapper = styled.div`
 const DragColumn = ({title, tasks, id, onAdd}: ColumnProps) => { 
     const state = useSelector((state: RootReducerType) => state.addItem)
     const dispatch = useDispatch()
-    // const ref = useRef(
-    //     {
-    //         dragRef: null,
-    //         dropRef: null
-    //     }
-    // )
-
-
 
     const ref = useRef<HTMLDivElement>(null)
 
-    // const rootRef = useCombinedRefs(dragRef, dropRef)
-
-    console.log('render');
+    // console.log('render');
 
     const [{isDragging}, drag, preview] = useDrag({
         item: {type: 'COLUMN', id, title, tasks},
         collect: monitor => ({
             isDragging: !!monitor.isDragging()
         }),
+        end: () => dispatch({type: 'SET_DRAGGED_LIST', payload: ''})
     })
 
     const [{isOver}, drop] = useDrop({
@@ -42,7 +33,7 @@ const DragColumn = ({title, tasks, id, onAdd}: ColumnProps) => {
         hover(item: DragItem) {
             const dragId = item.id
             const hoverId = id
-            // console.log(`dragId ${JSON.stringify(item)}`);
+
             if(hoverId === dragId){
                 if(state.draggedListId !== dragId){
                     dispatch({type: 'SET_DRAGGED_LIST', payload: dragId})
@@ -52,7 +43,6 @@ const DragColumn = ({title, tasks, id, onAdd}: ColumnProps) => {
             dispatch({type: 'SET_DRAGGED_LIST', payload: dragId})
             dispatch({type: 'MOVE_LIST', payload: {hoverId, dragId}})
         },
-        drop: () => dispatch({type: 'SET_DRAGGED_LIST', payload: ''}), 
         collect: monitor => ({
             isOver: !!monitor.isOver()
         })
@@ -77,3 +67,4 @@ const DragColumn = ({title, tasks, id, onAdd}: ColumnProps) => {
 }
 
 export default DragColumn
+

@@ -8,15 +8,6 @@ interface ColumnContainerProps  {
 
 
 export const ColumnContainer = styled.div<ColumnContainerProps>`
-    /* width: 300px;
-    background-color: ${({isOver}) => isOver ?'grey' : 'lightgrey'};
-    opacity: ${({isOver}) => isOver ? '0.3' : '1'};
-    transform: rotateZ(${({isDragging}) => isDragging ? '5deg' : '0'});
-    height: max-content;
-    margin:10px;
-    /* padding-bottom: 10px; */
-    /* border-radius: 5px;
-    z-index: 0; */
     height: 100%;
 `
 
