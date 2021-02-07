@@ -2,6 +2,7 @@ import React, { MutableRefObject, Ref } from 'react'
 import { isDebuggerStatement } from 'typescript'
 import AddNewItem from '../AddNewItem'
 import Card from '../Card'
+import DragCard from '../Card/DragCard'
 import { AddItemState, Task } from '../redux/reducer'
 import { ColumnCardContainer, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
@@ -26,7 +27,7 @@ const Column = React.forwardRef<HTMLDivElement, ColumnProps>(({title, tasks, id,
                 <ColumnCardContainer>
                     {
                         tasks.map(task =>
-                            <Card text={task.text} key={task.id}/>
+                            <DragCard text={task.text} id={task.id} columnId={id} key={task.id}/>
                         )
                     }
                     <AddNewItem 
