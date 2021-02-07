@@ -28,7 +28,8 @@ function App() {
   const data = useSelector((state: RootReducerType) => state.addItem)
   const ref = useRef(null)
   const dispatch = useDispatch()
-  console.log(`app ${JSON.stringify(data)}`);
+  // console.log(`app ${JSON.stringify(data)}`);
+  // console.log(data);
 
   //   const [{isOver}, drop] = useDrop({
   //     accept: "LIST",
