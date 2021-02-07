@@ -9,11 +9,15 @@ interface AddItemFormProps {
 
 const AddItemForm = ({title, onAdd}: AddItemFormProps) => {
     const [text, setText] = useState('')
+    
+    const handleAddItem = () => {
+        text.trim() !== '' && onAdd(text)
+    }
 
     return (
         <AddItemFormContainer>
             <AddItemFormInput type='text' value={text} onChange={e => setText(e.currentTarget.value)}/>
-            <AddItemFormButton onClick={() => onAdd(text)}>{title}</AddItemFormButton>
+            <AddItemFormButton onClick={handleAddItem}>{title}</AddItemFormButton>
         </AddItemFormContainer>
     )
 }
