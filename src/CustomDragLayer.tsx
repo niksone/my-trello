@@ -13,7 +13,7 @@ const DragLayerContainer = styled.div`
     width: 100%;
     height: 100%;
     z-index: 100;
-    transform: rotateZ('100deg');
+    /* transform: rotateZ('100deg'); */
     pointer-events: none;
 `
 
@@ -27,7 +27,7 @@ const DragLayerContainer = styled.div`
     }
 
     const {x,y} = currentOffset
-    console.log(x, y);
+    // console.log(x, y);
     const transform = `translate(${x}px, ${y}px)`
     return {
         transform,
@@ -42,10 +42,10 @@ export const CustomDragLayer = () => {
         isDragging: monitor.isDragging()
     }))
 
-    console.log(item)
+    // console.log(item)
 
     const renderItem = (item: any) => {
-        console.log(item);
+        // console.log(item);
 
         switch(item.type){
             case 'COLUMN':
@@ -56,6 +56,14 @@ export const CustomDragLayer = () => {
                         tasks={item.tasks}
                         onAdd={() => {}}
                         isDragging={isDragging}
+                    />
+                )
+            case 'CARD':
+                return (
+                    <Card 
+                        id={item.id}
+                        text={item.text}
+                        columnId={item.columnId}
                     />
                 )
         }
@@ -74,14 +82,14 @@ export const CustomDragLayer = () => {
 
 
 
-function collect(monitor: DragLayerMonitor) {
-    return {
-      item: monitor.getItem(),
-      itemType: monitor.getItemType(),
-      currentOffset: monitor.getSourceClientOffset(),
-      isDragging: monitor.isDragging()
-    }
-  }  
+// function collect(monitor: DragLayerMonitor) {
+//     return {
+//       item: monitor.getItem(),
+//       itemType: monitor.getItemType(),
+//       currentOffset: monitor.getSourceClientOffset(),
+//       isDragging: monitor.isDragging()
+//     }
+//   }  
 
 
-export default DragLayer(collect)(CustomDragLayer)
+export default CustomDragLayer
