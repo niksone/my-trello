@@ -1,5 +1,20 @@
 import styled from 'styled-components'
 
+
+export interface AddItemContainerProps {
+    item: AddItemContainerTypes
+}
+
+export type AddItemContainerTypes = 
+    | 'ADDITEM' 
+    | 'COLUMN'
+
+
+export const AddItemContainer = styled.div<AddItemContainerProps>`
+    min-width: ${({item}) => item === 'ADDITEM' ? '300px' : '100%'};
+    padding: ${({item}) => item === 'ADDITEM' ? '5px 10px' : '0'};
+`
+
 export const AddItemButton = styled.button`
     background: none;
     border: none;
@@ -27,4 +42,5 @@ export const AddItemFormButton = styled.button`
     outline: none;
     cursor: pointer;
     padding-top: 5px;
+    text-align: left;
 `

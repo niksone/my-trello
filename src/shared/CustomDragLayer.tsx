@@ -5,7 +5,7 @@ import AddNewItem from './AddNewItem'
 import Card from './Card'
 import Column from './Column'
 import { ColumnContainer, ColumnTitle } from './Column/ColumnElements'
-import {Task} from './redux/reducer'
+import {Task} from '../redux/reducer'
 const DragLayerContainer = styled.div`
     position: absolute;
     left: 0;

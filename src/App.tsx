@@ -1,26 +1,27 @@
 import React, { useEffect, useRef } from 'react';
-import Column from './Column';
+import Column from './shared/Column';
 import styled from 'styled-components'
 import { GlobalStyles } from './globalStyles';
 import { data } from './data';
-import AddNewItem from './AddNewItem';
+import AddNewItem from './shared/AddNewItem';
 import {useDispatch, useSelector} from 'react-redux'
 // import {RootReducerType} from './redux/store'
 import { AddItemState } from './redux/reducer';
 import { RootReducerType } from './redux/store';
 import { useDrop } from 'react-dnd';
-import CustomDragLayer from './CustomDragLayer';
-import DragColumn from './Column/DragColumn';
+import CustomDragLayer from './shared/CustomDragLayer';
+import DragColumn from './shared/Column/DragColumn';
 import {FpsView} from 'react-fps'
+import { BoardContainer } from './shared/BoardContainer';
+import Header from './shared/Header';
 
 const AppContainer = styled.div`
-  background-color: lightblue;
-  display: flex;
-  align-items: flex-start;
   height: 100vh;
-  /* width: 100%; */
-  padding: 10px;
-  overflow-x: scroll;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  grid-template-areas: 
+    'header'
+    'board';
 `
 
 
@@ -41,26 +42,30 @@ function App() {
   // useEffect(() => {console.log(data)}, [data])
   return (
     <AppContainer>
-      <FpsView width={100} height={100} left={0} top={0}/>
-      <GlobalStyles />
-      <CustomDragLayer />
-      {
-        data.lists.map(list => 
-          <DragColumn 
-            title={list.title} 
-            tasks={list.tasks} 
-            id={list.id} 
-            key={list.id}
-            onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
-          />
-        )
-      }
-      <AddNewItem 
-        onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
-        text='Add New List +'
-        formText='Add List'
-      />
-    </ AppContainer>
+      <Header />
+      <BoardContainer>
+        <FpsView width={100} height={100} left={0} top={0}/>
+        <GlobalStyles />
+        <CustomDragLayer />
+        {
+          data.lists.map(list => 
+            <DragColumn 
+              title={list.title} 
+              tasks={list.tasks} 
+              id={list.id} 
+              key={list.id}
+              onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
+            />
+          )
+        }
+        <AddNewItem 
+          onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
+          text='Add New List +'
+          formText='Add List'
+          item='ADDITEM'
+        />
+      </ BoardContainer>
+    </AppContainer>
   );
 }
 

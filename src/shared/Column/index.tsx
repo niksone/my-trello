@@ -3,7 +3,7 @@ import { isDebuggerStatement } from 'typescript'
 import AddNewItem from '../AddNewItem'
 import Card from '../Card'
 import DragCard from '../Card/DragCard'
-import { AddItemState, Task } from '../redux/reducer'
+import { AddItemState, Task } from '../../redux/reducer'
 import { ColumnCardContainer, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
 export interface ColumnProps {
@@ -34,6 +34,7 @@ const Column = React.forwardRef<HTMLDivElement, ColumnProps>(({title, tasks, id,
                         text='Add New Task' 
                         formText='Add Task' 
                         onAdd={text => onAdd(text)}
+                        item='COLUMN'
                     />
                 </ColumnCardContainer>
             </ColumnWrapper>
