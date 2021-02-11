@@ -12,8 +12,9 @@ import { useDrop } from 'react-dnd';
 import CustomDragLayer from './shared/CustomDragLayer';
 import DragColumn from './shared/Column/DragColumn';
 import {FpsView} from 'react-fps'
-import { BoardContainer } from './shared/BoardContainer';
+import { BoardContainer } from './shared/Board/BoardContainer';
 import Header from './shared/Header';
+import Board from './shared/Board';
 
 const AppContainer = styled.div`
   height: 100vh;
@@ -28,7 +29,6 @@ const AppContainer = styled.div`
 function App() {
   const data = useSelector((state: RootReducerType) => state.addItem)
   const ref = useRef(null)
-  const dispatch = useDispatch()
   // console.log(`app ${JSON.stringify(data)}`);
   // console.log(data);
 
@@ -41,31 +41,13 @@ function App() {
   // })
   // useEffect(() => {console.log(data)}, [data])
   return (
-    <AppContainer>
-      <Header />
-      <BoardContainer>
-        <FpsView width={100} height={100} left={0} top={0}/>
-        <GlobalStyles />
-        <CustomDragLayer />
-        {
-          data.lists.map(list => 
-            <DragColumn 
-              title={list.title} 
-              tasks={list.tasks} 
-              id={list.id} 
-              key={list.id}
-              onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
-            />
-          )
-        }
-        <AddNewItem 
-          onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
-          text='Add New List +'
-          formText='Add List'
-          item='ADDITEM'
-        />
-      </ BoardContainer>
-    </AppContainer>
+    <>
+      <GlobalStyles />
+      <AppContainer>
+        <Header />
+        <Board data={data}/>
+      </AppContainer>
+    </>
   );
 }
 
