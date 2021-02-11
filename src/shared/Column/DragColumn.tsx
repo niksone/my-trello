@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
-import {DragItem} from '../redux/reducer'
+import {DragItem} from '../../redux/reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import Column, { ColumnProps } from '.'
 import styled from 'styled-components'
-import { RootReducerType } from '../redux/store'
+import { RootReducerType } from '../../redux/store'
 
 const ColumnWrapper = styled.div`
     height: fit-content;
