@@ -64,6 +64,7 @@ export const CustomDragLayer = () => {
                         id={item.id}
                         text={item.text}
                         columnId={item.columnId}
+                        isDragging={isDragging}
                     />
                 )
         }

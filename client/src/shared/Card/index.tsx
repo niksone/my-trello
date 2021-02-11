@@ -6,12 +6,13 @@ export interface CardProps {
     columnId: string
     text: string
     isOver?: boolean
+    isDragging?: boolean
 }
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(({id, text, columnId, isOver}, ref) => {
+const Card = React.forwardRef<HTMLDivElement, CardProps>(({id, text, columnId, isOver, isDragging}, ref) => {
     // console.log(isOver)
     return (
-        <CardContainer ref={ref} isOver={isOver}>
+        <CardContainer ref={ref} isOver={isOver} isDragging={isDragging}>
             {text}
         </CardContainer>
     )
