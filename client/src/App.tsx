@@ -5,27 +5,34 @@ import {useSelector} from 'react-redux'
 import { RootReducerType } from './redux/store';
 import Header from './shared/Header';
 import Board from './shared/Board';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import RegisterPage from './Auth/RegisterPage';
+import BoardPage from './BoardPage';
+import LoginPage from './Auth/LoginPage';
 
-const AppContainer = styled.div`
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 100px 1fr;
-  grid-template-areas: 
-    'header'
-    'board';
-`
+
 
 function App() {
   const data = useSelector((state: RootReducerType) => state.addItem)
 
   return (
-    <>
+    <Router>
       <GlobalStyles />
-      <AppContainer>
-        <Header />
-        <Board data={data}/>
-      </AppContainer>
-    </>
+      <Switch>
+        <Route path='/' exact>
+          <BoardPage data={data} />
+        </Route>
+
+        <Route path='/register'>
+          <RegisterPage />
+        </Route>
+
+        <Route path='/login'>
+          <LoginPage />
+        </Route>
+      </Switch>
+
+    </Router>
   );
 }
 
