@@ -1,15 +1,46 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 
 const RegisterPage = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmedPassword, setConfirmedPassword] = useState('')
+
+
+    const handleRegister = (e: any) => {
+        e.preventDefault()
+        axios({
+            method: 'POST',
+            data: {email, password},
+            withCredentials: true,
+            url: 'http://localhost:5050/register'
+        }).then(res => console.log(res))
+    }
+
     return (
         <AuthContainer>
             <AuthForm>
                 <AuthFormTitle>Register</AuthFormTitle>
-                <AuthFormInput type='email' placeholder='Enter email'/>
-                <AuthFormInput type='password' placeholder='Enter password'/>
-                <AuthFormInput type='password' placeholder='Submit password'/>
-                <AuthFormButton >Register</AuthFormButton>
+                <AuthFormInput 
+                    type='email' 
+                    placeholder='Enter email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                />
+                <AuthFormInput 
+                    type='password' 
+                    placeholder='Enter password'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <AuthFormInput 
+                    type='password' 
+                    placeholder='Submit password'
+                    value={confirmedPassword}
+                    onChange={e => setConfirmedPassword(e.target.value)}
+                />
+                <AuthFormButton onClick={e => handleRegister(e)}>Register</AuthFormButton>
                 <AuthFormLink to='/login'>
                     Already have the account? Login
                 </AuthFormLink>
