@@ -1,12 +1,8 @@
 import mongoose from 'mongoose'
 
-export interface User {
-    username: string,
-    password: string
-}
 
 const user = new mongoose.Schema({
-    username: {
+    email: {
         type: String,
         unique: true,
     },
