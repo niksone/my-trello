@@ -15,10 +15,12 @@ import User from "./User"
 
 const LocalStrategy = passportLocal.Strategy
 
+const PORT = process.env.PORT || 5000
+
 const app = express()
 
 const link = 'mongodb+srv://niksone-ts:test1234@cluster0.cr0ko.mongodb.net/my-trello?retryWrites=true&w=majority'
-mongoose.connect(link, {
+mongoose.connect(process.env.MONGODB_URI || link, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true   
@@ -35,8 +37,9 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(session({
     secret: 'secretcode',
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: true,
+    maxAge: 1000 * 24 * 60 * 60
 }))
 app.use(cookieParser('secretcode'))
 
@@ -86,6 +89,11 @@ app.post('/register', async (req: Request, res: Response) => {
 
 })
 
+app.get('/user', (req: Request, res: Response) => {
+    console.log(req.user, '=/user')
+    res.send(req.user)
+})
+
 
 
 // app.use((req: Request, res: Response, next: NextFunction) => {
@@ -93,4 +101,12 @@ app.post('/register', async (req: Request, res: Response) => {
 //     next()
 // })
 
-app.listen(5050, () => console.log('app is running'))
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('../../client/build/'))
+}
+
+app.get('*', (req: Request, res: Response) => {
+    res.sendFile('../../client/build')  
+})
+
+app.listen(PORT, () => console.log('app is running'))
