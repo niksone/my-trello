@@ -14,7 +14,7 @@ const RegisterPage = () => {
             method: 'POST',
             data: {email, password},
             withCredentials: true,
-            url: 'http://localhost:5050/register'
+            url: '/register'
         }).then(res => console.log(res))
     }
 

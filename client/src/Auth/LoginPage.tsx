@@ -1,11 +1,17 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
+import { Link, useHistory } from "react-router-dom";
+import useToken from '../useToken';
+import { userContext } from '../Context';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+    const context = useContext(userContext)
+    console.log(context);
+    const history = useHistory()
+
     const handleLogin = (e: any) => {
         e.preventDefault()
         axios({
@@ -15,13 +21,14 @@ const LoginPage = () => {
                 password: password
             },
             withCredentials: true,
-            url: 'http://localhost:5050/login'
+            url: '/login'
         })
-            .then(res => console.log(res.data))
+            .then(res => history.push('/'))
     }
 
     return (
         <AuthContainer>
+            <Link to='/'>Home</Link>
             <AuthForm>
                 <AuthFormTitle>Login</AuthFormTitle>
                 <AuthFormInput 
