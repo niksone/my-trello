@@ -4,16 +4,26 @@ import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, A
 import { Link, useHistory } from "react-router-dom";
 import useToken from '../useToken';
 import { userContext } from '../Context';
+import { loginUser } from '../Context/actions';
+import { useAuthDispatch } from '../Context/context';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const context = useContext(userContext)
-    console.log(context);
+    const {user, isLoading} = useContext(userContext)
+    console.log(user, isLoading);
     const history = useHistory()
+    const dispatch = useAuthDispatch()
+    const {setUser} = useContext(userContext)
 
-    const handleLogin = (e: any) => {
+    const handleLogin = async (e: any) => {
         e.preventDefault()
+        // const payload = {email, password}
+        // try {
+        //     let response = await loginUser(dispatch, payload)
+        // } catch (error) {
+            
+        // }
         axios({
             method: 'POST',
             data: {
@@ -22,8 +32,11 @@ const LoginPage = () => {
             },
             withCredentials: true,
             url: '/login'
-        })
-            .then(res => history.push('/'))
+        }).then(res => {
+            setUser(res.data)
+        }
+        )
+            // .then(res => history.push('/'    \))
     }
 
     return (
