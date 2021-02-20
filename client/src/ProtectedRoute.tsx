@@ -4,13 +4,16 @@ import LoginPage from './Auth/LoginPage'
 import { userContext } from './Context'
 
 const ProtectedRoute = ({component: Component, ...rest}: any) => {
-    const isAuth = useContext(userContext)
-    console.log(isAuth, !!isAuth._id);
+    const {user, isLoading} = useContext(userContext)
+    console.log(user, !!user._id);
     return (
-        
-            isAuth._id
-                ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
-                : <Redirect to='/login' />
+            // isLoading
+            //     ?
+            //         <div></div>
+            //     :
+                    user._id
+                        ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
+                        : <Redirect to='/login' />
 
     )
 }
