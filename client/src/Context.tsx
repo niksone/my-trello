@@ -1,44 +1,37 @@
 import axios from 'axios'
 import React, { createContext, PropsWithChildren, useEffect, useState } from 'react'
-import useToken from './useToken'
 
 export const userContext = createContext<any>({})
 
-const Context = ({children}: PropsWithChildren<{}>) => {
-    // console.log(value);
-    // console.log(JSON.parse(value));
-    // console.log(initialValue)
+const UserContext = ({children}: PropsWithChildren<{}>) => {
     const [user, setUser] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     
-    useEffect(() => {
-        const value = localStorage.getItem('user')
-        const initialValue = value !== null ? JSON.parse(value) : ''
-        if(initialValue){
-            setUser(initialValue)
-            setIsLoading(false)
-        }
-        else{
-            axios({
+    const getUser = async () => {
+        try {
+            const currentUser = await axios({
                 method: 'GET',
                 withCredentials: true,
                 url: '/user'
-            }).then(res => {
-                console.log(res)
-                    setUser(res.data)
-                    localStorage.setItem('user', JSON.stringify(res.data))     
-                    setIsLoading(false)
-                }
-            )
+            })
+
+            const userData = currentUser.data
+            setUser(userData)
+            setIsLoading(false)
+        } catch (error) {
+            console.log(error);
         }
-            console.log(user);       
+    }
+
+    useEffect(() => {
+        getUser()
     }, []) 
 
     return (
-        <userContext.Provider value={{user, setUser, isLoading}}>
+        <userContext.Provider value={{user, getUser, isLoading}}>
             {children}
         </userContext.Provider>
     )
 }
 
-export default Context
+export default UserContext
