@@ -12,19 +12,19 @@ import LoginPage from './Auth/LoginPage';
 import UserContext, { userContext } from './Context';
 import ProtectedRoute from './ProtectedRoute';
 import ProtectedAuthRoute from './ProtectedAuthRoute';
-import Context from './Context';
+import { AuthProvider } from './Context/context';
 
 
 
 function App() {
   const data = useSelector((state: RootReducerType) => state.addItem)
-  const ctx = useContext(userContext)
-  console.log(ctx);
+  // const ctx = useContext(userContext)
+  // console.log(ctx);
 
   return (
     <>
         <GlobalStyles />
-        <Context>
+        <UserContext>
             <Router>
             <Switch>
               <ProtectedRoute path='/' exact component={() => <BoardPage data={data} />} />
@@ -42,7 +42,7 @@ function App() {
               }  */}
             </Switch>
             </Router>
-        </Context>
+        </UserContext>
       </>
       
   );
