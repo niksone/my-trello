@@ -2,10 +2,7 @@ import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 import { Link, useHistory } from "react-router-dom";
-import useToken from '../useToken';
 import { userContext } from '../Context';
-import { loginUser } from '../Context/actions';
-import { useAuthDispatch } from '../Context/context';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
@@ -13,17 +10,11 @@ const LoginPage = () => {
     const {user, isLoading} = useContext(userContext)
     console.log(user, isLoading);
     const history = useHistory()
-    const dispatch = useAuthDispatch()
-    const {setUser} = useContext(userContext)
+    const {getUser} = useContext(userContext)
 
     const handleLogin = async (e: any) => {
         e.preventDefault()
-        // const payload = {email, password}
-        // try {
-        //     let response = await loginUser(dispatch, payload)
-        // } catch (error) {
-            
-        // }
+
         axios({
             method: 'POST',
             data: {
@@ -33,10 +24,8 @@ const LoginPage = () => {
             withCredentials: true,
             url: '/login'
         }).then(res => {
-            setUser(res.data)
-        }
-        )
-            // .then(res => history.push('/'    \))
+            getUser()
+        })
     }
 
     return (
