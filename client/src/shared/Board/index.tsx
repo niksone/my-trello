@@ -20,19 +20,19 @@ const Board = ({data}: BoardProps) => {
             {
             data.lists.map(list => 
                 <DragColumn 
-                title={list.title} 
-                tasks={list.tasks} 
-                id={list.id} 
-                key={list.id}
-                onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
+                    title={list.title} 
+                    tasks={list.tasks} 
+                    id={list.id} 
+                    key={list.id}
+                    onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
                 />
             )
             }
             <AddNewItem
-            onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
-            text='Add New List +'
-            formText='Add List'
-            item='ADDITEM'
+                onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
+                text='Add New List +'
+                formText='Add List'
+                item='ADDITEM'
             />
         </ BoardContainer>
     )
