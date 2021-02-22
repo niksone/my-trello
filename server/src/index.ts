@@ -97,6 +97,7 @@ app.post('/register', async (req: Request, res: Response) => {
 
 app.get('/user', (req: Request, res: Response) => {
     console.log(req.session, '=/user')
+    console.log(req.isAuthenticated(), 'isAuth')
     res.send(req.session)
 })
 
