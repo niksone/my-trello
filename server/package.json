@@ -12,7 +12,8 @@
     "build": "tsc",
     "postinstall": "tsc",
     "startDev": "nodemon --exec ts-node src/index.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "gitHerokuPush": "cd ../ && git subtree push --prefix server heroku master"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^4.1.0",
     "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
