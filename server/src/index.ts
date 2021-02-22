@@ -96,8 +96,8 @@ app.post('/register', async (req: Request, res: Response) => {
 })
 
 app.get('/user', (req: Request, res: Response) => {
-    console.log(req.user, '=/user')
-    res.send(req.user)
+    console.log(req.session, '=/user')
+    res.send(req.session)
 })
 
 
