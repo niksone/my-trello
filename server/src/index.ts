@@ -36,7 +36,7 @@ mongoose.connect(process.env.MONGODB_URI || link, {
     console.log('connect to mongodb')
 })
 
-app.use(cors({origin: whitelist, credentials: }))
+app.use(cors({origin: whitelist, credentials: true}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(session({
