@@ -69,10 +69,6 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
             ? res.send('No user')
             : req.logIn(user, (err: Error) => {
                 if(err) next(err)
-                if(req.session.passport.id){
-                    
-                }
-                req.session.passport.id === user
                 res.send(user)
             })
     })(req, res, next)
@@ -101,6 +97,11 @@ app.post('/register', async (req: Request, res: Response) => {
         }
     })
 
+})
+
+app.get('/isAuth', (req: Request, res: Response) => {
+    console.log(req.isAuthenticated(), 'auth')
+    res.send(req.isAuthenticated())
 })
 
 app.get('/user', (req: Request, res: Response) => {
