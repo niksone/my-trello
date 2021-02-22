@@ -6,6 +6,7 @@ const passport = require('passport')
 const passportLocal = require('passport-local')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const cookieSession = require('cookie-session')
 const bcrypt = require('bcryptjs')
 const dotenv = require('dotenv')
 const passportConfig = require('./passportConfig')
@@ -42,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI || link, {
 app.use(cors({origin: whitelist, credentials: true}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(session({
+app.use(cookieSession({
     secret: 'secretcode',
     name: 'user',
     resave: false,
