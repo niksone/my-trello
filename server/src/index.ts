@@ -36,7 +36,7 @@ mongoose.connect(process.env.MONGODB_URI || link, {
     if(error){
         console.log(error)
         throw error
-    } 
+    }
     console.log('connect to mongodb')
 })
 
