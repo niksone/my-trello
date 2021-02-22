@@ -9,6 +9,7 @@ const session = require('express-session')
 const bcrypt = require('bcryptjs')
 const dotenv = require('dotenv')
 const passportConfig = require('./passportConfig')
+const MongoStore = require('connect-mongo').default
 import { NextFunction, Request, Response } from "express"
 import User from "./User"
 
@@ -43,7 +44,8 @@ app.use(session({
     secret: 'secretcode',
     resave: false,
     saveUninitialized: true,
-    maxAge: 1000 * 24 * 60 * 60
+    maxAge: 1000 * 24 * 60 * 60,
+    store: MongoStore.create({mongoUrl: link})
 }))
 app.use(cookieParser('secretcode'))
 
