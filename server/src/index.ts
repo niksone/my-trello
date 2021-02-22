@@ -16,7 +16,12 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-const whitelist = ['http://localhost:3000', '']
+const whitelist = [
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'https://wizardly-roentgen-09e599.netlify.app/', 
+    'https://nikita-trello.herokuapp.com/'
+]
 
 const corsOptions = {
   origin: function (origin: any, callback: any) {
