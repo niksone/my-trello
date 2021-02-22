@@ -43,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI || link, {
 app.use(cors({origin: whitelist, credentials: true}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(cookieSession({
+app.use(session({
     secret: 'secretcode',
     name: 'user',
     resave: false,
