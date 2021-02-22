@@ -19,8 +19,8 @@ const app = express()
 const whitelist = [
     'http://localhost:3000',
     'http://localhost:5000',
-    'https://wizardly-roentgen-09e599.netlify.app/', 
-    'https://nikita-trello.herokuapp.com/'
+    'https://wizardly-roentgen-09e599.netlify.app', 
+    'https://nikita-trello.herokuapp.com'
 ]
 
 const corsOptions = {
