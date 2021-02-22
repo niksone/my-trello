@@ -43,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI || link, {
 app.use(cors({origin: whitelist, credentials: true}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(cookieSession({
+app.use(session({
     secret: 'secretcode',
     name: 'user',
     resave: false,
@@ -69,6 +69,10 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
             ? res.send('No user')
             : req.logIn(user, (err: Error) => {
                 if(err) next(err)
+                if(req.session.passport.id){
+                    
+                }
+                req.session.passport.id === user
                 res.send(user)
             })
     })(req, res, next)
