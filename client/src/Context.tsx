@@ -19,6 +19,7 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
             const userData = currentUser.data
             setUser(userData)
             setIsLoading(false)
+            console.log(user);
         } catch (error) {
             console.log(error);
         }
