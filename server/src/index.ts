@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-app.set('trust proxy', true)
+app.set('trust proxy', 1)
 
 const whitelist = [
     'http://localhost:3000',
@@ -44,12 +44,13 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(session({
     secret: 'secretcode',
+    name: 'user',
     resave: false,
     saveUninitialized: true,
     maxAge: 1000 * 24 * 60 * 60,
     store: MongoStore.create({mongoUrl: link})
 }))
-app.use(cookieParser('secretcode'))
+// app.use(cookieParser('secretcode'))
 
 app.use(passport.initialize())
 app.use(passport.session())
