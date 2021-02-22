@@ -106,6 +106,7 @@ app.get('/isAuth', (req: Request, res: Response) => {
 
 app.get('/user', (req: Request, res: Response) => {
     console.log(req.user, '=/user')
+    console.log(req, '------------req')
     res.send(req.session)
 })
 
