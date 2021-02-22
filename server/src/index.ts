@@ -10,15 +10,24 @@ const bcrypt = require('bcryptjs')
 const dotenv = require('dotenv')
 const passportConfig = require('./passportConfig')
 import { NextFunction, Request, Response } from "express"
-
 import User from "./User"
-
-const LocalStrategy = passportLocal.Strategy
 
 const PORT = process.env.PORT || 5000
 
 const app = express()
 
+const whitelist = ['http://localhost:3000', '']
+
+const corsOptions = {
+  origin: function (origin: any, callback: any) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}
 const link = 'mongodb+srv://niksone-ts:test1234@cluster0.cr0ko.mongodb.net/my-trello?retryWrites=true&w=majority'
 mongoose.connect(process.env.MONGODB_URI || link, {
     useCreateIndex: true,
@@ -32,7 +41,7 @@ mongoose.connect(process.env.MONGODB_URI || link, {
     console.log('connect to mongodb')
 })
 
-app.use(cors({credentials: true}))
+app.use(cors(corsOptions))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(session({
