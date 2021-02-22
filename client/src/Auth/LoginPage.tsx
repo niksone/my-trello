@@ -26,6 +26,7 @@ const LoginPage = () => {
             url: `${websiteInfo.serverUrl}/login`
         }).then(res => {
             getUser()
+            console.log(res.data);
         })
     }
 
