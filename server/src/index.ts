@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
 const dotenv = require('dotenv')
-
+const passportConfig = require('./passportConfig')
 import { NextFunction, Request, Response } from "express"
 
 import User from "./User"
@@ -45,8 +45,8 @@ app.use(cookieParser('secretcode'))
 
 app.use(passport.initialize())
 app.use(passport.session())
-
-require('./passportConfig.ts')(passport)
+passportConfig(passport)
+// require('./passportConfig.ts')(passport)
 // Passport
 
 
@@ -109,4 +109,4 @@ app.get('/user', (req: Request, res: Response) => {
 //     res.sendFile('../../client/build')  
 // })
 
-app.listen(PORT, () => console.log('app is running'))
+app.listen(PORT, () => console.log(`app is running on ${PORT}`))
