@@ -20,7 +20,7 @@ const app = express()
 
 declare module 'express-session' {
     export interface SessionData {
-      user: UserI | string;
+      user: UserI | {};
     }
   }
 
@@ -78,7 +78,7 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
                 if(req.session.user){
                     req.session.user = user
                 }else{
-                    req.session.user = ''
+                    req.session.user = {}
                 }
                 req.session.save(err => {
                     console.log(req.session)
