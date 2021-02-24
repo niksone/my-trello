@@ -69,7 +69,10 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
             ? res.send('No user')
             : req.logIn(user, (err: Error) => {
                 if(err) next(err)
-                res.send(user)
+                req.session.save(err => {
+                    console.log(req.session)
+                    res.send(user)
+                })
             })
     })(req, res, next)
 })
