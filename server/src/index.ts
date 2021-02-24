@@ -18,6 +18,12 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
+declare module 'express-session' {
+    export interface SessionData {
+      user: UserI | string;
+    }
+  }
+
 app.set('trust proxy', 1)
 
 const whitelist = [
@@ -69,6 +75,11 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
             ? res.send('No user')
             : req.logIn(user, (err: Error) => {
                 if(err) next(err)
+                if(req.session.user){
+                    req.session.user = user
+                }else{
+                    req.session.user = ''
+                }
                 req.session.save(err => {
                     console.log(req.session)
                     res.send(user)
