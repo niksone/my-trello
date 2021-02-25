@@ -13,7 +13,7 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
             const currentUser = await axios({
                 method: 'GET',
                 withCredentials: true,
-                url: `${websiteInfo.serverUrl}/user`
+                url: `/user`
             })
 
             const userData = currentUser.data

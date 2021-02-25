@@ -23,7 +23,7 @@ const LoginPage = () => {
                 password: password
             },
             withCredentials: true,
-            url: `${websiteInfo.serverUrl}/login`
+            url: `/login`
         }).then(res => {
             getUser()
             console.log(res.data);
