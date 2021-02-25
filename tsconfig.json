@@ -2,7 +2,7 @@
     "compilerOptions": {
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
+        "baseUrl": "./src",
         "outDir": "dist",
         "module": "commonjs",
         "target": "es5",
@@ -17,4 +17,7 @@
         "noImplicitAny": false,
         "strictNullChecks": true
     },
+    "exclude": [
+        "./client/"
+    ]
 }

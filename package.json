@@ -9,12 +9,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
     "startDev": "nodemon --exec ts-node src/index.ts",
     "start": "node dist/index.js",
-    "install-client": "cd client && npm install ",
-    "build-client": "cd client && npm run build",
-    "heroku-postbuild": "npm run install-client && npm run build-client && npm run build",
+    "install-client": "npm install --prefix client",
+    "build-client": "npm run build --prefix client",
+    "heroku-postbuild": "npm run install-client && npm run build-client && tsc && cp -r client/build dist/client",
     "gitHerokuPush": "git subtree push --prefix server heroku master"
   },
   "author": "",
