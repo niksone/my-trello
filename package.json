@@ -12,7 +12,7 @@
     "build": "tsc",
     "startDev": "nodemon --exec ts-node src/index.ts",
     "start": "node dist/index.js",
-    "heroku-postbuild": "cd client && npm install only=dev && npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "gitHerokuPush": "git subtree push --prefix server heroku master"
   },
   "author": "",
