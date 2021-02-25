@@ -1,18 +1,17 @@
 import React, { useContext } from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import LoginPage from './Auth/LoginPage'
 import { userContext } from './Context'
 
 const ProtectedAuthRoute = ({component: Component, ...rest}: any) => {
     const {user, isLoading} = useContext(userContext)
-    console.log(user, !!user);
+    console.log(user);
     // console.log(localStorage.getItem('user'));
     return (
         // isLoading
         //     ?
         //         <div></div>
         //     :
-            !user._id
+            !user
                 ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
                 : <Redirect to='/' />
 

@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "14.15.5",
+    "npm": "7.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startDev": "nodemon --exec ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "install-client": "npm install --prefix client",
+    "build-client": "npm run build --prefix client",
+    "heroku-postbuild": "npm run install-client && npm run build-client && tsc && cp -r client/build dist/client",
+    "gitHerokuPush": "git subtree push --prefix server heroku master"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.1.0",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.15",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/express-session": "^1.17.3",
+    "@types/mongoose": "^5.10.3",
+    "@types/passport": "^1.0.6",
+    "@types/passport-local": "^1.0.33",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  }
+}

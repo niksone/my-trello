@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { createContext, PropsWithChildren, useEffect, useState } from 'react'
-import { websiteInfo } from './websiteInfo'
 
 export const userContext = createContext<any>({})
 
@@ -13,10 +12,10 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
             const currentUser = await axios({
                 method: 'GET',
                 withCredentials: true,
-                url: `${websiteInfo.serverUrl}/user`
+                url: `/user`
             })
 
-            const userData = currentUser.data
+            const userData = currentUser.data.passport.user
             setUser(userData)
             setIsLoading(false)
             console.log(currentUser);

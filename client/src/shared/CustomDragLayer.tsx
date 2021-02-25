@@ -67,6 +67,7 @@ export const CustomDragLayer = () => {
                         isDragging={isDragging}
                     />
                 )
+            default: return <div></div>
         }
     }
     return (
