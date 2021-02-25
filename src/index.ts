@@ -19,14 +19,11 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-app.use(express.static(path.join(__dirname, "client")))
-
-declare module 'express-session' {
-    export interface SessionData {
-      user: UserI | {};
-    }
-  }
-
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, "client")))
+}else{
+    app.use(cors({url: 'http://localhost:3000', credentials: true}))
+}
 app.set('trust proxy', 1)
 
 const link = 'mongodb+srv://niksone-ts:test1234@cluster0.cr0ko.mongodb.net/my-trello?retryWrites=true&w=majority'
@@ -73,11 +70,11 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
             ? res.send('No user')
             : req.logIn(user, (err: Error) => {
                 if(err) next(err)
-                if(req.session.user){
-                    req.session.user = user
-                }else{
-                    req.session.user = {}
-                }
+                // if(req.session.user){
+                //     req.session.user = user
+                // }else{
+                //     req.session.user = {}
+                // }
                 req.session.save(err => {
                     console.log(req.session)
                     res.send(user)
@@ -117,15 +114,18 @@ app.get('/isAuth', (req: Request, res: Response) => {
 })
 
 app.get('/user', (req: Request, res: Response) => {
-    console.log(req.user, '=/user')
-    console.log(req, '------------req')
-    console.log(req.session, '------------session----------------')
     res.send(req.session)
 })
 
-app.get("*", (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "client", "index.html"));
-});
+app.post('/logout', (req: Request, res: Response) => {
+    req.logOut()
+    res.send('log out')
+})
+
+if(process.env.NODE_ENV === 'production')
+    app.get("*", (req: Request, res: Response) => {
+        res.sendFile(path.join(__dirname, "client", "index.html"));
+    });
 
 
 // app.use((req: Request, res: Response, next: NextFunction) => {
