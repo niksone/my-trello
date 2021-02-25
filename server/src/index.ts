@@ -55,7 +55,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     maxAge: 1000 * 24 * 60 * 60,
-    store: MongoStore.create({mongoUrl: link})
+    store: MongoStore.create({mongoUrl: link}),
+    cookie: {
+        secure: true
+    }
 }))
 // app.use(cookieParser('secretcode'))
 
