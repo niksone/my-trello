@@ -29,13 +29,6 @@ declare module 'express-session' {
 
 app.set('trust proxy', 1)
 
-// const whitelist = [
-//     'http://localhost:3000',
-//     'http://localhost:5000',
-//     'https://wizardly-roentgen-09e599.netlify.app', 
-//     'https://nikita-trello.herokuapp.com'
-// ]
-
 const link = 'mongodb+srv://niksone-ts:test1234@cluster0.cr0ko.mongodb.net/my-trello?retryWrites=true&w=majority'
 mongoose.connect(process.env.MONGODB_URI || link, {
     useCreateIndex: true,
@@ -49,7 +42,6 @@ mongoose.connect(process.env.MONGODB_URI || link, {
     console.log('connect to mongodb')
 })
 
-// app.use(cors({origin: whitelist, credentials: true}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(session({
