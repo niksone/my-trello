@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 import { Link, useHistory } from "react-router-dom";
 import { userContext } from '../Context';
-import { websiteInfo } from '../websiteInfo';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')

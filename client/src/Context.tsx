@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { createContext, PropsWithChildren, useEffect, useState } from 'react'
-import { websiteInfo } from './websiteInfo'
 
 export const userContext = createContext<any>({})
 
