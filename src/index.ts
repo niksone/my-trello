@@ -10,6 +10,7 @@ const cookieSession = require('cookie-session')
 const bcrypt = require('bcryptjs')
 const dotenv = require('dotenv')
 const passportConfig = require('./passportConfig')
+const path = require("path")
 const MongoStore = require('connect-mongo').default
 import { NextFunction, Request, Response } from "express"
 import User from "./User"
@@ -17,6 +18,8 @@ import User from "./User"
 const PORT = process.env.PORT || 5000
 
 const app = express()
+
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 declare module 'express-session' {
     export interface SessionData {
@@ -128,6 +131,9 @@ app.get('/user', (req: Request, res: Response) => {
     res.send(req.session)
 })
 
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 
 // app.use((req: Request, res: Response, next: NextFunction) => {
