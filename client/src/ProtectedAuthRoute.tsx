@@ -12,7 +12,7 @@ const ProtectedAuthRoute = ({component: Component, ...rest}: any) => {
         //     ?
         //         <div></div>
         //     :
-            !user._id
+            !user.user
                 ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
                 : <Redirect to='/' />
 
