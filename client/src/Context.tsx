@@ -16,7 +16,7 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
                 url: `/user`
             })
 
-            const userData = currentUser.data
+            const userData = currentUser.data.passport.user
             setUser(userData)
             setIsLoading(false)
             console.log(currentUser);
