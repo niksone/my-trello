@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
-app.use(express.static(path.join(__dirname, "cleint")))
+app.use(express.static(path.join(__dirname, "client")))
 
 declare module 'express-session' {
     export interface SessionData {
