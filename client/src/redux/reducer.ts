@@ -1,5 +1,7 @@
 import {v4 as uuid} from 'uuid'
 import { data } from '../data'
+import { moveItem } from '../utils/moveItem'
+import { moveItemBetweenLists } from '../utils/moveItemBetweenLists'
 import { Action } from './actions'
 
 export interface Task {
@@ -10,11 +12,12 @@ export interface Task {
 export interface List {
     id: string,
     title: string,
-    tasks: Task[]
+    tasks: Task[],
 }
 
 export interface AddItemState {
     lists: List[],
+    taskIds: string[],
     draggedListId: string,
     draggedCardId: string
 }
@@ -40,15 +43,19 @@ const findIndex = <T extends List | Task>(id: string, array: T[]  ) => {
     return array.findIndex((item: T )=> item.id === id)
 }
 
+const getTasks = (lists: List[]) => {
+    return lists.map(list => list.tasks).flat().map(task => task.id)
+}
+
 // const find
 
-export const moveItem = <T>(array: T[], from: number, to: number) => {
-    const startIndex = to < 0 ? array.length + to : to;
-    const item = array.splice(from, 1)[0]
-    array.splice(startIndex, 0, item)
+// export const moveItem = <T>(array: T[], from: number, to: number) => {
+//     const startIndex = to < 0 ? array.length + to : to;
+//     const item = array.splice(from, 1)[0]
+//     array.splice(startIndex, 0, item)
     
-    return array
-}
+//     return array
+// }
 
 const moveItemToList = <T>(arrFrom: T[], arrTo: T[], from: number, to: number) => {
     const startIndex = from < 0 ? arrFrom.length + from : from;
@@ -75,43 +82,49 @@ export const addItemReducer = (state: AddItemState = data, action: Action): AddI
             console.log(action.payload.listId, state.lists)
             state.lists[line].tasks.push({text: action.payload.text, id: uuid()})
             console.log('state add task')
+            state.taskIds = getTasks(state.lists)
             return{   
                     ...state,
                 }
         }
 
         case 'MOVE_LIST': {
-            const {dragId, hoverId} = action.payload
-            const dragIndex = findIndex(dragId, state.lists)
-            const hoverIndex = findIndex(hoverId, state.lists)
-            // console.log(dragIndex, hoverIndex)
+            const {sourceIndex, destIndex} = action.payload
+
             
-            state.lists = moveItem(state.lists, dragIndex, hoverIndex)
+            moveItem(state.lists, sourceIndex, destIndex)
             return {...state}
         }
 
         case 'MOVE_CARD': {
-            const {dragId, hoverId, hoverColumnId, dragColumnId} = action.payload
-            console.log(dragId, hoverId, hoverColumnId, dragColumnId)
-            const hoverColumnIndex = findIndex(hoverColumnId, state.lists)
-            const dragColumnIndex = findIndex(dragColumnId, state.lists)
+            const {sourceDroppableId, destDroppableId, sourceIndex, destIndex} = action.payload
 
-            const dragIndex = findIndex(dragId, state.lists[dragColumnIndex].tasks)
-            const hoverIndex = findIndex(hoverId, state.lists[hoverColumnIndex].tasks)
-            // const hoverIndex
-            // const dragIndex = findId(dragId, state.lists)
-            console.log('id', dragId, hoverId, hoverColumnId, dragColumnId   )
-            if(hoverColumnIndex === dragColumnIndex) {
-                moveItem(state.lists[hoverColumnIndex].tasks, dragIndex, hoverIndex)
-            } else{
-                // const item = state.lists[dragColumnIndex].tasks.splice(dragIndex ,1)[0]
-                // state.lists[hoverColumnIndex].tasks.splice(hoverIndex, 0, item)
-                moveItemToList(state.lists[dragColumnIndex].tasks, state.lists[hoverColumnIndex].tasks, dragIndex, hoverIndex)
+            if(destDroppableId === sourceDroppableId){
+                const arrIndex = state.lists.findIndex(list => list.id === sourceDroppableId)
+                const sourceTaskIndex = state.lists[arrIndex].tasks.findIndex(task => task.id === state.taskIds[sourceIndex])
+                const destTaskIndex = state.lists[arrIndex].tasks.findIndex(task => task.id === state.taskIds[destIndex])
+                
+                moveItem(state.lists[arrIndex].tasks, sourceTaskIndex, destTaskIndex)
+                state.taskIds = getTasks(state.lists)
+                console.log(state.taskIds)
+                console.log(state, action.payload, sourceTaskIndex, destTaskIndex)
+                return {...state}
             }
-            // console.log(state.lists[dragColumnIndex])
-            // console.log(state.lists[hoverColumnIndex])
-            // state.lists = moveItem(state.lists, dragIndex, hoverIndex)
-            // console.log(state)
+            const destArrIndex = state.lists.findIndex(list => list.id === destDroppableId)
+            const sourceArrIndex = state.lists.findIndex(list => list.id === sourceDroppableId)
+            
+            const sourceTaskIndex = state.lists[sourceArrIndex].tasks.findIndex(
+                task => task.id === state.taskIds[sourceIndex]
+            )
+            const destTaskIndex = state.lists[destArrIndex].tasks.findIndex(
+                task => task.id === (state.taskIds[destIndex] && state.taskIds[destIndex])
+            )
+    
+            const checkedDestTaskIndex = destTaskIndex < 0 ? state.lists[destArrIndex].tasks.length : destTaskIndex
+    
+            moveItemBetweenLists(state.lists[sourceArrIndex].tasks, state.lists[destArrIndex].tasks, sourceTaskIndex, checkedDestTaskIndex)
+            state.taskIds = getTasks(state.lists)
+            console.log(state, action.payload, sourceTaskIndex, checkedDestTaskIndex)
             return {...state}
         }
 
