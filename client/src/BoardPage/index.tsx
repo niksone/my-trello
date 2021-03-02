@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { AddItemState } from '../redux/reducer'
 import Board from '../shared/Board'
+import BeautifulBoard from '../shared/Board/BeautifulBoard'
 import Header from '../shared/Header'
 
 
@@ -21,7 +22,8 @@ const BoardPage = ({data}: BoardPageProps) => {
     return (
         <AppContainer>
             <Header />
-            <Board data={data}/> 
+            <BeautifulBoard data={data}/>
+            {/* <Board data={data}/>  */}
         </AppContainer>
     )
 }
