@@ -9,6 +9,7 @@ export const BoardContainer = styled.div`
   /* width: 100%; */
   padding: 10px;
   overflow-x: scroll;
+  position: relative;
 `
 
 export const BoardWrapper = styled.div`
