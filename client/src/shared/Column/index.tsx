@@ -11,6 +11,7 @@ export interface ColumnProps {
     tasks: Task[],
     id: string,
     onAdd(text: string): any,
+    index: number,
     titleRef?: HTMLDivElement,
     isOver?: boolean
     isDragging?: boolean
