@@ -9,7 +9,6 @@ const LoginPage = () => {
     const [password, setPassword] = useState('')
     const {user, isLoading} = useContext(userContext)
     console.log(user, isLoading);
-    const history = useHistory()
     const {getUser} = useContext(userContext)
 
     const handleLogin = async (e: any) => {
@@ -25,7 +24,6 @@ const LoginPage = () => {
             url: `/login`
         }).then(res => {
             getUser()
-            console.log(res.data);
         })
     }
 
