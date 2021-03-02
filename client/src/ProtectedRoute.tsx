@@ -5,7 +5,6 @@ import { userContext } from './Context'
 
 const ProtectedRoute = ({component: Component, ...rest}: any) => {
     const {user, isLoading} = useContext(userContext)
-    console.log(user);
     return (
             // isLoading
             //     ?
