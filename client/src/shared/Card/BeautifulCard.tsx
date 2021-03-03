@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useSelector } from 'react-redux'
 import { Task } from '../../redux/reducer'
 import { RootReducerType } from '../../redux/store'
-import { CardContainer } from './CardElements'
+import { ResizeableTextArea } from '../ResizableTextArea'
+import { CardContainer, EditButton } from './CardElements'
 
 
 interface CardPropsI {
@@ -15,6 +16,10 @@ interface CardPropsI {
 const BeautifulCard = ({taskId, task}: CardPropsI) => {
   const {taskIds} = useSelector((state: RootReducerType) => state.addItem)
   const index = taskIds.findIndex(task => task === taskId)
+  const [isEdit, setIsEdit] = useState(false)
+  const handleEdit = () => {
+    setIsEdit(!isEdit)
+  }
 
     return (
         <Draggable draggableId={taskId} index={index} key={taskId}>
@@ -24,7 +29,11 @@ const BeautifulCard = ({taskId, task}: CardPropsI) => {
             {...provided.dragHandleProps}
             {...provided.draggableProps}
           >
-            {task.text}
+            {!isEdit 
+              ? task.text
+              : <ResizeableTextArea />
+            }
+            <EditButton onClick={handleEdit}/>
           </CardContainer>
         )}
       </Draggable>

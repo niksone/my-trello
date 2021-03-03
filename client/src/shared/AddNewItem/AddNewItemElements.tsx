@@ -21,6 +21,8 @@ export const AddItemButton = styled.button`
     outline: none;
     cursor: pointer;
     padding-top: 10px;
+    width: 100%;
+    text-align: left;
 `
 
 export const AddItemFormContainer = styled.div`
@@ -28,13 +30,15 @@ export const AddItemFormContainer = styled.div`
     /* width: 100%; */
 `
 
-export const AddItemFormInput= styled.input`
+export const AddItemFormWrapper= styled.div`
     width: 100%;
-    padding: 5px;
+    padding: 5px 10px;
     outline: none;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
+    background-color: #fff;
 `
+
 
 export const AddItemFormButton = styled.button`
     background: none;
