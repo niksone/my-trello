@@ -15,7 +15,6 @@ import ProtectedAuthRoute from './ProtectedAuthRoute';
 
 function App() {
   const data = useSelector((state: RootReducerType) => state.addItem)
-
   return (
     <>
         <GlobalStyles />

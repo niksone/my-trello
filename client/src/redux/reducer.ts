@@ -47,24 +47,6 @@ const getTasks = (lists: List[]) => {
     return lists.map(list => list.tasks).flat().map(task => task.id)
 }
 
-// const find
-
-// export const moveItem = <T>(array: T[], from: number, to: number) => {
-//     const startIndex = to < 0 ? array.length + to : to;
-//     const item = array.splice(from, 1)[0]
-//     array.splice(startIndex, 0, item)
-    
-//     return array
-// }
-
-const moveItemToList = <T>(arrFrom: T[], arrTo: T[], from: number, to: number) => {
-    const startIndex = from < 0 ? arrFrom.length + from : from;
-    
-    console.log(arrFrom, arrTo, startIndex, to)
-    const item = arrFrom.splice(startIndex, 1)[0]
-    arrTo.splice(to, 0, item)
-}
-
 export const addItemReducer = (state: AddItemState = data, action: Action): AddItemState => {
     switch(action.type) {
         case 'ADD_LIST':{
