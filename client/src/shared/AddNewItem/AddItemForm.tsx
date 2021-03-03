@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { ResizeableTextArea } from '../ResizableTextArea'
+import ResizableTextArea from '../ResizableTextArea'
 import { AddItemButton, AddItemFormButton, AddItemFormContainer,AddItemFormWrapper } from './AddNewItemElements'
 
 
@@ -12,12 +12,13 @@ const AddItemForm = ({title, onAdd}: AddItemFormProps) => {
     const test = useRef<HTMLSpanElement>(null)
     const handleAddItem = () => {
         const text = test?.current?.innerHTML || '';
+        console.log(text);
         text.trim() !== '' && onAdd(text)
     }
 
     return (
         <AddItemFormContainer>
-            <AddItemFormWrapper><ResizeableTextArea ref={test}/></AddItemFormWrapper>
+            <AddItemFormWrapper><ResizableTextArea ref={test}/></AddItemFormWrapper>
             {/* <AddItemFormInput type='text' value={text} onChange={e => setText(e.currentTarget.value)}/> */}
             <AddItemFormButton onClick={handleAddItem}>{title}</AddItemFormButton>
         </AddItemFormContainer>

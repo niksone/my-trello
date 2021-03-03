@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-export const ResizeableTextArea = styled.span`
+export const ResizeableTextAreaContainer = styled.span`
     display: block;
     overflow: hidden;
     resize: both;
@@ -19,14 +19,14 @@ export const ResizeableTextArea = styled.span`
 //   }
 
 interface ResizableTextAreaProps {
-    children: React.ReactChildren
+    children?: React.ReactChildren
 }
 
 const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children}, ref) => {
     return (
-        <ResizeableTextArea contentEditable role="textbox" ref={ref}>
+        <ResizeableTextAreaContainer contentEditable role="textbox" ref={ref}>
             {children}
-        </ResizeableTextArea>
+        </ResizeableTextAreaContainer>
     )
 })
 

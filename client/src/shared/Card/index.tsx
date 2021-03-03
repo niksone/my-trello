@@ -13,7 +13,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(({id, text, columnId, i
     // console.log(isOver)
     return (
         <CardContainer ref={ref} isOver={isOver} isDragging={isDragging}>
-            {text}
+            <p>{text}</p>
         </CardContainer>
     )
 })

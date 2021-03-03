@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import { useSelector } from 'react-redux'
 import { Task } from '../../redux/reducer'
 import { RootReducerType } from '../../redux/store'
-import { ResizeableTextArea } from '../ResizableTextArea'
+import ResizableTextArea from '../ResizableTextArea'
 import { CardContainer, EditButton } from './CardElements'
 
 
@@ -31,7 +31,7 @@ const BeautifulCard = ({taskId, task}: CardPropsI) => {
           >
             {!isEdit 
               ? task.text
-              : <ResizeableTextArea />
+              : <ResizableTextArea />
             }
             <EditButton onClick={handleEdit}/>
           </CardContainer>
