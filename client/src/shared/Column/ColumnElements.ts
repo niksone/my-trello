@@ -32,6 +32,7 @@ export const ColumnTitleContainer = styled.div`
 export const ColumnTitle = styled.p`
     text-align: left;
     font-weight: bold;
+    word-break: break-word;
 `
 
 export const ColumnCardContainer = styled.div`
@@ -43,5 +44,4 @@ export const ColumnCardContainer = styled.div`
 `
 
 export const ColumnCardWrapper = styled.div`
-
 `
