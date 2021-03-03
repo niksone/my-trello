@@ -47,6 +47,7 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                                   key={task.id}
                                 />
                             ))}
+                            {provided.placeholder}
                             </ColumnCardWrapper>
                             <AddNewItem 
                               text='Add New Task' 
@@ -55,7 +56,6 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                               item='COLUMN'
                             />
                           </ColumnCardContainer>
-                          {provided.placeholder}
                         </ColumnWrapper>
                       )}
                     </Droppable>
