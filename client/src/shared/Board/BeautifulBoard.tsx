@@ -33,32 +33,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
         dispatch({type: 'MOVE_LIST', payload: {sourceIndex, destIndex}})
         return 
       }else{
-        // if(destination.droppableId === source.droppableId){
-        //   const arrIndex = lists.findIndex(list => list.id === source.droppableId)
-        //   const sourceTaskIndex = lists[arrIndex].tasks.findIndex(task => task.id === tasks[source.index].id)
-        //   const destTaskIndex = lists[arrIndex].tasks.findIndex(task => task.id === tasks[destination.index].id)
-          
-        //   moveItem(lists[arrIndex].tasks, sourceTaskIndex, destTaskIndex)
-  
-        //   const resTasks = lists.map(list => list.tasks).flat()
-        //   setTasks(resTasks)
-        //   return
-        // }
-        // const destArrIndex = lists.findIndex(list => list.id === destination.droppableId)
-        // const sourceArrIndex = lists.findIndex(list => list.id === source.droppableId)
-        
-        // const sourceTaskIndex = lists[sourceArrIndex].tasks.findIndex(
-        //   task => task.id === tasks[source.index].id
-        // )
-        // const destTaskIndex = lists[destArrIndex].tasks.findIndex(
-        //   task => task.id === (tasks[destination.index] && tasks[destination.index].id)
-        // )
-  
-        // const destIndex = destTaskIndex < 0 ? lists[destArrIndex].tasks.length : destTaskIndex
-  
-        // moveItemBetweenLists(lists[sourceArrIndex].tasks, lists[destArrIndex].tasks, sourceTaskIndex, destIndex)
-          
-        // setTasks(resTasks)
         const sourceDroppableId = source.droppableId
         const destDroppableId = destination.droppableId
         const sourceIndex = source.index
