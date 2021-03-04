@@ -123,6 +123,23 @@ export const addItemReducer = (state: AddItemState = data, action: Action): AddI
                 ...state,
                 draggedCardId: action.payload
             }
+            break;
+
+        case 'EDIT_CARD': {
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
+            state.lists[columnIndex].tasks[taskIndex].text = action.payload.text
+
+            return {...state}
+        }
+
+        case 'DELETE_CARD':{
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
+            state.lists[columnIndex].tasks.splice(taskIndex, 1)
+            return {...state}
+        }
+    
 
         default:
             return state
