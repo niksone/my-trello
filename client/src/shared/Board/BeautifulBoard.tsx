@@ -58,6 +58,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                     key={list.id}
                     tasks={list.tasks}
                     taskIds={taskIds}
+                    id={list.id}
                     onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
                   />
                 ))}
