@@ -100,24 +100,19 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
                 email,
                 password: hashedPassword
             })
-        
+
             await newUser.save()
             req.logIn(user, (err: Error) => {
                 if(err) next(err)
-                // if(req.session.user){
-                //     req.session.user = user
-                // }else{
-                //     req.session.user = {}
-                // }
                 req.session.save(err => {
                     console.log(req.session)
                     res.send(user)
                 })
-            res.send(newUser)        
+            })
+            res.send(newUser)  
+        }          
     })
-}   
-
-})
+})   
 
 app.get('/isAuth', (req: Request, res: Response) => {
     console.log(req.isAuthenticated(), 'auth')
