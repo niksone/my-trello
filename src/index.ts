@@ -106,10 +106,9 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
                 if(err) next(err)
                 req.session.save(err => {
                     console.log(req.session)
-                    res.send(newUser)
+                    res.redirect('/user')
                 })
             })
-            res.send(newUser)  
         }          
     })
 })   
