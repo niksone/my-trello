@@ -9,7 +9,7 @@ import { ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, C
 
 interface ColumnPropsI {
     title?: string,
-    id?: string,
+    id: string,
     list: List,
     index: number,
     taskIds: string[],
@@ -45,6 +45,7 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                                   taskId={task.id}
                                   task={task}
                                   key={task.id}
+                                  listId={id}
                                 />
                             ))}
                             {provided.placeholder}
