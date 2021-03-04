@@ -83,7 +83,7 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
     })(req, res, next)
 })
 
-app.post('/register', async (req: Request, res: Response) => {
+app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
     const {email, password} = req?.body;
 
     if(!email || !password || typeof email !== 'string' || typeof password !== 'string'){
@@ -102,6 +102,17 @@ app.post('/register', async (req: Request, res: Response) => {
             })
         
             await newUser.save()
+            req.logIn(user, (err: Error) => {
+                if(err) next(err)
+                // if(req.session.user){
+                //     req.session.user = user
+                // }else{
+                //     req.session.user = {}
+                // }
+                req.session.save(err => {
+                    console.log(req.session)
+                    res.send(user)
+                })
             res.send(newUser)        
         }
     })
