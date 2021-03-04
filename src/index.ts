@@ -114,8 +114,8 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
                     res.send(user)
                 })
             res.send(newUser)        
-        }
     })
+}   
 
 })
 
