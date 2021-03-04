@@ -9,6 +9,12 @@ const EditCardContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
+
+interface EditCardProps {
+    listId: string,
+    taskId: string,
+    text: string
+}
 const EditCard = ({listId, taskId, text}: any) => {
     const dispatch = useDispatch()
     const test = useRef<HTMLSpanElement>(null)
