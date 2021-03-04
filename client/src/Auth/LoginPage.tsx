@@ -29,7 +29,6 @@ const LoginPage = () => {
 
     return (
         <AuthContainer>
-            <Link to='/'>Home</Link>
             <AuthForm>
                 <AuthFormTitle>Login</AuthFormTitle>
                 <AuthFormInput 
