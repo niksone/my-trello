@@ -16,7 +16,7 @@ const RegisterPage = () => {
             data: {email, password},
             withCredentials: true,
             url: '/register'
-        }).then(getUser())
+        }).then((res) => {getUser()})
     }
 
     return (
