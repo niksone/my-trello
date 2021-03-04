@@ -1,12 +1,13 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { userContext } from '../Context'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 
 const RegisterPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmedPassword, setConfirmedPassword] = useState('')
-
+    const {getUser} = useContext(userContext)
 
     const handleRegister = (e: any) => {
         e.preventDefault()
@@ -15,7 +16,7 @@ const RegisterPage = () => {
             data: {email, password},
             withCredentials: true,
             url: '/register'
-        }).then(res => console.log(res))
+        }).then(getUser())
     }
 
     return (
