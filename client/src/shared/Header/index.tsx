@@ -11,7 +11,7 @@ const Header = () => {
     const logout = async () => {
         axios({
             method: 'POST',
-            url: `/logout`
+            url: `http://localhost:5000/logout`
         }).then(res => {
             getUser()
             console.log(res.data);
