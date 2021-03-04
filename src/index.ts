@@ -102,11 +102,11 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
             })
 
             await newUser.save()
-            req.logIn(user, (err: Error) => {
+            req.logIn(newUser, (err: Error) => {
                 if(err) next(err)
                 req.session.save(err => {
                     console.log(req.session)
-                    res.send(user)
+                    res.send(newUser)
                 })
             })
             res.send(newUser)  
