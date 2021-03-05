@@ -4,12 +4,14 @@ import styled from 'styled-components'
 
 export const ResizeableTextAreaContainer = styled.span`
     display: block;
+    width: 100%;
     overflow: hidden;
     resize: both;
     min-height: 40px;
     line-height: 20px;
     outline: none;
     border: none;
+    background-color: #fff;
 `
 
   
