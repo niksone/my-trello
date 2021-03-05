@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import ResizableTextArea from '../ResizableTextArea'
-import { CardContainer, EditButton } from './CardElements'
+import { CardContainer } from './CardElements'
 
 const EditCardContainer = styled.div`
     display: flex;
@@ -37,7 +37,7 @@ const EditCard = ({listId, taskId, text}: any) => {
         <EditCardContainer>
             <CardContainer>
                 <ResizableTextArea ref={test}/>
-                <EditButton style={{backgroundColor: 'red'}} onClick={deleteCard}/>
+                {/* <EditButton style={{backgroundColor: 'red'}} onClick={deleteCard}/> */}
             </CardContainer>
             <button style={{backgroundColor: 'green'}} onClick={editCard}>submit</button>
         </EditCardContainer>

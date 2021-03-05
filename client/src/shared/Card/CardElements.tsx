@@ -18,18 +18,4 @@ export const CardContainer = styled.div<CardContainerProps>`
     cursor: pointer;
 `
 
-export const EditButton = styled.span`
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    height: 20px;
-    width: 20px;
-    border-radius: 3px;
-    display: none;
-    background-color: grey;
-    cursor: pointer;
-    
-    ${CardContainer}:hover & {
-        display: block;
-    }
-`
+
