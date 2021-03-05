@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
+import { useDispatch } from 'react-redux'
 import Column, { ColumnProps } from '.'
 import { List, Task } from '../../redux/reducer'
 import AddNewItem from '../AddNewItem'
 import BeautifulCard from '../Card/BeautifulCard'
 import { CardContainer } from '../Card/CardElements'
+import EditableItem from '../EditableItem'
 import { ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
 interface ColumnPropsI {
@@ -20,6 +22,16 @@ interface ColumnPropsI {
 const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: ColumnPropsI) => {
     const [dragBlocking, setDragBlocking] = useState(false);
     console.log(index);
+    const dispatch = useDispatch()
+
+    const deleteList = () => {
+      dispatch({type: 'DELETE_LIST', payload: {listId: list.id}})
+    }
+
+    const editList = (text: string) => {
+      dispatch({type: 'EDIT_LIST', payload: {listId: list.id, text}})
+
+    }
     
     return (
         <Draggable draggableId={list.id} index={index} key={list.id}>
@@ -35,9 +47,15 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                           ref={provided.innerRef}
                           {...provided.droppableProps}
                         >
-                          <ColumnTitleContainer>
+                
+                          <EditableItem
+                              deleteItem={deleteList}
+                              editItem={editList}
+                              initialText={list.title}
+                              Wrapper={ColumnTitleContainer}
+                          >
                             <ColumnTitle>{list.title}</ColumnTitle>
-                          </ColumnTitleContainer>
+                          </EditableItem>                        
                           <ColumnCardContainer >
                             <ColumnCardWrapper>
                             {tasks.map((task: any, index: number) => (
