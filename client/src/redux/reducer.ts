@@ -139,6 +139,19 @@ export const addItemReducer = (state: AddItemState = data, action: Action): AddI
             state.lists[columnIndex].tasks.splice(taskIndex, 1)
             return {...state}
         }
+
+        case 'EDIT_LIST': {
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            state.lists[columnIndex].title = action.payload.text
+
+            return {...state}
+        }
+
+        case 'DELETE_LIST':{
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            state.lists.splice(columnIndex, 1)
+            return {...state}
+        }
     
 
         default:
