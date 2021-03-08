@@ -1,9 +1,9 @@
 const passport = require('passport')
-const passportConfig = require('./passportConfig')
+const passportConfig = require('../passportConfig')
 import { NextFunction, Request, Response } from "express"
+import User from "../User";
 const bcrypt = require('bcryptjs')
-import { UserI } from 'Interfaces/UserInterface';
-import User from '../../dist/User';
+import { UserI } from '../Interfaces/UserInterface';
 
 passportConfig(passport)
 

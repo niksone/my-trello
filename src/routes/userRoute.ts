@@ -1,4 +1,4 @@
-import UserController from "controllers/UserController"
+import UserController from "../controllers/UserController"
 
 const Router = require('express').Router
 
@@ -8,7 +8,6 @@ userRouter.get('/isAuth', UserController.isAuth)
 userRouter.get('/user', UserController.getUser)
 
 userRouter.post('/logout',UserController.logout)
-
 
 userRouter.post('/login', UserController.login)
 

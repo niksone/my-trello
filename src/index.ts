@@ -14,7 +14,7 @@ const path = require("path")
 const MongoStore = require('connect-mongo').default
 import { NextFunction, Request, Response } from "express"
 import User from "./User"
-import userRouter from 'routes/userRoute';
+import userRouter from './routes/userRoute';
 
 const PORT = process.env.PORT || 5000
 
