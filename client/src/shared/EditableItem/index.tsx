@@ -25,6 +25,7 @@ const EditableItem = ({children, deleteItem, editItem, initialText, Wrapper}: Ed
         const text = test.current && (test.current.innerText)
         if(text === null) return
         editItem(text)
+        setIsEdit(false)
     }
 
     useEffect(() => {
