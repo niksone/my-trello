@@ -6,10 +6,10 @@ const ProtectedAuthRoute = ({component: Component, ...rest}: any) => {
     const {user, isLoading} = useContext(userContext)
     // console.log(localStorage.getItem('user'));
     return (
-        // isLoading
-        //     ?
-        //         <div></div>
-        //     :
+        isLoading
+            ?
+                <div>Loading</div>
+            :
             !user
                 ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
                 : <Redirect to='/' />

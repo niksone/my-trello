@@ -6,10 +6,10 @@ import { userContext } from './Context'
 const ProtectedRoute = ({component: Component, ...rest}: any) => {
     const {user, isLoading} = useContext(userContext)
     return (
-            // isLoading
-            //     ?
-            //         <div></div>
-            //     :
+            isLoading
+                ?
+                    <div>is Loading</div>
+                :
                     user
                         ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
                         : <Redirect to='/login' />
