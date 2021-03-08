@@ -1,8 +1,10 @@
 import { List } from './reducer';
-export type Action = AddList | AddTask | MoveList 
+export type Action = SetBoard | AddList | AddTask | MoveList 
 | MoveCard | SetDraggedList | SetDraggedCard | EditCard
 | DeleteCard | EditList | DeleteList
 interface AddList {type: 'ADD_LIST', payload: string}
+
+interface SetBoard {type: 'SET_BOARD', payload: any}
 
 interface AddTask {type: 'ADD_TASK', payload: {text: string, listId: string}}
 

@@ -1,5 +1,5 @@
 import {v4 as uuid} from 'uuid'
-import { data } from '../data'
+import { boards } from '../data'
 import { moveItem } from '../utils/moveItem'
 import { moveItemBetweenLists } from '../utils/moveItemBetweenLists'
 import { Action } from './actions'
@@ -16,6 +16,8 @@ export interface List {
 }
 
 export interface AddItemState {
+    id: string,
+    name: string,
     lists: List[],
     taskIds: string[],
     draggedListId: string,
@@ -47,8 +49,13 @@ const getTasks = (lists: List[]) => {
     return lists.map(list => list.tasks).flat().map(task => task.id)
 }
 
-export const addItemReducer = (state: AddItemState = data, action: Action): AddItemState => {
+export const addItemReducer = (state: AddItemState = {} as AddItemState, action: Action): AddItemState => {
     switch(action.type) {
+        case 'SET_BOARD': {
+            console.log('reducer', action.payload)
+            return {...state,...action.payload}
+        }
+
         case 'ADD_LIST':{
             return{   
                     ...state,
@@ -88,8 +95,6 @@ export const addItemReducer = (state: AddItemState = data, action: Action): AddI
                 
                 moveItem(state.lists[arrIndex].tasks, sourceTaskIndex, destTaskIndex)
                 state.taskIds = getTasks(state.lists)
-                console.log(state.taskIds)
-                console.log(state, action.payload, sourceTaskIndex, destTaskIndex)
                 return {...state}
             }
             const destArrIndex = state.lists.findIndex(list => list.id === destDroppableId)
@@ -106,7 +111,6 @@ export const addItemReducer = (state: AddItemState = data, action: Action): AddI
     
             moveItemBetweenLists(state.lists[sourceArrIndex].tasks, state.lists[destArrIndex].tasks, sourceTaskIndex, checkedDestTaskIndex)
             state.taskIds = getTasks(state.lists)
-            console.log(state, action.payload, sourceTaskIndex, checkedDestTaskIndex)
             return {...state}
         }
 
