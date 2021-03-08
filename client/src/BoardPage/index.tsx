@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { boards } from '../data'
 import { AddItemState } from '../redux/reducer'
+import { RootReducerType, store } from '../redux/store'
 import Board from '../shared/Board'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 import Header from '../shared/Header'
+import { useFetching } from '../utils/useFetching'
 
 
 const AppContainer = styled.div`
@@ -15,15 +20,21 @@ const AppContainer = styled.div`
     'board';
 `
 export interface BoardPageProps {
-    data: AddItemState
+    // data: AddItemState
 }
 
-const BoardPage = ({data}: BoardPageProps) => {
+const BoardPage = () => {
+    const {id} = useParams<{id: string}>()
+    const board = boards.find(board => board.id === id)
+    useFetching({type: 'SET_BOARD', payload: board}, board?.id === id)
+    
+    const data = useSelector((state: RootReducerType) => state.addItem)
+    console.log(data);
+
     return (
         <AppContainer>
             <Header />
-            <BeautifulBoard data={data}/>
-            {/* <Board data={data}/>  */}
+            <BeautifulBoard data={data} />
         </AppContainer>
     )
 }
