@@ -51,7 +51,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 ref={provided.innerRef} 
                 {...provided.droppableProps}
               >
-                {lists.map((list, index) => (
+                {lists?.map((list, index) => (
                   <BeautifulDragColumn 
                     list={list}
                     index={index}
