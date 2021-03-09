@@ -3,6 +3,7 @@ import UserController from "../controllers/UserController"
 const Router = require('express').Router
 
 const userRouter = new Router()
+
 userRouter.get('/isAuth', UserController.isAuth)
 
 userRouter.get('/user', UserController.getUser)

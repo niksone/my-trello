@@ -54,8 +54,9 @@ app.use(session({
     }
 }))
 // app.use(cookieParser('secretcode'))
-userRouter.use(passport.initialize())
-userRouter.use(passport.session())
+app.use(passport.initialize())
+app.use(passport.session())
+passportConfig(passport)
 
 app.use('', userRouter)
 // require('./passportConfig.ts')(passport)
