@@ -3,14 +3,14 @@ import { Redirect, Route } from 'react-router-dom'
 import { userContext } from './Context'
 
 const ProtectedAuthRoute = ({component: Component, ...rest}: any) => {
-    const {user, isLoading} = useContext(userContext)
+    const {isAuth, isLoading} = useContext(userContext)
     // console.log(localStorage.getItem('user'));
     return (
         isLoading
             ?
                 <div>Loading</div>
             :
-            !user
+            !isAuth
                 ? <Route {...rest} render={props =><Component {...rest} {...props} />}/>
                 : <Redirect to='/' />
 
