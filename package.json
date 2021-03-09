@@ -29,7 +29,8 @@
     "express-session": "^1.17.1",
     "mongoose": "^5.11.15",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
