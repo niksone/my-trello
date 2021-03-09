@@ -6,21 +6,21 @@ import { userContext } from '../../Context'
 import { HeaderContainer } from './HeaderElements'
 
 const Header = () => {
-    const {user, getUser} = useContext(userContext)
+    const {isAuth, getAuth} = useContext(userContext)
 
     const logout = async () => {
         axios({
             method: 'POST',
             url: `/logout`
         }).then(res => {
-            getUser()
+            getAuth()
             console.log(res.data);
         })
     }
     return (
         <HeaderContainer>
             {
-                user 
+                isAuth 
                     ? <>
                         <button onClick={logout}>Log Out</button>
                         <Link to='/'>Boards</Link>
