@@ -5,14 +5,13 @@ import User from "../User";
 const bcrypt = require('bcryptjs')
 import { UserI } from '../Interfaces/UserInterface';
 
-passportConfig(passport)
 
 class UserController {
     async login(req: Request, res: Response, next: NextFunction) {
         passport.authenticate('local', (err: Error, user: UserI, info: any) => {
             if( err) next(err)  
             !user
-                ? res.send('No user')
+                ? res.status(500).json({message: 'No user'})
                 : req.logIn(user, (err: Error) => {
                     if(err) next(err)
                     req.session.save(err => {
@@ -27,13 +26,13 @@ class UserController {
         const {email, password} = req?.body;
     
         if(!email || !password || typeof email !== 'string' || typeof password !== 'string'){
-            res.send('Wrong values')
+            res.status(500).send('Wrong values')
             return
         }
     
         User.findOne({email}, async (err: Error, user:  UserI) => {
             if(err) throw err
-            if(user) res.send('User already exist')
+            if(user) res.status(500).send({message: 'User already exist'})
             if(!user){
                 const hashedPassword = await bcrypt.hash(password, 10)
                 const newUser = new User({
@@ -53,12 +52,12 @@ class UserController {
         })
     }
 
-    async logout (req: Request, res: Response) {
-        req.logOut()
+    logout (req: Request, res: Response) {
+        req.logout()
         res.send('log out')
     }
 
-    async getUser(req: Request, res: Response) {
+    getUser(req: Request, res: Response) {
         res.send(req.session)
     }
 
