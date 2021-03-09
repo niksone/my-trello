@@ -4,32 +4,34 @@ import React, { createContext, PropsWithChildren, useEffect, useState } from 're
 export const userContext = createContext<any>({})
 
 const UserContext = ({children}: PropsWithChildren<{}>) => {
-    const [user, setUser] = useState('')
+    const [user, setUser] = useState(false)
+    const [isAuth, setIsAuth] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    
-    const getUser = async () => {
+        
+    const getAuth = async () => {
         try {
             const currentUser = await axios({
                 method: 'GET',
                 withCredentials: true,
-                url: `/user`
+                url: `/isAuth`
             })
 
-            const userData = currentUser.data.passport.user
-            setUser(userData)
-            setIsLoading(false)
             console.log(currentUser);
+
+            const authData = currentUser.data
+            setIsAuth(authData)
+            setIsLoading(false)
         } catch (error) {
             console.log(error);
         }
     }
 
     useEffect(() => {
-        getUser()
+        getAuth()
     }, []) 
 
     return (
-        <userContext.Provider value={{user, getUser, isLoading}}>
+        <userContext.Provider value={{user, isAuth, getAuth, isLoading}}>
             {children}
         </userContext.Provider>
     )
