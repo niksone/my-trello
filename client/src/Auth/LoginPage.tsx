@@ -7,9 +7,9 @@ import { userContext } from '../Context';
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
     const {user, isLoading} = useContext(userContext)
-    console.log(user, isLoading);
-    const {getUser} = useContext(userContext)
+    const {getAuth} = useContext(userContext)
 
     const handleLogin = async (e: any) => {
         e.preventDefault()
@@ -22,15 +22,20 @@ const LoginPage = () => {
             },
             withCredentials: true,
             url: `/login`
-        }).then(res => {
-            getUser()
         })
+            .then(res => {
+                getAuth()
+            })
+            .catch(err => {
+                setError(err.response.data.message)
+            })
     }
 
     return (
         <AuthContainer>
             <AuthForm>
                 <AuthFormTitle>Login</AuthFormTitle>
+                <p>{error}</p>
                 <AuthFormInput 
                     type='email' 
                     placeholder='Enter email' 
