@@ -1,9 +1,11 @@
 import {combineReducers, createStore} from 'redux'
-import { addItemReducer } from './reducer'
-import {AddItemState} from './reducer'
+import { boardReducer } from './Board/reducer'
+import { addItemReducer } from './AddItem/reducer'
+import {AddItemState} from './AddItem/reducer'
 
 const rootReducer = combineReducers({
-    addItem: addItemReducer
+    addItem: addItemReducer,
+    boards: boardReducer
 })
 
 export type RootReducerType = ReturnType<typeof rootReducer>

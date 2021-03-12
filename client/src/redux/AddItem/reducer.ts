@@ -1,7 +1,7 @@
 import {v4 as uuid} from 'uuid'
-import { boards } from '../data'
-import { moveItem } from '../utils/moveItem'
-import { moveItemBetweenLists } from '../utils/moveItemBetweenLists'
+import { boards } from '../../data'
+import { moveItem } from '../../utils/moveItem'
+import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
 import { Action } from './actions'
 
 export interface Task {
@@ -77,6 +77,36 @@ export const addItemReducer = (state: AddItemState = {} as AddItemState, action:
                 }
         }
 
+        case 'EDIT_CARD': {
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
+            state.lists[columnIndex].tasks[taskIndex].text = action.payload.text
+
+            return {...state}
+        }
+
+        case 'DELETE_CARD':{
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
+            state.lists[columnIndex].tasks.splice(taskIndex, 1)
+            return {...state}
+        }
+
+        case 'EDIT_LIST': {
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            state.lists[columnIndex].title = action.payload.text
+
+            return {...state}
+        }
+
+        case 'DELETE_LIST':{
+            const columnIndex = findIndex(action.payload.listId, state.lists)
+            state.lists.splice(columnIndex, 1)
+            return {...state}
+        }
+    
+
+
         case 'MOVE_LIST': {
             const {sourceIndex, destIndex} = action.payload
 
@@ -122,41 +152,12 @@ export const addItemReducer = (state: AddItemState = {} as AddItemState, action:
             }
         }
 
-        case 'SET_DRAGGED_CARD': 
+        case 'SET_DRAGGED_CARD': {
             return {
                 ...state,
                 draggedCardId: action.payload
             }
-            break;
-
-        case 'EDIT_CARD': {
-            const columnIndex = findIndex(action.payload.listId, state.lists)
-            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
-            state.lists[columnIndex].tasks[taskIndex].text = action.payload.text
-
-            return {...state}
         }
-
-        case 'DELETE_CARD':{
-            const columnIndex = findIndex(action.payload.listId, state.lists)
-            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
-            state.lists[columnIndex].tasks.splice(taskIndex, 1)
-            return {...state}
-        }
-
-        case 'EDIT_LIST': {
-            const columnIndex = findIndex(action.payload.listId, state.lists)
-            state.lists[columnIndex].title = action.payload.text
-
-            return {...state}
-        }
-
-        case 'DELETE_LIST':{
-            const columnIndex = findIndex(action.payload.listId, state.lists)
-            state.lists.splice(columnIndex, 1)
-            return {...state}
-        }
-    
 
         default:
             return state
