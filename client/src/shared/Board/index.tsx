@@ -1,7 +1,7 @@
 import React from 'react'
 import AddNewItem from '../AddNewItem'
 import { BoardContainer } from './BoardContainer'
-import {AddItemState} from '../../redux/reducer'
+import {AddItemState} from '../../redux/AddItem/reducer'
 import { useDispatch } from 'react-redux'
 
 export interface BoardProps {

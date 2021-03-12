@@ -2,7 +2,7 @@ import React, { MutableRefObject, Ref } from 'react'
 import { isDebuggerStatement } from 'typescript'
 import AddNewItem from '../AddNewItem'
 import Card from '../Card'
-import { AddItemState, Task } from '../../redux/reducer'
+import { AddItemState, Task } from '../../redux/AddItem/reducer'
 import { ColumnCardContainer, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
 export interface ColumnProps {

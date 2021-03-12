@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { Task } from '../../redux/reducer'
+import { Task } from '../../redux/AddItem/reducer'
 import { RootReducerType } from '../../redux/store'
 import EditableItem from '../EditableItem'
 import ResizableTextArea from '../ResizableTextArea'

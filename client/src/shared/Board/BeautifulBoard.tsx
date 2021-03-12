@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Task } from '../../redux/reducer'
+import { Task } from '../../redux/AddItem/reducer'
 import { moveItem } from '../../utils/moveItem'
 // import { moveItem, Task } from '../../redux/reducer'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
@@ -71,7 +71,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
           onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
           text='Add New List +'
           formText='Add List'
-          item='ADDITEM'
+          item='CARD'
         />
       </BoardContainer>
     )
