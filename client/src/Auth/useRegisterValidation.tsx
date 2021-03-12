@@ -8,43 +8,43 @@ const schema = Yup.object().shape({
         .required('Please Enter your password')
         .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+        "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
         ),
     confirmedPassword: Yup.string().required().oneOf([Yup.ref('password')], 'Passwords does not match')
    , email: Yup.string().email(),
 
 })
 
-const register = async (email: string, password: string) => {
+const checkUserExist = async (email: string, password: string) => {
     return axios({
-        method: 'POST',
+        method: 'GET',
         data: {email, password},
         withCredentials: true,
-        url: '/register'
+        url: '/checkUserExist'
     })
         .then((res) => {
-            return {success: true, error: ''}
+            return res.data 
+                ? {userExist: true, error: 'User Already Exist'}
+                : {userExist: false, error: ''}
             })
         .catch(err => {
-            console.log(err.response.data.message);
-            return {success: false, error: err.response.data.message}
+            // console.log(err.response.data.message);
+            return {userExist: false, error: err}
         })
 }
 
 export const useRegisterValidation = () => {
     const [validation, setValidation] = useState({
         isValid: false,
-        errors: []
+        errors: ''
     })
 
     const checkValid = async (email: string, password: string, confirmedPassword: string) => {
         try {
             const res = schema
-            .validateSync({email, password, confirmedPassword})
-            const {success, error} = await register(email, password)
-            setValidation({isValid: success, errors: error})
-                // : setValidation({isValid: success, errors: })
-    
+                .validateSync({email, password, confirmedPassword})
+            const {userExist, error} = await checkUserExist(email, password)
+            setValidation({isValid: !userExist, errors: error})    
         return validation
         } catch (error) {
             const res = error.errors
