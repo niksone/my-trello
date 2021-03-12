@@ -6,6 +6,8 @@ const userRouter = new Router()
 
 userRouter.get('/isAuth', UserController.isAuth)
 
+userRouter.get('/checkUserExist', UserController.checkUserExist)
+
 userRouter.get('/user', UserController.getUser)
 
 userRouter.post('/logout',UserController.logout)

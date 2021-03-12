@@ -1,7 +1,7 @@
 const passport = require('passport')
 const passportConfig = require('../passportConfig')
 import { NextFunction, Request, Response } from "express"
-import User from "../User";
+import User from "../models/User";
 const bcrypt = require('bcryptjs')
 import { UserI } from '../Interfaces/UserInterface';
 
@@ -52,12 +52,24 @@ class UserController {
         })
     }
 
-    logout (req: Request, res: Response) {
+    async checkUserExist(req: Request, res: Response) {
+        const {email, password} = req?.body;
+
+        User.findOne({email}, async (err: Error, user:  UserI) => {
+            if(err) throw err
+            if(user) res.send(true)
+            if(!user){
+                res.send(false)
+            }      
+        })
+    }
+
+    async logout (req: Request, res: Response) {
         req.logout()
         res.send('log out')
     }
 
-    getUser(req: Request, res: Response) {
+    async getUser(req: Request, res: Response) {
         res.send(req.session)
     }
 
