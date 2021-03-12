@@ -18,7 +18,8 @@ const RegisterPage = () => {
         const res = await checkValid( email, password, confirmedPassword)
         console.log(res);
         console.log(res.isValid, res.errors);
-        res.isValid && getAuth()
+        res.isValid 
+        && handleRegister()
         // console.log(validation.isValid, validation.errors);
         // if(!email || !password || !confirmedPassword){
         //     setError('Fields cannot be empty')
@@ -38,8 +39,7 @@ const RegisterPage = () => {
 
     }
 
-    const handleRegister = (e: any) => {
-        e.preventDefault()
+    const handleRegister = () => {
         axios({
             method: 'POST',
             data: {email, password},
