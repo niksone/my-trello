@@ -1,5 +1,5 @@
 import { UserI } from "./Interfaces/UserInterface"
-import User from "./User"
+import User from "./models/User"
 const bcrypt = require('bcryptjs')
 const localStrategy = require('passport-local').Strategy
 
