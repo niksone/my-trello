@@ -6,13 +6,14 @@ export interface AddItemContainerProps {
 }
 
 export type AddItemContainerTypes = 
-    | 'ADDITEM' 
+    | 'CARD' 
     | 'COLUMN'
+    | 'BOARD'
 
 
 export const AddItemContainer = styled.div<AddItemContainerProps>`
-    min-width: ${({item}) => item === 'ADDITEM' ? '300px' : '100%'};
-    padding: ${({item}) => item === 'ADDITEM' ? '5px 10px' : '0'};
+    min-width: ${({item}) => item === 'CARD' ? '300px' : '100%'};
+    padding: ${({item}) => item === 'CARD' ? '5px 10px' : '0'};
 `
 
 export const AddItemButton = styled.button`
