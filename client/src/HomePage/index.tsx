@@ -1,19 +1,22 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { boards } from '../data'
-import { AddItemState } from '../redux/reducer'
+import { AddItemState } from '../redux/AddItem/reducer'
+import { RootReducerType } from '../redux/store'
+import AddNewItem from '../shared/AddNewItem'
 import Header from '../shared/Header'
 
-const HomePage = ({data}: any) => {
+const HomePage = () => {
+    const data = useSelector((state: RootReducerType) => state.boards).boards
     const dispatch = useDispatch()
-    // console.log(data);
+    console.log(data);
 
-    const getBoardInfo = (id: string) => {
-        console.log(data, id);
-        console.log(data.find((board: any) => board.id === id));
-        return data.find((board: any) => board.id === id).name
-    }
+    // const getBoardInfo = (id: string) => {
+    //     console.log(data, id);
+    //     console.log(data.find((board: any) => board.id === id));
+    //     return data.find((board: any) => board.id === id).name
+    // }
 
     return (
         
@@ -26,6 +29,12 @@ const HomePage = ({data}: any) => {
                         {board.name}
                     </Link>)
             }  
+            <AddNewItem 
+                text='Add New Board'
+                formText='Add Board'
+                item='BOARD'
+                onAdd={name => dispatch({type: 'ADD_BOARD', payload: {name}})}
+            />
         </div>
     )
 }
