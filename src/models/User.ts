@@ -1,3 +1,4 @@
+import { UserI } from 'Interfaces/UserInterface'
 import mongoose from 'mongoose'
 
 
@@ -6,7 +7,8 @@ const user = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    password: String
+    password: String,
+    boardIds: [String]
 })
 
-export default mongoose.model('User', user)
+export default mongoose.model<UserI>('User', user)

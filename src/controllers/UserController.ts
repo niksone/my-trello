@@ -5,6 +5,11 @@ import User from "../models/User";
 const bcrypt = require('bcryptjs')
 import { UserI } from '../Interfaces/UserInterface';
 
+declare module 'express-session' {
+    export interface SessionData {
+      data: {passport: {user: string}};
+    }
+  }
 
 class UserController {
     async login(req: Request, res: Response, next: NextFunction) {
@@ -15,7 +20,7 @@ class UserController {
                 : req.logIn(user, (err: Error) => {
                     if(err) next(err)
                     req.session.save(err => {
-                        console.log(req.session)
+                        // console.log(req.session)
                         res.send(user)
                     })
                 })
@@ -37,7 +42,8 @@ class UserController {
                 const hashedPassword = await bcrypt.hash(password, 10)
                 const newUser = new User({
                     email,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    boardIds: []
                 })
     
                 await newUser.save()
@@ -66,7 +72,7 @@ class UserController {
 
     async logout (req: Request, res: Response) {
         req.logout()
-        res.send('log out')
+        res.send({message: 'log out'})
     }
 
     async getUser(req: Request, res: Response) {
@@ -74,7 +80,7 @@ class UserController {
     }
 
     async isAuth(req: Request, res: Response) {
-        console.log(req.isAuthenticated(), 'auth')
+        // console.log(req.isAuthenticated(), 'auth')
         res.send(req.isAuthenticated())
     }
 }
