@@ -11,32 +11,10 @@ const RegisterPage = () => {
     const {getAuth} = useContext(userContext)
     const {validation, checkValid} = useRegisterValidation()
 
-    
-
     const handleValidation = async (e:any, email: string, password: string, confirmedPassword: string) => {
         e.preventDefault()
         const res = await checkValid( email, password, confirmedPassword)
-        console.log(res);
-        console.log(res.isValid, res.errors);
-        res.isValid 
-        && handleRegister()
-        // console.log(validation.isValid, validation.errors);
-        // if(!email || !password || !confirmedPassword){
-        //     setError('Fields cannot be empty')
-        //     return false
-        // }
-
-        // if(email)
-        
-        // if(password.length <= 8 ){
-
-        // }
-
-        // if(password !== confirmedPassword){
-        //     setError('Passwords should be equal')
-        //     return false
-        // }
-
+        res.isValid && handleRegister()
     }
 
     const handleRegister = () => {
@@ -74,7 +52,6 @@ const RegisterPage = () => {
                 <AuthFormButton 
                     onClick={e => 
                         handleValidation(e, email, password, confirmedPassword) 
-                        // && handleRegister(e)
                     }
                 >
                     Register
