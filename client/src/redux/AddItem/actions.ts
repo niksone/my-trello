@@ -1,32 +1,41 @@
-import { List } from './reducer';
-export type Action = MoveList | MoveCard | SetDraggedCard |
+import { List, Task } from './reducer';
+export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
  SetDraggedList| AddBoard | SetBoard | AddList | AddTask | EditCard
 | DeleteCard | EditList | DeleteList
-interface AddList {type: 'ADD_LIST', payload: string}
+
+interface AddList {type: 'ADD_LIST', payload: List}
 
 interface SetBoard {type: 'SET_BOARD', payload: any}
 
 interface AddBoard {type: 'ADD_BOARD', payload: any}
 
-interface AddTask {type: 'ADD_TASK', payload: {text: string, listId: string}}
+interface AddTask {type: 'ADD_CARD', payload: {task: Task, listId: string}}
 
 interface EditCard {type: 'EDIT_CARD', payload: {listId: string, taskId: string, text: string}}
 
 interface DeleteCard {type: 'DELETE_CARD', payload: {listId: string, taskId: string}}
 
-interface EditList {type: 'EDIT_LIST', payload: {listId: string, text: string}}
+interface EditList {type: 'EDIT_LIST', payload: {listId: string, title: string}}
 
 interface DeleteList {type: 'DELETE_LIST', payload: {listId: string}}
 
 interface MoveList {type: 'MOVE_LIST', payload: {sourceIndex: number, destIndex: number}}
 
-interface MoveCard {type: 'MOVE_CARD', 
+interface MoveCardBetweenList {type: 'MOVE_CARD_BETWEEN_LISTS', 
     payload: {
-        sourceDroppableId: string, 
-        destDroppableId: string, 
-        sourceIndex: number, 
-        destIndex: number
+        sourceArrIndex: number, 
+        destArrIndex: number, 
+        sourceTaskIndex: number, 
+        destTaskIndex: number
     }}
+
+
+interface MoveCardInList {type: 'MOVE_CARD_IN_LIST', 
+payload: {
+    arrIndex: number
+    sourceTaskIndex: number, 
+    destTaskIndex: number
+}}
 
 interface SetDraggedList {type: 'SET_DRAGGED_LIST', payload: string}
 
