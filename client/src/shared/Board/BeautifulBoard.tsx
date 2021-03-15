@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Task } from '../../redux/AddItem/reducer'
+import { addList, addTask, moveList, moveTask, Task } from '../../redux/AddItem/reducer'
 import { moveItem } from '../../utils/moveItem'
 // import { moveItem, Task } from '../../redux/reducer'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
@@ -18,7 +18,8 @@ export const BoardColumnContainer = styled.div`
 
 const BeautifulBoard = ({data}: BoardProps) => {
     const dispatch = useDispatch()
-    const {lists, taskIds} = data
+    const {lists, taskIds, _id} = data
+    const boardId = _id
 
   
     const handleDrop = (res: any) => {
@@ -30,14 +31,14 @@ const BeautifulBoard = ({data}: BoardProps) => {
       if(type === 'COLUMN'){
         const sourceIndex = source.index
         const destIndex = destination.index
-        dispatch({type: 'MOVE_LIST', payload: {sourceIndex, destIndex}})
+        dispatch(moveList(boardId, sourceIndex, destIndex))
         return 
       }else{
         const sourceDroppableId = source.droppableId
         const destDroppableId = destination.droppableId
         const sourceIndex = source.index
         const destIndex = destination.index
-        dispatch({type: 'MOVE_CARD', payload: {sourceDroppableId, destDroppableId, sourceIndex, destIndex}})
+        dispatch(moveTask(boardId, data, sourceDroppableId, sourceIndex, destDroppableId, destIndex))
       }
     }
 
@@ -55,11 +56,11 @@ const BeautifulBoard = ({data}: BoardProps) => {
                   <BeautifulDragColumn 
                     list={list}
                     index={index}
-                    key={list.id}
+                    key={list._id}
                     tasks={list.tasks}
                     taskIds={taskIds}
-                    id={list.id}
-                    onAdd={(text: string)=>dispatch({type: 'ADD_TASK', payload: {text, listId: list.id}})}
+                    id={list._id}
+                    onAdd={(text: string)=>dispatch(addTask(_id, list._id, text))}
                   />
                 ))}
                 {provided.placeholder}
@@ -68,7 +69,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
           </Droppable>
       </DragDropContext>
         <AddNewItem
-          onAdd={text => dispatch({type: "ADD_LIST", payload: text})} 
+          onAdd={text => dispatch(addList( _id,text))} 
           text='Add New List +'
           formText='Add List'
           item='CARD'

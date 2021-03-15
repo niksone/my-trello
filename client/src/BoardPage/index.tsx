@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { boards } from '../data'
-import { AddItemState } from '../redux/AddItem/reducer'
+import { authApi } from '../api'
+import { userContext } from '../Context'
+import { AddItemState, setBoard } from '../redux/AddItem/reducer'
+import { Board, getBoards } from '../redux/Board/reducer'
 import { RootReducerType, store } from '../redux/store'
-import Board from '../shared/Board'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 import Header from '../shared/Header'
 import { useFetching } from '../utils/useFetching'
@@ -21,20 +22,38 @@ const AppContainer = styled.div`
 `
 export interface BoardPageProps {
     // data: AddItemState
+    boards: Board[]
 }
 
-const BoardPage = () => {
+const BoardPage = (
+    // {boards}: BoardPageProps
+    ) => {
+    const dispatch = useDispatch()
     const {id} = useParams<{id: string}>()
-    const board = boards.find(board => board.id === id)
-    useFetching({type: 'SET_BOARD', payload: board}, board?.id === id)
-    
-    const data = useSelector((state: RootReducerType) => state.addItem)
-    console.log(data);
 
+    const {user} = useContext(userContext)
+
+    const {boards, isLoading} = useSelector((state: RootReducerType) => state.boards)
+
+    const currentBoard = boards.find(board => board._id === id) || {} as Board
+
+    const data = useSelector((state: RootReducerType) => state.addItem)
+    // console.log(`${user} -> ${JSON.stringify(boards)} -> ${JSON.stringify(data)}`);
+    // console.log(`${data.isLoading}->data ${isLoading}->board`);
+
+    useEffect(() => {
+        dispatch(getBoards(user))
+        dispatch(setBoard(currentBoard))
+    }, [dispatch, currentBoard._id, user])
     return (
         <AppContainer>
             <Header />
-            <BeautifulBoard data={data} />
+            
+            {data.isLoading || isLoading
+                ? <p>Loading</p>
+                : 
+                <BeautifulBoard data={data} />
+            }
         </AppContainer>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { Task } from '../../redux/AddItem/reducer'
+import { deleteTask, Task } from '../../redux/AddItem/reducer'
 import { RootReducerType } from '../../redux/store'
 import EditableItem from '../EditableItem'
 import ResizableTextArea from '../ResizableTextArea'
@@ -18,6 +18,7 @@ interface CardPropsI {
 
 const BeautifulCard = ({taskId, task, listId}: CardPropsI) => {
   const {taskIds} = useSelector((state: RootReducerType) => state.addItem)
+  const boardId = useSelector((state: RootReducerType) => state.addItem)._id
   const index = taskIds.findIndex(task => task === taskId)
   const [isEdit, setIsEdit] = useState(false)
   const dispatch = useDispatch()
@@ -26,8 +27,8 @@ const BeautifulCard = ({taskId, task, listId}: CardPropsI) => {
     dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
   }
 
-  const deleteCard = () => {
-      dispatch({type: 'DELETE_CARD', payload: {listId, taskId}})
+  const handleDeleteCard = () => {
+    dispatch(deleteTask(boardId, listId, taskId))
   }
 
   const handleEdit = () => {
@@ -43,7 +44,7 @@ const BeautifulCard = ({taskId, task, listId}: CardPropsI) => {
           {...provided.draggableProps}
         > 
             <EditableItem
-              deleteItem={deleteCard}
+              deleteItem={handleDeleteCard}
               editItem={editCard}
               initialText={task.text}
               Wrapper={CardContainer}

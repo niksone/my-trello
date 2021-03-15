@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { useDispatch } from 'react-redux'
-import Column, { ColumnProps } from '.'
-import { List, Task } from '../../redux/AddItem/reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteList, List, Task, updateListTitle } from '../../redux/AddItem/reducer'
+import { RootReducerType } from '../../redux/store'
 import AddNewItem from '../AddNewItem'
 import BeautifulCard from '../Card/BeautifulCard'
-import { CardContainer } from '../Card/CardElements'
 import EditableItem from '../EditableItem'
 import { ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
@@ -20,28 +19,26 @@ interface ColumnPropsI {
 }
 
 const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: ColumnPropsI) => {
-    const [dragBlocking, setDragBlocking] = useState(false);
-    console.log(index);
+    const boardId = useSelector((state: RootReducerType) => state.addItem)._id
     const dispatch = useDispatch()
 
-    const deleteList = () => {
-      dispatch({type: 'DELETE_LIST', payload: {listId: list.id}})
+    const handleDeleteList = () => {
+      dispatch(deleteList(boardId, id))
     }
 
-    const editList = (text: string) => {
-      dispatch({type: 'EDIT_LIST', payload: {listId: list.id, text}})
-
+    const editList = (title: string) => {
+      dispatch(updateListTitle(boardId, list._id, title))
     }
     
     return (
-        <Draggable draggableId={list.id} index={index} key={list.id}>
+        <Draggable draggableId={list._id} index={index} key={list._id}>
                 {(provided, snapshot) => (
                   <ColumnContainer
                     ref={provided.innerRef}
                     {...provided.dragHandleProps}
                     {...provided.draggableProps}
                   >
-                    <Droppable droppableId={list.id}>
+                    <Droppable droppableId={list._id}>
                       {(provided, snapshot) => (
                         <ColumnWrapper
                           ref={provided.innerRef}
@@ -49,7 +46,7 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                         >
                 
                           <EditableItem
-                              deleteItem={deleteList}
+                              deleteItem={handleDeleteList}
                               editItem={editList}
                               initialText={list.title}
                               Wrapper={ColumnTitleContainer}
@@ -58,11 +55,11 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                           </EditableItem>                        
                           <ColumnCardContainer >
                             <ColumnCardWrapper>
-                            {tasks.map((task: any, index: number) => (
+                            {tasks?.map((task: any, index: number) => (
                                 <BeautifulCard 
-                                  taskId={task.id}
+                                  taskId={task._id}
                                   task={task}
-                                  key={task.id}
+                                  key={task._id}
                                   listId={id}
                                 />
                             ))}
