@@ -1,39 +1,41 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { boards } from '../data'
+import { authApi } from '../api'
+import { userContext } from '../Context'
 import { AddItemState } from '../redux/AddItem/reducer'
+import { addBoard, Board, getBoards } from '../redux/Board/reducer'
 import { RootReducerType } from '../redux/store'
 import AddNewItem from '../shared/AddNewItem'
 import Header from '../shared/Header'
+import { useFetching } from '../utils/useFetching'
 
 const HomePage = () => {
-    const data = useSelector((state: RootReducerType) => state.boards).boards
-    const dispatch = useDispatch()
-    console.log(data);
 
-    // const getBoardInfo = (id: string) => {
-    //     console.log(data, id);
-    //     console.log(data.find((board: any) => board.id === id));
-    //     return data.find((board: any) => board.id === id).name
-    // }
+    const {user} = useContext(userContext)
+    useFetching(() => getBoards(user))
+
+    const {boards, isLoading} = useSelector((state: RootReducerType) => state.boards)
+    const dispatch = useDispatch()
+
 
     return (
         
         <div>
             <Header />
             {
-                data.map((board: AddItemState) => 
-                    <Link to={`/board/${board.id}`} key={board.id} onClick={() => {}}>
-                        {/* {console.log(data[board])} */}
-                        {board.name}
-                    </Link>)
+                isLoading
+                    ? <p>Loading</p>
+                    :boards?.map((board: Board) => 
+                        <Link to={`/board/${board._id}`} key={board._id} onClick={() => {console.log(board)}}>
+                            {board.name}
+                        </Link>)
             }  
             <AddNewItem 
                 text='Add New Board'
                 formText='Add Board'
                 item='BOARD'
-                onAdd={name => dispatch({type: 'ADD_BOARD', payload: {name}})}
+                onAdd={name => dispatch(addBoard(user, name))}
             />
         </div>
     )
