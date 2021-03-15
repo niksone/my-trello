@@ -1,7 +1,8 @@
-import {combineReducers, createStore} from 'redux'
+import {applyMiddleware, combineReducers, createStore} from 'redux'
 import { boardReducer } from './Board/reducer'
 import { addItemReducer } from './AddItem/reducer'
 import {AddItemState} from './AddItem/reducer'
+import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
     addItem: addItemReducer,
@@ -10,4 +11,4 @@ const rootReducer = combineReducers({
 
 export type RootReducerType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer, applyMiddleware(thunk))
