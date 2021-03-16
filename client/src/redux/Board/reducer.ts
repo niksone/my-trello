@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import {v4 as uuid} from 'uuid'
 import { boardApi } from '../../api';
-import { List } from '../AddItem/reducer';
+import { List } from '../AddItem/interfaces';
 import { BoardAction } from "./actions"
 
 export interface Board {

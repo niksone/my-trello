@@ -1,4 +1,4 @@
-import { List, Task } from './reducer';
+import { List, Task } from './interfaces';
 export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
  SetDraggedList| AddBoard | SetBoard | AddList | AddTask | EditCard
 | DeleteCard | EditList | DeleteList

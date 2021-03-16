@@ -1,6 +1,5 @@
-import { Task } from './../redux/AddItem/reducer';
 import axios from "axios";
-import { addList, List } from "../redux/AddItem/reducer";
+import { List, Task } from "../redux/AddItem/interfaces";
 import { addBoard, Board } from "../redux/Board/reducer";
 
 const instance = axios.create({

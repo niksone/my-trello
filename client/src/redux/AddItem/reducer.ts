@@ -1,51 +1,12 @@
-import { boardApi } from './../../api/index';
 import { Board } from './../Board/reducer';
 import { moveItem } from '../../utils/moveItem'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
 import { AddItemAction } from './actions'
 import { Dispatch } from 'redux';
-import ObjectID from 'bson-objectid';
-
-export interface Task {
-    text: string,
-    _id: string
-}
-
-export interface List {
-    _id: string,
-    title: string,
-    tasks: Task[],
-}
-
-export interface AddItemState {
-    _id: string,
-    name: string,
-    lists: List[],
-    taskIds: string[],
-    draggedListId: string,
-    draggedCardId: string,
-    isLoading: boolean
-}
-
-export type ColumnDragItem = 
-    {
-        id: string,
-        title: string,
-        type: 'COLUMN'
-    }
-
-export type CardDragItem = 
-    {
-        id: string,
-        columnId: string,
-        text: string,
-        type: 'CARD',
-    }
-
-export type DragItem = ColumnDragItem | CardDragItem
+import { AddItemState, List, Task } from './interfaces';
 
 const findIndex = <T extends List | Task>(id: string, array: T[]  ) => {
-    return array.findIndex((item: T )=> item._id === id)
+    return array.findIndex((item: T)=> item._id === id)
 }
 
 const getTasks = (lists: List[]) => {
@@ -64,120 +25,6 @@ const initialState = {
     draggedListId: '',
     draggedCardId: '',
     isLoading: true
-}
-
-
-export const addList = (boardId: string, title: string) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        const list: List = {
-            _id: String(new ObjectID()),
-            title,
-            tasks: []
-        }
-        dispatch({type: 'ADD_LIST', payload: list})
-        await boardApi.addList( boardId, list)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const deleteList = (boardId: string, listId: string) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        dispatch({type: 'DELETE_LIST', payload: {listId}})
-        const list = (await boardApi.deleteList( boardId, listId))
-        console.log(list , 'list')
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
-
-export const addTask = (boardId: string, listId: string, text: string) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        const task: Task = {
-            _id: String(new ObjectID()),
-            text
-        }
-        dispatch({type: 'ADD_CARD', payload: {listId, task}})
-        await boardApi.addTask( boardId, listId, task)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const deleteTask = (boardId: string, listId: string, taskId: string) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        dispatch({type: 'DELETE_CARD', payload: {listId, taskId}})
-        const list = (await boardApi.deleteTask( boardId, listId, taskId))
-        console.log(list , 'list')
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const updateListTitle = (boardId: string, listId: string, title: string) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        dispatch({type: 'EDIT_LIST', payload: {listId, title}})
-        await boardApi.editListTitle(boardId, listId, title)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const updateTaskText = (boardId: string, listId: string, taskId: string, text: string) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
-        await boardApi.editTaskText(boardId, listId, taskId, text)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const moveList = (boardId: string, sourceIndex: number, destinationIndex: number) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        dispatch({type: 'MOVE_LIST', payload: {sourceIndex, destIndex: destinationIndex}})
-        await boardApi.moveList(boardId, sourceIndex, destinationIndex)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-export const moveTask = (boardId: string, state: any, sourceDroppableId: string, sourceIndex: number, destDroppableId: string, destIndex: number) => async (dispatch: Dispatch<AddItemAction>) => {
-    try {
-        const {sourceArrIndex, destArrIndex, sourceTaskIndex, destTaskIndex} 
-            = getMoveIndexes(state.lists, destDroppableId, sourceDroppableId, sourceIndex, destIndex, state.taskIds)
-
-        if(sourceDroppableId === destDroppableId){
-            dispatch({type: 'MOVE_CARD_IN_LIST', payload: {arrIndex: sourceArrIndex, sourceTaskIndex, destTaskIndex}})
-            await boardApi.moveTask(boardId, sourceArrIndex, destArrIndex, sourceTaskIndex, destTaskIndex)
-
-        }else{
-            const checkedDestTaskIndex = destTaskIndex < 0 ? state.lists[destArrIndex].tasks.length : destTaskIndex
-            dispatch({type: 'MOVE_CARD_BETWEEN_LISTS', payload: {sourceArrIndex, destArrIndex, sourceTaskIndex, destTaskIndex: checkedDestTaskIndex}})
-            await boardApi.moveTask(boardId, sourceArrIndex, destArrIndex, sourceTaskIndex, checkedDestTaskIndex)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-const getMoveIndexes = <T extends List>(
-        lists: T[], destDroppableId: string, sourceDroppableId: string, 
-        sourceIndex: number, destIndex: number, taskIds: string[]
-    ) => {
-        const destArrIndex = lists.findIndex((list: List) => list._id === destDroppableId)
-        const sourceArrIndex = lists.findIndex((list: List) => list._id === sourceDroppableId)
-        
-        const sourceTaskIndex = lists[sourceArrIndex].tasks.findIndex(
-            (task: Task) => task._id === taskIds[sourceIndex]
-        )
-
-        const destTaskIndex = lists[destArrIndex].tasks.findIndex(
-            (task: Task) => task._id === (taskIds[destIndex] && taskIds[destIndex])
-        )
-
-        return {destArrIndex, sourceArrIndex, sourceTaskIndex, destTaskIndex}
 }
 
 export const addItemReducer = (state: AddItemState = initialState, action: AddItemAction): AddItemState => {

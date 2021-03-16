@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { addList, addTask, moveList, moveTask, Task } from '../../redux/AddItem/reducer'
-import { moveItem } from '../../utils/moveItem'
-// import { moveItem, Task } from '../../redux/reducer'
-import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
+import { addList, addTask, moveList, moveTask } from '../../redux/AddItem/actionCreators'
+import { AddItemState, List } from '../../redux/AddItem/interfaces'
 import AddNewItem from '../AddNewItem'
 import BeautifulDragColumn from '../Column/BeautifulDragColumn'
 import { BoardContainer } from './BoardContainer'
-import {BoardProps} from './index'
 
 export const BoardColumnContainer = styled.div`
   display: flex;
   height: 100%;
 `
+export interface BoardProps {
+  data: AddItemState
+}
 
 const BeautifulBoard = ({data}: BoardProps) => {
     const dispatch = useDispatch()
@@ -52,7 +51,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 ref={provided.innerRef} 
                 {...provided.droppableProps}
               >
-                {lists?.map((list, index) => (
+                {lists?.map((list: List, index: number) => (
                   <BeautifulDragColumn 
                     list={list}
                     index={index}
