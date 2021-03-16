@@ -1,4 +1,5 @@
-import { Board } from './reducer';
+import { Board } from "./interfaces";
+
 export type BoardAction = SetBoards | AddBoard | SetLoading
 
 interface SetBoards {type: 'SET_BOARDS', payload: Board[]}
