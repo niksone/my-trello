@@ -145,7 +145,7 @@ class BoardController {
                 })
             }
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
@@ -248,7 +248,7 @@ class BoardController {
                 })
             }
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
