@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteTask, Task } from '../../redux/AddItem/reducer'
+import { deleteTask, Task, updateTaskText } from '../../redux/AddItem/reducer'
 import { RootReducerType } from '../../redux/store'
 import EditableItem from '../EditableItem'
 import ResizableTextArea from '../ResizableTextArea'
@@ -24,7 +24,8 @@ const BeautifulCard = ({taskId, task, listId}: CardPropsI) => {
   const dispatch = useDispatch()
 
   const editCard = (text: string) => {
-    dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
+    dispatch(updateTaskText(boardId, listId, taskId, text))
+    // dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
   }
 
   const handleDeleteCard = () => {
