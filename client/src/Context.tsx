@@ -1,7 +1,14 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react'
 import { authApi } from './api'
 
-export const userContext = createContext<any>({})
+interface UserContextI {
+    user: string,
+    isAuth: boolean,
+    isLoading: boolean,
+    getAuth(): void
+}
+
+export const userContext = createContext<UserContextI>({} as UserContextI)
 
 const UserContext = ({children}: PropsWithChildren<{}>) => {
     const [user, setUser] = useState('')

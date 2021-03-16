@@ -15,7 +15,7 @@ interface ColumnPropsI {
     index: number,
     taskIds: string[],
     tasks: Task[],
-    onAdd(text: string): any,
+    onAdd(text: string): void,
 }
 
 const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: ColumnPropsI) => {
@@ -55,7 +55,7 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                           </EditableItem>                        
                           <ColumnCardContainer >
                             <ColumnCardWrapper>
-                            {tasks?.map((task: any, index: number) => (
+                            {tasks?.map((task: Task, index: number) => (
                                 <BeautifulCard 
                                   taskId={task._id}
                                   task={task}
