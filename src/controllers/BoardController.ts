@@ -193,7 +193,7 @@ class BoardController {
                 }else{
                     board.lists[listIndex].tasks.splice(taskIndex, 1)
                     board.save()
-                    res.send(res.send(board.lists[listIndex]))
+                    res.send(board.lists[listIndex])
                 }
             })
         } catch (error) {
