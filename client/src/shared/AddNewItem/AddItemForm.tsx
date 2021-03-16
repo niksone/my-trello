@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import { useRef } from 'react'
 import ResizableTextArea from '../ResizableTextArea'
-import { AddItemButton, AddItemFormButton, AddItemFormContainer,AddItemFormWrapper } from './AddNewItemElements'
+import { AddItemFormButton, AddItemFormContainer,AddItemFormWrapper } from './AddNewItemElements'
 
 
 interface AddItemFormProps {

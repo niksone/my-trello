@@ -28,7 +28,6 @@ const checkUserExist = async (email: string, password: string) => {
                 : {userExist: false, error: ''}
             })
         .catch(err => {
-            // console.log(err.response.data.message);
             return {userExist: false, error: err}
         })
 }

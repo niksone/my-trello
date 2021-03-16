@@ -6,7 +6,6 @@ export const BoardContainer = styled.div`
   display: flex;
   align-items: flex-start;
   height: 100%;
-  /* width: 100%; */
   padding: 10px;
   overflow-x: scroll;
   position: relative;

@@ -18,10 +18,11 @@ const AddNewItem = ({text, formText, onAdd, item}: AddNewItemProps) => {
     }
 
     const handleForm = (text: string) => {
-        // if(text.trim() !== ''){
-            onAdd(text)
+        const trimText = text.trim()
+        if(trimText !== ''){
+            onAdd(trimText)
             setShowForm(false)
-        // }
+        }
     }
 
     return (

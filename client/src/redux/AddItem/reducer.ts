@@ -1,4 +1,4 @@
-import { Board } from './../Board/reducer';
+import { Board } from './../Board/interfaces';
 import { moveItem } from '../../utils/moveItem'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
 import { AddItemAction } from './actions'

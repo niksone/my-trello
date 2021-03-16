@@ -1,6 +1,6 @@
 import axios from "axios";
 import { List, Task } from "../redux/AddItem/interfaces";
-import { addBoard, Board } from "../redux/Board/reducer";
+import { Board } from "../redux/Board/interfaces";
 
 const instance = axios.create({
     withCredentials: true
