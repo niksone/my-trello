@@ -27,11 +27,14 @@ mongoose.connect(process.env.MONGODB_URI || link, {
     useNewUrlParser: true,
     useUnifiedTopology: true   
 }, (error: Error) => {
-    if(error){
+    try {
+        if(error){
+            throw error
+        }
+        console.log('connect to mongodb')
+    } catch (error) {
         console.log(error)
-        throw error
     }
-    console.log('connect to mongodb')
 })
 
 app.use(express.urlencoded({extended: true}))
