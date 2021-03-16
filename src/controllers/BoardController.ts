@@ -57,39 +57,47 @@ class BoardController {
     }
 
     async addList(req: Request, res: Response){
-        const {boardId, list} = req.body
-        if(!boardId || !list) res.status(500).send({message: 'Wrong values'})
-
-        await Board.findById(boardId, (err: Error, board: BoardI) => {
-            if(err) throw err
-            if(!board) res.status(500).send({message: 'Board not found'})
-            board.lists.push(list)
-            board.save()
-            console.log(board.lists, 'list initial ----------')
-            // const list = board.lists[board.lists.length - 1]
-            console.log(list, board.lists, '-----------list-------')
-            res.send(list)
-        })        
+        try {
+            const {boardId, list} = req.body
+            if(!boardId || !list) res.status(500).send({message: 'Wrong values'})
+    
+            await Board.findById(boardId, (err: Error, board: BoardI) => {
+                if(err) throw err
+                if(!board) res.status(500).send({message: 'Board not found'})
+                board.lists.push(list)
+                board.save()
+                console.log(board.lists, 'list initial ----------')
+                // const list = board.lists[board.lists.length - 1]
+                console.log(list, board.lists, '-----------list-------')
+                res.send(list)
+            })   
+        } catch (error) {
+            console.log(error)
+        }     
     }
 
     async removeList(req: Request, res: Response){
-        const {boardId, listId} = req.body
-        if(!boardId || !listId) res.send({message: 'Wrong values'})
-
-        await Board.findById(boardId, (err: Error, board: BoardI) => {
-            if(err) throw err
-            if(!board) res.status(500).send({message: 'Board not found'})
-
-            const listIndex = board.lists.findIndex(list => String(list._id) === listId)
-            console.log(listIndex)
-            if(listIndex < 0){
-                res.status(500).send({message: 'List didn`t found'})
-            }else{
-                board.lists.splice(listIndex, 1)
-                board.save()
-                res.send(board)
-            }
-        })
+        try {
+            const {boardId, listId} = req.body
+            if(!boardId || !listId) res.send({message: 'Wrong values'})
+    
+            await Board.findById(boardId, (err: Error, board: BoardI) => {
+                if(err) throw err
+                if(!board) res.status(500).send({message: 'Board not found'})
+    
+                const listIndex = board.lists.findIndex(list => String(list._id) === listId)
+                console.log(listIndex)
+                if(listIndex < 0){
+                    res.status(500).send({message: 'List didn`t found'})
+                }else{
+                    board.lists.splice(listIndex, 1)
+                    board.save()
+                    res.send(board)
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async updateListTitle(req: Request, res: Response) {
@@ -146,43 +154,51 @@ class BoardController {
     }
 
     async addTask(req: Request, res: Response){
-        const {boardId, listId, task} = req.body
-        if(!boardId || !listId || !task) res.status(500).send({message: 'Wrong values'})
-
-        await Board.findById(boardId, (err: Error, board: BoardI) => {
-            if(err) throw err
-            if(!board) res.status(500).send({message: 'Board not found'})
-            const listIndex = board.lists.findIndex(list => String(list._id) === listId)
-            if(listIndex < 0){
-                res.status(500).send({message: 'List didn`t found'})
-            }else{
-                board.lists[listIndex].tasks.push(task)
-                board.save()
-                res.send(task)
-            }
-        })     
+        try {
+            const {boardId, listId, task} = req.body
+            if(!boardId || !listId || !task) res.status(500).send({message: 'Wrong values'})
+    
+            await Board.findById(boardId, (err: Error, board: BoardI) => {
+                if(err) throw err
+                if(!board) res.status(500).send({message: 'Board not found'})
+                const listIndex = board.lists.findIndex(list => String(list._id) === listId)
+                if(listIndex < 0){
+                    res.status(500).send({message: 'List didn`t found'})
+                }else{
+                    board.lists[listIndex].tasks.push(task)
+                    board.save()
+                    res.send(task)
+                }
+            })  
+        } catch (error) {
+            console.log(error)
+        }   
     }
 
     async removeTask(req: Request, res: Response) {
-        const {boardId, listId, taskId} = req.body
-        if(!boardId || !listId || !taskId) res.status(500).send({message: 'Wrong values'})
-
-        await Board.findById(boardId, (err: Error, board: BoardI) => {
-            if(err) throw err
-            if(!board) res.status(500).send({message: 'Board not found'})
-
-            const listIndex = board.lists.findIndex(list => String(list._id) === listId)
-            const taskIndex = board.lists[listIndex].tasks.findIndex(task => String(task._id) === taskId)
-
-            console.log(listIndex, taskIndex)
-            if(listIndex < 0 || taskIndex < 0){
-                res.status(500).send({message: 'List or task didn`t found'})
-            }else{
-                board.lists[listIndex].tasks.splice(taskIndex, 1)
-                board.save()
-                res.send(res.send(board.lists[listIndex]))
-            }
-        })
+        try {
+            const {boardId, listId, taskId} = req.body
+            if(!boardId || !listId || !taskId) res.status(500).send({message: 'Wrong values'})
+    
+            await Board.findById(boardId, (err: Error, board: BoardI) => {
+                if(err) throw err
+                if(!board) res.status(500).send({message: 'Board not found'})
+    
+                const listIndex = board.lists.findIndex(list => String(list._id) === listId)
+                const taskIndex = board.lists[listIndex].tasks.findIndex(task => String(task._id) === taskId)
+    
+                console.log(listIndex, taskIndex)
+                if(listIndex < 0 || taskIndex < 0){
+                    res.status(500).send({message: 'List or task didn`t found'})
+                }else{
+                    board.lists[listIndex].tasks.splice(taskIndex, 1)
+                    board.save()
+                    res.send(res.send(board.lists[listIndex]))
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async updateTaskTitle(req: Request, res: Response) {
