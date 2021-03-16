@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
 import ResizableTextArea from '../ResizableTextArea'
 import { EditableItemContainer, EditButton, EditableItemWrapper, SubmitEditButton } from './EditableItemElements'
 

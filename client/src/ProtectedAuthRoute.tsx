@@ -4,7 +4,6 @@ import { userContext } from './Context'
 
 const ProtectedAuthRoute = ({component: Component, ...rest}: any) => {
     const {isAuth, isLoading} = useContext(userContext)
-    // console.log(localStorage.getItem('user'));
     return (
         isLoading
             ?

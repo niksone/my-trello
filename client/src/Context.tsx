@@ -1,8 +1,6 @@
-import axios from 'axios'
-import React, { createContext, PropsWithChildren, useEffect, useState } from 'react'
+import { createContext, PropsWithChildren, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { authApi } from './api'
-import { getBoards } from './redux/Board/reducer'
 
 export const userContext = createContext<any>({})
 
@@ -38,22 +36,7 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
             console.log(error)
         }
     }
-
-    // const getUserBoards = async () => {
-    //     console.log(isLoading)
-    //     try {
-    //         setIsLoading(true)
-    //         if(isAuth){
-    //             const user = await authApi.getUser()
-    //             dispatch(getBoards(user))
-    //         }
-    //         setIsLoading(false)
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
+    
     useEffect(() => {
         getAuth()
     }, []) 

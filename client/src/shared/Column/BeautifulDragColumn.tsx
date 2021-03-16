@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteList, updateListTitle } from '../../redux/AddItem/actionCreators'
