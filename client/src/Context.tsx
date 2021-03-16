@@ -1,5 +1,4 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { authApi } from './api'
 
 export const userContext = createContext<any>({})
@@ -8,7 +7,6 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
     const [user, setUser] = useState('')
     const [isAuth, setIsAuth] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    const dispatch = useDispatch()
         
     const getAuth = async () => {
         try {
@@ -36,7 +34,7 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
             console.log(error)
         }
     }
-    
+
     useEffect(() => {
         getAuth()
     }, []) 

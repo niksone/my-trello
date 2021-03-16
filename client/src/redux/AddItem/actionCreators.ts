@@ -2,7 +2,7 @@ import { boardApi } from './../../api/index';
 import ObjectID from "bson-objectid"
 import { Dispatch } from "react"
 import { AddItemAction } from "./actions"
-import { List, Task } from "./interfaces"
+import { AddItemState, List, Task } from "./interfaces"
 import { getMoveIndexes } from '../../utils/getTaskIndexes';
 
 export const addList = (boardId: string, title: string) => async (dispatch: Dispatch<AddItemAction>) => {
@@ -81,7 +81,7 @@ export const moveList = (boardId: string, sourceIndex: number, destinationIndex:
     }
 }
 
-export const moveTask = (boardId: string, state: any, sourceDroppableId: string, sourceIndex: number, destDroppableId: string, destIndex: number) => async (dispatch: Dispatch<AddItemAction>) => {
+export const moveTask = (boardId: string, state: AddItemState, sourceDroppableId: string, sourceIndex: number, destDroppableId: string, destIndex: number) => async (dispatch: Dispatch<AddItemAction>) => {
     try {
         const {sourceArrIndex, destArrIndex, sourceTaskIndex, destTaskIndex} 
             = getMoveIndexes(state.lists, destDroppableId, sourceDroppableId, sourceIndex, destIndex, state.taskIds)

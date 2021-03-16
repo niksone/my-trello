@@ -14,7 +14,9 @@ interface EditCardProps {
     taskId: string,
     text: string
 }
-const EditCard = ({listId, taskId, text}: any) => {
+
+
+const EditCard = ({listId, taskId, text}: EditCardProps) => {
     const dispatch = useDispatch()
     const test = useRef<HTMLSpanElement>(null)
 

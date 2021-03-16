@@ -1,3 +1,4 @@
+import { Board } from '../Board/interfaces';
 import { List, Task } from './interfaces';
 export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
  SetDraggedList| AddBoard | SetBoard | AddList | AddTask | EditCard
@@ -5,9 +6,9 @@ export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | Se
 
 interface AddList {type: 'ADD_LIST', payload: List}
 
-interface SetBoard {type: 'SET_BOARD', payload: any}
+interface SetBoard {type: 'SET_BOARD', payload: Board}
 
-interface AddBoard {type: 'ADD_BOARD', payload: any}
+interface AddBoard {type: 'ADD_BOARD', payload: Board}
 
 interface AddTask {type: 'ADD_CARD', payload: {task: Task, listId: string}}
 
