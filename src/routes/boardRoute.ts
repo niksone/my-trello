@@ -20,7 +20,7 @@ boardRouter.post('/boards/addTask', BoardController.addTask)
 
 boardRouter.delete('/boards/removeTask', BoardController.removeTask)
 
-boardRouter.patch('/boards/updateTaskTitle', BoardController.updateTaskTitle)
+boardRouter.patch('/boards/updateTaskTitle', BoardController.updateTaskText)
 
 boardRouter.patch('/boards/moveTask', BoardController.moveTask)
 

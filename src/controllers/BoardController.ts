@@ -201,7 +201,7 @@ class BoardController {
         }
     }
 
-    async updateTaskTitle(req: Request, res: Response) {
+    async updateTaskText(req: Request, res: Response) {
         try {
             const {boardId, listId, taskId, text} = req.body
             if(!boardId || !listId || ! taskId || !text) res.status(500).send({message: 'Wrong values'})
