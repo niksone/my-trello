@@ -1,5 +1,4 @@
 const passport = require('passport')
-const passportConfig = require('../passportConfig')
 import { NextFunction, Request, Response } from "express"
 import User from "../models/User";
 const bcrypt = require('bcryptjs')
@@ -15,14 +14,13 @@ class UserController {
 
     async login(req: Request, res: Response, next: NextFunction) {
         try {
-            passport.authenticate('local', (err: Error, user: UserI, info: any) => {
+            passport.authenticate('local', (err: Error, user: UserI) => {
                 if( err) next(err)  
                 !user
                     ? res.status(500).json({message: 'No user'})
                     : req.logIn(user, (err: Error) => {
                         if(err) next(err)
                         req.session.save(err => {
-                            // console.log(req.session)
                             res.send(user)
                         })
                     })
@@ -106,7 +104,6 @@ class UserController {
         } catch (error) {
             console.log(error)
         }
-        // console.log(req.isAuthenticated(), 'auth')
     }
 }
 

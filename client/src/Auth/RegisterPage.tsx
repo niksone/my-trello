@@ -11,7 +11,7 @@ const RegisterPage = () => {
     const {getAuth} = useContext(userContext)
     const {validation, checkValid} = useRegisterValidation()
 
-    const handleValidation = async (e:any, email: string, password: string, confirmedPassword: string) => {
+    const handleValidation = async (e: React.SyntheticEvent, email: string, password: string, confirmedPassword: string) => {
         e.preventDefault()
         const res = await checkValid( email, password, confirmedPassword)
         res.isValid && handleRegister()

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 import { userContext } from '../Context';
 
@@ -10,7 +10,7 @@ const LoginPage = () => {
     const {user, isLoading} = useContext(userContext)
     const {getAuth} = useContext(userContext)
 
-    const handleLogin = async (e: any) => {
+    const handleLogin = async (e: React.SyntheticEvent) => {
         e.preventDefault()
 
         axios({
