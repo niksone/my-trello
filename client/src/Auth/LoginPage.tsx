@@ -11,32 +11,25 @@ import ButtonGroup from '../shared/Buttons/ButtonGroup';
 import { Link } from 'react-router-dom';
 import Button from '../shared/Buttons';
 import {ReactComponent as LoginImg} from '../shared/icons/accessAccount.svg'
+import { authApi } from '../api';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const {user, isLoading} = useContext(userContext)
+
     const {getAuth} = useContext(userContext)
 
     const handleLogin = async (e: React.SyntheticEvent) => {
         e.preventDefault()
 
-        axios({
-            method: 'POST',
-            data: {
-                email: email,
-                password: password
-            },
-            withCredentials: true,
-            url: `/login`
-        })
-            .then(res => {
-                getAuth()
-            })
-            .catch(err => {
-                setError(err.response.data.message)
-            })
+        try {
+            const login = await authApi.login(email, password)
+            getAuth()
+        } catch (error) {
+            setError(error.response.data.message)
+        }
     }
 
     return (
@@ -90,26 +83,6 @@ const LoginPage = () => {
                     </HeroImgContainer>
                 </HeroRight>
             </Hero>
-            {/* <AuthForm>
-                <AuthFormTitle>Login</AuthFormTitle>
-                <p>{error}</p>
-                <AuthFormInput 
-                    type='email' 
-                    placeholder='Enter email' 
-                    value={email} 
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <AuthFormInput 
-                    type='password' 
-                    placeholder='Enter password'
-                    value={password} 
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <AuthFormButton onClick={e => handleLogin(e)}>Login</AuthFormButton>
-                <AuthFormLink to='/register'>
-                    Don`t have account yet? Register
-                </AuthFormLink>
-            </AuthForm> */}
         </AuthContainer>
     )
 }
