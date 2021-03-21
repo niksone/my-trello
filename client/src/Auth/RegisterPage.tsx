@@ -12,9 +12,9 @@ import TextInput from '../shared/TextInput'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 import {useRegisterValidation} from './useRegisterValidation'
 const RegisterPage = () => {
-    const [email, setEmail] = useState({fieldName: 'email', value: ''})
-    const [password, setPassword] = useState({fieldName: 'email', value: ''})
-    const [confirmedPassword, setConfirmedPassword] = useState({fieldName: 'email', value: ''})
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmedPassword, setConfirmedPassword] = useState('')
     const [error, setError] = useState('')
     const {getAuth} = useContext(userContext)
     const {validation, checkValid} = useRegisterValidation()
@@ -60,7 +60,7 @@ const RegisterPage = () => {
                                     fieldId='email-input'
                                     type='text'
                                     onChange={
-                                        (e: any) => setEmail(prev => ({...prev, value: e.target.value}))
+                                        (e: any) => setEmail(prev => e.target.value)
                                     }
                                     Icon={<MailIcon />}
                                 />
@@ -69,7 +69,7 @@ const RegisterPage = () => {
                                     placeholder='Enter your password' 
                                     fieldId='password-input'
                                     type='password'
-                                    onChange={(e: any) => setPassword(prev => ({...prev, value: e.target.value}))}
+                                    onChange={(e: any) => setPassword(prev => e.target.value)}
                                     Icon={<LockIcon />}
                                 />
                                 <TextInput 
@@ -77,7 +77,7 @@ const RegisterPage = () => {
                                     placeholder='Enter your password' 
                                     fieldId='confirmedpassword-input'
                                     type='password'
-                                    onChange={(e: any) => setConfirmedPassword(prev => ({...prev, value: e.target.value}))}
+                                    onChange={(e: any) => setConfirmedPassword(prev => e.target.value)}
                                     Icon={<LockIcon />}
                                 />
                             </FormInputsContainer>
