@@ -58,7 +58,8 @@ const LoginPage = () => {
                                         fieldId='email-input'
                                         type='text'
                                         onChange={(e: any) => setEmail(e.target.value)}
-                                        Icon={<MailIcon />}
+                                        Icon={MailIcon}
+                                        isError={error !== ''}
                                     />
                                     <TextInput 
                                         label='Password' 
@@ -66,7 +67,7 @@ const LoginPage = () => {
                                         fieldId='password-input'
                                         type='password'
                                         onChange={(e: any) => setPassword(e.target.value)}
-                                        Icon={<LockIcon />}
+                                        Icon={LockIcon}
                                     />
                                 </FormInputsContainer>
                                 <ButtonGroup spacing={3}>
