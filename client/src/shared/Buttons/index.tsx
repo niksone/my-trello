@@ -48,6 +48,7 @@ const ButtonContainer = styled.button<ButtonProps>`
     transition: 0.2s all ease-in-out;
     width: ${({widthFill}) => widthFill ? '100%' : 'auto'};
     ${({outline}) => outline ? outlineStyles : fillStyles};
+    font-size: var(--text-regular);
 `
 
 interface ButtonProps {
