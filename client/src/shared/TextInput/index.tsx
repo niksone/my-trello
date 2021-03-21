@@ -2,7 +2,11 @@ import React, { ChangeEventHandler, ReactNode } from 'react'
 import styled from 'styled-components'
 import UserIcon from '../icons/User/UserIcon'
 
-const TextInputContainer = styled.div`
+interface TextInput {
+    isError?: boolean
+}
+
+const TextInputContainer = styled.div<TextInput>`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -30,9 +34,9 @@ const StyledTextInput = styled.input`
     }
 `
 
-const TextInputWrapper = styled.div`
+const TextInputWrapper = styled.div<TextInput>`
     display: flex;
-    border-bottom: 2px var(--color-outline) solid;
+    border-bottom: 2px ${({isError}) => isError ? 'red' : 'var(--color-outline)'} solid;
     width: fit-content;
     padding-bottom: 17px;
     width: 100%;
@@ -51,14 +55,17 @@ interface TextInputProps {
     label: string,
     placeholder: string,
     fieldId: string,
-    Icon?: ReactNode
+    isError?: boolean,
+    Icon?: any
 }
 
-const TextInput = ({type, onChange, label, placeholder, fieldId, Icon}: TextInputProps) => {
+const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}: TextInputProps) => {
+    console.log(isError);
+    // const FinalIcon = Icon
     return (
-        <TextInputContainer>
+        <TextInputContainer isError={isError}>
             <TextInputLabel htmlFor={fieldId}>{label}</TextInputLabel>
-            <TextInputWrapper>
+            <TextInputWrapper isError={isError}>
                 <StyledTextInput 
                     type={type}
                     id={fieldId} 
@@ -69,9 +76,10 @@ const TextInput = ({type, onChange, label, placeholder, fieldId, Icon}: TextInpu
 
                     Icon && 
                     <IconWrapper>
-                        {Icon}
+                        <Icon fill={isError && 'red'}></Icon>
                     </IconWrapper>
                 }
+                {/* <FinalIcon fill={isError}/> */}
             </TextInputWrapper>
         </TextInputContainer>
     )
