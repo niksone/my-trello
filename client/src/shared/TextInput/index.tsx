@@ -25,7 +25,7 @@ const StyledTextInput = styled.input`
     width: 100%;
 
     &::placeholder{
-        font-weight: normal;
+        font-weight: bold;
         color: var(--color-primary-grey);
     }
 `
