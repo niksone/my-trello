@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { authApi } from '../api'
 import { userContext } from '../Context'
 import Button from '../shared/Buttons'
 import ButtonGroup from '../shared/Buttons/ButtonGroup'
@@ -9,29 +9,41 @@ import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, H
 import LockIcon from '../shared/icons/LockIcon/LockIcon'
 import MailIcon from '../shared/icons/Mail/MailIcon'
 import TextInput from '../shared/TextInput'
-import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
+import { AuthContainer } from './AuthElements'
 import {useRegisterValidation} from './useRegisterValidation'
+
+export interface RegisterState {
+    email: {value: string, fieldName: 'email'},
+    password: {value: string, fieldName: 'password'},
+    confirmedPassword: {value: string, fieldName: 'confirmedPassword'},
+    error: {value: string, fieldName: '' | 'email' | 'password' | 'confirmedPassword'},
+}
+
 const RegisterPage = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmedPassword, setConfirmedPassword] = useState('')
-    const [error, setError] = useState('')
     const {getAuth} = useContext(userContext)
     const {validation, checkValid} = useRegisterValidation()
 
-    const handleValidation = async (e: React.SyntheticEvent, email: string, password: string, confirmedPassword: string) => {
+    const [registerState, setRegisterState] = useState<RegisterState>({
+        email: {value: '', fieldName: 'email'},
+        password: {value: '', fieldName: 'password'},
+        confirmedPassword: {value: '', fieldName: 'confirmedPassword'},
+        error: {value: '', fieldName: ''},
+    })
+
+
+    const handleValidation = async (e: React.SyntheticEvent, registerState: RegisterState) => {
         e.preventDefault()
-        const res = await checkValid( email, password, confirmedPassword)
+        const res = await checkValid(registerState)
         res.isValid && handleRegister()
     }
 
-    const handleRegister = () => {
-        axios({
-            method: 'POST',
-            data: {email, password},
-            withCredentials: true,
-            url: '/register'
-        }).then((res) => {getAuth()})
+    const handleRegister = async () => {
+        try {
+            await authApi.register(registerState.email.value, registerState.password.value)
+                .then(res => getAuth())
+        } catch (error) {  
+            // console.log(error);
+        }
     }
 
     return (
@@ -52,39 +64,46 @@ const RegisterPage = () => {
                         </HeroSubtitle>
 
                         <FormContainer>
-                           <p>{validation.errors}</p>
+                           <p>{validation.error.value}</p>
                             <FormInputsContainer>
                                 <TextInput
                                     label='Email' 
                                     placeholder='Enter your email' 
                                     fieldId='email-input'
                                     type='text'
-                                    onChange={
-                                        (e: any) => setEmail(prev => e.target.value)
-                                    }
-                                    Icon={<MailIcon />}
+                                    onChange={(e: any) => setRegisterState(prev => (
+                                        {...prev, email: {...prev.email, value: e.target.value}}
+                                    ))}
+                                    isError={validation.error.fieldName === registerState.email.fieldName}
+                                    Icon={MailIcon}
                                 />
                                 <TextInput 
                                     label='Password' 
                                     placeholder='Enter your password' 
                                     fieldId='password-input'
                                     type='password'
-                                    onChange={(e: any) => setPassword(prev => e.target.value)}
-                                    Icon={<LockIcon />}
+                                    onChange={(e: any) => setRegisterState(prev => (
+                                        {...prev, password: {...prev.password, value: e.target.value}}
+                                    ))}
+                                    isError={validation.error.fieldName === registerState.password.fieldName}
+                                    Icon={LockIcon}
                                 />
                                 <TextInput 
                                     label='Confirm password' 
                                     placeholder='Enter your password' 
                                     fieldId='confirmedpassword-input'
                                     type='password'
-                                    onChange={(e: any) => setConfirmedPassword(prev => e.target.value)}
-                                    Icon={<LockIcon />}
+                                    onChange={(e: any) => setRegisterState(prev => (
+                                        {...prev, confirmedPassword: {...prev.confirmedPassword, value: e.target.value}}
+                                    ))}  
+                                    isError={validation.error.fieldName === registerState.confirmedPassword.fieldName}                                 
+                                    Icon={LockIcon}
                                 />
                             </FormInputsContainer>
                             <ButtonGroup spacing={3}>
                                 <Button 
                                     onClick={e => 
-                                        handleValidation(e, email, password, confirmedPassword) 
+                                        handleValidation(e, registerState) 
                                     }
                                     widthFill
                                 >
@@ -103,40 +122,6 @@ const RegisterPage = () => {
             </HeroRight>
         </Hero>
     </AuthContainer>
-        // <AuthContainer>
-        //     <AuthForm>
-        //         <AuthFormTitle>Register</AuthFormTitle>
-        //         <p>{validation.errors}</p>
-        //         <AuthFormInput 
-        //             type='email' 
-        //             placeholder='Enter email'
-        //             value={email}
-        //             onChange={e => setEmail(e.target.value)}
-        //         />
-        //         <AuthFormInput 
-        //             type='password' 
-        //             placeholder='Enter password'
-        //             value={password}
-        //             onChange={e => setPassword(e.target.value)}
-        //         />
-        //         <AuthFormInput 
-        //             type='password' 
-        //             placeholder='Submit password'
-        //             value={confirmedPassword}
-        //             onChange={e => setConfirmedPassword(e.target.value)}
-        //         />
-        //         <AuthFormButton 
-        //             onClick={e => 
-        //                 handleValidation(e, email, password, confirmedPassword) 
-        //             }
-        //         >
-        //             Register
-        //         </AuthFormButton>
-        //         <AuthFormLink to='/login'>
-        //             Already have the account? Login
-        //         </AuthFormLink>
-        //     </AuthForm>
-        // </AuthContainer>
     )
 }
 

@@ -1,57 +1,113 @@
 import axios from 'axios';
 import { useState } from 'react';
 import * as Yup from 'yup'
+import { authApi } from '../api';
+import { RegisterState } from './RegisterPage';
+
+const schemaMessages = {
+    email: {
+        empty: 'Please Enter your email',
+        wrongValues: 'Field should be valid email',
+        values: ['Please Enter your email', 'Field should be valid email'],
+        fieldName: ''
+    },
+    password: {
+        empty: 'Please Enter your password',
+        wrongValues: `Password Must Contain 8 Characters, One Uppercase, 
+            One Lowercase, One Number and one special case Character`,
+        values: [
+            'Please Enter your password',
+            `Password Must Contain 8 Characters, One Uppercase, 
+            One Lowercase, One Number and one special case Character`
+        ],
+        fieldName: ''
+    },
+    confirmedPassword: {
+        empty: 'Passwords does not match',
+        wrongValues: 'Passwords does not match',
+        values: ['Passwords does not match'],
+        fieldName: ''
+    }
+}
+
 
 const schema = Yup.object().shape({
+    confirmedPassword: Yup.string().required(schemaMessages.confirmedPassword.empty).oneOf([Yup.ref('password')], schemaMessages.confirmedPassword.wrongValues),
     password: Yup
         .string()
-        .required('Please Enter your password')
+        .required(schemaMessages.password.empty)
         .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-        ),
-    confirmedPassword: Yup.string().required().oneOf([Yup.ref('password')], 'Passwords does not match'),
-    email: Yup.string().email(),
+        schemaMessages.password.wrongValues
+    ),
+    email: Yup.string().required(schemaMessages.email.empty).email(schemaMessages.email.wrongValues),
 
 })
 
 const checkUserExist = async (email: string, password: string) => {
-    return axios({
-        method: 'GET',
-        data: {email, password},
-        withCredentials: true,
-        url: '/checkUserExist'
-    })
-        .then((res) => {
-            return res.data 
+    try {
+        const checkUserExist = await authApi.checkUserExist(email, password)
+        console.log(checkUserExist);
+        return checkUserExist.data 
                 ? {userExist: true, error: 'User Already Exist'}
                 : {userExist: false, error: ''}
-            })
-        .catch(err => {
-            return {userExist: false, error: err}
-        })
+    } catch (error) {
+        return {userExist: false, error: error}
+    }
 }
 
 export const useRegisterValidation = () => {
     const [validation, setValidation] = useState({
         isValid: false,
-        errors: ''
+        error: {
+            value: '',
+            fieldName: ''
+        }
     })
 
-    const checkValid = async (email: string, password: string, confirmedPassword: string) => {
+
+    
+    const checkValid = async ({email, password, confirmedPassword, error}: RegisterState) => {
+        schemaMessages.email.fieldName = email.fieldName
+        schemaMessages.password.fieldName = password.fieldName
+        schemaMessages.confirmedPassword.fieldName = confirmedPassword.fieldName
+
+
         try {
             const res = schema
-                .validateSync({email, password, confirmedPassword})
-            const {userExist, error} = await checkUserExist(email, password)
-            setValidation({isValid: !userExist, errors: error})    
+                .validateSync({
+                    email: email.value, 
+                    password: password.value, 
+                    confirmedPassword: confirmedPassword.value})
+            const {userExist} = await checkUserExist(email.value, password.value)
+            setValidation({
+                isValid: !userExist, 
+                error: {value: 'User Already Exist', fieldName: error.fieldName}
+            })    
         return validation
         } catch (error) {
             const res = error.errors
             console.log(res)
-            setValidation({isValid: false, errors: res})
+            setValidation({isValid: false, error: {
+                value: res,
+                fieldName: findFieldByError(res[0])
+            }})
             return validation
         }
     }
 
     return {validation, checkValid}
+}
+
+const findFieldByError = (error: string) => {
+    console.log(error);
+    for(const [field, value] of Object.entries(schemaMessages)){
+        // console.log(field, value);
+        if(value.values.includes(error)){
+            console.log(value.fieldName);
+            return value.fieldName
+        } 
+        // console.log(schemaMessages?[field])
+    }
+    return ''
 }
