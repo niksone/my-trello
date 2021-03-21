@@ -26,7 +26,7 @@ module.exports = (passport: PassportStatic) => {
     }
     passport.use(new localStrategy({usernameField: 'email'}, authenticateUser))
 
-    passport.serializeUser((user: UserI, cb: any) => {
+    passport.serializeUser((user: any, cb: any) => {
         cb(null, user.id)
     })
     
