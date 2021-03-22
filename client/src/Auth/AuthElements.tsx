@@ -8,6 +8,7 @@ export const AuthContainer = styled.div`
     justify-content: center;
     align-items: center;
     background-color: lightblue;
+    overflow: hidden;
 `
 
 export const AuthForm = styled.form`
