@@ -15,6 +15,7 @@ export const GlobalStyles = createGlobalStyle`
         --color-primary-grey: #8181A5;
         --color-primary-light: rgba(94, 129, 244, 0.1);
         --color-outline: #F0F0F3;
+        --color-error: #ff4848;
 
         --color-button-hover: #475EAB;
         --color-button-outline-resting: #ECECF2;
