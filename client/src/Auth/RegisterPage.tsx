@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import { authApi } from '../api'
 import { userContext } from '../Context'
 import Button from '../shared/Buttons'
@@ -11,6 +12,12 @@ import MailIcon from '../shared/icons/Mail/MailIcon'
 import TextInput from '../shared/TextInput'
 import { AuthContainer } from './AuthElements'
 import {useRegisterValidation} from './useRegisterValidation'
+
+
+const AuthWrapper = styled.div`
+    height: calc(100vh - calc(100vh - 100%));
+    width: 100%;
+`
 
 export interface RegisterState {
     email: {value: string, fieldName: 'email'},
@@ -47,7 +54,8 @@ const RegisterPage = () => {
     }
 
     return (
-        <AuthContainer>
+        <AuthContainer >
+        <AuthWrapper>
 
         <Hero>
             <HeroLeft>
@@ -125,6 +133,7 @@ const RegisterPage = () => {
                 </HeroImgContainer>
             </HeroRight>
         </Hero>
+        </AuthWrapper>
     </AuthContainer>
     )
 }
