@@ -12,13 +12,14 @@ import { Link } from 'react-router-dom';
 import Button from '../shared/Buttons';
 import {ReactComponent as LoginImg} from '../shared/icons/accessAccount.svg'
 import { authApi } from '../api';
+import useFullHeight from '../utils/useFullHeight';
+import Div100vh from '../shared/Div100vh';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const {user, isLoading} = useContext(userContext)
-
     const {getAuth} = useContext(userContext)
 
     const handleLogin = async (e: React.SyntheticEvent) => {
@@ -33,6 +34,7 @@ const LoginPage = () => {
     }
 
     return (
+        <Div100vh>
         <AuthContainer>
 
             <Hero>
@@ -86,6 +88,7 @@ const LoginPage = () => {
                 </HeroRight>
             </Hero>
         </AuthContainer>
+        </Div100vh>
     )
 }
 
