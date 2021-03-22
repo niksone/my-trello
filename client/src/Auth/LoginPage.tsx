@@ -2,8 +2,8 @@ import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 import { userContext } from '../Context';
-import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroSubtitle, HeroTitle } from '../shared/HeroSection';
-import { FormContainer, FormInputsContainer } from '../shared/FormControl';
+import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroSubtitle, HeroTextWrapper, HeroTitle } from '../shared/HeroSection';
+import { FormContainer, FormError, FormInputsContainer } from '../shared/FormControl';
 import TextInput from '../shared/TextInput';
 import MailIcon from '../shared/icons/Mail/MailIcon';
 import LockIcon from '../shared/icons/LockIcon/LockIcon';
@@ -39,8 +39,8 @@ const LoginPage = () => {
                 <HeroLeft>
                     <HeroLeftContainer>
                         <HeroLeftWrapper>
-
-                            <HeroTitle>
+                        <HeroTextWrapper>
+                            <HeroTitle >
                                     Welcome to React Trello.
                                     <br />
                                     Sign In to see latest updates.
@@ -48,9 +48,10 @@ const LoginPage = () => {
                             <HeroSubtitle>
                                 Enter your details to proceed further
                             </HeroSubtitle>
+                        </HeroTextWrapper>  
 
                             <FormContainer>
-                            <p>{error}</p>
+                                <FormError isError={error !== ''}>{error}</FormError>
                                 <FormInputsContainer>
                                     <TextInput
                                         label='Email' 

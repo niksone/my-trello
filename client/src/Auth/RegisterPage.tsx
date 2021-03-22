@@ -4,8 +4,8 @@ import { authApi } from '../api'
 import { userContext } from '../Context'
 import Button from '../shared/Buttons'
 import ButtonGroup from '../shared/Buttons/ButtonGroup'
-import { FormContainer, FormInputsContainer } from '../shared/FormControl'
-import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroSubtitle, HeroTitle } from '../shared/HeroSection'
+import { FormContainer, FormError, FormInputsContainer } from '../shared/FormControl'
+import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroSubtitle, HeroTextWrapper, HeroTitle } from '../shared/HeroSection'
 import LockIcon from '../shared/icons/LockIcon/LockIcon'
 import MailIcon from '../shared/icons/Mail/MailIcon'
 import TextInput from '../shared/TextInput'
@@ -53,6 +53,7 @@ const RegisterPage = () => {
             <HeroLeft>
                 <HeroLeftContainer>
                     <HeroLeftWrapper>
+                    <HeroTextWrapper>
 
                         <HeroTitle>
                                 Welcome to React Trello.
@@ -62,9 +63,12 @@ const RegisterPage = () => {
                         <HeroSubtitle>
                             Enter your details to proceed further
                         </HeroSubtitle>
+                    </ HeroTextWrapper>
 
                         <FormContainer>
-                           <p>{validation.error.value}</p>
+                           <FormError isError={validation.error.value !== ''}>
+                               {validation.error.value}
+                            </FormError>
                             <FormInputsContainer>
                                 <TextInput
                                     label='Email' 
