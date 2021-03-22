@@ -7,12 +7,13 @@ import Button from '../shared/Buttons'
 import ButtonGroup from '../shared/Buttons/ButtonGroup'
 import Div100vh from '../shared/Div100vh'
 import { FormContainer, FormError, FormInputsContainer } from '../shared/FormControl'
-import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroSubtitle, HeroTextWrapper, HeroTitle } from '../shared/HeroSection'
+import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroRightTextWrapper, HeroSubtitle, HeroTextWrapper, HeroTitle } from '../shared/HeroSection'
 import LockIcon from '../shared/icons/LockIcon/LockIcon'
 import MailIcon from '../shared/icons/Mail/MailIcon'
 import TextInput from '../shared/TextInput'
 import { AuthContainer } from './AuthElements'
 import {useRegisterValidation} from './useRegisterValidation'
+import {ReactComponent as RegisterImg} from '../shared/icons/authentication.svg'
 
 
 const AuthWrapper = styled.div`
@@ -130,8 +131,16 @@ const RegisterPage = () => {
                 </HeroLeftContainer>
             </HeroLeft>
             <HeroRight>
+                <HeroRightTextWrapper>
+                    <HeroTitle>
+                            Welcome to React Trello.
+                    </HeroTitle>
+                    <HeroSubtitle>
+                        Enter your details to proceed further
+                    </HeroSubtitle>
+                </HeroRightTextWrapper>
                 <HeroImgContainer>
-                    {/* <LoginIm /> */}
+                    <RegisterImg />
                 </HeroImgContainer>
             </HeroRight>
         </Hero>
