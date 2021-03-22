@@ -5,6 +5,7 @@ import { authApi } from '../api'
 import { userContext } from '../Context'
 import Button from '../shared/Buttons'
 import ButtonGroup from '../shared/Buttons/ButtonGroup'
+import Div100vh from '../shared/Div100vh'
 import { FormContainer, FormError, FormInputsContainer } from '../shared/FormControl'
 import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroSubtitle, HeroTextWrapper, HeroTitle } from '../shared/HeroSection'
 import LockIcon from '../shared/icons/LockIcon/LockIcon'
@@ -54,8 +55,9 @@ const RegisterPage = () => {
     }
 
     return (
-        <AuthContainer >
-        <AuthWrapper>
+        <Div100vh >
+        {/* // <AuthContainer >
+        // <AuthWrapper> */}
 
         <Hero>
             <HeroLeft>
@@ -133,8 +135,9 @@ const RegisterPage = () => {
                 </HeroImgContainer>
             </HeroRight>
         </Hero>
-        </AuthWrapper>
-    </AuthContainer>
+        {/* </AuthWrapper>
+    </AuthContainer> */}
+    </Div100vh>
     )
 }
 
