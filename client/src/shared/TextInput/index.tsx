@@ -32,6 +32,17 @@ const StyledTextInput = styled.input`
         font-weight: bold;
         color: var(--color-primary-grey);
     }
+
+    /* Remove Chrome autocomplete background */
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus, 
+    &:-webkit-autofill:active  {
+        transition: background-color 5000s;
+        color: red !important;
+        font-weight: bold;
+
+    }
 `
 
 const TextInputWrapper = styled.div<TextInput>`
@@ -40,6 +51,8 @@ const TextInputWrapper = styled.div<TextInput>`
     width: fit-content;
     padding-bottom: 17px;
     width: 100%;
+
+
 `
 
 const IconWrapper = styled.span`
