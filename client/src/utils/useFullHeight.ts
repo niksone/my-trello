@@ -5,8 +5,10 @@ const useFullHeight = () => {
 
     useEffect(() => {
         const measureHeight = () => {
-            setHeight(getHeight())
+            const measuredHeight = getHeight()
+            setHeight(measuredHeight)
         }
+        measureHeight()
         window.addEventListener('resize', measureHeight)
         return () => window.removeEventListener('resize', measureHeight)
     })
