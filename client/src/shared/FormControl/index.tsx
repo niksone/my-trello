@@ -32,6 +32,7 @@ export const FormError = styled.div<FormErrorProps>`
     color: #fff;
     padding: 15px;
     border-radius: 8px;
+    font-size: var(--text-regular);
     font-weight: bold;
     margin-bottom: 20px;
     animation: appear-fade 0.5s ease-in-out;
