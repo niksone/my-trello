@@ -79,7 +79,7 @@ export const HeroRight = styled.div`
 
     @media(max-width: 976px){
         width: 100%;
-        height: 50%;
+        height: auto;
     }
 `
 
