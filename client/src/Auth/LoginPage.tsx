@@ -35,7 +35,7 @@ const LoginPage = () => {
 
     return (
         <Div100vh>
-        <AuthContainer>
+        {/* <AuthContainer> */}
 
             <Hero>
                 <HeroLeft>
@@ -87,7 +87,7 @@ const LoginPage = () => {
                     </HeroImgContainer>
                 </HeroRight>
             </Hero>
-        </AuthContainer>
+        {/* </AuthContainer> */}
         </Div100vh>
     )
 }
