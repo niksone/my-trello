@@ -1,11 +1,5 @@
-import React from 'react'
 import styled from 'styled-components'
-import TextInput from '../TextInput'
-import {ReactComponent as User} from '../icons/user.svg'
-import UserIcon from '../icons/User/UserIcon'
 import {ReactComponent as LoginImg} from '../icons/accessAccount.svg'
-import MailIcon from '../icons/Mail/MailIcon'
-import LockIcon from '../icons/LockIcon/LockIcon'
 import Button from '../Buttons'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import { FormContainer, FormInputsContainer } from '../FormControl'
@@ -19,8 +13,12 @@ export const Hero = styled.div<HeroProps>`
     display: flex;
     flex-direction: ${({reverse}) => reverse ? 'row-reverse' : 'row'};
     background-color: var(--color-primary);
-    height: 100%;
     width: 100%;
+    height: 100%;
+
+    @media(max-width: 976px){
+        flex-direction: column-reverse;
+    }
 `
 
 export const HeroSectionWrapper = styled.div`
@@ -32,24 +30,40 @@ export const HeroSectionWrapper = styled.div`
 export const HeroLeft = styled.div`
     width: 50%;
     height: 100%;
+
+    @media(max-width: 976px){
+        width: 100%;
+        height: fit-content;    
+    }
     /* background-color: #fff; */
 `
 
 export const HeroLeftContainer = styled.div`
-    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 0px 16px 16px 0;
     border: none;
     background-color: white;
     height: 100%;
+
+
+    @media(max-width: 976px){
+        border-radius: 16px 16px 0 0;
+    }
 `
 
 
 export const HeroLeftWrapper = styled.div`
-    position: absolute;
+    /* position: absolute;
     top: 50%;
-    left: 60%;
-    transform: translate(-50%, -50%);
+    left: 60%; */
+    transform: translate(10%, 0%);
     width: fit-content;
+
+    @media(max-width:1280px){
+        transform: translate(0);
+    }
 `
 
 export const HeroTitle = styled.h1`
@@ -62,11 +76,20 @@ export const HeroRight = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media(max-width: 976px){
+        width: 100%;
+        height: 50%;
+    }
 `
 
 export const HeroImgContainer = styled.div`
     height: fit-content;
     width: fit-content;
+
+    @media(max-width: 976px){
+        display: none;
+    }
 `
 
 export const HeroSubtitle = styled.p`
@@ -75,8 +98,19 @@ export const HeroSubtitle = styled.p`
     padding-top: 11px;
 `
 
+export const HeroTextWrapper = styled.div`
+    @media(max-width: 976px){
+        display: none;
+    }
+`
 
 const HeroSection = () => {
+
+    const getHeroText = () =>  {
+        <HeroTextWrapper>
+
+        </HeroTextWrapper>
+    }
     return (
     <div style={{height: '100vh'}}>
         <Hero >
