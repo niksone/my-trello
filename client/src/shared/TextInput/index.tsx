@@ -21,6 +21,7 @@ const TextInputLabel = styled.label`
 `
 
 const StyledTextInput = styled.input`
+    background-color: transparent;
     border: none;
     outline: none;
     font-size: var(--text-regular);
@@ -39,7 +40,6 @@ const StyledTextInput = styled.input`
     &:-webkit-autofill:focus, 
     &:-webkit-autofill:active  {
         transition: background-color 5000s;
-        color: red !important;
         font-weight: bold;
 
     }
@@ -47,17 +47,16 @@ const StyledTextInput = styled.input`
 
 const TextInputWrapper = styled.div<TextInput>`
     display: flex;
-    border-bottom: 2px ${({isError}) => isError ? 'red' : 'var(--color-outline)'} solid;
+    border-bottom: 2px ${({isError}) => isError ? 'var(--color-error)' : 'var(--color-outline)'} solid;
     width: fit-content;
     padding-bottom: 17px;
     width: 100%;
-
-
+    transition: 0.5s all ease-in-out;
 `
 
 const IconWrapper = styled.span`
     height: fit-content;
-    color: red;
+    color: var(--color-error);
     /* padding-left: 5px; */
 `
 
@@ -89,7 +88,7 @@ const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}:
 
                     Icon && 
                     <IconWrapper>
-                        <Icon fill={isError && 'red'}></Icon>
+                        <Icon fill={isError && 'var(--color-error)'}></Icon>
                     </IconWrapper>
                 }
                 {/* <FinalIcon fill={isError}/> */}
