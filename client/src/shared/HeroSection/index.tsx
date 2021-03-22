@@ -83,6 +83,24 @@ export const HeroRight = styled.div`
     }
 `
 
+export const HeroRightTextWrapper = styled.div`
+    display: none;
+    text-align: center;
+
+    @media(max-width: 976px){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;   
+
+        & > p   {
+            color: white !important;  
+            font-weight: bold; 
+        }
+    }
+`
+
 export const HeroImgContainer = styled.div`
     height: fit-content;
     width: fit-content;
