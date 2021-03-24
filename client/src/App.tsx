@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { GlobalStyles } from './globalStyles';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import RegisterPage from './Auth/RegisterPage';
 import BoardPage from './BoardPage';
 import LoginPage from './Auth/LoginPage';
@@ -20,10 +20,11 @@ function App() {
         <UserContext>
             <Router>
             <Switch>
-              <ProtectedRoute path='/' exact component={() => <HomePage />} />
-              <ProtectedRoute path='/board/:id' children={() => <BoardPage />} />
+              <ProtectedRoute path='/board' exact component={() => <HomePage />} />
+              <ProtectedRoute path='/board/:id' children={() => <HomePage />} />
               <ProtectedAuthRoute path='/register' component={() => <RegisterPage />} />
               <ProtectedAuthRoute path='/login' component={() => <LoginPage />} />
+              <Redirect to='/board' />
             </Switch>
             </Router>
         </UserContext>
