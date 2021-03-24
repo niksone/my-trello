@@ -9,6 +9,10 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 62.5%;
     }
 
+    a{
+        text-decoration: none;
+    }
+
     #root{
         --color-primary: #5E81F4;
         --color-primary-dark: #1C1D21;
@@ -16,6 +20,8 @@ export const GlobalStyles = createGlobalStyle`
         --color-primary-light: rgba(94, 129, 244, 0.1);
         --color-outline: #F0F0F3;
         --color-error: #ff4848;
+        --color-background-light: #F5F5FA;
+        --color-resting-ouline: #ECECF2;
 
         --color-button-hover: #475EAB;
         --color-button-outline-resting: #ECECF2;
