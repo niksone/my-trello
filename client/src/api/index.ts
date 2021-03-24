@@ -32,8 +32,8 @@ export const authApi = {
         // }).then((res) => {getAuth()})
     },
 
-    logout() {
-
+    async logout() {
+        const logout = await instance.post('/logout')
     },
     
     async checkUserExist(email: string, password: string) {
