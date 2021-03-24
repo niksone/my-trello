@@ -35,8 +35,6 @@ const LoginPage = () => {
 
     return (
         <Div100vh>
-        {/* <AuthContainer> */}
-
             <Hero>
                 <HeroLeft>
                     <HeroLeftContainer>
@@ -95,7 +93,6 @@ const LoginPage = () => {
                     </HeroImgContainer>
                 </HeroRight>
             </Hero>
-        {/* </AuthContainer> */}
         </Div100vh>
     )
 }
