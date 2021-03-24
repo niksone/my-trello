@@ -10,26 +10,11 @@ export const authApi = {
     async login (email: string, password: string) {
         const login = await instance.post('/login', {email, password})
         return login
-        // axios({
-        //     method: 'POST',
-        //     data: {
-        //         email: email,
-        //         password: password
-        //     },
-        //     withCredentials: true,
-        //     url: `/login`
-        // })
     },
 
     async register(email: string, password: string) {
         const register = await instance.post('/register', {email, password})
         return register
-        // axios({
-        //     method: 'POST',
-        //     data: {email, password},
-        //     withCredentials: true,
-        //     url: '/register'
-        // }).then((res) => {getAuth()})
     },
 
     async logout() {
@@ -39,20 +24,6 @@ export const authApi = {
     async checkUserExist(email: string, password: string) {
         const checkUserExist = instance.post('/checkUserExist', {email, password})
         return checkUserExist;
-        // return axios({
-        //     method: 'GET',
-        //     data: {email, password},
-        //     withCredentials: true,
-        //     url: '/checkUserExist'
-        // })
-        //     .then((res) => {
-        //         return res.data 
-        //             ? {userExist: true, error: 'User Already Exist'}
-        //             : {userExist: false, error: ''}
-        //         })
-        //     .catch(err => {
-        //         return {userExist: false, error: err}
-        //     })
     },
 
     async isAuth() {

@@ -42,7 +42,7 @@ const BoardPage = (
 
     const {user} = useContext(userContext)
 
-    const {boards, isLoading} = useSelector((state: RootReducerType) => state.boards)
+    const {boards} = useSelector((state: RootReducerType) => state.boards)
 
     const currentBoard = boards.find(board => board._id === id) || {} as Board
 
@@ -53,11 +53,6 @@ const BoardPage = (
         dispatch(setBoard(currentBoard))
     }, [dispatch, currentBoard._id, user])
     return (
-        // <AppContainer>
-        //     {/* <Header /> */}
-        //     <BoardSidebar>
-        //         hyhyt
-        //     </BoardSidebar>
         <BoardSectionWrapper>
             <BeautifulBoard data={data} />
         </BoardSectionWrapper>
