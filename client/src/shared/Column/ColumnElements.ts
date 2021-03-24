@@ -13,8 +13,9 @@ export const ColumnContainer = styled.div<ColumnContainerProps>`
 
 export const ColumnWrapper = styled.div<ColumnContainerProps>`
     width: 300px;
-    background-color: ${({isOver}) => isOver ?'grey' : 'lightgrey'};
+    background: none;
     opacity: ${({isOver}) => isOver ? '0.3' : '1'};
+    border: 2px var(--color-resting-ouline) dashed;
     /* transform: rotateZ(${({isDragging}) => isDragging ? '5deg' : '0'}); */
     height: max-content;
     margin:10px;
