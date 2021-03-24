@@ -11,15 +11,23 @@ import { RootReducerType, store } from '../redux/store'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 import Header from '../shared/Header'
 import { useFetching } from '../utils/useFetching'
+import {BoardSidebar} from './BoardElements'
 
-
-const AppContainer = styled.div`
+export const AppContainer = styled.div`
   height: 100vh;
-  display: grid;
+  display: flex;
+  /* display: grid;
   grid-template-rows: 100px 1fr;
   grid-template-areas: 
     'header'
-    'board';
+    'board'; */
+`
+
+export const BoardSectionWrapper = styled.div`
+    height: 100%; 
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
 `
 export interface BoardPageProps {
     // data: AddItemState
@@ -39,23 +47,22 @@ const BoardPage = (
     const currentBoard = boards.find(board => board._id === id) || {} as Board
 
     const data = useSelector((state: RootReducerType) => state.addItem)
-    // console.log(`${user} -> ${JSON.stringify(boards)} -> ${JSON.stringify(data)}`);
-    // console.log(`${data.isLoading}->data ${isLoading}->board`);
 
     useEffect(() => {
         dispatch(getBoards(user))
         dispatch(setBoard(currentBoard))
     }, [dispatch, currentBoard._id, user])
     return (
-        <AppContainer>
-            <Header />
+        // <AppContainer>
+        //     {/* <Header /> */}
+        //     <BoardSidebar>
+        //         hyhyt
+        //     </BoardSidebar>
+        <BoardSectionWrapper>
+            <BeautifulBoard data={data} />
+        </BoardSectionWrapper>
             
-            {data.isLoading || isLoading
-                ? <p>Loading</p>
-                : 
-                <BeautifulBoard data={data} />
-            }
-        </AppContainer>
+        // </AppContainer>
     )
 }
 
