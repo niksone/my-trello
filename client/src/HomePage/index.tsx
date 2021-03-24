@@ -35,7 +35,7 @@ export const BoardSectionContainer = styled.div`
 
 export const BoardSectionWrapper = styled.div`
     width: 100%;
-    grid-area: board-section;
+    grid-area: 'board-section';
 `
 
 
@@ -47,10 +47,44 @@ export const BoardLinksContainer = styled.div`
     width: 100%;
 `
 
-export const BoardLinkWrapper = styled.div`
+export const BoardLinkWrapper = styled.div<BoardLinkContainer>`
     display: flex;
     width: 80%;
-    /* padding: 12px 12px 15px 12px; */
+
+    &::after{
+        content: '';
+        display: ${({active}) => active ? 'block' : 'none'};
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 2px;
+        background-color: var(--color-primary);
+        border-radius: 1px;
+    }
+    /* /* padding: 12px 12px 15px 12px; */
+`
+
+
+interface BoardLinkContainer {
+    active?: boolean
+}
+
+export const BoardLinkContainer = styled.div<BoardLinkContainer>`
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+
+    & ~ &{
+        margin: 8px 0 8px 0;
+    }
+    /* border-right: ${({active}) => active ? '2px var(--color-primary) solid' : 'none'}; */
+`
+
+export const BoardName = styled.h3`
+    font-size: var(--text-h3);
 `
 
 export const BoardLink = styled(Link)`
@@ -58,11 +92,6 @@ export const BoardLink = styled(Link)`
     text-decoration: none;
     color: var(--color-primary-dark);
     font-size: var(--text-regular);
-    padding: 8px 0 8px 0;
-
-    &:first-child{
-        padding-top: 0;
-    }
 
     & > Button{
         padding: 13px;  
@@ -72,11 +101,13 @@ export const BoardLink = styled(Link)`
 `
 
 export const BoardLinkIconWrapper = styled.span`
+    display: flex;
+    align-items: center;
     padding-right: 30px;
+    color: inherit;
 `
 
 const HomePage = () => {
-
     const {user, getAuth} = useContext(userContext)
 
     const {boards} = useSelector((state: RootReducerType) => state.boards)
@@ -86,15 +117,14 @@ const HomePage = () => {
 
     const currentBoard = boards.find(board => board._id === id) || {} as Board
 
-
     const handleLogout = async () => {
-        const logout = await authApi.logout()
+        await authApi.logout()
         getAuth()
     }
 
     useEffect(() => {
         dispatch(getBoards(user))
-    }, [dispatch, currentBoard._id, user])
+    }, [dispatch, user])
     return (
         
         <AppContainer>
@@ -107,16 +137,18 @@ const HomePage = () => {
                     </HeaderContainer>
                         {
                             boards?.map((board: Board) => 
-                                <BoardLinkWrapper key={board._id}>
+                            <BoardLinkContainer key={board._id}>
+                                <BoardLinkWrapper active={board._id == id}>
                                     <BoardLink to={`/board/${board._id}`} key={board._id}>
                                         <Button jc='start' widthFill variant='shadow' active={board._id === id}>
                                             <BoardLinkIconWrapper>
-                                                <PickIcon fill='var(--color-primary-grey'/>
+                                                <PickIcon />
                                             </BoardLinkIconWrapper>
                                             {board.name}
                                         </Button>
                                     </BoardLink>
-                                </BoardLinkWrapper>)
+                                </BoardLinkWrapper>
+                            </BoardLinkContainer>)
                         }  
                 </BoardLinksContainer>
                 <BoardLinkWrapper>
@@ -132,7 +164,7 @@ const HomePage = () => {
             <BoardSectionContainer>
                     <HeaderContainer>
                         <HeaderWrapper>
-                            <p>{currentBoard.name}</p>
+                            <BoardName>{currentBoard.name}</BoardName>
                             <Button 
                                 onClick={handleLogout}
                             >
@@ -141,7 +173,7 @@ const HomePage = () => {
                         </HeaderWrapper>
                     </HeaderContainer>
                 <BoardSectionWrapper>
-                    {id && <BoardPage />   } 
+                    {currentBoard._id && <BoardPage />   } 
                 </BoardSectionWrapper>
             </BoardSectionContainer>
         </AppContainer>
