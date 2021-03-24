@@ -12,21 +12,21 @@ import { Link } from 'react-router-dom';
 import Button from '../shared/Buttons';
 import {ReactComponent as LoginImg} from '../shared/icons/accessAccount.svg'
 import { authApi } from '../api';
-import useFullHeight from '../utils/useFullHeight';
 import Div100vh from '../shared/Div100vh';
+import bgPattern from '../shared/icons/bgPattern.svg'
+import mobileBgPattern from '../shared/icons/bgPattern2.svg'
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const {user, isLoading} = useContext(userContext)
     const {getAuth} = useContext(userContext)
 
     const handleLogin = async (e: React.SyntheticEvent) => {
         e.preventDefault()
 
         try {
-            const login = await authApi.login(email, password)
+            await authApi.login(email, password)
             getAuth()
         } catch (error) {
             setError(error.response.data.message)
@@ -79,7 +79,7 @@ const LoginPage = () => {
                         </ HeroLeftWrapper>
                     </HeroLeftContainer>
                 </HeroLeft>
-                <HeroRight>
+                <HeroRight bgPattern={bgPattern} mobileBgPattern={mobileBgPattern}>
                     <HeroRightTextWrapper>
                         <HeroTitle>
                                 Welcome to React Trello.

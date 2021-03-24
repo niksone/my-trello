@@ -11,9 +11,10 @@ import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, H
 import LockIcon from '../shared/icons/LockIcon/LockIcon'
 import MailIcon from '../shared/icons/Mail/MailIcon'
 import TextInput from '../shared/TextInput'
-import { AuthContainer } from './AuthElements'
 import {useRegisterValidation} from './useRegisterValidation'
 import {ReactComponent as RegisterImg} from '../shared/icons/authentication.svg'
+import bgPattern from '../shared/icons/bgPattern.svg'
+import mobileBgPattern from '../shared/icons/bgPattern2.svg'
 
 
 const AuthWrapper = styled.div`
@@ -127,7 +128,7 @@ const RegisterPage = () => {
                     </ HeroLeftWrapper>
                 </HeroLeftContainer>
             </HeroLeft>
-            <HeroRight>
+            <HeroRight bgPattern={bgPattern} mobileBgPattern={mobileBgPattern}>
                 <HeroRightTextWrapper>
                     <HeroTitle>
                             Welcome to React Trello.

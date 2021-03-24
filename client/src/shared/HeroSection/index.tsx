@@ -71,15 +71,24 @@ export const HeroTitle = styled.h1`
     white-space: pre-line;
 `
 
-export const HeroRight = styled.div`
+interface HeroRightProps {
+    bgPattern?: any,
+    mobileBgPattern?: any
+}
+export const HeroRight = styled.div<HeroRightProps>`
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: ${({bgPattern}) => bgPattern ? `url(${bgPattern})`  : 'none'} 100% 100%;
+    background-size: cover;
+    /* background-position: top 0 left -10%; */
 
     @media(max-width: 976px){
         width: 100%;
         height: fill-available;  
+        ${({mobileBgPattern}) => mobileBgPattern && `background: url(${mobileBgPattern})`};
+        background-size: cover;
     }
 `
 
