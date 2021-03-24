@@ -54,9 +54,9 @@ const TextInputWrapper = styled.div<TextInput>`
     transition: 0.5s all ease-in-out;
 `
 
-const IconWrapper = styled.span`
+const IconWrapper = styled.span<TextInput>`
     height: fit-content;
-    color: var(--color-error);
+    color: ${({isError}) => isError ? 'var(--color-error)' : 'inherit'};
     /* padding-left: 5px; */
 `
 
@@ -87,8 +87,8 @@ const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}:
                 {
 
                     Icon && 
-                    <IconWrapper>
-                        <Icon fill={isError && 'var(--color-error)'}></Icon>
+                    <IconWrapper isError={isError}>
+                        <Icon />
                     </IconWrapper>
                 }
                 {/* <FinalIcon fill={isError}/> */}
