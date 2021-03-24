@@ -57,9 +57,6 @@ const RegisterPage = () => {
 
     return (
         <Div100vh >
-        {/* // <AuthContainer >
-        // <AuthWrapper> */}
-
         <Hero>
             <HeroLeft>
                 <HeroLeftContainer>
@@ -144,8 +141,6 @@ const RegisterPage = () => {
                 </HeroImgContainer>
             </HeroRight>
         </Hero>
-        {/* </AuthWrapper>
-    </AuthContainer> */}
     </Div100vh>
     )
 }

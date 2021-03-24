@@ -75,7 +75,7 @@ const LoginPage = () => {
                                 </FormInputsContainer>
                                 <ButtonGroup spacing={3}>
                                     <Button onClick={(e: any) => handleLogin(e)} widthFill>Sign In</Button>
-                                    <Link  to='/register'><Button widthFill>Sign Up</Button></Link>
+                                    <Link to='/register'><Button widthFill>Sign Up</Button></Link>
                                 </ButtonGroup>
                             </FormContainer>
                         </ HeroLeftWrapper>
