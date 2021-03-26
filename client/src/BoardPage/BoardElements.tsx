@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BoardSidebar = styled.div`
     height: 100%;
-    width: 15%;
+    width: 250px;
 
     background-color: #fff;
 
