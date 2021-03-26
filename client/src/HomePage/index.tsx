@@ -13,9 +13,8 @@ import { RootReducerType } from '../redux/store'
 import AddNewItem from '../shared/AddNewItem'
 import Button from '../shared/Buttons'
 import PickIcon from '../shared/icons/Pick/PickIcon'
-import { HeaderContainer, HeaderWrapper, LogoWrapper } from '../shared/Header/HeaderElements'
-import { BoardWrapper } from '../shared/Board/BoardContainer'
-import {BoardContainer} from '../shared/Board/BoardContainer'
+import { HeaderContainer, HeaderWrapper, LogoContainer, LogoWrapper } from '../shared/Header/HeaderElements'
+import {ReactComponent as Logo} from '../shared/icons/Logo3.svg'
 export const AppContainer = styled.div`
     height: 100vh;
     display: flex;
@@ -65,6 +64,10 @@ export const BoardLinkWrapper = styled.div<BoardLinkContainer>`
     /* /* padding: 12px 12px 15px 12px; */
 `
 
+
+export const LogoImgContainer = styled.div`
+    padding-right: 20px;
+`
 
 interface BoardLinkContainer {
     active?: boolean
@@ -131,9 +134,13 @@ const HomePage = () => {
             <BoardSidebar>
                 <BoardLinksContainer>
                     <HeaderContainer>
-                        <LogoWrapper>
-                            betaCRM
-                        </LogoWrapper>
+                        <LogoContainer>
+                            <LogoWrapper>
+                                <LogoImgContainer>
+                                    <Logo/>
+                                </LogoImgContainer>React Trello
+                            </LogoWrapper>
+                        </LogoContainer>
                     </HeaderContainer>
                         {
                             boards?.map((board: Board) => 

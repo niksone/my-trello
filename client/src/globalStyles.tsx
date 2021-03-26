@@ -1,13 +1,13 @@
-import styled, { createGlobalStyle } from "styled-components";
+import {createGlobalStyle} from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
     *{
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: 'Lato', sans-serif;
         font-size: 62.5%;
     }
+<<<<<<< HEAD
 
     a{
         text-decoration: none;
@@ -40,4 +40,6 @@ export const GlobalStyles = createGlobalStyle`
 
 
     }
+=======
+>>>>>>> parent of 5e32653f... add variables
 `

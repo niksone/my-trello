@@ -33,6 +33,7 @@ class UserController {
     async register (req: Request, res: Response, next: NextFunction) {
         try {
             const {email, password} = req?.body;
+            console.log(email, password)
     
             if(!email || !password || typeof email !== 'string' || typeof password !== 'string'){
                 res.status(500).send('Wrong values')
@@ -68,7 +69,8 @@ class UserController {
     async checkUserExist(req: Request, res: Response) {
         try {
             const {email, password} = req?.body;
-
+            console.log(email, password)
+            console.log(req.body)
             User.findOne({email}, async (err: Error, user:  UserI) => {
                 if(err) throw err
                 if(user) res.send(true)

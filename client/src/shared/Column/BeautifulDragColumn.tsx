@@ -31,7 +31,8 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
     }
     
     return (
-        <Draggable draggableId={list._id} index={index} key={list._id}>
+      <div style={{height: '100%'}}>
+        <Draggable draggableId={list._id} index={index} key={list._id} >
                 {(provided, snapshot) => (
                   <ColumnContainer
                     ref={provided.innerRef}
@@ -78,6 +79,7 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                   </ColumnContainer>
                 )}
             </Draggable>
+            </div>
     )
 }
 
