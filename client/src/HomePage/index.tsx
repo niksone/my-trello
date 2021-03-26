@@ -16,9 +16,13 @@ import PickIcon from '../shared/icons/Pick/PickIcon'
 import { HeaderContainer, HeaderWrapper, LogoWrapper } from '../shared/Header/HeaderElements'
 import { BoardWrapper } from '../shared/Board/BoardContainer'
 import {BoardContainer} from '../shared/Board/BoardContainer'
+import LogoImg from '../shared/icons/Logo.svg'
+
 export const AppContainer = styled.div`
     height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    overflow: hidden;
 `
 export const BoardSectionContainer = styled.div`
     width: 100%;
@@ -29,13 +33,14 @@ export const BoardSectionContainer = styled.div`
     grid-template-areas:
         'header'
         'board-section';
-
     grid-template-rows: 85px 1fr;
 `
 
 export const BoardSectionWrapper = styled.div`
     width: 100%;
     grid-area: 'board-section';
+    background-color: #fff;
+    overflow: scroll;
 `
 
 
@@ -106,6 +111,14 @@ export const BoardLinkIconWrapper = styled.span`
     padding-right: 30px;
     color: inherit;
 `
+interface LogoI {    
+    logoImg: any
+}
+
+export const Logo = styled.div<LogoI>`
+    background-image: url(${({logoImg}) => logoImg});
+    margin-right: 30px;
+`
 
 const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
@@ -132,7 +145,7 @@ const HomePage = () => {
                 <BoardLinksContainer>
                     <HeaderContainer>
                         <LogoWrapper>
-                            betaCRM
+                            <Logo logoImg={LogoImg}/>betaCRM
                         </LogoWrapper>
                     </HeaderContainer>
                         {
