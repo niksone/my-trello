@@ -4,12 +4,20 @@ import styled from 'styled-components'
 import { addList, addTask, moveList, moveTask } from '../../redux/AddItem/actionCreators'
 import { AddItemState, List } from '../../redux/AddItem/interfaces'
 import AddNewItem from '../AddNewItem'
+import Button from '../Buttons'
 import BeautifulDragColumn from '../Column/BeautifulDragColumn'
-import { BoardContainer } from './BoardContainer'
-
+import { ColumnContainer, ColumnWrapper } from '../Column/ColumnElements'
+import { AddColumnContainer, BoardContainer } from './BoardContainer'
+import AddIcon from '../icons/Add/AddIcon'
+import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
+import AddItemForm from '../AddNewItem/AddItemForm'
 export const BoardColumnContainer = styled.div`
   display: flex;
   height: 100%;
+
+  & > div{
+    margin-right: 16px;
+  }
 `
 export interface BoardProps {
   data: AddItemState
@@ -67,12 +75,35 @@ const BeautifulBoard = ({data}: BoardProps) => {
               )}
           </Droppable>
       </DragDropContext>
-        <AddNewItem
-          onAdd={text => dispatch(addList( _id,text))} 
-          text='Add New List +'
-          formText='Add List'
-          item='CARD'
-        />
+      <BoardColumnContainer>
+        <ColumnWrapper>
+          <AddColumnContainer>
+          <AddNewItemBtn 
+            widthFill 
+            Icon={AddIcon}
+            title='Add New List'
+            onAdd={(text: string) => dispatch(addList( _id,text))}
+            Form={AddItemForm}
+          >
+              add new List
+          </AddNewItemBtn>
+            {/* <Button variant='shadow' Icon={AddIcon}>
+              Add New List
+            </Button> */}
+            {/* <AddNewItem
+              text='Add New List'
+              formText='Add list'
+              onAdd={() => {}}
+              item='COLUMN'
+              Button={ 
+                <Button variant='shadow' Icon={AddIcon}>
+                  Add New List
+                </Button> 
+              }
+            /> */}
+          </AddColumnContainer>
+        </ColumnWrapper>
+      </BoardColumnContainer>
       </BoardContainer>
     )
 }
