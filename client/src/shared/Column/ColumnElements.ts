@@ -12,22 +12,27 @@ export const ColumnContainer = styled.div<ColumnContainerProps>`
 `
 
 export const ColumnWrapper = styled.div<ColumnContainerProps>`
-    width: 300px;
+/* display: flex; */
+    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
+    width: 400px;
     background: none;
+    height: 100%;
     opacity: ${({isOver}) => isOver ? '0.3' : '1'};
-    border: 2px var(--color-resting-ouline) dashed;
+    border: 2px var(--color-resting-outline) dashed;
     /* transform: rotateZ(${({isDragging}) => isDragging ? '5deg' : '0'}); */
-    height: max-content;
-    margin:10px;
+    /* height: max-content; */
+    padding:10px;
     /* padding-bottom: 10px; */
     border-radius: 5px;
-    z-index: 0;
+    z-index: 1;
 `
 
 export const ColumnTitleContainer = styled.div`
     padding: 10px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 5;
 `
 
 export const ColumnTitle = styled.p`
@@ -37,11 +42,13 @@ export const ColumnTitle = styled.p`
 `
 
 export const ColumnCardContainer = styled.div`
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
     padding-top: 0;
+    overflow: auto;
 `
 
 export const ColumnCardWrapper = styled.div`

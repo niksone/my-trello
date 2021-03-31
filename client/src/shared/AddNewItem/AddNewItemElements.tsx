@@ -27,7 +27,7 @@ export const AddItemButton = styled.button`
 `
 
 export const AddItemFormContainer = styled.div`
-    padding-top: 10px;
+    /* padding-top: 10px; */
     /* width: 100%; */
 `
 
