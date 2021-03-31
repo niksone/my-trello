@@ -21,10 +21,11 @@ export const GlobalStyles = createGlobalStyle`
         --color-outline: #F0F0F3;
         --color-error: #ff4848;
         --color-background-light: #F5F5FA;
-        --color-resting-ouline: #ECECF2;
+        --color-resting-outline: #ECECF2;
 
         --color-button-hover: #475EAB;
         --color-button-outline-resting: #ECECF2;
+        --color-border-light: #EEEEEE;
 
         --color-background: #F6F6F6;
         
