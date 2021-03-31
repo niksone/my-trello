@@ -4,8 +4,12 @@ import { deleteList, updateListTitle } from '../../redux/AddItem/actionCreators'
 import { List, Task } from '../../redux/AddItem/interfaces'
 import { RootReducerType } from '../../redux/store'
 import AddNewItem from '../AddNewItem'
+import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
+import Button from '../Buttons'
 import BeautifulCard from '../Card/BeautifulCard'
 import EditableItem from '../EditableItem'
+import AddIcon from '../icons/Add/AddIcon'
+import CardForm from './AddCardForm'
 import { ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
 interface ColumnPropsI {
@@ -65,12 +69,22 @@ const BeautifulDragColumn = ({title, id, list, index, taskIds, tasks, onAdd}: Co
                             ))}
                             {provided.placeholder}
                             </ColumnCardWrapper>
-                            <AddNewItem 
+                            {/* <AddNewItem 
                               text='Add New Task' 
                               formText='Add Task' 
                               onAdd={text => onAdd(text)}
                               item='COLUMN'
-                            />
+                              Button={<Button>add New Task</Button>}
+                            /> */}
+                            <AddNewItemBtn 
+                              widthFill 
+                              Icon={AddIcon} 
+                              onAdd={(text: string) => onAdd(text)}
+                              title='Add New Card'
+                              Form={CardForm}
+                            >
+                                add new card
+                            </AddNewItemBtn>
                           </ColumnCardContainer>
                         </ColumnWrapper>
                       )}
