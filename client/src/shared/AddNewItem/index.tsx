@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { factory } from 'typescript'
-import { ColumnWrapper } from '../Column/ColumnElements'
+import Button from '../Buttons'
+import Modal from '../Modal'
 import AddItemForm from './AddItemForm'
 import { AddItemButton, AddItemContainer, AddItemContainerProps, AddItemContainerTypes } from './AddNewItemElements'
 
@@ -8,10 +8,11 @@ interface AddNewItemProps {
     text: string,
     formText: string,
     onAdd(text: string): void,
-    item: AddItemContainerTypes
+    item: AddItemContainerTypes,
+    Button: any
 }
 
-const AddNewItem = ({text, formText, onAdd, item}: AddNewItemProps) => {
+const AddNewItem = ({text, formText, onAdd, item, Button}: AddNewItemProps) => {
     const [showForm, setShowForm] = useState(false)
     const toggleForm = () => {
         setShowForm(!showForm)
@@ -29,11 +30,12 @@ const AddNewItem = ({text, formText, onAdd, item}: AddNewItemProps) => {
             <AddItemContainer item={item}>
                 {
                     !showForm 
-                        ? <AddItemButton onClick={toggleForm}>{text}</AddItemButton>
-                        : <AddItemForm onAdd={handleForm} title={formText}/>
+                        ? <Button onClick={toggleForm}>{text}</Button>
+                        // ? {Button}
+                        // : <AddItemForm />onAdd={handleForm} title={formText}/>
+                        : <Modal exit={toggleForm}>jopa</Modal>
                 }
             </AddItemContainer>
-
     )
 }
 
