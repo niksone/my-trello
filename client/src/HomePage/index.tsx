@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -6,41 +6,48 @@ import { authApi } from '../api'
 import BoardPage from '../BoardPage'
 import { BoardSidebar } from '../BoardPage/BoardElements'
 import { userContext } from '../Context'
-import { setBoard } from '../redux/AddItem/reducer'
-import { addBoard, getBoards } from '../redux/Board/actionCreators'
+import {addBoard, getBoards } from '../redux/Board/actionCreators'
 import { Board } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
-import AddNewItem from '../shared/AddNewItem'
 import Button from '../shared/Buttons'
 import PickIcon from '../shared/icons/Pick/PickIcon'
 import { HeaderContainer, HeaderWrapper, LogoWrapper } from '../shared/Header/HeaderElements'
-import { BoardWrapper } from '../shared/Board/BoardContainer'
-import {BoardContainer} from '../shared/Board/BoardContainer'
 import LogoImg from '../shared/icons/Logo.svg'
+import AddIcon from '../shared/icons/Add/AddIcon'
+import AddNewItem from '../shared/AddNewItem'
+import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
+import AddItemForm from '../shared/AddNewItem/AddItemForm'
 
 export const AppContainer = styled.div`
     height: 100vh;
-    display: grid;
+    display: flex;
+    /* display: grid;
     grid-template-columns: 250px 1fr;
-    overflow: hidden;
+    overflow: hidden; */
 `
 export const BoardSectionContainer = styled.div`
-    width: 100%;
+    width: calc(100% - 250px);
     height: 100%;
     background-color: var(--color-background-light);
     padding: 0 28px 28px 28px;
-    display: grid;
+    /* display: grid;
     grid-template-areas:
         'header'
         'board-section';
-    grid-template-rows: 85px 1fr;
+    grid-template-rows: 85px 1fr; */
 `
 
 export const BoardSectionWrapper = styled.div`
     width: 100%;
-    grid-area: 'board-section';
+    height: calc(100% - 85px);
+    /* grid-area: 'board-section'; */
     background-color: #fff;
-    overflow: scroll;
+    overflow-x: auto;
+
+
+    & > {
+        padding-right: 10px;
+    }
 `
 
 
@@ -148,6 +155,16 @@ const HomePage = () => {
                             <Logo logoImg={LogoImg}/>betaCRM
                         </LogoWrapper>
                     </HeaderContainer>
+                            {/* <BoardLinkContainer >
+                                {/* <BoardLinkWrapper active={true}>
+                                    <Button jc='start' widthFill variant='shadow' active={true}>
+                                        <BoardLinkIconWrapper>
+                                            <PickIcon />
+                                        </BoardLinkIconWrapper>
+                                        {}ene
+                                    </Button>
+                                </BoardLinkWrapper> 
+                            </BoardLinkContainer> */}
                         {
                             boards?.map((board: Board) => 
                             <BoardLinkContainer key={board._id}>
@@ -165,12 +182,30 @@ const HomePage = () => {
                         }  
                 </BoardLinksContainer>
                 <BoardLinkWrapper>
-                    <AddNewItem 
-                        text='Add New Board'
-                        formText='Add Board'
-                        item='BOARD'
-                        onAdd={name => dispatch(addBoard(user, name))}
-                    />
+                    <AddNewItemBtn 
+                        widthFill 
+                        Icon={AddIcon}
+                        onAdd={(name: string) => dispatch(addBoard(user, name))}
+                        title='Add Board'
+                        Form={AddItemForm}
+                    >
+                        add new Board
+                    </AddNewItemBtn>
+                    {/* <Button widthFill Icon={AddIcon}> */}
+                        {/* Add board */}
+                        {/* <AddNewItem 
+                            text='Add New Board'
+                            formText='Add Board'
+                            item='BOARD'
+                            Button={Button
+                                // <Button widthFill Icon={AddIcon}>
+                                //     Add board
+                                // </Button>
+                            }
+                            // onAdd={name => dispatch(addBoard(user, name))}
+                            onAdd={() => {}}
+                        /> */}
+                    {/* </Button> */}
                 </BoardLinkWrapper>
             </BoardSidebar>   
 
@@ -180,6 +215,8 @@ const HomePage = () => {
                             <BoardName>{currentBoard.name}</BoardName>
                             <Button 
                                 onClick={handleLogout}
+                                size='md'
+                                colorScheme='error'
                             >
                                 logout
                             </Button>
