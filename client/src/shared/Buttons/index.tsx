@@ -2,6 +2,20 @@ import React from 'react'
 import styled, {css, FlattenInterpolation, ThemedStyledProps} from 'styled-components'
 
 
+const colorSchemes = {
+    primary: {
+        resting: 'var(--color-primary-light)',
+        hover: 'var(--color-button-hover)',
+        active: 'var(--color-primary)'
+    },
+    error: {
+        resting: 'var(--color-primary-light)',
+        hover: 'var(--color-error)',
+        active: 'var(--color-error)'
+    }
+}
+
+
 const shadowStylesActive = css`
     background-color: var(--color-primary-light);
     color: var(--color-primary);
@@ -22,7 +36,7 @@ const shadowStyles = css<ButtonProps>`
     }
 `
 
-const oulineStylesActive = css`
+const outlineStylesActive = css`
     border: 1px var(--color-primary) solid;
     color: var(--color-primary);
 `
@@ -31,7 +45,7 @@ const outlineStyles = css<ButtonProps>`
     background: none;
     border:  1px var(${({color}) => color ? color : '--color-button-outline-resting'}) solid;
     color: var(${({color}) => color ? color : '--color-primary-grey'});
-    ${({active}) => active && oulineStylesActive}
+    ${({active}) => active && outlineStylesActive}
 
     &:hover{ 
         border:  1px var(--color-primary) solid;
@@ -39,25 +53,29 @@ const outlineStyles = css<ButtonProps>`
     }
 
     &:active{
-        ${oulineStylesActive}
+        ${outlineStylesActive}
     }
 `
 
-const fillStylesActive = css`
-    background: '--color-primary';
+const fillStylesActive = css<ButtonProps>`
+    background: ${({colorScheme}) => colorScheme ? colorSchemes[colorScheme].active : colorSchemes.primary.active};
     color: #fff;
 `
 
 
 const fillStyles = css<ButtonProps>`
-    background: var(${({background}) => background ? background : '--color-primary-light'});
+    background: ${({colorScheme}) => colorScheme 
+        ? colorSchemes[colorScheme].resting 
+        : colorSchemes.primary.resting};
     color: var(${({color}) => color ? color : '--color-primary'});
     border: none;
     ${({active}) => active && fillStylesActive}
 
 
     &:hover {
-        background: var(${({background}) => background ? background : '--color-button-hover'});
+        background: ${({colorScheme}) => colorScheme 
+            ? colorSchemes[colorScheme].hover 
+            : colorSchemes.primary.hover};
         color: #fff;
     }
 
@@ -66,7 +84,7 @@ const fillStyles = css<ButtonProps>`
     }
 
     &:disabled{
-        background: var(${({background}) => background ? background : '--color-background'});
+        background: var(--color-background);
         color: var(--color-primary-grey);
     }
 `
@@ -81,12 +99,17 @@ const styles: stylesOptions = {
     shadow: shadowStyles
 }
 
+const sizes = {
+    sm: '4px 9px',
+    md: '8px 19px',
+    lg: '14px 29px'
+}
 
 const ButtonContainer = styled.button<ButtonProps>`
     display: flex;
     justify-content: ${({jc}) => jc ? jc : 'center'};
     align-items: center;
-    padding: 14px 29px;
+    padding: ${({size}) => size ? sizes[size] : sizes.lg};
     font-size: var(--text-button);
     cursor: pointer;
     border-radius: 8px;
@@ -97,21 +120,38 @@ const ButtonContainer = styled.button<ButtonProps>`
     font-size: var(--text-regular);
 `
 
+const ButtonIconContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+`
+
 interface ButtonProps {
     onClick?:  React.MouseEventHandler<HTMLButtonElement>;
-    background?: string,
+    // background?: string,
     color?: string,
     widthFill?: boolean,
     active?: boolean,
     variant?: 'outline' | 'fill' | 'shadow',
+    Icon?: any,
+    size?: 'lg' | 'md' | 'sm',
+    colorScheme?: keyof typeof colorSchemes,
     jc?: 'start' | 'center' | 'end'
 }
 
 const Button = ({children, onClick, ...rest}: React.PropsWithChildren<ButtonProps>) => {
     rest.variant = rest.variant ? rest.variant : 'fill'
+    const ButtonIcon = rest.Icon
     console.log(rest.variant)
     return (
         <ButtonContainer onClick={onClick} {...rest}>
+            {ButtonIcon && (
+                <ButtonIconContainer>
+                    {/* {rest.Icon} */}
+                    <ButtonIcon />
+                </ButtonIconContainer>
+            )}
             {children}
         </ButtonContainer>
     )
