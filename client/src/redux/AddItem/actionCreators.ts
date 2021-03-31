@@ -37,6 +37,9 @@ export const addTask = (boardId: string, listId: string, text: string) => async 
             _id: String(new ObjectID()),
             text
         }
+        if(listId === null || task === null){
+            throw new Error('wrong values')
+        }
         dispatch({type: 'ADD_CARD', payload: {listId, task}})
         await boardApi.addTask( boardId, listId, task)
     } catch (error) {
