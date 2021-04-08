@@ -82,15 +82,11 @@ export const boardApi = {
     },
 
     async updateCard(boardId: string, listId: string, cardId: string, card: Card){
-        try {
             const updatedCard = await instance.patch<Card>(
                 '/boards/updateCard', 
                 {boardId, listId, cardId, card}
             )
             return updatedCard
-        } catch (error) {
-            console.log(error)
-        }
     },
 
     // async editCardText(boardId: string, listId: string, cardId: string, text: string) {
