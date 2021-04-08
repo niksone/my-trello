@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from '../Buttons'
-import Modal from '../Modal'
+import {Modal} from '../Modal'
 import AddItemForm from './AddItemForm'
 
 const AddNewItemBtn = ({children, onAdd, title, Form, ...rest}: any) => {
@@ -28,10 +28,11 @@ const AddNewItemBtn = ({children, onAdd, title, Form, ...rest}: any) => {
         {
             showForm 
                 &&  <Modal exit={toggleForm}>
-                        <Form 
+                    {Form}
+                        {/* <Form 
                             title={title}
                             onAdd={handleForm}
-                        />
+                        /> */}
                     </Modal>
         }
         </>
