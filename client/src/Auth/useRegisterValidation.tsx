@@ -79,10 +79,10 @@ export const useRegisterValidation = () => {
                     email: email.value, 
                     password: password.value, 
                     confirmedPassword: confirmedPassword.value})
-            const {userExist} = await checkUserExist(email.value, password.value)
+            const {userExist, error} = await checkUserExist(email.value, password.value)
             setValidation({
                 isValid: !userExist, 
-                error: {value: 'User Already Exist', fieldName: error.fieldName}
+                error: {value: 'User Already Exist', fieldName: email.fieldName}
             })    
         return validation
         } catch (error) {
