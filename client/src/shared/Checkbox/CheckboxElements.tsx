@@ -24,19 +24,23 @@ export const Checkmark = styled.div`
     }
 `
 
-export const CheckboxText= styled.p`
+interface CheckboxTextProps {
+    checked: boolean
+}
+
+export const CheckboxText= styled.p<CheckboxTextProps>`
     padding-left: 15px;
     font-size: var(--text-regular);
     line-height: 20px;
     font-weight: bold;
-    color: var(--color-primary-grey);
+    color: ${({checked}) => checked ? 'var(--color-primary-dark)': 'var(--color-primary-grey)'};
     transition: 0.2s all ease-in-out;
     width: fit-content;
-
+    /* background: red; */
 `
 
 
-export const CheckboxContainer = styled.label`
+export const CheckboxWrapper = styled.label`
     display: flex;
     align-items: flex-start;
     position: relative;
@@ -52,7 +56,31 @@ export const CheckboxContainer = styled.label`
         display: block;
     }
 
-    ${CheckboxInput}:checked ~ ${CheckboxText} {
-        color: var(--color-primary-dark);
+    /* ${CheckboxInput}:checked{
+    /* ${CheckboxText} {
+         color: var(--color-primary-dark);
+         background: red
+    } */
+`
+
+export const CheckboxContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+
+    /* ${CheckboxWrapper} > ${CheckboxInput}:checked ~ ${Checkmark} {
+        background-color: var(--color-primary);
     }
+
+    ${CheckboxInput}:checked ~ ${Checkmark} > * {
+        display: block;
+    /* } */
+
+    ${CheckboxWrapper} ~ ${CheckboxInput}:checked {
+        color: var(--color-primary-dark);
+        background: red;
+    } 
 `
