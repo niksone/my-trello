@@ -1,14 +1,24 @@
-import React from 'react'
+import ObjectID from 'bson-objectid'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { updateTask } from '../../redux/AddItem/actionCreators'
+import { Card, SimpleCard, Task } from '../../redux/AddItem/interfaces'
+import AddItemForm from '../AddNewItem/AddItemForm'
 import Button from '../Buttons'
 import ButtonGroup from '../Buttons/ButtonGroup'
+import { getCompletedTasks } from '../Card/BeautifulCard'
 import Checkbox from '../Checkbox'
+import { CheckboxText } from '../Checkbox/CheckboxElements'
+import EditableItem from '../EditableItem'
 import ProgressBar from '../ProgressBar'
 
 export const FormContainer= styled.div`
-    max-height: 85%;
-    min-width: 30%;
-    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    height: 85%;
+    /* min-width: 30%; */
+    width: 650px;
     background-color: #fff;
     
     border-radius: 4px;
@@ -16,6 +26,8 @@ export const FormContainer= styled.div`
 
 export const FormContent = styled.div`
     padding: 22px 28px 0 28px;
+    height: 100%;
+    overflow: auto;
 `
 
 export const FormBlockTitle = styled.h4`
@@ -82,15 +94,101 @@ export const FormCheklistItems = styled.div`
     }
 `
 
-const CardForm = () => {
+export const ChecklistItem = styled.div`
+    display: flex;
+    align-items: flex-start;
+    color: var(--color-primary-grey);
+`
+
+
+interface CardFormProps {
+    columnId: string,
+    cardId: string,
+    title: string,
+    subtitle: string,
+    description: string,
+    tasks: Task[],
+    onExit?: any,
+    onSave?: any
+}
+
+const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit, onSave}: CardFormProps) => {
+    const [card, setCard] = useState<SimpleCard>({title, subtitle, description, tasks})
+    // const completedTasks = getCompletedTasks(card.tasks)
+
+    const handleUpdate = (title: string, subtitle: string, description: string, tasks: Task[]) => {
+        setCard(prev => ({...prev, title, subtitle, description, tasks}))
+    }
+
+    const dispatch = useDispatch()
+
+    const updateTask = (tasks: Task[], taskId: string, text: string, completed: boolean) => {
+        // console.log({text, completed}, tasks, 'upd')
+
+        return tasks.map((task, index) => {
+            // task._id === taskId ? {...task, text, completed} : task
+            if(task._id === taskId){
+                console.log('update', task.completed, completed, tasks)
+                return {...task, text, completed}
+            }else{
+                return task
+            }
+        })
+        console.log({text, completed}, tasks, 'upd')
+
+    }
+
+    const addTask = (text: string) => {
+        setCard(prev => (
+            {...prev, tasks: tasks.concat({_id: new Date().toISOString(), completed: false, text})}
+        ))
+    }
+
+    const editTask = (taskId: string, text: string) => {
+        // setCard(prev => (
+        //     {...prev, tasks: tasks.map(task => (
+        //         task._id === taskId ? {task._id, task.completed, text}: task
+        //     ))}
+        // ))
+        // updateTask(taskId, text, completed)
+        console.log(card.tasks);
+    }
+
+    const handleSave = () => {
+        console.log(card);
+        onSave(card)
+        onExit()
+    }
+    
     return (
         <FormContainer>
             <FormContent>
                 <FormBlock>
                     <FormTitleContainer>
                         {/* <FormWrapper> */}
-                            <FormTitle>Design new UI presentation</FormTitle>
-                            <FormSubtitle>Dribble Presentation</FormSubtitle>
+                        <FormTitle>
+                            <EditableItem
+                                initialText={card.title}
+                                deleteItem={() => {}}
+                                editItem={() => {}}
+                                updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
+                                // Wrapper={FormTitle}
+                            />
+                        </FormTitle>
+                        <FormSubtitle>
+                            <EditableItem
+                                initialText={card.subtitle}
+                                deleteItem={() => {}}
+                                editItem={() => {}}
+                                updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
+                                // Wrapper={FormSubtitle}
+                            />
+                        </FormSubtitle>
+
+                            {/* {subtitle|| ''}
+                        </EditableItem> */}
+                            {/* <FormTitle>{title}</FormTitle> */}
+                            {/* <FormSubtitle>{subtitle}</FormSubtitle> */}
                         {/* </FormWrapper> */}
                     </FormTitleContainer>
                 </FormBlock>
@@ -100,41 +198,61 @@ const CardForm = () => {
                             Description
                         </FormBlockTitle>
                         <FormDescription>
-                            When I first got into the online advertising business, I was looking for the magical
-                            combination that would put my website into the top search engine rankings, catapult me to
-                            the forefront of the minds or individuals looking to buy my product, and generally make me
-                            rich beyond my wildest dreams.
+                            <EditableItem
+                                initialText={card.description}
+                                deleteItem={() => {}}
+                                editItem={() => {}}
+                                updateItem={(text) => handleUpdate(card.title, card.subtitle, text, card.tasks)}
+                                // Wrapper={FormDescription}
+                            />
                         </FormDescription>
+                        {/* <FormDescription>
+                            {description}
+                        </FormDescription> */}
                     </FormDescriptionContainer>
                 </FormBlock>
-                <FormBlock>
-                    <FormChecklistContainer>
-                        <FormChecklistTitle>
-                            <FormBlockTitle>Checklist</FormBlockTitle>
-                            <FormChecklistDone>7 / 14</FormChecklistDone>
-                        </FormChecklistTitle>  
-                        <ProgressBar value={7/14 * 100}/>
-                        <FormCheklistItems>
-                            <Checkbox>
-                                Design new home page 
-                                Design new home page Design new home page 
-                                Design new home page Design new home page 
-                                Design new home page Design new home page
-                            </Checkbox>
-                            <Checkbox>Design new home page</Checkbox>
-                            <Checkbox>Design new home page</Checkbox>
-                            <Checkbox>Design new home page</Checkbox>
-                            <Checkbox>Design new home page</Checkbox>
-                            <Checkbox>Design new home page</Checkbox>
-                        </FormCheklistItems>
-                    </FormChecklistContainer>
-                
-                </FormBlock>
+                {card.tasks &&
+                    <FormBlock>
+                        <FormChecklistContainer>
+                            <FormChecklistTitle>
+                                <FormBlockTitle>Checklist</FormBlockTitle>
+                                <FormChecklistDone>{getCompletedTasks(card.tasks)} / {card.tasks.length}</FormChecklistDone>
+                            </FormChecklistTitle>  
+                            <ProgressBar variant='default' value={getCompletedTasks(card.tasks) / card.tasks.length * 100 || getCompletedTasks(card.tasks)}/>
+                            <FormCheklistItems>
+                                {card.tasks?.map(task =>
+                                    <ChecklistItem
+                                        key={task._id} 
+                                    >
+                                        <Checkbox 
+                                            checked={task.completed} 
+                                            key={task._id} 
+                                            onChange={() => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, task.text, !task.completed))}
+                                            // onChange={() => dispatch(updateTask(columnId, cardId, task._id, task.text, !task.completed))}
+                                        >
+
+                                        <EditableItem 
+                                            initialText={task.text}
+                                            deleteItem={() => {}}
+                                            editItem={(text: string) => {}}
+                                            updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
+                                            // Wrapper={CheckboxText}
+                                        />
+                                        </Checkbox>
+                                    </ChecklistItem>
+
+                                )}
+                                <AddItemForm title='Add new Task' onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}/>
+                            </FormCheklistItems>
+                        </FormChecklistContainer>
+    
+                    </FormBlock>
+                }
             </FormContent>
             <FormButtonsContainer>
                 <ButtonGroup spacing={10}>
-                    <Button>Close</Button>
-                    <Button>Save</Button>
+                    <Button onClick={onExit}>Close</Button>
+                    <Button onClick={handleSave}>Save</Button>
                 </ButtonGroup>
             </FormButtonsContainer>
         </FormContainer>
