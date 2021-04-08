@@ -1,5 +1,5 @@
 import axios from "axios";
-import { List, Task } from "../redux/AddItem/interfaces";
+import { Card, List } from "../redux/AddItem/interfaces";
 import { Board } from "../redux/Board/interfaces";
 
 const instance = axios.create({
@@ -71,32 +71,44 @@ export const boardApi = {
         return updateBoard
     },
 
-    async addTask(boardId: string, listId: string, task: Task){
-        const listItem = await instance.post<Task>('/boards/addTask', {boardId, listId, task})
+    async addCard(boardId: string, listId: string, card: Card){
+        const listItem = await instance.post<Card>('/boards/addCard', {boardId, listId, card})
         return listItem
     },
 
-    async deleteTask(boardId: string, listId: string, taskId: string) {
+    async deleteCard(boardId: string, listId: string, cardId: string) {
         try {
-            const list = await instance.delete<Task>('/boards/removeTask', {data: {boardId, listId, taskId}})
+            const list = await instance.delete<Card>('/boards/removeCard', {data: {boardId, listId, cardId}})
             return list
         } catch (error) {
             console.log(error)
         }
     },
 
-    async editTaskText(boardId: string, listId: string, taskId: string, text: string) {
-        const updateTask = await instance.patch<Task>('/boards/updateTaskTitle', {boardId,listId, taskId, text})
-        return updateTask
+    async updateCard(boardId: string, listId: string, cardId: string, card: Card){
+        try {
+            const updatedCard = await instance.patch<Card>(
+                '/boards/updateCard', 
+                {boardId, listId, cardId, card}
+            )
+            return updatedCard
+        } catch (error) {
+            console.log(error)
+        }
     },
 
-    async moveTask(
+    // async editCardText(boardId: string, listId: string, cardId: string, text: string) {
+    //     const updateCard = await instance.patch<Card>('/boards/updateCardTitle', {boardId,listId, cardId, text})
+    //     return updateCard
+    // },
+
+    async moveCard(
         boardId: string, sourceListIndex: number, destListIndex: number, 
-        sourceTaskIndex: number, destTaskIndex: number
+        sourceCardIndex: number, destCardIndex: number
     ) {
         const updateBoard = await instance.patch<Board>(
-            '/boards/moveTask', 
-            {boardId, sourceListIndex, destListIndex, sourceTaskIndex, destTaskIndex}
+            '/boards/moveCard', 
+            {boardId, sourceListIndex, destListIndex, sourceCardIndex, destCardIndex}
         )
         return updateBoard
     }

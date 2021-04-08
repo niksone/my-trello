@@ -1,20 +1,23 @@
 import { Board } from '../Board/interfaces';
-import { List, Task } from './interfaces';
+import { Card, List } from './interfaces';
 export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
- SetDraggedList| AddBoard | SetBoard | AddList | AddTask | EditCard
-| DeleteCard | EditList | DeleteList
-
+ SetDraggedList| AddBoard | SetBoard | AddList  | UpdateCard
+| DeleteCard | EditList | DeleteList | AddCard | UpdateTask
+// | AddTask
 interface AddList {type: 'ADD_LIST', payload: List}
 
 interface SetBoard {type: 'SET_BOARD', payload: Board}
 
 interface AddBoard {type: 'ADD_BOARD', payload: Board}
 
-interface AddTask {type: 'ADD_CARD', payload: {task: Task, listId: string}}
+// interface AddTask {type: 'ADD_TASK', payload: {task: Task, listId: string, cardId: string}}
 
-interface EditCard {type: 'EDIT_CARD', payload: {listId: string, taskId: string, text: string}}
+interface AddCard {type: 'ADD_CARD', payload: {listId: string, card: Card}}
 
-interface DeleteCard {type: 'DELETE_CARD', payload: {listId: string, taskId: string}}
+interface UpdateCard {type: 'UPDATE_CARD', payload: {listId: string, cardId: string, card: Card}}
+
+interface DeleteCard {type: 'DELETE_CARD', payload: {listId: string, cardId: string}}
+
 
 interface EditList {type: 'EDIT_LIST', payload: {listId: string, title: string}}
 
@@ -26,18 +29,23 @@ interface MoveCardBetweenList {type: 'MOVE_CARD_BETWEEN_LISTS',
     payload: {
         sourceArrIndex: number, 
         destArrIndex: number, 
-        sourceTaskIndex: number, 
-        destTaskIndex: number
+        sourceCardIndex: number, 
+        destCardIndex: number
     }}
 
 
 interface MoveCardInList {type: 'MOVE_CARD_IN_LIST', 
 payload: {
     arrIndex: number
-    sourceTaskIndex: number, 
-    destTaskIndex: number
+    sourceCardIndex: number, 
+    destCardIndex: number
 }}
 
 interface SetDraggedList {type: 'SET_DRAGGED_LIST', payload: string}
 
 interface SetDraggedCard {type: 'SET_DRAGGED_CARD', payload: string}
+
+interface UpdateTask {
+    type: 'UPDATE_TASK', 
+    payload: {columnId: string, cardId: string, taskId: string,text: string, completed: boolean}
+}

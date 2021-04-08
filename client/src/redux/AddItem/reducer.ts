@@ -3,14 +3,14 @@ import { moveItem } from '../../utils/moveItem'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
 import { AddItemAction } from './actions'
 import { Dispatch } from 'redux';
-import { AddItemState, List, Task } from './interfaces';
+import { AddItemState, Card, List } from './interfaces';
 
-const findIndex = <T extends List | Task>(id: string, array: T[]  ) => {
+const findIndex = <T extends List | Card>(id: string, array: T[]  ) => {
     return array.findIndex((item: T)=> item._id === id)
 }
 
-const getTasks = (lists: List[]) => {
-    return lists?.map(list => list.tasks).flat().map(task => task._id) || []
+const getCards = (lists: List[]) => {
+    return lists?.map(list => list.cards).flat().map(card => card._id)
 }
 
 export const setBoard = (board: Board) => (dispatch: Dispatch) => {
@@ -21,7 +21,7 @@ const initialState = {
     _id: '',
     name: '',
     lists: [],
-    taskIds: [],
+    cardIds: [],
     draggedListId: '',
     draggedCardId: '',
     isLoading: true
@@ -32,8 +32,8 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
         case 'SET_BOARD': {
             console.log('reducer', action.payload)
             const lists = action.payload.lists
-            const taskIds = getTasks(lists)
-            return {...state,...action.payload, isLoading: false, taskIds   }
+            const cardIds = getCards(lists)
+            return {...state,...action.payload, isLoading: false, cardIds}
         }
 
         case 'ADD_LIST':{
@@ -47,34 +47,49 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
         }
 
         case 'ADD_CARD':{
-            const {listId, task} = action.payload
+            const {listId, card} = action.payload
             const line = findIndex(action.payload.listId, state.lists)
             console.log(action.payload.listId, state.lists)
-            state.lists[line].tasks.push(task)
-            state.taskIds = getTasks(state.lists)
+            state.lists[line].cards.push(card)
+            state.cardIds = getCards(state.lists)
             return{   
                     ...state,
                 }
         }
 
-        case 'EDIT_CARD': {
-            const columnIndex = findIndex(action.payload.listId, state.lists)
-            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
-            state.lists[columnIndex].tasks[taskIndex].text = action.payload.text
+        // case 'EDIT_CARD': {
+        //     const columnIndex = findIndex(action.payload.listId, state.lists)
+        //     const cardIndex = findIndex(action.payload.cardId, state.lists[columnIndex].cards)
+        //     state.lists[columnIndex].cards[cardIndex].text = action.payload.text
+
+        //     return {...state}
+        // }
+
+        case 'UPDATE_CARD': {
+            const {listId, cardId, card} = action.payload
+            console.log('update_Card')
+            const columnIndex = findIndex(listId, state.lists)
+            const cardIndex = findIndex(cardId, state.lists[columnIndex].cards)
+            // state.lists[columnIndex].cards[cardIndex] = action.payload
+            state.lists[columnIndex].cards = state.lists[columnIndex].cards.map((stateCard, index) => {
+                return index === cardIndex ? card : stateCard
+            })
+            console.log(state)
 
             return {...state}
         }
 
         case 'DELETE_CARD':{
             const columnIndex = findIndex(action.payload.listId, state.lists)
-            const taskIndex = findIndex(action.payload.taskId, state.lists[columnIndex].tasks)
-            state.lists[columnIndex].tasks.splice(taskIndex, 1)
+            const cardIndex = findIndex(action.payload.cardId, state.lists[columnIndex].cards)
+            state.lists[columnIndex].cards.splice(cardIndex, 1)
             return {...state}
         }
 
         case 'EDIT_LIST': {
-            const columnIndex = findIndex(action.payload.listId, state.lists)
-            state.lists[columnIndex].title = action.payload.title
+            const {listId, title} = action.payload
+            const columnIndex = findIndex(listId, state.lists)
+            state.lists[columnIndex].title = title
 
             return {...state}
         }
@@ -84,8 +99,6 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
             state.lists.splice(columnIndex, 1)
             return {...state}
         }
-    
-
 
         case 'MOVE_LIST': {
             const {sourceIndex, destIndex} = action.payload
@@ -96,18 +109,18 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
         }
 
         case 'MOVE_CARD_IN_LIST': {
-            const {arrIndex, sourceTaskIndex, destTaskIndex} = action.payload
-            moveItem(state.lists[arrIndex].tasks, sourceTaskIndex, destTaskIndex)
-            state.taskIds = getTasks(state.lists)
+            const {arrIndex, sourceCardIndex, destCardIndex} = action.payload
+            moveItem(state.lists[arrIndex].cards, sourceCardIndex, destCardIndex)
+            state.cardIds = getCards(state.lists)
             return {...state}
 
         }
 
         case 'MOVE_CARD_BETWEEN_LISTS': {
-            const {sourceArrIndex, destArrIndex, sourceTaskIndex, destTaskIndex} = action.payload
+            const {sourceArrIndex, destArrIndex, sourceCardIndex, destCardIndex} = action.payload
     
-            moveItemBetweenLists(state.lists[sourceArrIndex].tasks, state.lists[destArrIndex].tasks, sourceTaskIndex, destTaskIndex)
-            state.taskIds = getTasks(state.lists)
+            moveItemBetweenLists(state.lists[sourceArrIndex].cards, state.lists[destArrIndex].cards, sourceCardIndex, destCardIndex)
+            state.cardIds = getCards(state.lists)
             return {...state}
         }
 
@@ -126,9 +139,34 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
             }
         }
 
+        case 'UPDATE_TASK':{
+            const {columnId, cardId, taskId, text, completed} = action.payload
+            console.log(action.payload)
+            console.log(state)
+
+            const columnIndex = state.lists.findIndex(column => column._id === columnId)
+            const cardIndex = state.lists[columnIndex].cards.findIndex(card => card._id === cardId)
+
+            // state.lists[columnIndex].cards[cardIndex].tasks.findIndex(task => task._id === taskId)
+            state.lists[columnIndex].cards[cardIndex].tasks = state.lists[columnIndex].cards[cardIndex].tasks.map((task, index) => {
+                // task._id === taskId ? {...task, text, completed} : task
+                if(task._id === taskId){
+                    console.log({...task, text, completed})
+                    return {...task, text, completed}
+                }else{
+                    return task
+                }
+            })
+            // console.log({...task, text, completed})
+            console.log(state)
+            return {...state, }
+        }
+
+
         default:
             return state
     }
+
 
 }
 
