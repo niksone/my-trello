@@ -127,6 +127,26 @@ const ButtonIconContainer = styled.div`
     padding-right: 10px;
 `
 
+const btnIconSizes = {
+    sm: '16px',
+    md: '25px',
+    lg: '36px'
+}
+
+const BtnIconContainer = styled.button<ButtonProps>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ${({variant}) => variant ? styles[variant] : 'fill'};
+    height: ${({size}) => size ? btnIconSizes[size] : btnIconSizes.md};
+    width: ${({size}) => size ? btnIconSizes[size] : btnIconSizes.md};
+
+    cursor: pointer;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s all ease-in-out;
+`
+
 interface ButtonProps {
     onClick?:  React.MouseEventHandler<HTMLButtonElement>;
     // background?: string,
@@ -137,23 +157,57 @@ interface ButtonProps {
     Icon?: any,
     size?: 'lg' | 'md' | 'sm',
     colorScheme?: keyof typeof colorSchemes,
-    jc?: 'start' | 'center' | 'end'
+    jc?: 'start' | 'center' | 'end',
+    shape?: BtnShape,
 }
+
+type BtnShape = 'default' | 'icon'
 
 const Button = ({children, onClick, ...rest}: React.PropsWithChildren<ButtonProps>) => {
     rest.variant = rest.variant ? rest.variant : 'fill'
+    rest.shape = rest.shape ? rest.shape : 'default'
+
     const ButtonIcon = rest.Icon
-    console.log(rest.variant)
+    // console.log(rest.variant)
+
+
+    const getButtonStyles = (shape: BtnShape) => {
+        switch(shape){
+            case 'default':{
+                return (
+                    <ButtonContainer onClick={onClick} {...rest}>
+                        {ButtonIcon && (
+                            <ButtonIconContainer>
+                                {/* {rest.Icon} */}
+                                <ButtonIcon />
+                            </ButtonIconContainer>
+                        )}
+                        {children}
+                    </ButtonContainer>
+                )
+            }
+
+            case 'icon':{
+                return (
+                    <BtnIconContainer onClick={onClick} {...rest}>
+                        {children}
+                    </BtnIconContainer>
+                )
+            }
+
+        }
+    }
     return (
-        <ButtonContainer onClick={onClick} {...rest}>
-            {ButtonIcon && (
-                <ButtonIconContainer>
-                    {/* {rest.Icon} */}
-                    <ButtonIcon />
-                </ButtonIconContainer>
-            )}
-            {children}
-        </ButtonContainer>
+        getButtonStyles(rest.shape)
+        // <ButtonContainer onClick={onClick} {...rest}>
+        //     {ButtonIcon && (
+        //         <ButtonIconContainer>
+        //             {/* {rest.Icon} */}
+        //             <ButtonIcon />
+        //         </ButtonIconContainer>
+        //     )}
+        //     {children}
+        // </ButtonContainer>
     )
 }
 
