@@ -1,4 +1,3 @@
-import { addCard } from './../../client/src/redux/AddItem/actionCreators';
 import BoardController from "../controllers/BoardController"
 
 const Router = require('express').Router
