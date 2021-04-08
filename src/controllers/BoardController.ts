@@ -1,5 +1,5 @@
-import { BoardI } from './../Interfaces/BoardInteface';
-import e, { Request, Response } from "express";
+import { BoardI } from '../Interfaces/BoardInteface';
+import { Request, Response } from "express";
 import { UserI } from "Interfaces/UserInterface";
 import User from "../models/User";
 import { Error } from "mongoose";
