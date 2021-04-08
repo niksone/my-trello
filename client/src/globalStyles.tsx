@@ -13,13 +13,15 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
-    #root{
+    html{
         --color-primary: #5E81F4;
         --color-primary-dark: #1C1D21;
         --color-primary-grey: #8181A5;
         --color-primary-light: rgba(94, 129, 244, 0.1);
         --color-outline: #F0F0F3;
         --color-error: #ff4848;
+        --color-warning: #F4BE5E;
+        --color-success: #7CE7AC;
         --color-background-light: #F5F5FA;
         --color-resting-outline: #ECECF2;
 
@@ -38,7 +40,5 @@ export const GlobalStyles = createGlobalStyle`
 
         --text-caption: 1.4rem;
         --text-regular: 1.4rem;
-
-
     }
 `
