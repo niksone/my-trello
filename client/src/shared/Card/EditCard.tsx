@@ -11,22 +11,22 @@ const EditCardContainer = styled.div`
 
 interface EditCardProps {
     listId: string,
-    taskId: string,
+    cardId: string,
     text: string
 }
 
 
-const EditCard = ({listId, taskId, text}: EditCardProps) => {
+const EditCard = ({listId, cardId, text}: EditCardProps) => {
     const dispatch = useDispatch()
     const test = useRef<HTMLSpanElement>(null)
 
     const editCard = () => {
         const text = test?.current?.innerText
-        dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
+        // dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
     }
 
     const deleteCard = () => {
-        dispatch({type: 'DELETE_CARD', payload: {listId, taskId}})
+        // dispatch({type: 'DELETE_CARD', payload: {listId, taskId}})
     }
 
     useEffect(() => {
