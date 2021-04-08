@@ -3,11 +3,19 @@ import mongoose from "mongoose";
 
 const task = new mongoose.Schema({
     text: {type: String},
+    completed: {type: Boolean}
+})
+
+const card = new mongoose.Schema({
+    title: {type: String},
+    subtitle: {type: String},
+    description: {type: String},
+    tasks: [task]
 })
 
 const list = new mongoose.Schema({
     title: {type: String},
-    tasks: [task]
+    cards: [card]
 })
 
 const board = new mongoose.Schema({

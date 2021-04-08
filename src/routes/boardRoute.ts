@@ -1,3 +1,4 @@
+import { addCard } from './../../client/src/redux/AddItem/actionCreators';
 import BoardController from "../controllers/BoardController"
 
 const Router = require('express').Router
@@ -16,13 +17,13 @@ boardRouter.patch('/boards/moveList', BoardController.moveList)
 
 boardRouter.delete('/boards/removeList', BoardController.removeList)
 
-boardRouter.post('/boards/addTask', BoardController.addTask)
+boardRouter.post('/boards/addCard', BoardController.addCard)
 
-boardRouter.delete('/boards/removeTask', BoardController.removeTask)
+boardRouter.delete('/boards/removeCard', BoardController.removeCard)
 
-boardRouter.patch('/boards/updateTaskTitle', BoardController.updateTaskText)
+boardRouter.patch('/boards/updateCard', BoardController.updateCard)
 
-boardRouter.patch('/boards/moveTask', BoardController.moveTask)
+boardRouter.patch('/boards/moveCard', BoardController.moveCard)
 
 
 

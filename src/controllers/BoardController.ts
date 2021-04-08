@@ -36,7 +36,7 @@ class BoardController {
         try {
             const {userId, boardName} = req.body
             if(!userId || !boardName) res.send({message: 'Wrong values'})
-
+            console.log(req.body)
             await User.findById(userId, (err: Error, user: UserI) => {
                 if(err) throw err
                 if(!user) res.status(500).send({message: 'No user found'})
@@ -153,10 +153,10 @@ class BoardController {
 
     }
 
-    async addTask(req: Request, res: Response){
+    async addCard(req: Request, res: Response){
         try {
-            const {boardId, listId, task} = req.body
-            if(!boardId || !listId || !task) res.status(500).send({message: 'Wrong values'})
+            const {boardId, listId, card} = req.body
+            if(!boardId || !listId || !card) res.status(500).send({message: 'Wrong values'})
     
             await Board.findById(boardId, (err: Error, board: BoardI) => {
                 if(err) throw err
@@ -165,9 +165,9 @@ class BoardController {
                 if(listIndex < 0){
                     res.status(500).send({message: 'List didn`t found'})
                 }else{
-                    board.lists[listIndex].tasks.push(task)
+                    board.lists[listIndex].cards.push(card)
                     board.save()
-                    res.send(task)
+                    res.send(card)
                 }
             })  
         } catch (error) {
@@ -175,23 +175,23 @@ class BoardController {
         }   
     }
 
-    async removeTask(req: Request, res: Response) {
+    async removeCard(req: Request, res: Response) {
         try {
-            const {boardId, listId, taskId} = req.body
-            if(!boardId || !listId || !taskId) res.status(500).send({message: 'Wrong values'})
+            const {boardId, listId, cardId} = req.body
+            if(!boardId || !listId || !cardId) res.status(500).send({message: 'Wrong values'})
     
             await Board.findById(boardId, (err: Error, board: BoardI) => {
                 if(err) throw err
                 if(!board) res.status(500).send({message: 'Board not found'})
     
                 const listIndex = board.lists.findIndex(list => String(list._id) === listId)
-                const taskIndex = board.lists[listIndex].tasks.findIndex(task => String(task._id) === taskId)
+                const cardIndex = board.lists[listIndex].cards.findIndex(card => String(card._id) === cardId)
     
-                console.log(listIndex, taskIndex)
-                if(listIndex < 0 || taskIndex < 0){
-                    res.status(500).send({message: 'List or task didn`t found'})
+                console.log(listIndex, cardIndex)
+                if(listIndex < 0 || cardIndex < 0){
+                    res.status(500).send({message: 'List or card didn`t found'})
                 }else{
-                    board.lists[listIndex].tasks.splice(taskIndex, 1)
+                    board.lists[listIndex].cards.splice(cardIndex, 1)
                     board.save()
                     res.send(board.lists[listIndex])
                 }
@@ -201,12 +201,36 @@ class BoardController {
         }
     }
 
-    async updateTaskText(req: Request, res: Response) {
-        try {
-            const {boardId, listId, taskId, text} = req.body
-            if(!boardId || !listId || ! taskId || !text) res.status(500).send({message: 'Wrong values'})
+    // async updateTaskText(req: Request, res: Response) {
+    //     try {
+    //         const {boardId, listId, taskId, text} = req.body
+    //         if(!boardId || !listId || ! taskId || !text) res.status(500).send({message: 'Wrong values'})
             
-            console.log(boardId, listId, taskId, text)
+    //         console.log(boardId, listId, taskId, text)
+    //         await Board.findById(boardId, (err: Error, board: BoardI) => {
+    //             if(err) throw err
+    //             if(!board) {res.status(500).send({message: 'Board with that id not found'})}
+    //             else{
+    //                 const listIndex = board.lists.findIndex(list => String(list._id) === listId)
+    //                 if(listIndex < 0) {res.status(500).send({message: 'Wrong list Id'})}
+    //                 else{
+    //                     const taskIndex = board.lists[listIndex].tasks.findIndex(task => String(task._id) === taskId)
+    //                     board.lists[listIndex].tasks[taskIndex].text = text
+    //                     board.save()
+    //                     res.send(board.lists[listIndex].tasks[taskIndex])
+    //                 }   
+    //             }
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    async updateCard(req: Request, res: Response) {
+        try {
+            const {boardId, listId, cardId, card} = req.body
+            if(!boardId || !listId || !cardId || !card) res.status(500).send({message: 'Wrong values'})
+            
+            console.log(boardId, listId, cardId, card)
             await Board.findById(boardId, (err: Error, board: BoardI) => {
                 if(err) throw err
                 if(!board) {res.status(500).send({message: 'Board with that id not found'})}
@@ -214,24 +238,25 @@ class BoardController {
                     const listIndex = board.lists.findIndex(list => String(list._id) === listId)
                     if(listIndex < 0) {res.status(500).send({message: 'Wrong list Id'})}
                     else{
-                        const taskIndex = board.lists[listIndex].tasks.findIndex(task => String(task._id) === taskId)
-                        board.lists[listIndex].tasks[taskIndex].text = text
+                        const cardIndex = board.lists[listIndex].cards.findIndex(card => String(card._id) === cardId)
+                        board.lists[listIndex].cards[cardIndex] = card
                         board.save()
-                        res.send(board.lists[listIndex].tasks[taskIndex])
+                        res.send(board.lists[listIndex].cards[cardIndex])
                     }   
                 }
             })
+        
         } catch (error) {
             console.log(error)
         }
     }
 
-    async moveTask(req: Request, res: Response){
+    async moveCard(req: Request, res: Response){
         try {
-            const {boardId, sourceListIndex, destListIndex, sourceTaskIndex, destTaskIndex} = req.body
+            const {boardId, sourceListIndex, destListIndex, sourceCardIndex, destCardIndex} = req.body
             console.log(req.body)
             if(!boardId || sourceListIndex === null || !destListIndex === null
-                || sourceTaskIndex === null || destTaskIndex === null
+                || sourceCardIndex === null || destCardIndex === null
             )  res.status(500).send({message: 'Wrong values'})
             else{
                 await Board.findById(boardId, (err: Error, board: BoardI) => {
@@ -239,8 +264,8 @@ class BoardController {
                     if(!board) {res.status(500).send({message: 'Board with that id not found'})}
                     else{
                         console.log(board.lists, '----------final lists---------')
-                        const task = board.lists[sourceListIndex].tasks.splice(sourceTaskIndex, 1)[0]
-                        board.lists[destListIndex].tasks.splice(destTaskIndex, 0, task)
+                        const card = board.lists[sourceListIndex].cards.splice(sourceCardIndex, 1)[0]
+                        board.lists[destListIndex].cards.splice(destCardIndex, 0, card)
                         console.log(board.lists, '----------final lists---------')
                         board.save()
                         res.send(board)

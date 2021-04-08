@@ -1,23 +1,35 @@
 
 export interface Task {
     text: string,
+    completed: boolean,
     _id: string
+}
+
+export interface SimpleCard {
+    title: string,
+    subtitle: string,
+    description: string,
+    tasks: Task[]
+}
+
+export interface Card extends SimpleCard{
+    _id: string,
 }
 
 export interface List {
     _id: string,
     title: string,
-    tasks: Task[],
+    cards: Card[],
 }
 
 export interface AddItemState {
     _id: string,
     name: string,
     lists: List[],
-    taskIds: string[],
+    cardIds: string[],
     draggedListId: string,
     draggedCardId: string,
-    isLoading: boolean
+    isLoading?: boolean
 }
 
 export type ColumnDragItem = 
