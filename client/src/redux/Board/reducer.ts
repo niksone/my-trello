@@ -1,8 +1,10 @@
+import { boards } from "../../data";
 import { BoardAction } from "./actions"
 import { Board, BoardReducerProps } from './interfaces';
 
 const initialState: BoardReducerProps = {
     boards: [] as Board[],
+    // boards: boards,
     isLoading: true
 }
 
@@ -22,7 +24,7 @@ export const boardReducer = (state: BoardReducerProps = initialState, action: Bo
                 _id: id,
                 name,
                 lists: [],
-                taskIds: [],
+                cardIds: [],
                 draggedListId: '',
                 draggedCardId: ''
             }

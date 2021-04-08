@@ -4,7 +4,7 @@ export interface Board {
     _id: string,
     name: string,
     lists: List[],
-    taskIds: string[],
+    cardIds: string[],
     draggedListId: string,
     draggedCardId: string
 }
