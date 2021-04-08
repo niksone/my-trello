@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from '../Buttons'
-import Modal from '../Modal'
+import {Modal} from '../Modal'
 import AddItemForm from './AddItemForm'
 import { AddItemButton, AddItemContainer, AddItemContainerProps, AddItemContainerTypes } from './AddNewItemElements'
 
