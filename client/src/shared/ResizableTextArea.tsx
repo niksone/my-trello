@@ -6,12 +6,20 @@ export const ResizeableTextAreaContainer = styled.span`
     display: block;
     width: 100%;
     overflow: hidden;
-    resize: both;
+    /* resize: both;
     min-height: 40px;
-    line-height: 20px;
+    line-height: 20px; */
     outline: none;
     border: none;
-    background-color: #fff;
+    background-color: transparent;
+    font-size: inherit;
+    font-weight: inherit;
+
+    &:empty::before {
+    content: "Placeholder still possible";
+    color: gray;
+    
+  }
 `
 
   
@@ -21,12 +29,13 @@ export const ResizeableTextAreaContainer = styled.span`
 //   }
 
 interface ResizableTextAreaProps {
-    children?: React.ReactChildren
+    children?: React.ReactChildren,
+    onChange?: () => void
 }
 
-const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children}, ref) => {
+const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, onChange}, ref) => {
     return (
-        <ResizeableTextAreaContainer contentEditable role="textbox" ref={ref}>
+        <ResizeableTextAreaContainer contentEditable role="textbox" ref={ref} onChange={onChange}>
             {children}
         </ResizeableTextAreaContainer>
     )
