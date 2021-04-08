@@ -7,7 +7,7 @@ interface CardContainerProps  {
 
 export const CardContainer = styled.div<CardContainerProps>`
     position: relative;
-    background: none;
+    background: #fff;
     border: 1px var(--color-resting-outline) solid;
     
     /* opacity: ${({isOver}) => isOver ? '0.3' :'1' }; */
@@ -21,4 +21,54 @@ export const CardContainer = styled.div<CardContainerProps>`
     cursor: pointer;
 `
 
+export const CardContainerBlock = styled.div`
+    padding-bottom: 18px;
 
+    &:last-child{
+        padding-bottom: 0;
+    }
+`
+
+export const CardTitleContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+`
+
+export const CardTitleWrapper = styled.div`
+
+`
+
+export const CardTitle = styled.h5`
+    font-size: var(--text-h5);
+`
+
+export const CardSubtitle = styled.p`
+    font-size: var(--text-regular);
+    color: var(--color-primary-grey);       
+`
+
+export const CardDescription = styled.p`
+    font-size: var(--text-regular);
+`
+
+export const CardProgressContainer = styled.div``
+
+export const CardProgressInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 11px;
+`
+
+export const CardProgressIcon = styled.span`
+    padding-right: 5px;
+`
+
+export const CardProgressLabel = styled.span`
+    color: var(--color-primary-grey);
+`
+
+export const CardProgressStage = styled.span`
+    font-size: var(--text-regular);
+`
