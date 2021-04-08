@@ -3,7 +3,8 @@ import { ProgressContainer, ProgressFill, ProgressValue } from './ProgressCompon
 
 
 interface ProgressBarProps {
-    value: number
+    value: number,
+    variant: 'default'
 }
 
 const ProgressBar = ({value}: ProgressBarProps)  => {
