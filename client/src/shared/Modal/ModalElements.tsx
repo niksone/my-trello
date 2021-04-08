@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const ModalContainer = styled.div`
+interface ModalContainerProps {
+    show: boolean
+}
+
+export const ModalContainer = styled.div<ModalContainerProps>`
     position: fixed;
     top: 0;
     left: 0;
-    display: flex;
+    display: ${({show}) => show ? 'flex' : 'none'};
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -28,7 +32,11 @@ export const ModalWrapper = styled.div`
 
 
 export const ModalContent = styled.div`
-position: fixed;
-    z-index: 10;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     min-width: 20%;
+    z-index: 10;
 `
