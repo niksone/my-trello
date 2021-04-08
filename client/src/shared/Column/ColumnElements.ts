@@ -17,7 +17,7 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
     display: flex;
     flex-direction: column;
     width: 400px;
-    background: none;
+    background: #fff;
     height: 100%;
     opacity: ${({isOver}) => isOver ? '0.3' : '1'};
     border: 2px var(--color-resting-outline) dashed;
