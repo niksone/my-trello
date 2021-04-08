@@ -11,6 +11,7 @@ import { getCompletedTasks } from '../Card/BeautifulCard'
 import Checkbox from '../Checkbox'
 import { CheckboxText } from '../Checkbox/CheckboxElements'
 import EditableItem from '../EditableItem'
+import TrashcanIcon from '../icons/Trashcan/TrashcanIcon'
 import ProgressBar from '../ProgressBar'
 
 export const FormContainer= styled.div`
@@ -97,6 +98,7 @@ export const FormCheklistItems = styled.div`
 export const ChecklistItem = styled.div`
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     color: var(--color-primary-grey);
 `
 
@@ -111,6 +113,16 @@ interface CardFormProps {
     onExit?: any,
     onSave?: any
 }
+
+const DeleteIconWrapper = styled.span`
+    color: var(--color-primary-dark);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+        color: var(--color-error);
+    }
+`
 
 const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit, onSave}: CardFormProps) => {
     const [card, setCard] = useState<SimpleCard>({title, subtitle, description, tasks})
@@ -152,6 +164,10 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
         // ))
         // updateTask(taskId, text, completed)
         console.log(card.tasks);
+    }
+
+    const removeTask = (taskId: string, tasks: Task[]) => {
+        return tasks.filter(task => task._id !== taskId)
     }
 
     const handleSave = () => {
@@ -239,6 +255,9 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                             // Wrapper={CheckboxText}
                                         />
                                         </Checkbox>
+                                        <DeleteIconWrapper onClick={() => handleUpdate(card.title, card.subtitle, card.description, removeTask(task._id, card.tasks))}>
+                                            <TrashcanIcon />
+                                        </DeleteIconWrapper>
                                     </ChecklistItem>
 
                                 )}
