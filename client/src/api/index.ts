@@ -77,12 +77,8 @@ export const boardApi = {
     },
 
     async deleteCard(boardId: string, listId: string, cardId: string) {
-        try {
             const list = await instance.delete<Card>('/boards/removeCard', {data: {boardId, listId, cardId}})
             return list
-        } catch (error) {
-            console.log(error)
-        }
     },
 
     async updateCard(boardId: string, listId: string, cardId: string, card: Card){
