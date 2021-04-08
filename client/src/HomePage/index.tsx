@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -17,6 +17,8 @@ import AddIcon from '../shared/icons/Add/AddIcon'
 import AddNewItem from '../shared/AddNewItem'
 import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
 import AddItemForm from '../shared/AddNewItem/AddItemForm'
+import { Modal, ModalHandle } from '../shared/Modal'
+// import { boards } from '../data'
 
 export const AppContainer = styled.div`
     height: 100vh;
@@ -109,6 +111,7 @@ export const BoardLink = styled(Link)`
         padding: 13px;  
         font-weight: bold;
         text-align:left;
+        word-break: break-word;
     }
 `
 
@@ -129,6 +132,8 @@ export const Logo = styled.div<LogoI>`
 
 const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
+    const [showModal, setShowModal] = useState(false)
+    const modalRef = useRef<ModalHandle>(null)
 
     const {boards} = useSelector((state: RootReducerType) => state.boards)
     const dispatch = useDispatch()
@@ -140,6 +145,11 @@ const HomePage = () => {
     const handleLogout = async () => {
         await authApi.logout()
         getAuth()
+    }
+
+    const handleAddItem = (text: string) => {
+        dispatch(addBoard(user, text))
+        setShowModal(false)
     }
 
     useEffect(() => {
@@ -182,15 +192,19 @@ const HomePage = () => {
                         }  
                 </BoardLinksContainer>
                 <BoardLinkWrapper>
-                    <AddNewItemBtn 
+                    <Button 
                         widthFill 
                         Icon={AddIcon}
-                        onAdd={(name: string) => dispatch(addBoard(user, name))}
-                        title='Add Board'
-                        Form={AddItemForm}
+                        onClick={() => setShowModal(true)}
                     >
                         add new Board
-                    </AddNewItemBtn>
+                    </Button>
+                    {
+                    showModal && 
+                        <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
+                            <AddItemForm title='add board' onAdd={(name: string) => handleAddItem(name)} /> 
+                        </Modal>
+                    }
                     {/* <Button widthFill Icon={AddIcon}> */}
                         {/* Add board */}
                         {/* <AddNewItem 

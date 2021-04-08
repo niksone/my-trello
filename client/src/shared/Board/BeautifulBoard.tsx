@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { addList, addTask, moveList, moveTask } from '../../redux/AddItem/actionCreators'
+import { addList, addCard, moveList, moveCard } from '../../redux/AddItem/actionCreators'
 import { AddItemState, List } from '../../redux/AddItem/interfaces'
 import AddNewItem from '../AddNewItem'
 import Button from '../Buttons'
@@ -11,6 +11,9 @@ import { AddColumnContainer, BoardContainer } from './BoardContainer'
 import AddIcon from '../icons/Add/AddIcon'
 import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
 import AddItemForm from '../AddNewItem/AddItemForm'
+import { useRef, useState } from 'react'
+import { Modal, ModalHandle } from '../Modal'
+import { addBoard } from '../../redux/Board/actionCreators'
 export const BoardColumnContainer = styled.div`
   display: flex;
   height: 100%;
@@ -25,10 +28,17 @@ export interface BoardProps {
 
 const BeautifulBoard = ({data}: BoardProps) => {
     const dispatch = useDispatch()
-    const {lists, taskIds, _id} = data
+    const {lists, cardIds, _id} = data
     const boardId = _id
+    const [showModal, setShowModal] = useState(false)
 
-  
+    const modalRef = useRef<ModalHandle>(null)
+
+    const handleAddItem = (text: string) => {
+      dispatch(addList(boardId, text))
+      setShowModal(false)
+    }
+
     const handleDrop = (res: any) => {
       const {destination, source, draggableId, type} = res
       if(!destination || !source) return
@@ -45,7 +55,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
         const destDroppableId = destination.droppableId
         const sourceIndex = source.index
         const destIndex = destination.index
-        dispatch(moveTask(boardId, data, sourceDroppableId, sourceIndex, destDroppableId, destIndex))
+        dispatch(moveCard(boardId, data, sourceDroppableId, sourceIndex, destDroppableId, destIndex))
       }
     }
 
@@ -64,10 +74,10 @@ const BeautifulBoard = ({data}: BoardProps) => {
                     list={list}
                     index={index}
                     key={list._id}
-                    tasks={list.tasks}
-                    taskIds={taskIds}
+                    cards={list.cards}
+                    cardIds={cardIds}
                     id={list._id}
-                    onAdd={(text: string)=>dispatch(addTask(_id, list._id, text))}
+                    onAdd={(text: string)=>dispatch(addCard(_id, list._id, text))}
                   />
                 ))}
                 {provided.placeholder}
@@ -78,15 +88,28 @@ const BeautifulBoard = ({data}: BoardProps) => {
       <BoardColumnContainer>
         <ColumnWrapper>
           <AddColumnContainer>
-          <AddNewItemBtn 
+          {/* <AddNewItemBtn 
             widthFill 
             Icon={AddIcon}
             title='Add New List'
             onAdd={(text: string) => dispatch(addList( _id,text))}
-            Form={AddItemForm}
+            Form={<AddItemForm title='' onAdd={() => {}}/>}
           >
               add new List
-          </AddNewItemBtn>
+          </AddNewItemBtn> */}
+          <Button 
+              widthFill 
+              Icon={AddIcon}
+              onClick={() => setShowModal(true)}
+          >
+              add new List
+          </Button>
+          {
+          showModal && 
+              <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
+                  <AddItemForm title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
+              </Modal>
+          }
             {/* <Button variant='shadow' Icon={AddIcon}>
               Add New List
             </Button> */}
