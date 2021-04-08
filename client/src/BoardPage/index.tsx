@@ -49,7 +49,6 @@ const BoardPage = (
     const data = useSelector((state: RootReducerType) => state.addItem)
 
     useEffect(() => {
-        dispatch(getBoards(user))
         dispatch(setBoard(currentBoard))
     }, [dispatch, currentBoard._id, user])
     return (
