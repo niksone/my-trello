@@ -33,7 +33,7 @@ const AddNewItem = ({text, formText, onAdd, item, Button}: AddNewItemProps) => {
                         ? <Button onClick={toggleForm}>{text}</Button>
                         // ? {Button}
                         // : <AddItemForm />onAdd={handleForm} title={formText}/>
-                        : <Modal exit={toggleForm}>jopa</Modal>
+                        : <Modal exit={toggleForm}></Modal>
                 }
             </AddItemContainer>
     )
