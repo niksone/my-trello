@@ -89,6 +89,14 @@ const fillStyles = css<ButtonProps>`
     }
 `
 
+const unStyle = css`
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+`
+
 type stylesOptions = {
     [key: string]: FlattenInterpolation<ThemedStyledProps<ButtonProps, any>>
 }
@@ -96,7 +104,8 @@ type stylesOptions = {
 const styles: stylesOptions = {
     outline: outlineStyles,
     fill: fillStyles,
-    shadow: shadowStyles
+    shadow: shadowStyles,
+    unstyle: unStyle
 }
 
 const sizes = {
@@ -153,7 +162,7 @@ interface ButtonProps {
     color?: string,
     widthFill?: boolean,
     active?: boolean,
-    variant?: 'outline' | 'fill' | 'shadow',
+    variant?: 'outline' | 'fill' | 'shadow' | 'unstyle',
     Icon?: any,
     size?: 'lg' | 'md' | 'sm',
     colorScheme?: keyof typeof colorSchemes,
