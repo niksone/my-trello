@@ -2,13 +2,24 @@ import styled from 'styled-components'
 
 
 export interface AddItemContainerProps {
-    item: AddItemContainerTypes
+    item?: AddItemContainerTypes
 }
 
+type stylesOptions = {
+    [key: string]: string
+}
+
+
+export const containerType: stylesOptions ={
+    'TASK': '5px 0px',
+    'FORM': '5px 10px'
+}
 export type AddItemContainerTypes = 
     | 'CARD' 
     | 'COLUMN'
     | 'BOARD'
+    | 'TASK'
+    | 'FORM'
 
 
 export const AddItemContainer = styled.div<AddItemContainerProps>`
@@ -28,12 +39,12 @@ export const AddItemButton = styled.button`
 
 export const AddItemFormContainer = styled.div`
     /* padding-top: 10px; */
-    /* width: 100%; */
+    width: 100%;
 `
 
-export const AddItemFormWrapper= styled.div`
+export const AddItemFormWrapper= styled.div<AddItemContainerProps>`
     width: 100%;
-    padding: 5px 10px;
+    padding: ${({item}) => item ? containerType[item] : '0'};
     outline: none;
     border: none;
     border-radius: 5px;

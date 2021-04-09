@@ -25,7 +25,7 @@ export const ModalWrapper = styled.div`
     width: 100%;
     background-color: var(--color-primary-grey);
     mix-blend-mode: normal;
-    opacity: 0.35;
+    opacity: 0.45;
     z-index: 1;
 `
 

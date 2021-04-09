@@ -12,12 +12,13 @@ import { RootReducerType } from '../redux/store'
 import Button from '../shared/Buttons'
 import PickIcon from '../shared/icons/Pick/PickIcon'
 import { HeaderContainer, HeaderWrapper, LogoWrapper } from '../shared/Header/HeaderElements'
-import LogoImg from '../shared/icons/Logo.svg'
+import {ReactComponent as LogoImg} from '../shared/icons/Logo.svg'
 import AddIcon from '../shared/icons/Add/AddIcon'
 import AddNewItem from '../shared/AddNewItem'
 import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
 import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import { Modal, ModalHandle } from '../shared/Modal'
+import EditIcon from '../shared/icons/Edit/EditIcon'
 // import { boards } from '../data'
 
 export const AppContainer = styled.div`
@@ -106,7 +107,10 @@ export const BoardLink = styled(Link)`
     text-decoration: none;
     color: var(--color-primary-dark);
     font-size: var(--text-regular);
+`
 
+export const BoardButtonWrapper = styled.div`
+    width: 100%;
     & > Button{
         padding: 13px;  
         font-weight: bold;
@@ -125,8 +129,7 @@ interface LogoI {
     logoImg: any
 }
 
-export const Logo = styled.div<LogoI>`
-    background-image: url(${({logoImg}) => logoImg});
+export const LogoImgWrapper = styled.div`
     margin-right: 30px;
 `
 
@@ -162,7 +165,14 @@ const HomePage = () => {
                 <BoardLinksContainer>
                     <HeaderContainer>
                         <LogoWrapper>
-                            <Logo logoImg={LogoImg}/>betaCRM
+                            <BoardLinkWrapper>
+                                <LogoWrapper>
+                                    <LogoImgWrapper>
+                                        <LogoImg />
+                                    </LogoImgWrapper>
+                                    React Trello
+                                </LogoWrapper>
+                            </BoardLinkWrapper>
                         </LogoWrapper>
                     </HeaderContainer>
                             {/* <BoardLinkContainer >
@@ -180,16 +190,30 @@ const HomePage = () => {
                             <BoardLinkContainer key={board._id}>
                                 <BoardLinkWrapper active={board._id == id}>
                                     <BoardLink to={`/board/${board._id}`} key={board._id}>
-                                        <Button jc='start' widthFill variant='shadow' active={board._id === id}>
-                                            <BoardLinkIconWrapper>
-                                                <PickIcon />
-                                            </BoardLinkIconWrapper>
-                                            {board.name}
-                                        </Button>
+                                        <BoardButtonWrapper>
+                                            <Button jc='start' widthFill variant='shadow' active={board._id === id}>
+                                                <BoardLinkIconWrapper>
+                                                    <PickIcon />
+                                                </BoardLinkIconWrapper>
+                                                {board.name}
+                                            </Button>
+                                        </BoardButtonWrapper>
                                     </BoardLink>
                                 </BoardLinkWrapper>
                             </BoardLinkContainer>)
                         }  
+                            <BoardLinkContainer >
+                                <BoardLinkWrapper>
+                                    <BoardButtonWrapper>
+                                        <Button jc='start' widthFill variant='shadow'>
+                                            <BoardLinkIconWrapper>
+                                                <EditIcon />
+                                            </BoardLinkIconWrapper>
+                                            Edit board
+                                        </Button>
+                                    </BoardButtonWrapper>
+                                </BoardLinkWrapper>
+                            </BoardLinkContainer>
                 </BoardLinksContainer>
                 <BoardLinkWrapper>
                     <Button 
@@ -202,7 +226,7 @@ const HomePage = () => {
                     {
                     showModal && 
                         <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                            <AddItemForm title='add board' onAdd={(name: string) => handleAddItem(name)} /> 
+                            <AddItemForm item='FORM' title='add board' onAdd={(name: string) => handleAddItem(name)} /> 
                         </Modal>
                     }
                     {/* <Button widthFill Icon={AddIcon}> */}

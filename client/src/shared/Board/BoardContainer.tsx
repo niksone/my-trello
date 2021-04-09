@@ -21,4 +21,8 @@ export const AddColumnContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  & > button{
+    height: 100%;
+  }
 `

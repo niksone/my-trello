@@ -30,15 +30,20 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
 `
 
 export const ColumnTitleContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+
     padding: 10px;
     cursor: pointer;
     z-index: 5;
 `
 
 export const ColumnTitle = styled.p`
+    flex-grow:100;
     text-align: left;
     font-weight: bold;
     word-break: break-word;
+
 `
 
 export const ColumnCardContainer = styled.div`
