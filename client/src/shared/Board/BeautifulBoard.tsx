@@ -101,13 +101,14 @@ const BeautifulBoard = ({data}: BoardProps) => {
               widthFill 
               Icon={AddIcon}
               onClick={() => setShowModal(true)}
+              variant='unstyle'
           >
               add new List
           </Button>
           {
           showModal && 
               <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                  <AddItemForm title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
+                  <AddItemForm item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
               </Modal>
           }
             {/* <Button variant='shadow' Icon={AddIcon}>
