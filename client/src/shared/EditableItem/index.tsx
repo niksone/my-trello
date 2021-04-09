@@ -8,12 +8,13 @@ interface EditableItemProps {
     deleteItem: () => void,
     updateItem: (text: string) => void
     editItem: (text: string) => void,
-    Wrapper?: any
+    Wrapper?: any,
+    placeholder: string
 }
 
 
 
-const EditableItem = ({deleteItem, editItem, updateItem, initialText, Wrapper}: EditableItemProps) => {
+const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, Wrapper}: EditableItemProps) => {
     const [isEdit, setIsEdit] = useState(false)
     const test = useRef<HTMLSpanElement>(null)
 
@@ -69,6 +70,7 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, Wrapper}: 
         console.log('handle click');
          const onExit = (e: any) => {
             updateItem(test?.current?.innerText || '') 
+            // test.current && (test.current.innerText = '')
             document.removeEventListener('focusout', onExit)            
         }
         document.addEventListener('focusout', onExit)
@@ -91,8 +93,11 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, Wrapper}: 
         // <EditableItemContainer>
                     /* <CardContainer> */
                     <span onClick={handleClick}>
-                        <ResizableTextArea ref={test}
-                         onChange={() => {}}/>
+                        <ResizableTextArea 
+                            ref={test}
+                            onChange={() => {}}
+                            placeholder={placeholder}
+                        />
                         {/* <EditButton style={{backgroundColor: 'red'}} onClick={deleteItem}/> */}
                     </span>
                     /* </CardContainer> */

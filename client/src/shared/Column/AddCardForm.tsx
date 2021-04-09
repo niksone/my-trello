@@ -187,6 +187,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 initialText={card.title}
                                 deleteItem={() => {}}
                                 editItem={() => {}}
+                                placeholder='Enter Title'
                                 updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
                                 // Wrapper={FormTitle}
                             />
@@ -196,6 +197,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 initialText={card.subtitle}
                                 deleteItem={() => {}}
                                 editItem={() => {}}
+                                placeholder='Enter subtitle'
                                 updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
                                 // Wrapper={FormSubtitle}
                             />
@@ -218,6 +220,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 initialText={card.description}
                                 deleteItem={() => {}}
                                 editItem={() => {}}
+                                placeholder='Enter Description'
                                 updateItem={(text) => handleUpdate(card.title, card.subtitle, text, card.tasks)}
                                 // Wrapper={FormDescription}
                             />
@@ -251,6 +254,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                             initialText={task.text}
                                             deleteItem={() => {}}
                                             editItem={(text: string) => {}}
+                                            placeholder='Enter task text'
                                             updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
                                             // Wrapper={CheckboxText}
                                         />
@@ -261,7 +265,12 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                     </ChecklistItem>
 
                                 )}
-                                <AddItemForm title='Add new Task' onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}/>
+                                <AddItemForm 
+                                    title='Add new Task' 
+                                    placeholder='Start Typing...'
+                                    item='TASK'
+                                    onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}
+                                />
                             </FormCheklistItems>
                         </FormChecklistContainer>
     
