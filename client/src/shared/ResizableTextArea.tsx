@@ -16,7 +16,7 @@ export const ResizeableTextAreaContainer = styled.span`
     font-weight: inherit;
 
     &:empty::before {
-    content: "Placeholder still possible";
+    content: attr(data-placeholder);
     color: gray;
     
   }
@@ -30,12 +30,19 @@ export const ResizeableTextAreaContainer = styled.span`
 
 interface ResizableTextAreaProps {
     children?: React.ReactChildren,
+    placeholder?: string,
     onChange?: () => void
 }
 
-const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, onChange}, ref) => {
+const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, placeholder, onChange}, ref) => {
     return (
-        <ResizeableTextAreaContainer contentEditable role="textbox" ref={ref} onChange={onChange}>
+        <ResizeableTextAreaContainer 
+            contentEditable 
+            role="textbox" 
+            ref={ref} 
+            onChange={onChange}
+            data-placeholder={placeholder || ''}
+        >
             {children}
         </ResizeableTextAreaContainer>
     )
