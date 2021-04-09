@@ -62,10 +62,19 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                               deleteItem={handleDeleteList}
                               editItem={editList}
                               initialText={list.title}
+                              placeholder='adaa'
                               // Wrapper={ColumnTitle}
                               updateItem={(title: string) => dispatch(updateListTitle(boardId, id, title))}
                             />
                           </ColumnTitle>
+                          <Button
+                              // widthFill 
+                              Icon={AddIcon}
+                              onClick={() => setShowModal(true)}
+                              variant='unstyle'
+                            >
+                              add new card
+                            </Button>
 
                               {/* <ColumnTitle>{list.title}</ColumnTitle> */}
                             {/* </EditableItem>    */}
@@ -98,13 +107,14 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                             >
                                 add new card
                             </AddNewItemBtn> */}
-                            <Button
+                            {/* <Button
                               widthFill 
                               Icon={AddIcon}
                               onClick={() => setShowModal(true)}
+                              variant='unstyle'
                             >
                               add new card
-                            </Button>
+                            </Button> */}
                             {showModal &&
                               <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
                                 <CardForm 
