@@ -55,9 +55,6 @@ export const HeroLeftContainer = styled.div`
 
 
 export const HeroLeftWrapper = styled.div`
-    /* position: absolute;
-    top: 50%;
-    left: 60%; */
     transform: translate(10%, 0%);
     width: fit-content;
 
@@ -155,18 +152,7 @@ const HeroSection = () => {
 
                         <FormContainer>
                             <FormInputsContainer>
-                                {/* <TextInput 
-                                    label='Email' 
-                                    placeholder='Enter your email' 
-                                    fieldId='email-input'
-                                    Icon={MailIcon}
-                                />
-                                <TextInput 
-                                    label='Password' 
-                                    placeholder='Enter your password' 
-                                    fieldId='password-input'
-                                    Icon={LockIcon}
-                                /> */}
+
                             </FormInputsContainer>
                             <ButtonGroup spacing={4}>
                                 <Button widthFill>Sign In</Button>

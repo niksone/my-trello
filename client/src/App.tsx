@@ -8,8 +8,6 @@ import UserContext, { userContext } from './Context';
 import ProtectedRoute from './ProtectedRoute';
 import ProtectedAuthRoute from './ProtectedAuthRoute';
 import HomePage from './HomePage';
-// import {boards} from './data';
-
 
 
 function App() {

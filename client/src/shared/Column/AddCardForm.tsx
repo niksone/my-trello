@@ -181,7 +181,6 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
             <FormContent>
                 <FormBlock>
                     <FormTitleContainer>
-                        {/* <FormWrapper> */}
                         <FormTitle>
                             <EditableItem
                                 initialText={card.title}
@@ -189,7 +188,6 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 editItem={() => {}}
                                 placeholder='Enter Title'
                                 updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
-                                // Wrapper={FormTitle}
                             />
                         </FormTitle>
                         <FormSubtitle>
@@ -199,15 +197,8 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 editItem={() => {}}
                                 placeholder='Enter subtitle'
                                 updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
-                                // Wrapper={FormSubtitle}
                             />
                         </FormSubtitle>
-
-                            {/* {subtitle|| ''}
-                        </EditableItem> */}
-                            {/* <FormTitle>{title}</FormTitle> */}
-                            {/* <FormSubtitle>{subtitle}</FormSubtitle> */}
-                        {/* </FormWrapper> */}
                     </FormTitleContainer>
                 </FormBlock>
                 <FormBlock>
@@ -222,12 +213,8 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 editItem={() => {}}
                                 placeholder='Enter Description'
                                 updateItem={(text) => handleUpdate(card.title, card.subtitle, text, card.tasks)}
-                                // Wrapper={FormDescription}
                             />
                         </FormDescription>
-                        {/* <FormDescription>
-                            {description}
-                        </FormDescription> */}
                     </FormDescriptionContainer>
                 </FormBlock>
                 {card.tasks &&
@@ -247,17 +234,14 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                             checked={task.completed} 
                                             key={task._id} 
                                             onChange={() => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, task.text, !task.completed))}
-                                            // onChange={() => dispatch(updateTask(columnId, cardId, task._id, task.text, !task.completed))}
                                         >
-
-                                        <EditableItem 
-                                            initialText={task.text}
-                                            deleteItem={() => {}}
-                                            editItem={(text: string) => {}}
-                                            placeholder='Enter task text'
-                                            updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
-                                            // Wrapper={CheckboxText}
-                                        />
+                                            <EditableItem 
+                                                initialText={task.text}
+                                                deleteItem={() => {}}
+                                                editItem={(text: string) => {}}
+                                                placeholder='Enter task text'
+                                                updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
+                                            />
                                         </Checkbox>
                                         <DeleteIconWrapper onClick={() => handleUpdate(card.title, card.subtitle, card.description, removeTask(task._id, card.tasks))}>
                                             <TrashcanIcon />

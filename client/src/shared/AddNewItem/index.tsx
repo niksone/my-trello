@@ -31,8 +31,6 @@ const AddNewItem = ({text, formText, onAdd, item, Button}: AddNewItemProps) => {
                 {
                     !showForm 
                         ? <Button onClick={toggleForm}>{text}</Button>
-                        // ? {Button}
-                        // : <AddItemForm />onAdd={handleForm} title={formText}/>
                         : <Modal exit={toggleForm}></Modal>
                 }
             </AddItemContainer>

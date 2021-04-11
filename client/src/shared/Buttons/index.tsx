@@ -208,15 +208,6 @@ const Button = ({children, onClick, ...rest}: React.PropsWithChildren<ButtonProp
     }
     return (
         getButtonStyles(rest.shape)
-        // <ButtonContainer onClick={onClick} {...rest}>
-        //     {ButtonIcon && (
-        //         <ButtonIconContainer>
-        //             {/* {rest.Icon} */}
-        //             <ButtonIcon />
-        //         </ButtonIconContainer>
-        //     )}
-        //     {children}
-        // </ButtonContainer>
     )
 }
 

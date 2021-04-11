@@ -19,17 +19,7 @@ const Header = () => {
     }
     return (
         <HeaderContainer>
-            {/* {
-                isAuth 
-                    ? <>
-                        <button onClick={logout}>Log Out</button>
-                        <Link to='/'>Boards</Link>
-                        </>
-                    : <>
-                        <Link to='/login'>Log In </Link>
-                        <Link to='/register'> register</Link>
-                    </>
-            } */}
+            
         </HeaderContainer>
     )
 }

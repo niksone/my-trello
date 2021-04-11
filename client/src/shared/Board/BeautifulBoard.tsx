@@ -65,7 +65,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
           <Droppable droppableId='droppable' type='COLUMN' direction='horizontal' >
             {(provided, snapshot) => (
               <BoardColumnContainer 
-                // style={{display:'flex'}}               
                 ref={provided.innerRef} 
                 {...provided.droppableProps}
               >
@@ -88,15 +87,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
       <BoardColumnContainer>
         <ColumnWrapper>
           <AddColumnContainer>
-          {/* <AddNewItemBtn 
-            widthFill 
-            Icon={AddIcon}
-            title='Add New List'
-            onAdd={(text: string) => dispatch(addList( _id,text))}
-            Form={<AddItemForm title='' onAdd={() => {}}/>}
-          >
-              add new List
-          </AddNewItemBtn> */}
           <Button 
               widthFill 
               Icon={AddIcon}
@@ -111,20 +101,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
                   <AddItemForm item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
               </Modal>
           }
-            {/* <Button variant='shadow' Icon={AddIcon}>
-              Add New List
-            </Button> */}
-            {/* <AddNewItem
-              text='Add New List'
-              formText='Add list'
-              onAdd={() => {}}
-              item='COLUMN'
-              Button={ 
-                <Button variant='shadow' Icon={AddIcon}>
-                  Add New List
-                </Button> 
-              }
-            /> */}
           </AddColumnContainer>
         </ColumnWrapper>
       </BoardColumnContainer>

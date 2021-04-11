@@ -11,7 +11,7 @@ const ButtonGroupContainer = styled.div<ButtonGroupContainerProps>`
     grid-template-columns: repeat(${({columns}) => columns}, 1fr);
     grid-column-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0};
 
-    > {
+    & > *{
         width: 100%;
     }
 `

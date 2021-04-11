@@ -73,7 +73,6 @@ interface TextInputProps {
 
 const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}: TextInputProps) => {
     console.log(isError);
-    // const FinalIcon = Icon
     return (
         <TextInputContainer isError={isError}>
             <TextInputLabel htmlFor={fieldId}>{label}</TextInputLabel>
@@ -91,7 +90,6 @@ const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}:
                         <Icon />
                     </IconWrapper>
                 }
-                {/* <FinalIcon fill={isError}/> */}
             </TextInputWrapper>
         </TextInputContainer>
     )

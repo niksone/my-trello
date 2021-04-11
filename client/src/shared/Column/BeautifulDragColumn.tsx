@@ -63,75 +63,49 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                               editItem={editList}
                               initialText={list.title}
                               placeholder='adaa'
-                              // Wrapper={ColumnTitle}
                               updateItem={(title: string) => dispatch(updateListTitle(boardId, id, title))}
                             />
                           </ColumnTitle>
                           <Button
-                              // widthFill 
                               Icon={AddIcon}
                               onClick={() => setShowModal(true)}
                               variant='unstyle'
                             >
                               add new card
                             </Button>
-
-                              {/* <ColumnTitle>{list.title}</ColumnTitle> */}
-                            {/* </EditableItem>    */}
                           </ColumnTitleContainer>                     
                           <ColumnCardContainer >
                             <ColumnCardWrapper>
-                            {cards?.map((card: Card, index: number) => (
+                            {
+                              cards?.map((card: Card, index: number) => (
                                 <BeautifulCard 
                                   cardId={card._id}
                                   card={card}
                                   key={card._id}
                                   listId={id}
                                 />
-                            ))}
+                              ))
+                            }
                             {provided.placeholder}
                             </ColumnCardWrapper>
-                            {/* <AddNewItem 
-                              text='Add New Task' 
-                              formText='Add Task' 
-                              onAdd={text => onAdd(text)}
-                              item='COLUMN'
-                              Button={<Button>add New Task</Button>}
-                            /> */}
-                            {/* <AddNewItemBtn 
-                              widthFill 
-                              Icon={AddIcon} 
-                              onAdd={(text: string) => onAdd(text)}
-                              title='Add New Card'
-                              Form={<CardForm />}
-                            >
-                                add new card
-                            </AddNewItemBtn> */}
-                            {/* <Button
-                              widthFill 
-                              Icon={AddIcon}
-                              onClick={() => setShowModal(true)}
-                              variant='unstyle'
-                            >
-                              add new card
-                            </Button> */}
-                            {showModal &&
-                              <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                                <CardForm 
-                                  title=''
-                                  subtitle=''
-                                  description=''
-                                  columnId={id}
-                                  cardId={''}
-                                  onSave={
-                                    (card: SimpleCard) => 
-                                    // {console.log(...Object.values(card))}
-                                    dispatch(addCard(boardId, id, card.title, card.subtitle, card.description, card.tasks))
-                                  }                                  
-                                  onExit={() => modalRef.current.close()}
-                                  tasks={[] as Task[]}
-                                />
-                              </Modal>
+                            {
+                              showModal &&
+                                <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
+                                  <CardForm 
+                                    title=''
+                                    subtitle=''
+                                    description=''
+                                    columnId={id}
+                                    cardId={''}
+                                    onSave={
+                                      (card: SimpleCard) => 
+                                      // {console.log(...Object.values(card))}
+                                      dispatch(addCard(boardId, id, card.title, card.subtitle, card.description, card.tasks))
+                                    }                                  
+                                    onExit={() => modalRef.current.close()}
+                                    tasks={[] as Task[]}
+                                  />
+                                </Modal>
                             }
                           </ColumnCardContainer>
                         </ColumnWrapper>

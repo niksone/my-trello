@@ -59,16 +59,10 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
         <Draggable draggableId={cardId} index={index} key={cardId}>
         {(provided, snapshot) => (
           <div
-          ref={provided.innerRef}
-          {...provided.dragHandleProps}
-          {...provided.draggableProps}
-        > 
-            {/* <EditableItem
-              deleteItem={handleDeleteCard}
-              editItem={editCard}
-              initialText={card.title}
-              Wrapper={CardContainer}
-            > */}
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
+            {...provided.draggableProps}
+          > 
             <CardContainer onClick={() => setShowModal(true)}>
               <CardContainerBlock>
                 <CardTitleContainer>
@@ -81,27 +75,29 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                   </Button>
                 </CardTitleContainer>
               </CardContainerBlock>
-              {card.description !== '' &&
-                <CardContainerBlock>
-                  <CardDescription>
-                    {card.description}
-                  </CardDescription>
-                </ CardContainerBlock>
+              {
+                card.description !== '' &&
+                  <CardContainerBlock>
+                    <CardDescription>
+                      {card.description}
+                    </CardDescription>
+                  </ CardContainerBlock>
               }
 
-              {card.tasks.length > 0 &&
-                <CardContainerBlock>
-                  <CardProgressContainer>
-                    <CardProgressInfo>
-                      <CardProgressLabel>
-                        <CardProgressIcon><ChecklistIcon/></CardProgressIcon>
-                        Checklist
-                      </CardProgressLabel>
-                      <CardProgressStage> {completedTasks} / {allTasks}</CardProgressStage>
-                    </CardProgressInfo>
-                    <ProgressBar variant='default' value={completedTasks / allTasks * 100}/>
-                  </CardProgressContainer>
-                </ CardContainerBlock>
+              {
+                card.tasks.length > 0 &&
+                  <CardContainerBlock>
+                    <CardProgressContainer>
+                      <CardProgressInfo>
+                        <CardProgressLabel>
+                          <CardProgressIcon><ChecklistIcon/></CardProgressIcon>
+                          Checklist
+                        </CardProgressLabel>
+                        <CardProgressStage> {completedTasks} / {allTasks}</CardProgressStage>
+                      </CardProgressInfo>
+                      <ProgressBar variant='default' value={completedTasks / allTasks * 100}/>
+                    </CardProgressContainer>
+                  </ CardContainerBlock>
               }
             </CardContainer>
             {showModal &&
@@ -119,7 +115,6 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                 />
               </Modal>
             }
-            {/* </EditableItem> */}
           </div>
         )}
       </Draggable>
