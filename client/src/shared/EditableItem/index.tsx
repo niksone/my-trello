@@ -69,7 +69,7 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
     const handleClick = () => {
         console.log('handle click');
          const onExit = (e: any) => {
-            updateItem(test?.current?.innerText || '') 
+            updateItem(test?.current?.innerText.trim() || '') 
             // test.current && (test.current.innerText = '')
             document.removeEventListener('focusout', onExit)            
         }
