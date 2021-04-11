@@ -102,12 +102,10 @@ export const useRegisterValidation = () => {
 const findFieldByError = (error: string) => {
     console.log(error);
     for(const [field, value] of Object.entries(schemaMessages)){
-        // console.log(field, value);
         if(value.values.includes(error)){
             console.log(value.fieldName);
             return value.fieldName
         } 
-        // console.log(schemaMessages?[field])
     }
     return ''
 }

@@ -19,31 +19,21 @@ import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
 import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import { Modal, ModalHandle } from '../shared/Modal'
 import EditIcon from '../shared/icons/Edit/EditIcon'
-// import { boards } from '../data'
 
 export const AppContainer = styled.div`
     height: 100vh;
     display: flex;
-    /* display: grid;
-    grid-template-columns: 250px 1fr;
-    overflow: hidden; */
 `
 export const BoardSectionContainer = styled.div`
     width: calc(100% - 250px);
     height: 100%;
     background-color: var(--color-background-light);
     padding: 0 28px 28px 28px;
-    /* display: grid;
-    grid-template-areas:
-        'header'
-        'board-section';
-    grid-template-rows: 85px 1fr; */
 `
 
 export const BoardSectionWrapper = styled.div`
     width: 100%;
     height: calc(100% - 85px);
-    /* grid-area: 'board-section'; */
     background-color: #fff;
     overflow-x: auto;
 
@@ -77,7 +67,6 @@ export const BoardLinkWrapper = styled.div<BoardLinkContainer>`
         background-color: var(--color-primary);
         border-radius: 1px;
     }
-    /* /* padding: 12px 12px 15px 12px; */
 `
 
 
@@ -95,7 +84,6 @@ export const BoardLinkContainer = styled.div<BoardLinkContainer>`
     & ~ &{
         margin: 8px 0 8px 0;
     }
-    /* border-right: ${({active}) => active ? '2px var(--color-primary) solid' : 'none'}; */
 `
 
 export const BoardName = styled.h3`
@@ -175,16 +163,6 @@ const HomePage = () => {
                             </BoardLinkWrapper>
                         </LogoWrapper>
                     </HeaderContainer>
-                            {/* <BoardLinkContainer >
-                                {/* <BoardLinkWrapper active={true}>
-                                    <Button jc='start' widthFill variant='shadow' active={true}>
-                                        <BoardLinkIconWrapper>
-                                            <PickIcon />
-                                        </BoardLinkIconWrapper>
-                                        {}ene
-                                    </Button>
-                                </BoardLinkWrapper> 
-                            </BoardLinkContainer> */}
                         {
                             boards?.map((board: Board) => 
                             <BoardLinkContainer key={board._id}>
@@ -229,21 +207,6 @@ const HomePage = () => {
                             <AddItemForm item='FORM' title='add board' onAdd={(name: string) => handleAddItem(name)} /> 
                         </Modal>
                     }
-                    {/* <Button widthFill Icon={AddIcon}> */}
-                        {/* Add board */}
-                        {/* <AddNewItem 
-                            text='Add New Board'
-                            formText='Add Board'
-                            item='BOARD'
-                            Button={Button
-                                // <Button widthFill Icon={AddIcon}>
-                                //     Add board
-                                // </Button>
-                            }
-                            // onAdd={name => dispatch(addBoard(user, name))}
-                            onAdd={() => {}}
-                        /> */}
-                    {/* </Button> */}
                 </BoardLinkWrapper>
             </BoardSidebar>   
 

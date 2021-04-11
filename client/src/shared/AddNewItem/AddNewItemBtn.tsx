@@ -28,11 +28,7 @@ const AddNewItemBtn = ({children, onAdd, title, Form, ...rest}: any) => {
         {
             showForm 
                 &&  <Modal exit={toggleForm}>
-                    {Form}
-                        {/* <Form 
-                            title={title}
-                            onAdd={handleForm}
-                        /> */}
+                        {Form}
                     </Modal>
         }
         </>

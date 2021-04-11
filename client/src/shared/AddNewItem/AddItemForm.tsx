@@ -25,7 +25,6 @@ const AddItemForm = ({title, placeholder, item, onAdd}: AddItemFormProps) => {
     return (
         <AddItemFormContainer >
             <AddItemFormWrapper item={item}><ResizableTextArea ref={test} placeholder={placeholder}/></AddItemFormWrapper>
-            {/* <AddItemFormInput type='text' value={text} onChange={e => setText(e.currentTarget.value)}/> */}
             <Button onClick={handleAddItem} size='md'>{title}</Button>
         </AddItemFormContainer>
     )

@@ -16,11 +16,6 @@ import {BoardSidebar} from './BoardElements'
 export const AppContainer = styled.div`
   height: 100vh;
   display: flex;
-  /* display: grid;
-  grid-template-rows: 100px 1fr;
-  grid-template-areas: 
-    'header'
-    'board'; */
 `
 
 export const BoardSectionWrapper = styled.div`
@@ -29,14 +24,12 @@ export const BoardSectionWrapper = styled.div`
     background-color: #fff;
     border-radius: 12px;
 `
-export interface BoardPageProps {
-    // data: AddItemState
-    boards: Board[]
-}
+// export interface BoardPageProps {
+//     // data: AddItemState
+//     boards: Board[]
+// }
 
-const BoardPage = (
-    // {boards}: BoardPageProps
-    ) => {
+const BoardPage = () => {
     const dispatch = useDispatch()
     const {id} = useParams<{id: string}>()
 
