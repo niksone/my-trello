@@ -23,6 +23,11 @@ export const BoardSectionWrapper = styled.div`
     width: 100%;
     background-color: #fff;
     border-radius: 12px;
+    overflow-x: auto;
+
+    @media screen and (max-width: 425px){
+        border-radius: 0;
+    }
 `
 // export interface BoardPageProps {
 //     // data: AddItemState

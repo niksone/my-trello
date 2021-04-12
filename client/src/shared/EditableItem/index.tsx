@@ -45,13 +45,13 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
 
 
     return (
-        <span onClick={handleClick}>
+        <EditableItemContainer onClick={handleClick}>
             <ResizableTextArea 
                 ref={test}
                 onChange={() => {}}
                 placeholder={placeholder}
             />
-        </span>
+        </EditableItemContainer>
     )
 }
 

@@ -14,14 +14,48 @@ import AddItemForm from '../AddNewItem/AddItemForm'
 import { useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
-export const BoardColumnContainer = styled.div`
+
+export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
   display: flex;
   height: 100%;
+  position: relative;
 
   & > div{
-    margin-right: 16px;
+    margin: 0 8px;
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(${({count}) => count ? `${count * 100}%` + `${4 * count}px` : 0}); */
+  } 
+
+  @media screen and (max-width:425px){
+    & > div{
+      margin: 0 calc((100vw - (100vw - 40px)) / 2);
+    }
+
+    & > div:first-child{
+      margin-left: 0;
+    }
   }
 `
+
+interface BoardColumnWrapperProps {
+  count?: number,
+  isDragging?: boolean,
+  isOver?: boolean
+}
+
+export const BoardColumnWrapper = styled.div<BoardColumnWrapperProps>`
+    ${({isDragging, isOver, count}) => !isDragging && count && `
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      transform: translateX(calc(${count * 100}% + ${16 * count}px));
+      z-index: 0;
+  `}
+`
+
 export interface BoardProps {
   data: AddItemState
 }
@@ -69,15 +103,17 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 {...provided.droppableProps}
               >
                 {lists?.map((list: List, index: number) => (
-                  <BeautifulDragColumn 
-                    list={list}
-                    index={index}
-                    key={list._id}
-                    cards={list.cards}
-                    cardIds={cardIds}
-                    id={list._id}
-                    onAdd={(text: string)=>dispatch(addCard(_id, list._id, text))}
-                  />
+                  // <BoardColumnWrapper count={index} key={list._id}>
+                    <BeautifulDragColumn 
+                      list={list}
+                      index={index}
+                      cards={list.cards}
+                      cardIds={cardIds}
+                      id={list._id}
+                      key={list._id}
+                      onAdd={(text: string)=>dispatch(addCard(_id, list._id, text))}
+                    />
+                  // </BoardColumnWrapper>
                 ))}
                 {provided.placeholder}
               </BoardColumnContainer>
@@ -85,24 +121,26 @@ const BeautifulBoard = ({data}: BoardProps) => {
           </Droppable>
       </DragDropContext>
       <BoardColumnContainer>
-        <ColumnWrapper>
-          <AddColumnContainer>
-          <Button 
-              widthFill 
-              Icon={AddIcon}
-              onClick={() => setShowModal(true)}
-              variant='unstyle'
-          >
-              add new List
-          </Button>
-          {
-          showModal && 
-              <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                  <AddItemForm item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
-              </Modal>
-          }
-          </AddColumnContainer>
-        </ColumnWrapper>
+        {/* <BoardColumnWrapper count={lists.length - 1}> */}
+          <ColumnWrapper>
+            <AddColumnContainer>
+            <Button 
+                widthFill 
+                Icon={AddIcon}
+                onClick={() => setShowModal(true)}
+                variant='unstyle'
+            >
+                add new List
+            </Button>
+            {
+            showModal && 
+                <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
+                    <AddItemForm item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
+                </Modal>
+            }
+            </AddColumnContainer>
+          </ColumnWrapper>
+        {/* </BoardColumnWrapper> */}
       </BoardColumnContainer>
       </BoardContainer>
     )

@@ -22,13 +22,22 @@ import EditIcon from '../shared/icons/Edit/EditIcon'
 
 export const AppContainer = styled.div`
     height: 100vh;
+    /* width: 100%; */
     display: flex;
 `
 export const BoardSectionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     width: calc(100% - 250px);
     height: 100%;
     background-color: var(--color-background-light);
     padding: 0 28px 28px 28px;
+
+    @media screen and (max-width: 425px){
+        width: 100%;
+        background: none;
+        padding: 0;
+    }
 `
 
 export const BoardSectionWrapper = styled.div`
@@ -223,9 +232,9 @@ const HomePage = () => {
                             </Button>
                         </HeaderWrapper>
                     </HeaderContainer>
-                <BoardSectionWrapper>
+                {/* <BoardSectionWrapper> */}
                     {currentBoard._id && <BoardPage />   } 
-                </BoardSectionWrapper>
+                {/* </BoardSectionWrapper> */}
             </BoardSectionContainer>
         </AppContainer>
     )

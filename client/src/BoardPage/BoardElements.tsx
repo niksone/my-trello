@@ -12,4 +12,8 @@ export const BoardSidebar = styled.div`
     align-items: center;
 
     padding-bottom: 24px;
+
+    @media screen and (max-width: 425px){
+        display: none;
+    }
 `

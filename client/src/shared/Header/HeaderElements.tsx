@@ -3,6 +3,10 @@ import styled from 'styled-components'
 export const HeaderContainer = styled.div`
     height: 85px;
     width: 100%;
+
+    @media screen and (max-width: 425px){
+        padding: 0 20px;
+    }
     /* grid-area: 'header' */
 `
 

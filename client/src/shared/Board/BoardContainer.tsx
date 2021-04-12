@@ -6,6 +6,10 @@ export const BoardContainer = styled.div`
   height: 100%;
   padding: 28px 0 36px 30px;
   position: relative;
+
+  @media screen and (max-width: 425px){
+    padding: 0 20px;
+  }
 `
 
 export const BoardWrapper = styled.div`
