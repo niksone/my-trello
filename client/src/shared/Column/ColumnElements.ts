@@ -53,7 +53,7 @@ export const ColumnTitle = styled.p`
     text-align: left;
     font-weight: bold;
     word-break: break-word;
-
+    font-size: var(--text-regular);
 `
 
 export const ColumnCardContainer = styled.div`

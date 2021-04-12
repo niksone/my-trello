@@ -67,6 +67,7 @@ export const CardProgressIcon = styled.span`
 
 export const CardProgressLabel = styled.span`
     color: var(--color-primary-grey);
+    font-size: var(--text-regular);
 `
 
 export const CardProgressStage = styled.span`

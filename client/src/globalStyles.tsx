@@ -41,4 +41,8 @@ export const GlobalStyles = createGlobalStyle`
         --text-caption: 1.4rem;
         --text-regular: 1.4rem;
     }
+
+    p, span, div, input{
+        font-size: var(--text-regular);
+    }
 `
