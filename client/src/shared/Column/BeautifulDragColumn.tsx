@@ -6,6 +6,7 @@ import { Card, List, SimpleCard, Task } from '../../redux/AddItem/interfaces'
 import { RootReducerType } from '../../redux/store'
 import AddNewItem from '../AddNewItem'
 import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
+import { BoardColumnWrapper } from '../Board/BeautifulBoard'
 import Button from '../Buttons'
 import BeautifulCard from '../Card/BeautifulCard'
 import EditableItem from '../EditableItem'
@@ -43,8 +44,13 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
     }
     
     return (
-        <Draggable draggableId={list._id} index={index} key={list._id}>
-                {(provided, snapshot) => (
+      // <div>
+        <Draggable 
+          draggableId={list._id} 
+          index={index} key={list._id}
+          
+        >
+            {(provided, snapshot) => (
                   <ColumnContainer
                     ref={provided.innerRef}
                     {...provided.dragHandleProps}
@@ -62,7 +68,7 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                               deleteItem={handleDeleteList}
                               editItem={editList}
                               initialText={list.title}
-                              placeholder='adaa'
+                              placeholder='Enter List Title'
                               updateItem={(title: string) => dispatch(updateListTitle(boardId, id, title))}
                             />
                           </ColumnTitle>
@@ -112,8 +118,9 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                       )}
                     </Droppable>
                   </ColumnContainer>
-                )}
-            </Draggable>
+            )}
+        </Draggable>
+
     )
 }
 
