@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
-export const EditableItemContainer = styled.div`
-    position: relative;
+export const EditableItemContainer = styled.span`
+    /* position: relative;
     display: flex;
     flex-direction: column;
     /* height: 100%; */
-    width: 100%;
+    /* width: 100%; */
+    cursor: text;
 `
 export const EditableItemWrapper = styled.div`
     display: flex;
