@@ -1,5 +1,6 @@
+import { editBoardName } from './../../client/src/redux/Board/actionCreators';
 import { BoardI } from '../Interfaces/BoardInteface';
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { UserI } from "Interfaces/UserInterface";
 import User from "../models/User";
 import { Error } from "mongoose";
@@ -196,6 +197,50 @@ class BoardController {
                     res.send(board.lists[listIndex])
                 }
             })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteBoard(req: Request, res: Response) {
+        try {
+            const {userId, boardId} = req.body
+            if(!userId || !boardId) res.status(500).send({message: 'Wrong values'})
+            else{
+                await User.findById(userId, (err: Error, user: UserI) => {
+                    if(err) throw err
+                    if(!user) res.status(500).send({message: 'User Not Found'})
+
+                    user.boardIds = user.boardIds.filter(board => board !== boardId)
+
+                    Board.findByIdAndDelete(boardId,{useFindAndModify: false}, (err: Error, board: BoardI) => {
+                        if(err) throw err
+                        if(!board) res.status(500).send({message: 'Board Not Found'})
+                        else{
+                            user.save() 
+                            res.send(boardId)
+                        }
+                    })  
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async editBoardName(req: Request, res: Response) {
+        try {
+            const {boardId, boardName} = req.body
+            if(!boardId || !boardName) res.status(500).send({message: 'Wrong values'})
+            else{
+                await Board.findByIdAndUpdate(boardId, {name: boardName}, {useFindAndModify: false}, (err: Error, board: BoardI) => {
+                    if(err) throw err
+                    if(!board) res.status(500).send({message: 'User Not Found'})
+                    else{
+                        res.send(boardName)
+                    }
+                })
+            }
         } catch (error) {
             console.log(error)
         }

@@ -8,12 +8,16 @@ boardRouter.post('/getBoards', BoardController.getUserBoards)
 
 boardRouter.post('/boards', BoardController.addBoard)
 
+boardRouter.delete('/boards', BoardController.deleteBoard)
+
+boardRouter.patch('/boards', BoardController.editBoardName)
+
 boardRouter.post('/boards/addList', BoardController.addList)
 
 boardRouter.patch('/boards/updateListTitle', BoardController.updateListTitle)
 
 boardRouter.patch('/boards/moveList', BoardController.moveList)
-
+    
 boardRouter.delete('/boards/removeList', BoardController.removeList)
 
 boardRouter.post('/boards/addCard', BoardController.addCard)
