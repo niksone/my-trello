@@ -14,14 +14,19 @@ import EditableItem from '../EditableItem'
 import TrashcanIcon from '../icons/Trashcan/TrashcanIcon'
 import ProgressBar from '../ProgressBar'
 
+export const AddCardFormContainer = styled.div`
+    width: 650px;
+    height: 85%;
+
+`
+
 export const FormContainer= styled.div`
     display: flex;
     flex-direction: column;
-    height: 85%;
     /* min-width: 30%; */
-    width: 650px;
+    height: 100%;
+    width: 100%;
     background-color: #fff;
-    
     border-radius: 4px;
 `
 
@@ -87,18 +92,23 @@ export const FormChecklistTitle = styled.div`
 
 export const FormChecklistDone = styled.p``
 
-export const FormCheklistItems = styled.div`
-    padding-top: 35px;
+export const FormListItems = styled.div`
+    /* padding-top: 35px; */
 
     & > * {
         padding: 7px 0;
     }
 `
 
-export const ChecklistItem = styled.div`
+export const FormChecklistItemsWrapper = styled.div`
+    padding-top: 35px;
+`
+
+export const FormListItem = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    width: 100%;
     color: var(--color-primary-grey);
 `
 
@@ -114,7 +124,8 @@ interface CardFormProps {
     onSave?: any
 }
 
-const DeleteIconWrapper = styled.span`
+export const DeleteIconWrapper = styled.span`
+    display: flex;
     color: var(--color-primary-dark);
     cursor: pointer;
     transition: all .2s ease-in-out;
@@ -122,7 +133,14 @@ const DeleteIconWrapper = styled.span`
     &:hover{
         color: var(--color-error);
     }
+
+    & > svg {
+        width: 16px;
+    }
 `
+
+
+
 
 const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit, onSave}: CardFormProps) => {
     const [card, setCard] = useState<SimpleCard>({title, subtitle, description, tasks})
@@ -152,7 +170,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
 
     const addTask = (text: string) => {
         setCard(prev => (
-            {...prev, tasks: tasks.concat({_id: new Date().toISOString(), completed: false, text})}
+            {...prev, tasks: tasks.concat({_id: String(new ObjectID()), completed: false, text})}
         ))
     }
 
@@ -177,6 +195,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
     }
     
     return (
+        <AddCardFormContainer>
         <FormContainer>
             <FormContent>
                 <FormBlock>
@@ -225,37 +244,39 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                                 <FormChecklistDone>{getCompletedTasks(card.tasks)} / {card.tasks.length}</FormChecklistDone>
                             </FormChecklistTitle>  
                             <ProgressBar variant='default' value={getCompletedTasks(card.tasks) / card.tasks.length * 100 || getCompletedTasks(card.tasks)}/>
-                            <FormCheklistItems>
-                                {card.tasks?.map(task =>
-                                    <ChecklistItem
-                                        key={task._id} 
-                                    >
-                                        <Checkbox 
-                                            checked={task.completed} 
+                            <FormChecklistItemsWrapper>
+                                <FormListItems>
+                                    {card.tasks?.map(task =>
+                                        <FormListItem
                                             key={task._id} 
-                                            onChange={() => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, task.text, !task.completed))}
                                         >
-                                            <EditableItem 
-                                                initialText={task.text}
-                                                deleteItem={() => {}}
-                                                editItem={(text: string) => {}}
-                                                placeholder='Enter task text'
-                                                updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
-                                            />
-                                        </Checkbox>
-                                        <DeleteIconWrapper onClick={() => handleUpdate(card.title, card.subtitle, card.description, removeTask(task._id, card.tasks))}>
-                                            <TrashcanIcon />
-                                        </DeleteIconWrapper>
-                                    </ChecklistItem>
+                                            <Checkbox 
+                                                checked={task.completed} 
+                                                key={task._id} 
+                                                onChange={() => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, task.text, !task.completed))}
+                                            >
+                                                <EditableItem 
+                                                    initialText={task.text}
+                                                    deleteItem={() => {}}
+                                                    editItem={(text: string) => {}}
+                                                    placeholder='Enter task text'
+                                                    updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
+                                                />
+                                            </Checkbox>
+                                            <DeleteIconWrapper onClick={() => handleUpdate(card.title, card.subtitle, card.description, removeTask(task._id, card.tasks))}>
+                                                <TrashcanIcon />
+                                            </DeleteIconWrapper>
+                                        </FormListItem>
 
-                                )}
-                                <AddItemForm 
-                                    title='Add new Task' 
-                                    placeholder='Start Typing...'
-                                    item='TASK'
-                                    onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}
-                                />
-                            </FormCheklistItems>
+                                    )}
+                                    <AddItemForm 
+                                        title='Add new Task' 
+                                        placeholder='Start Typing...'
+                                        item='TASK'
+                                        onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}
+                                    />
+                                </FormListItems>
+                            </FormChecklistItemsWrapper>
                         </FormChecklistContainer>
     
                     </FormBlock>
@@ -268,6 +289,8 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                 </ButtonGroup>
             </FormButtonsContainer>
         </FormContainer>
+        </AddCardFormContainer>
+
     )
 }
 
