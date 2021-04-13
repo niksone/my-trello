@@ -14,6 +14,7 @@ export const ResizeableTextAreaContainer = styled.span`
     background-color: transparent;
     font-size: inherit;
     font-weight: inherit;
+    cursor: text;
 
     &:empty::before {
     content: attr(data-placeholder);
