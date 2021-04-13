@@ -61,7 +61,7 @@ export const ProgressValue = styled.div<ProgressValueProps>`
     /* width: ${({value}) => value && value}%; */
     width: 100%;
     transform: translateX(${({value}) => value ? value - 100 : -100}%);
-    background-color: ${({value}) => value && getProgressColor(value, progressStyles)};
+    background-color: ${({value}) => getProgressColor(value, progressStyles)};
     border-radius: inherit;
     transition: 0.2s transform ease-in-out;
 `
