@@ -19,6 +19,7 @@ export const CardContainer = styled.div<CardContainerProps>`
     word-break: break-word;
     white-space: pre-line;
     cursor: pointer;
+    box-shadow: ${({isDragging}) => isDragging ? '0px 12px 20px rgba(0, 0, 0, 0.05)' : 'none'};
 `
 
 export const CardContainerBlock = styled.div`
@@ -62,12 +63,15 @@ export const CardProgressInfo = styled.div`
 `
 
 export const CardProgressIcon = styled.span`
+    display: flex;
     padding-right: 5px;
 `
 
 export const CardProgressLabel = styled.span`
     color: var(--color-primary-grey);
     font-size: var(--text-regular);
+    display: flex;
+    align-items: baseline;
 `
 
 export const CardProgressStage = styled.span`
