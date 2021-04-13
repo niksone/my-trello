@@ -63,7 +63,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
             {...provided.dragHandleProps}
             {...provided.draggableProps}
           > 
-            <CardContainer onClick={() => setShowModal(true)}>
+            <CardContainer onClick={() => setShowModal(true)} isDragging={snapshot.isDragging}>
               <CardContainerBlock>
                 <CardTitleContainer>
                   <CardTitleWrapper>
