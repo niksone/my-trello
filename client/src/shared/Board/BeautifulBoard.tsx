@@ -130,7 +130,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 onClick={() => setShowModal(true)}
                 variant='unstyle'
             >
-                add new List
+                ADD NEW LIST
             </Button>
             {
             showModal && 
