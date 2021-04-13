@@ -34,8 +34,10 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
 
     @media screen and (max-width: 425px){
         width: calc(100vw - 20px * 2);
-        background-color: grey;
+        background: none;
         border: none;
+        padding:20px 0;
+
     }
 `
 

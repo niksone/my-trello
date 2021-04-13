@@ -27,6 +27,7 @@ export const BoardSectionWrapper = styled.div`
 
     @media screen and (max-width: 425px){
         border-radius: 0;
+        background-color: var(--color-background-light);
     }
 `
 // export interface BoardPageProps {
