@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { deleteBoard, editBoardName, addBoard} from '../redux/Board/actionCreators'
-import { Board, SimpleBoard } from '../redux/Board/interfaces'
+import { Board} from '../redux/Board/interfaces'
 import AddNewItem from '../shared/AddNewItem'
 import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
@@ -19,7 +19,7 @@ import TrashcanIcon from '../shared/icons/Trashcan/TrashcanIcon'
 
 interface EditBoardFormProps {
     onExit: () => void,
-    onSave: (boards: SimpleBoard[]) => void
+    onSave: (boards: Board[]) => void
     boards: Board[]
     userId: string
 }
@@ -51,21 +51,21 @@ export const EditIconWrapper = styled.span`
 const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => {
 
     const dispatch = useDispatch()
-    const [editBoards, setEditBoards] = useState<SimpleBoard[]>(boards)
+    // const [editBoards, setEditBoards] = useState<SimpleBoard[]>(boards)
 
-    const handleSave = () => {
-        onSave(editBoards)
-    }
+    // const handleSave = () => {
+    //     onSave(editBoards)
+    // }
 
-    const updateBoards = (boards: SimpleBoard[]) => {
-        setEditBoards(prev => boards)
-    }
+    // const updateBoards = (boards: SimpleBoard[]) => {
+    //     setEditBoards(prev => boards)
+    // }
 
-    const editBoard = (id: string, name: string) => {
-        return editBoards.map(board => (
-            board._id === id ? {...board, name} : board
-        ))
-    }
+    // const editBoard = (id: string, name: string) => {
+    //     return editBoards.map(board => (
+    //         board._id === id ? {...board, name} : board
+    //     ))
+    // }
 
     // const deleteBoard = (id: string) => {
     //     return editBoards.filter(board => board._id !== id)
@@ -134,7 +134,7 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
                 <FormButtonsContainer>
                     <ButtonGroup spacing={10}>
                         <Button onClick={onExit}>Close</Button>
-                        <Button onClick={handleSave}>Save</Button>
+                        <Button >Save</Button>
                     </ButtonGroup>
                 </FormButtonsContainer>
             </FormContainer>
