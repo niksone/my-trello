@@ -52,6 +52,15 @@ export const boardApi = {
         return board
     },
 
+    async deleteBoard(userId: string, boardId: string) {
+        const board = await instance.delete<Board>('/boards', {data: {userId, boardId}})
+        return board
+    },
+    async editBoardName(boardId: string, boardName: string) {
+        const board = await instance.patch<Board>('/boards', {boardId, boardName})
+        return board
+    },
+
     async addList(boardId: string, list: List){
         const listItem = await instance.post<List>('/boards/addList', {boardId, list})
         return listItem
