@@ -56,6 +56,7 @@ const TextInputWrapper = styled.div<TextInput>`
 
 const IconWrapper = styled.span<TextInput>`
     height: fit-content;
+    display: flex;
     color: ${({isError}) => isError ? 'var(--color-error)' : 'inherit'};
     /* padding-left: 5px; */
 `
