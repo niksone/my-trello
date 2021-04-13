@@ -12,6 +12,7 @@ type stylesOptions = {
 
 export const containerType: stylesOptions ={
     'TASK': '5px 0px',
+    'ADD': '0px',
     'FORM': '5px 10px'
 }
 export type AddItemContainerTypes = 
@@ -37,9 +38,17 @@ export const AddItemButton = styled.button`
     text-align: left;
 `
 
-export const AddItemFormContainer = styled.div`
+interface AddItemFormContainerProps {
+    fd?: 'column' | 'row'
+    alignItems?: 'start' | 'center' | 'end'
+}
+
+export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
     /* padding-top: 10px; */
     width: 100%;
+    display: flex;
+    flex-direction: ${({fd}) => fd ? fd : 'column'};
+    align-items: ${({alignItems}) => alignItems ? alignItems : 'start'};
 `
 
 export const AddItemFormWrapper= styled.div<AddItemContainerProps>`
@@ -59,4 +68,11 @@ export const AddItemFormButton = styled.button`
     cursor: pointer;
     padding-top: 5px;
     text-align: left;
+`
+
+
+export const FormIcon = styled.span`
+    display: flex;
+    padding-right: 13px;
+    cursor: pointer;
 `
