@@ -7,7 +7,7 @@ import BoardPage from '../BoardPage'
 import { BoardSidebar } from '../BoardPage/BoardElements'
 import { userContext } from '../Context'
 import {addBoard, getBoards } from '../redux/Board/actionCreators'
-import { Board } from '../redux/Board/interfaces'
+import { Board, SimpleBoard } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import Button from '../shared/Buttons'
 import PickIcon from '../shared/icons/Pick/PickIcon'
@@ -19,6 +19,7 @@ import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
 import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import { Modal, ModalHandle } from '../shared/Modal'
 import EditIcon from '../shared/icons/Edit/EditIcon'
+import EditBoardForm from './EditBoardForm'
 
 export const AppContainer = styled.div`
     height: 100vh;
@@ -135,6 +136,9 @@ const HomePage = () => {
     const [showModal, setShowModal] = useState(false)
     const modalRef = useRef<ModalHandle>(null)
 
+    const [showEditBoardModal, setShowEditBoardModal] = useState(false)
+    const editBoardModalRef = useRef<ModalHandle>(null);
+
     const {boards} = useSelector((state: RootReducerType) => state.boards)
     const dispatch = useDispatch()
 
@@ -150,6 +154,10 @@ const HomePage = () => {
     const handleAddItem = (text: string) => {
         dispatch(addBoard(user, text))
         setShowModal(false)
+    }
+
+    const handleSave = (boards: Board[]) => {
+        console.log(boards);
     }
 
     useEffect(() => {
@@ -192,7 +200,12 @@ const HomePage = () => {
                             <BoardLinkContainer >
                                 <BoardLinkWrapper>
                                     <BoardButtonWrapper>
-                                        <Button jc='start' widthFill variant='shadow'>
+                                        <Button 
+                                            jc='start' 
+                                            widthFill 
+                                            variant='shadow' 
+                                            onClick={() => setShowEditBoardModal(true)}
+                                        >
                                             <BoardLinkIconWrapper>
                                                 <EditIcon />
                                             </BoardLinkIconWrapper>
@@ -201,6 +214,17 @@ const HomePage = () => {
                                     </BoardButtonWrapper>
                                 </BoardLinkWrapper>
                             </BoardLinkContainer>
+                            { showEditBoardModal &&
+                                <Modal ref={editBoardModalRef} show={showEditBoardModal} exit={() => setShowEditBoardModal(false)}>
+                                    <EditBoardForm 
+                                        onExit={() => setShowEditBoardModal(false)}
+                                        boards={boards}
+                                        onSave={() => {}}
+                                        userId=''
+                                        // onSave={(boards: SimpleBoard[]) => handleSave()}
+                                    />
+                                </Modal>
+                            }   
                 </BoardLinksContainer>
                 <BoardLinkWrapper>
                     <Button 
@@ -208,12 +232,12 @@ const HomePage = () => {
                         Icon={AddIcon}
                         onClick={() => setShowModal(true)}
                     >
-                        add new Board
+                        Add board
                     </Button>
                     {
                     showModal && 
                         <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                            <AddItemForm item='FORM' title='add board' onAdd={(name: string) => handleAddItem(name)} /> 
+                            <AddItemForm item='FORM' title='Add board' onAdd={(name: string) => handleAddItem(name)} /> 
                         </Modal>
                     }
                 </BoardLinkWrapper>
