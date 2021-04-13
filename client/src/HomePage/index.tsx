@@ -51,6 +51,10 @@ export const BoardSectionWrapper = styled.div`
     & > {
         padding-right: 10px;
     }
+
+    @media screen and (max-width: 425px){
+        background-color:var(--color-background-light);
+    }
 `
 
 
@@ -220,7 +224,7 @@ const HomePage = () => {
                                         onExit={() => setShowEditBoardModal(false)}
                                         boards={boards}
                                         onSave={() => {}}
-                                        userId=''
+                                        userId={user}
                                         // onSave={(boards: SimpleBoard[]) => handleSave()}
                                     />
                                 </Modal>

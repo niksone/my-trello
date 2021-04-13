@@ -105,7 +105,7 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
                                         <DeleteIconWrapper 
                                             onClick={() => 
                                                 // updateBoards(deleteBoard(board._id))
-                                                dispatch(deleteBoard(board._id))
+                                                dispatch(deleteBoard(userId, board._id))
                                             }
                                         >
                                             <TrashcanIcon />
