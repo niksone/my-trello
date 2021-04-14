@@ -12,7 +12,7 @@ type stylesOptions = {
 
 export const containerType: stylesOptions ={
     'TASK': '5px 0px',
-    'ADD': '0px',
+    'ADD': '`0px',
     'FORM': '5px 10px'
 }
 export type AddItemContainerTypes = 
@@ -75,4 +75,24 @@ export const FormIcon = styled.span`
     display: flex;
     padding-right: 13px;
     cursor: pointer;
+`
+
+
+
+
+export type AddItemFormButtonContainerTypes = 'ADD' | 'DEFAULT'
+
+interface AddItemFormButtonContainerProps {
+    item: AddItemFormButtonContainerTypes
+}
+
+const btnWrapperType: stylesOptions = {
+    'ADD': '5px',
+    'DEFAULT': '0'
+}
+
+export const AddItemFormButtonContainer = styled.div<AddItemFormButtonContainerProps>`
+    background-color: var(--color-background-light);
+    border-radius: 8px;
+    margin-top: ${({item}) => btnWrapperType[item]};
 `
