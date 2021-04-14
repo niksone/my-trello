@@ -11,7 +11,6 @@ import { RootReducerType, store } from '../redux/store'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 import Header from '../shared/Header'
 import { useFetching } from '../utils/useFetching'
-import {BoardSidebar} from './BoardElements'
 
 export const AppContainer = styled.div`
   height: 100vh;
