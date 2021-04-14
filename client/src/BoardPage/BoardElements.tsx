@@ -1,19 +1,49 @@
 import styled from "styled-components";
 
-export const BoardSidebar = styled.div`
+interface BoardSidebarProps {
+    show?: boolean
+}
+
+export const BoardSidebarContainer = styled.div<BoardSidebarProps>`
     height: 100%;
     width: 250px;
 
     background-color: #fff;
 
+    @media screen and (max-width: 425px){
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(${({show}) => show ? '0' : '-100%'});
+        display: flex;
+        z-index: 99;
+        transition: 0.2s all ease-in-out;
+    }
+`
+
+export const BoardSidebarWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
-    padding-bottom: 24px;
+    height: 100%; 
+    width: 100%;
 
+    padding-bottom: 24px;
+`
+
+export const BoardSidebarClose = styled.div<BoardSidebarProps>`
+    display: none;
+    z-index: 0;
     @media screen and (max-width: 425px){
-        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: ${({show}) => show ? 'block' : 'none'};
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--color-primary-grey);
+        opacity: 0.45;
     }
 `
