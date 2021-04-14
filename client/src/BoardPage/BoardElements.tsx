@@ -8,10 +8,10 @@ export const BoardSidebarContainer = styled.div<BoardSidebarProps>`
     height: 100%;
     width: 250px;
 
-    background-color: #fff;
 
     @media screen and (max-width: 425px){
         position: absolute;
+        width: 100%;
         top: 0;
         left: 0;
         transform: translateX(${({show}) => show ? '0' : '-100%'});
@@ -26,23 +26,25 @@ export const BoardSidebarWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 250px;
 
     height: 100%; 
-    width: 100%;
+    background-color: #fff;
 
     padding-bottom: 24px;
+    z-index: 99;
 `
 
 export const BoardSidebarClose = styled.div<BoardSidebarProps>`
     display: none;
     z-index: 0;
     @media screen and (max-width: 425px){
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         display: ${({show}) => show ? 'block' : 'none'};
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         background-color: var(--color-primary-grey);
         opacity: 0.45;
     }
