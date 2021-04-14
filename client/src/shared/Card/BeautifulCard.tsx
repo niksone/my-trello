@@ -12,6 +12,10 @@ import Button from '../Buttons'
 import {ReactComponent as MoreIcon} from '../icons/more.svg'
 import {Modal, ModalHandle} from '../Modal'
 import CardForm from '../Column/AddCardForm'
+import Tooltip from '../Tooltip'
+import ButtonGroup from '../Buttons/ButtonGroup'
+import EditIcon from '../icons/Edit/EditIcon'
+import TrashcanIcon from '../icons/Trashcan/TrashcanIcon'
 
 interface CardPropsI {
     cardId: string,
@@ -70,9 +74,34 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                     <CardTitle>{card.title}</CardTitle>
                     <CardSubtitle>{card.subtitle}</CardSubtitle>
                   </CardTitleWrapper>
-                  <Button shape='icon' variant='outline' size='lg'>
-                    <MoreIcon />
-                  </Button>
+                  <Tooltip
+                    content={
+                      <ButtonGroup spacing={2} direction='column'>
+                        <Button 
+                          size='lg'
+                          Icon={EditIcon}
+                          onClick={() => setShowModal(true)}
+                          fw='700'
+                        >
+                          Edit Card
+                        </Button>
+                        <Button 
+                          size='lg' 
+                          colorScheme='error' 
+                          Icon={TrashcanIcon}
+                          onClick={handleDeleteCard}
+                          fw='700'
+                        >
+                          Delete
+                        </Button>
+                      </ButtonGroup>
+                    }
+                    direction='bottom'
+                  >
+                    <Button shape='icon' variant='outline' size='lg'>
+                      <MoreIcon />
+                    </Button>
+                  </Tooltip>
                 </CardTitleContainer>
               </CardContainerBlock>
               {
