@@ -1,6 +1,5 @@
-import { editBoardName } from './../../client/src/redux/Board/actionCreators';
 import { BoardI } from '../Interfaces/BoardInteface';
-import e, { Request, Response } from "express";
+import  { Request, Response } from "express";
 import { UserI } from "Interfaces/UserInterface";
 import User from "../models/User";
 import { Error } from "mongoose";
