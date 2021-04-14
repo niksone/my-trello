@@ -76,6 +76,7 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                               Icon={AddIcon}
                               onClick={() => setShowModal(true)}
                               variant='unstyle'
+                              fw='700'
                             >
                               ADD NEW CARD
                             </Button>

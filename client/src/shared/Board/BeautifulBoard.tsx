@@ -129,6 +129,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 Icon={AddIcon}
                 onClick={() => setShowModal(true)}
                 variant='unstyle'
+                fw='700'
             >
                 ADD NEW LIST
             </Button>

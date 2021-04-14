@@ -118,6 +118,7 @@ const ButtonContainer = styled.button<ButtonProps>`
     display: flex;
     justify-content: ${({jc}) => jc ? jc : 'center'};
     align-items: center;
+    color: var(--color-primary-dark);
     padding: ${({size}) => size ? sizes[size] : sizes.lg};
     font-size: var(--text-button);
     cursor: pointer;
@@ -127,6 +128,7 @@ const ButtonContainer = styled.button<ButtonProps>`
     width: ${({widthFill}) => widthFill ? '100%' : 'auto'};
     ${({variant}) => variant ? styles[variant] : 'fill'};
     font-size: var(--text-regular);
+    font-weight: ${({fw}) => fw};
 `
 
 const ButtonIconContainer = styled.div`
@@ -149,7 +151,6 @@ const BtnIconContainer = styled.button<ButtonProps>`
     ${({variant}) => variant ? styles[variant] : 'fill'};
     height: ${({size}) => size ? btnIconSizes[size] : btnIconSizes.md};
     width: ${({size}) => size ? btnIconSizes[size] : btnIconSizes.md};
-
     cursor: pointer;
     border-radius: 8px;
     outline: none;
@@ -167,6 +168,7 @@ interface ButtonProps {
     size?: 'lg' | 'md' | 'sm',
     colorScheme?: keyof typeof colorSchemes,
     jc?: 'start' | 'center' | 'end',
+    fw?: '400' | '700'
     shape?: BtnShape,
 }
 
@@ -175,6 +177,7 @@ type BtnShape = 'default' | 'icon'
 const Button = ({children, onClick, ...rest}: React.PropsWithChildren<ButtonProps>) => {
     rest.variant = rest.variant ? rest.variant : 'fill'
     rest.shape = rest.shape ? rest.shape : 'default'
+    rest.fw = rest.fw ? rest.fw : '400'
 
     const ButtonIcon = rest.Icon
     // console.log(rest.variant)
