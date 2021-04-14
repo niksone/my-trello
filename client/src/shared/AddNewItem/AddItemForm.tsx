@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import Button from '../Buttons'
 import ResizableTextArea from '../ResizableTextArea'
-import { AddItemContainerTypes, AddItemFormButton, AddItemFormContainer,AddItemFormWrapper, FormIcon } from './AddNewItemElements'
+import { AddItemContainerTypes, AddItemFormButton, AddItemFormButtonContainer, AddItemFormButtonContainerTypes, AddItemFormContainer,AddItemFormWrapper, FormIcon } from './AddNewItemElements'
 
 type FormVariant = 'icon' | 'default'
 
@@ -11,11 +11,13 @@ interface AddItemFormProps {
     placeholder?: string
     onAdd(text: string): void
     item?: AddItemContainerTypes,
+    btnItem?: AddItemFormButtonContainerTypes
     Icon?: any
     variant?: FormVariant
+
 }
 
-const AddItemForm = ({title, placeholder, item, onAdd, Icon, variant = 'default'}: AddItemFormProps) => {
+const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon, variant = 'default'}: AddItemFormProps) => {
     const test = useRef<HTMLSpanElement>(null)
     // const FormIcon = Icon
     const handleAddItem = () => {
@@ -34,7 +36,9 @@ const AddItemForm = ({title, placeholder, item, onAdd, Icon, variant = 'default'
                         <AddItemFormWrapper item={item}>
                             <ResizableTextArea ref={test} placeholder={placeholder}/>
                         </AddItemFormWrapper>
-                        <Button onClick={handleAddItem} size='md'>{title}</Button>
+                        <AddItemFormButtonContainer item={btnItem}>
+                            <Button onClick={handleAddItem} size='md'>{title}</Button>
+                        </AddItemFormButtonContainer>
                     </AddItemFormContainer>
                 )
             }

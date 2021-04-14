@@ -136,7 +136,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
             {
             showModal && 
                 <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                    <AddItemForm item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
+                    <AddItemForm btnItem='ADD' item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
                 </Modal>
             }
             </AddColumnContainer>
