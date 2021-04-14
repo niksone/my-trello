@@ -56,6 +56,7 @@ export const ColumnTitle = styled.p`
     font-weight: bold;
     word-break: break-word;
     font-size: var(--text-regular);
+    color: var(--color-primary-grey);
 `
 
 export const ColumnCardContainer = styled.div`
