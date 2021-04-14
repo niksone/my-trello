@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { authApi } from '../api'
 import BoardPage from '../BoardPage'
-import { BoardSidebar } from '../BoardPage/BoardElements'
+import { BoardSidebarClose, BoardSidebarContainer, BoardSidebarWrapper } from '../BoardPage/BoardElements'
 import { userContext } from '../Context'
 import {addBoard, getBoards } from '../redux/Board/actionCreators'
 import { Board } from '../redux/Board/interfaces'
@@ -20,6 +20,7 @@ import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import { Modal, ModalHandle } from '../shared/Modal'
 import EditIcon from '../shared/icons/Edit/EditIcon'
 import EditBoardForm from './EditBoardForm'
+import MenuIcon from '../shared/icons/Menu/MenuIcon'
 
 export const AppContainer = styled.div`
     height: 100vh;
@@ -143,6 +144,8 @@ const HomePage = () => {
     const [showEditBoardModal, setShowEditBoardModal] = useState(false)
     const editBoardModalRef = useRef<ModalHandle>(null);
 
+    const [showSidebar, setShowSidebar] = useState(false)
+
     const {boards} = useSelector((state: RootReducerType) => state.boards)
     const dispatch = useDispatch()
 
@@ -170,7 +173,11 @@ const HomePage = () => {
     return (
         
         <AppContainer>
-            <BoardSidebar>
+            <BoardSidebarContainer show={showSidebar}>
+                <BoardSidebarClose onClick={() => setShowSidebar(false)} show={showSidebar}>
+
+                </BoardSidebarClose>
+                <BoardSidebarWrapper>
                 <BoardLinksContainer>
                     <HeaderContainer>
                         <LogoWrapper>
@@ -241,15 +248,19 @@ const HomePage = () => {
                     {
                     showModal && 
                         <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                            <AddItemForm item='FORM' title='Add board' onAdd={(name: string) => handleAddItem(name)} /> 
+                            <AddItemForm btnItem='ADD' item='FORM' title='Add board' onAdd={(name: string) => handleAddItem(name)} /> 
                         </Modal>
                     }
                 </BoardLinkWrapper>
-            </BoardSidebar>   
+                </BoardSidebarWrapper>
+            </BoardSidebarContainer>   
 
             <BoardSectionContainer>
                     <HeaderContainer>
                         <HeaderWrapper>
+                            <Button shape='icon' variant='outline' size='lg' onClick={() => setShowSidebar(true)}>
+                                <MenuIcon />
+                            </Button>
                             <BoardName>{currentBoard.name}</BoardName>
                             <Button 
                                 onClick={handleLogout}
