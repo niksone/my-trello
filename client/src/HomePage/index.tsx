@@ -21,6 +21,9 @@ import { Modal, ModalHandle } from '../shared/Modal'
 import EditIcon from '../shared/icons/Edit/EditIcon'
 import EditBoardForm from './EditBoardForm'
 import MenuIcon from '../shared/icons/Menu/MenuIcon'
+import Tooltip from '../shared/Tooltip'
+import ButtonGroup from '../shared/Buttons/ButtonGroup'
+import MoreIcon from '../shared/icons/More/MoreIcon'
 
 export const AppContainer = styled.div`
     height: 100vh;
@@ -134,6 +137,18 @@ interface LogoI {
 
 export const LogoImgWrapper = styled.div`
     margin-right: 30px;
+`
+
+interface ShowContainerProps {
+    show: boolean
+    mobile: boolean
+}
+export const ShowContainer = styled.div<ShowContainerProps>`
+    display: ${({show, mobile}) => show && !mobile ? 'flex' : 'none'};
+
+    @media screen and (max-width: 425px){
+        display: ${({show, mobile}) => show && mobile? 'flex' : 'none'};
+    }
 `
 
 const HomePage = () => {
@@ -258,17 +273,46 @@ const HomePage = () => {
             <BoardSectionContainer>
                     <HeaderContainer>
                         <HeaderWrapper>
-                            <Button shape='icon' variant='outline' size='lg' onClick={() => setShowSidebar(true)}>
-                                <MenuIcon />
-                            </Button>
+                            <ShowContainer show={true} mobile={true}>
+                                <Button shape='icon' variant='outline' size='lg' onClick={() => setShowSidebar(true)}>
+                                    <MenuIcon />
+                                </Button>
+                            </ShowContainer>
                             <BoardName>{currentBoard.name}</BoardName>
-                            <Button 
-                                onClick={handleLogout}
-                                size='md'
-                                colorScheme='error'
+
+                            <ShowContainer show={true} mobile={true}>
+                            <Tooltip 
+                                content={
+                                    <ButtonGroup direction='column' spacing={2}>
+                                        <Button onClick={() => {}}>
+                                            Add List
+                                        </Button>
+                                        <Button 
+                                            onClick={handleLogout}
+                                            colorScheme='error'
+                                        >
+                                            Log Out
+                                        </Button>
+                                    </ButtonGroup>
+                                } 
+                                direction='bottom'
                             >
-                                logout
-                            </Button>
+                                <Button shape='icon' variant='outline' size='lg'>
+                                    <MoreIcon />
+                                </Button>
+                            </Tooltip>
+                            </ShowContainer>
+
+                            <ShowContainer show={true} mobile={false}>
+                                <Button 
+                                    onClick={handleLogout}
+                                    size='md'
+                                    colorScheme='error'
+                                >
+                                    logout
+                                </Button>
+                            </ShowContainer>
+
                         </HeaderWrapper>
                     </HeaderContainer>
                 {/* <BoardSectionWrapper> */}
