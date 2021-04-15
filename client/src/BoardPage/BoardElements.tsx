@@ -43,9 +43,21 @@ export const BoardSidebarClose = styled.div<BoardSidebarProps>`
         top: 0;
         left: 0;
         display: ${({show}) => show ? 'block' : 'none'};
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         background-color: var(--color-primary-grey);
+        animation: appear 0.5s ease-in-out;
         opacity: 0.45;
+
+    }
+
+    @keyframes appear {
+        from{
+            opacity: 0;
+        }
+
+        to{
+            opacity: 0.45;
+        }
     }
 `
