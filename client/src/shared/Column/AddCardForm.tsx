@@ -2,6 +2,7 @@ import ObjectID from 'bson-objectid'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { ShowContainer } from '../../HomePage'
 import { updateTask } from '../../redux/AddItem/actionCreators'
 import { Card, SimpleCard, Task } from '../../redux/AddItem/interfaces'
 import AddItemForm from '../AddNewItem/AddItemForm'
@@ -18,6 +19,11 @@ export const AddCardFormContainer = styled.div`
     width: 650px;
     height: 85%;
 
+    @media screen and (max-width: 425px){
+        width: 100%;
+        height: 100%;
+    }
+
 `
 
 export const FormContainer= styled.div`
@@ -26,7 +32,6 @@ export const FormContainer= styled.div`
     /* min-width: 30%; */
     height: 100%;
     width: 100%;
-    background-color: #fff;
     border-radius: 4px;
 `
 
@@ -34,6 +39,10 @@ export const FormContent = styled.div`
     padding: 22px 28px 0 28px;
     height: 100%;
     overflow: auto;
+
+    @media screen and (max-width: 425px){
+        padding: 0px 12px;
+    }
 `
 
 export const FormBlockTitle = styled.h4`
@@ -41,7 +50,13 @@ export const FormBlockTitle = styled.h4`
     color: var(--color-primary-dark);
 `
 
-export const FormTitleContainer = styled.div``
+export const FormTitleContainer = styled.div`
+    display: block;
+
+    @media screen and (max-width: 425px){
+        display: none;
+    }
+`
 
 // export const FormWrapper = styled.div``
 
@@ -72,6 +87,18 @@ export const FormBlock = styled.div`
     
     &:last-child{
         border-bottom: none;
+    }
+
+    @media screen and (max-width: 425px){
+        background-color: #fff;
+        border-radius: 6px;
+        border-bottom: none;
+        padding: 12px 16px;
+        margin-bottom: 4px;
+
+        &:first-child {
+            padding-top: 12px;
+        }
     }
 `
 
@@ -139,6 +166,29 @@ export const DeleteIconWrapper = styled.span`
     }
 `
 
+export const AddCardFormWrapper = styled.div`
+    background-color: #fff;
+
+    @media screen and (max-width: 425px){
+        background-color: var(--color-background-light);
+    }
+`
+
+export const FormMobileTitleContainer = styled.div`
+    display: none;
+
+    @media screen and (max-width: 425px){
+        display: block;
+    }
+
+`
+
+export const FormMobileBlock = styled.div`
+    background-color: #fff;
+    border-radius: 0;
+    padding: 26px 12px 30px 12px;
+    margin-bottom: 14px;
+`
 
 
 
@@ -196,46 +246,71 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
     
     return (
         <AddCardFormContainer>
+        <AddCardFormWrapper>
         <FormContainer>
+            <FormMobileTitleContainer>
+            <FormMobileBlock>
+                <FormTitle>
+                    <EditableItem
+                        initialText={card.title}
+                        deleteItem={() => {}}
+                        editItem={() => {}}
+                        placeholder='Enter Title'
+                        updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
+                    />
+                </FormTitle>
+                <FormSubtitle>
+                    <EditableItem
+                        initialText={card.subtitle}
+                        deleteItem={() => {}}
+                        editItem={() => {}}
+                        placeholder='Enter subtitle'
+                        updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
+                    />
+                </FormSubtitle>
+                </FormMobileBlock>
+            </FormMobileTitleContainer>
             <FormContent>
-                <FormBlock>
-                    <FormTitleContainer>
-                        <FormTitle>
-                            <EditableItem
-                                initialText={card.title}
-                                deleteItem={() => {}}
-                                editItem={() => {}}
-                                placeholder='Enter Title'
-                                updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
-                            />
-                        </FormTitle>
-                        <FormSubtitle>
-                            <EditableItem
-                                initialText={card.subtitle}
-                                deleteItem={() => {}}
-                                editItem={() => {}}
-                                placeholder='Enter subtitle'
-                                updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
-                            />
-                        </FormSubtitle>
-                    </FormTitleContainer>
-                </FormBlock>
-                <FormBlock>
-                    <FormDescriptionContainer>
-                        <FormBlockTitle>
-                            Description
-                        </FormBlockTitle>
-                        <FormDescription>
-                            <EditableItem
-                                initialText={card.description}
-                                deleteItem={() => {}}
-                                editItem={() => {}}
-                                placeholder='Enter Description'
-                                updateItem={(text) => handleUpdate(card.title, card.subtitle, text, card.tasks)}
-                            />
-                        </FormDescription>
-                    </FormDescriptionContainer>
-                </FormBlock>
+                <ShowContainer show={true} mobile={false}>
+                    <FormBlock>
+                        <FormTitleContainer>
+                            <FormTitle>
+                                <EditableItem
+                                    initialText={card.title}
+                                    deleteItem={() => {}}
+                                    editItem={() => {}}
+                                    placeholder='Enter Title'
+                                    updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
+                                />
+                            </FormTitle>
+                            <FormSubtitle>
+                                <EditableItem
+                                    initialText={card.subtitle}
+                                    deleteItem={() => {}}
+                                    editItem={() => {}}
+                                    placeholder='Enter subtitle'
+                                    updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
+                                />
+                            </FormSubtitle>
+                        </FormTitleContainer>
+                    </FormBlock>
+                    </ShowContainer>
+                    <FormBlock>
+                        <FormDescriptionContainer>
+                            <FormBlockTitle>
+                                Description
+                            </FormBlockTitle>
+                            <FormDescription>
+                                <EditableItem
+                                    initialText={card.description}
+                                    deleteItem={() => {}}
+                                    editItem={() => {}}
+                                    placeholder='Enter Description'
+                                    updateItem={(text) => handleUpdate(card.title, card.subtitle, text, card.tasks)}
+                                />
+                            </FormDescription>
+                        </FormDescriptionContainer>
+                    </FormBlock>
                 {card.tasks &&
                     <FormBlock>
                         <FormChecklistContainer>
@@ -289,6 +364,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                 </ButtonGroup>
             </FormButtonsContainer>
         </FormContainer>
+        </AddCardFormWrapper>
         </AddCardFormContainer>
 
     )

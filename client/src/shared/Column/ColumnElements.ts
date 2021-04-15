@@ -48,6 +48,10 @@ export const ColumnTitleContainer = styled.div`
     /* padding: 10px; */
     cursor: pointer;
     z-index: 5;
+
+    @media screen  and (max-width: 425px){
+        display: none;
+    }
 `
 
 export const ColumnTitle = styled.p`
