@@ -151,6 +151,10 @@ export const ShowContainer = styled.div<ShowContainerProps>`
     }
 `
 
+export const BoardSectionFooterContainer = styled.div`
+
+`
+
 const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
     const [showModal, setShowModal] = useState(false)
@@ -319,6 +323,9 @@ const HomePage = () => {
                     {currentBoard._id && <BoardPage />   } 
                 {/* </BoardSectionWrapper> */}
             </BoardSectionContainer>
+            <BoardSectionFooterContainer>
+                
+            </BoardSectionFooterContainer>
         </AppContainer>
     )
 }
