@@ -14,6 +14,7 @@ import AddItemForm from '../AddNewItem/AddItemForm'
 import { useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
+import { useSwipeable } from 'react-swipeable'
 
 export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
   display: flex;
@@ -62,9 +63,25 @@ export interface BoardProps {
 
 const BeautifulBoard = ({data}: BoardProps) => {
     const dispatch = useDispatch()
+    const boardRef = useRef<HTMLDivElement>(null)
     const {lists, cardIds, _id} = data
     const boardId = _id
     const [showModal, setShowModal] = useState(false)
+
+    const scrollLeft = () => {
+      console.log('scroll left');
+      boardRef.current && (boardRef.current.scrollLeft -= window.innerWidth)
+    }
+
+    const scrollRight = () => {
+      console.log('scroll right');
+      boardRef.current && (boardRef.current.scrollLeft -= window.innerWidth)
+    }
+
+    const handlers = useSwipeable({
+      onSwipedRight: scrollRight,
+      onSwipedLeft: scrollLeft,
+    })
 
     const modalRef = useRef<ModalHandle>(null)
 
@@ -94,7 +111,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     return (
-      <BoardContainer>
+      <BoardContainer {...handlers} ref={boardRef}>
         <DragDropContext onDragEnd={res => handleDrop(res)}>
           <Droppable droppableId='droppable' type='COLUMN' direction='horizontal' >
             {(provided, snapshot) => (
