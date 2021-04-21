@@ -11,10 +11,11 @@ import { AddColumnContainer, BoardContainer } from './BoardContainer'
 import AddIcon from '../icons/Add/AddIcon'
 import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
 import AddItemForm from '../AddNewItem/AddItemForm'
-import { useRef, useState } from 'react'
+import { Ref, useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
 import { useSwipeable } from 'react-swipeable'
+import { ShowContainer } from '../../HomePage'
 
 export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
   display: flex;
@@ -63,26 +64,10 @@ export interface BoardProps {
 
 const BeautifulBoard = ({data}: BoardProps) => {
     const dispatch = useDispatch()
-    const boardRef = useRef<HTMLDivElement>(null)
+    // const boardRef = useRef<HTMLDivElement>(null)
     const {lists, cardIds, _id} = data
     const boardId = _id
     const [showModal, setShowModal] = useState(false)
-
-    const scrollLeft = () => {
-      console.log('scroll left');
-      boardRef.current && (boardRef.current.scrollLeft -= window.innerWidth)
-    }
-
-    const scrollRight = () => {
-      console.log('scroll right');
-      boardRef.current && (boardRef.current.scrollLeft -= window.innerWidth)
-    }
-
-    const handlers = useSwipeable({
-      onSwipedRight: scrollRight,
-      onSwipedLeft: scrollLeft,
-    })
-
     const modalRef = useRef<ModalHandle>(null)
 
     const handleAddItem = (text: string) => {
@@ -111,7 +96,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     return (
-      <BoardContainer {...handlers} ref={boardRef}>
+      <BoardContainer >
         <DragDropContext onDragEnd={res => handleDrop(res)}>
           <Droppable droppableId='droppable' type='COLUMN' direction='horizontal' >
             {(provided, snapshot) => (
@@ -137,6 +122,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
               )}
           </Droppable>
       </DragDropContext>
+      <ShowContainer mobile={false} show={true}>
       <BoardColumnContainer>
         {/* <BoardColumnWrapper count={lists.length - 1}> */}
           <ColumnWrapper>
@@ -160,6 +146,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
           </ColumnWrapper>
         {/* </BoardColumnWrapper> */}
       </BoardColumnContainer>
+      </ShowContainer>
       </BoardContainer>
     )
 }
