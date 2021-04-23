@@ -5,7 +5,8 @@ const passport = require('passport')
 const session = require('express-session')
 const passportConfig = require('./passportConfig')
 const path = require("path")
-const MongoStore = require('connect-mongo').default
+// const MongoStore = require('connect-mongo').default
+import MongoStore from 'connect-mongo'
 import { Request, Response } from "express"
 import userRouter from './routes/userRoute';
 import boardRouter from './routes/boardRoute';
