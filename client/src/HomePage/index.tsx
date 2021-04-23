@@ -45,21 +45,19 @@ export const BoardSectionContainer = styled.div`
     }
 `
 
-export const BoardSectionWrapper = styled.div`
-    width: 100%;
-    height: calc(100% - 85px);
-    background-color: #fff;
-    overflow-x: auto;
+// export const BoardSectionWrapper = styled.div`
+//     width: 100%;
+//     height: calc(100% - 85px);
+//     background-color: #fff;
 
+//     & > {
+//         padding-right: 10px;
+//     }
 
-    & > {
-        padding-right: 10px;
-    }
-
-    @media screen and (max-width: 425px){
-        background-color:var(--color-background-light);
-    }
-`
+//     @media screen and (max-width: 425px){
+//         background-color:var(--color-background-light);
+//     }
+// `
 
 
 export const BoardLinksContainer = styled.div`

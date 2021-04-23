@@ -10,10 +10,27 @@ export const BoardContainer = styled.div`
   @media screen and (max-width: 425px){
     padding: 0 20px;
   }
+
+  & > * {
+    height:100%;  
+  }
+  /* overflow-x: auto; */
+
+  /* display: flex; 
+  flex-direction: column; */
 `
 
 export const BoardWrapper = styled.div`
+  /* height: 100%; */
+  display: flex;
+  align-items: flex-start;
   height: 100%;
+  padding: 28px 0 36px 30px;
+  position: relative;
+
+  @media screen and (max-width: 425px){
+    padding: 0 20px;
+  }
 `
 
 
