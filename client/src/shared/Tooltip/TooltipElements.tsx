@@ -4,11 +4,20 @@ export const TooltipContainer = styled.div`
     position: relative;
 `
 
-export const TooltipContent = styled.div`
+interface TooltipContentProps {
+    offsetX: number
+    offsetY: number
+
+}
+
+export const TooltipContent = styled.div<TooltipContentProps>`
     position: absolute;
-    bottom: -7px;
-    right: 0;
-    transform: translateY(100%);
+    top: ${({offsetY}) => offsetY ? offsetY : 0}px;
+    right: ${({offsetX}) => offsetX ? offsetX : 0}px;
+
+    /* bottom: -7px;
+    right: 0; */
+    /* transform: translateY(100%); */
     width: max-content;
     background: #fff;
     padding: 9px;
@@ -24,4 +33,5 @@ export const TooltipCloseContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 9999;
 `
