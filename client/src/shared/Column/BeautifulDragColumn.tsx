@@ -1,6 +1,7 @@
 import { MutableRefObject, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
+import { ShowContainer } from '../../HomePage'
 import { addCard, deleteList, updateListTitle } from '../../redux/AddItem/actionCreators'
 import { Card, List, SimpleCard, Task } from '../../redux/AddItem/interfaces'
 import { RootReducerType } from '../../redux/store'
@@ -13,7 +14,7 @@ import EditableItem from '../EditableItem'
 import AddIcon from '../icons/Add/AddIcon'
 import {Modal, ModalHandle } from '../Modal'
 import CardForm from './AddCardForm'
-import { ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
+import { AddCardContainer, ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
 interface ColumnPropsI {
     title?: string,
@@ -115,6 +116,20 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                                 </Modal>
                             }
                           </ColumnCardContainer>
+                          <ShowContainer show={true} mobile={true}>
+                            <AddCardContainer>
+                              <Button
+                                Icon={AddIcon}
+                                onClick={() => setShowModal(true)}
+                                variant='dashed'
+                                bg='inherit'
+                                fw='700'
+                                widthFill
+                              >
+                                ADD NEW CARD
+                              </Button>
+                            </AddCardContainer>
+                          </ShowContainer>
                         </ColumnWrapper>
                       )}
                     </Droppable>
