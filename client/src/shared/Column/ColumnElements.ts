@@ -38,6 +38,9 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
         border: none;
         padding:20px 0;
 
+        & > * {
+            margin-bottom: 4px;
+        }
     }
 `
 
@@ -65,13 +68,35 @@ export const ColumnTitle = styled.p`
 
 export const ColumnCardContainer = styled.div`
     height: 100%;
+    /* height: auto; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     /* padding: 10px; */
     padding-top: 0;
     overflow: auto;
+
+    @media screen and (max-width: 425px){
+        height: auto;
+    }
 `
 
 export const ColumnCardWrapper = styled.div`
+
+    & > *:not(:first-child){
+        margin-top:10px;
+    }
+
+    @media screen and (max-width: 425px){
+        & > *:not(:first-child){
+            margin-top: 4px;
+        }
+    }
+`
+export const AddCardContainer = styled.div`
+    width: 100%;
+
+    & > *{
+        background-color: #fff;
+    }
 `
