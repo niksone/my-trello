@@ -27,6 +27,7 @@ interface EditBoardFormProps {
 export const EditBoardFormContainer = styled.div`
     width: 350px;
     height: 500px;
+    background-color: #fff;
 `
 
 export const FormBoardItem = styled.div`
