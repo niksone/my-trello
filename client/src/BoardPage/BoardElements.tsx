@@ -44,7 +44,7 @@ export const BoardSidebarClose = styled.div<BoardSidebarProps>`
         left: 0;
         display: ${({show}) => show ? 'block' : 'none'};
         width: 100vw;
-        height: 100vh;
+        height: 100%;
         background-color: var(--color-primary-grey);
         animation: appear 0.5s ease-in-out;
         opacity: 0.45;

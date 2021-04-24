@@ -26,7 +26,7 @@ import ButtonGroup from '../shared/Buttons/ButtonGroup'
 import MoreIcon from '../shared/icons/More/MoreIcon'
 
 export const AppContainer = styled.div`
-    height: 100vh;
+    height: 100%;
     /* width: 100%; */
     display: flex;
 `
@@ -288,6 +288,9 @@ const HomePage = () => {
                                     <ButtonGroup direction='column' spacing={2}>
                                         <Button onClick={() => {}}>
                                             Add List
+                                        </Button>
+                                        <Button onClick={() => {}}>
+                                            Move List
                                         </Button>
                                         <Button 
                                             onClick={handleLogout}

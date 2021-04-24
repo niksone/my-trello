@@ -11,7 +11,7 @@ export const ModalContainer = styled.div<ModalContainerProps>`
     display: ${({show}) => show ? 'flex' : 'none'};
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     cursor: default;
     z-index: 9999;

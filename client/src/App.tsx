@@ -8,12 +8,13 @@ import UserContext, { userContext } from './Context';
 import ProtectedRoute from './ProtectedRoute';
 import ProtectedAuthRoute from './ProtectedAuthRoute';
 import HomePage from './HomePage';
+import Div100vh from './shared/Div100vh';
 
 
 function App() {
 
   return (
-    <>
+    <Div100vh>
         <GlobalStyles />
         <UserContext>
             <Router>
@@ -26,7 +27,7 @@ function App() {
             </Switch>
             </Router>
         </UserContext>
-      </>
+      </Div100vh>
       
   );
 }

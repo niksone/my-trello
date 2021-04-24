@@ -136,7 +136,7 @@ const HeroSection = () => {
         </HeroTextWrapper>
     }
     return (
-    <div style={{height: '100vh'}}>
+    <div style={{height: '100%'}}>
         <Hero >
             <HeroLeft>
                 <HeroLeftContainer>
