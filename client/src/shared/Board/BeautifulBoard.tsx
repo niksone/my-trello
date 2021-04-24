@@ -19,8 +19,9 @@ import { ShowContainer } from '../../HomePage'
 import { FormBlock, FormBlockTitle } from '../Column/AddCardForm'
 import { BoardSectionWrapper } from '../../BoardPage'
 
-import _ from 'lodash'
-import e from 'express'
+import {debounce} from 'lodash'
+import ButtonGroup from '../Buttons/ButtonGroup'
+import ArrowIcon from '../icons/Arrow/Arrow'
 
 export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
   display: flex;
@@ -66,9 +67,6 @@ export const BoardColumnWrapper = styled.div<BoardColumnWrapperProps>`
 `
 
 export const BoardColumnFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
   padding: 16px 0 32px 0;
   background-color: #fff;
@@ -78,22 +76,23 @@ export interface BoardProps {
   data: AddItemState
 }
 
+interface BoardRef extends HTMLDivElement {
+  initialScroll: number
+}
+
 const BeautifulBoard = ({data}: BoardProps) => {
     const dispatch = useDispatch()
-    // const boardRef = useRef<HTMLDivElement>(null)
     const {lists, cardIds, _id} = data
     const boardId = _id
     const [showModal, setShowModal] = useState(false)
     const modalRef = useRef<ModalHandle>(null)
 
-    const boardRef = useRef<HTMLDivElement>(null)
+    const boardRef = useRef<BoardRef>(null)
 
     const handleAddItem = (text: string) => {
       dispatch(addList(boardId, text))
       setShowModal(false)
     }
-
-    const [currentScroll, setCurrentScroll] = useState(0)
 
     const [currentListId, setCurrentListId] = useState('')
 
@@ -149,7 +148,8 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     const findListIndex = () => {
-      console.log(lists.findIndex(list => list._id === currentListId));
+      // console.log(lists.findIndex(list => list._id === currentListId));
+      // setCurrentScroll(prev => boardRef.current?.scrollLeft || prev)
 
       return lists.findIndex(list => list._id === currentListId)
     }
@@ -175,77 +175,101 @@ const BeautifulBoard = ({data}: BoardProps) => {
     
     //   }
 
-    // const handlers = useSwipeable({
-    //   onSwipedRight: (eventData) => scroll('prev'),
-    //   onSwipedLeft: (eventData) => scroll('next'),
-    //   // onSwiped: (eventData) => console.log(`User Swiped!, ${eventData}`),
-    //   preventDefaultTouchmoveEvent: true,
-    //   trackTouch: true
-    // })
-
-    // const refPassthrough = (el: HTMLElement) => {
-    //   // call useSwipeable ref prop with el
-    //   handlers.ref(el);
-  
-    //   // set myRef el so you can access it yourself
-    //   myRef.current = el;
-    // }
+    const getDirection = (start: number, end: number) => {
+      console.log('sign',Math.sign(end - start), end, start);
+      return Math.sign(end - start)
+    }
 
     const getPosition = () => {
-      if( boardRef.current && boardRef.current?.scrollLeft){
-        const currentScrollPosition = boardRef.current.scrollLeft
-        if(currentScrollPosition === currentScroll) return
-        console.log(currentScrollPosition);
+      console.log('test');
+      // console.log(boardRef.current, boardRef.current?.scrollLeft);
+      if( boardRef.current && boardRef.current?.scrollLeft !== null){
+        const currentScrollPosition = Math.floor(boardRef.current.scrollLeft)
+        const initialScrollPosition = Math.floor(boardRef.current.initialScroll)
+        if(currentScrollPosition === initialScrollPosition) return
+        // console.log(currentScrollPosition);
         const breakpoints = lists.map((list, index, arr) => ({
-          scrollStart: index * window.innerWidth,
-          scrollEnd: (index + 1) * window.innerWidth - window.innerWidth / 2,
-        }))
+              scrollStart: index * window.innerWidth,
+              scrollEnd: (index) * window.innerWidth + 50 ,
+            }))
+          // : lists.map((list, index, arr) => ({
+          //   scrollStart: (iwwndex + 1) * window.innerWidth - 50,
+          //   scrollEnd: (index) * window.innerWidth ,
+          // }))
         
+        console.log('start');
         breakpoints.forEach((breakpoint, index, arr) => {
-          if(breakpoint.scrollEnd < currentScrollPosition && arr[index + 1].scrollStart > currentScrollPosition ){
+          console.log(breakpoint.scrollStart, breakpoint.scrollEnd, currentScrollPosition);
+          if(breakpoint.scrollEnd < currentScrollPosition && arr[index + 1].scrollStart > currentScrollPosition && currentScrollPosition > initialScrollPosition){
               boardRef.current?.scrollTo({
                 top: 0,
                 left: window.innerWidth * (index +1 )| 0,
                 behavior: 'smooth'
               })
               setCurrentListId(prev => lists[index + 1]._id)
+              return
           } 
 
-          if (breakpoint.scrollStart < currentScrollPosition && breakpoint.scrollEnd > currentScrollPosition){
+          else if(breakpoint.scrollStart - 50 >= currentScrollPosition && arr[index - 1].scrollEnd < currentScrollPosition  && currentScrollPosition < initialScrollPosition) {
             boardRef.current?.scrollTo({
               top: 0,
-              left: window.innerWidth * (index)| 0,
+              left: window.innerWidth * (index - 1 )| 0,
               behavior: 'smooth'
             })
-            setCurrentListId(prev => lists[index]._id)
+            console.log('back', breakpoint.scrollStart - 50, currentScrollPosition);
+            setCurrentListId(prev => lists[index - 1]._id)
+            return
           }
-          // else{
-          //   boardRef.current?.scrollTo({
-          //     top: 0,
-          //     left: window.innerWidth * index| 0,
-          //     behavior: 'smooth'
-          //   })                
-          // }
-          setCurrentScroll(prev => boardRef.current?.scrollLeft || prev)
-        })
-        console.log(currentScrollPosition, breakpoints)
+
+          if (breakpoint.scrollStart <= currentScrollPosition && breakpoint.scrollEnd >= currentScrollPosition){
+            boardRef.current?.scrollTo({
+                top: 0,
+                left: window.innerWidth * (index)| 0,
+                behavior: 'smooth'
+              })
+            setCurrentListId(prev => lists[index]._id)
+            return
+          }
+
+          // console.log(index, 'curr index');
+          // console.log(lists[index].title)
+          // setCurrentListId(prev => lists[index]._id)
+          })
+
+        console.log(currentScrollPosition, boardRef.current.initialScroll, breakpoints)
       }
     }
 
-    useEffect(() => {
-      setCurrentListId(prev => lists.length > 0 ? lists[0]._id : '')
-      boardRef.current?.addEventListener('scroll',
-        _.debounce(() => {}, 100,
-        { 'leading': true, 'trailing': false })
-      ) 
+    const checkPos = () => {
+      // setCurrentScroll(prev => boardRef.current?.scrollLeft || prev)
+      boardRef.current && (boardRef.current.initialScroll = boardRef.current?.scrollLeft )
+      // alert( boardRef.current?.scrollLeft +  'curr scroll')
+    }
 
-      boardRef.current?.addEventListener('scroll',
-      _.debounce(getPosition, 100,
-      )
-    ) 
+    useEffect(() => {
+      if(window.innerWidth <= 425){
+        setCurrentListId(prev => lists.length > 0 ? lists[0]._id : '')
+
+        boardRef.current?.addEventListener('touchstart',checkPos
+        )
+
+        boardRef.current?.addEventListener('scroll',
+          debounce(() => {}, 100,
+          { 'leading': true, 'trailing': false })
+        ) 
+
+        boardRef.current?.addEventListener('scroll',
+          debounce(getPosition, 100,)
+        ) 
+        console.log(boardRef.current?.scrollLeft, 'test');
+        // setCurrentScroll(prev => boardRef.current?.scrollLeft)
+        // console.log(currentScroll);
+        console.log(currentListId);
+      }
     }, [lists])
 
     return (
+      <>
       <BoardSectionWrapper
       //  {...handlers}  ref={e => refPassthrough(e as HTMLElement)} 
       ref={boardRef}
@@ -276,14 +300,8 @@ const BeautifulBoard = ({data}: BoardProps) => {
                   ))}
                   {provided.placeholder}
                   </BoardColumnContainer>
-                  <BoardColumnFooter>
-                    <ShowContainer mobile={true} show={true}>
-                      <FormBlock><FormBlockTitle>jopa {lists[findListIndex()]?.title}</FormBlockTitle></FormBlock>
-                    </ShowContainer>
-                  </BoardColumnFooter>
                 </BoardColumnWrapper>
                 )}
-
             </Droppable>
         </DragDropContext>
         <ShowContainer mobile={false} show={true}>
@@ -314,7 +332,24 @@ const BeautifulBoard = ({data}: BoardProps) => {
         {/* </BoardWrapper> */}
         </BoardContainer>
       </BoardSectionWrapper>
+      <BoardColumnFooter>
+        <ShowContainer mobile={true} show={true}>
+          <FormBlock>
+            <FormBlockTitle>{lists[findListIndex()]?.title}</FormBlockTitle>
+            <ButtonGroup spacing={2} widthFill={false}>
+              <Button shape='icon' size='lg' variant='outline'>
+                <ArrowIcon direction='left'/>
+              </Button>
+              <Button shape='icon' size='lg' variant='outline'>
+                <ArrowIcon direction='right'/>
+              </Button>
+            </ButtonGroup>
+          </FormBlock>
+        </ShowContainer>
+      </BoardColumnFooter>
+      </>
     )
+
 }
 
 export default BeautifulBoard
