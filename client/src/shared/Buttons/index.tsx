@@ -89,12 +89,16 @@ const fillStyles = css<ButtonProps>`
     }
 `
 
-const unStyle = css`
+const unstyleStyles = css`
     border: none;
     outline: none;
     background: none;
     padding: 0;
     margin: 0;
+`
+
+const dashedStyles = css`
+    border: 1px dashed var(--color-resting-outline);
 `
 
 type stylesOptions = {
@@ -105,7 +109,8 @@ const styles: stylesOptions = {
     outline: outlineStyles,
     fill: fillStyles,
     shadow: shadowStyles,
-    unstyle: unStyle
+    unstyle: unstyleStyles,
+    dashed: dashedStyles
 }
 
 const sizes = {
@@ -129,6 +134,7 @@ const ButtonContainer = styled.button<ButtonProps>`
     ${({variant}) => variant ? styles[variant] : 'fill'};
     font-size: var(--text-regular);
     font-weight: ${({fw}) => fw};
+    background: ${({bg}) => bg && bg};
 `
 
 const ButtonIconContainer = styled.div`
@@ -163,13 +169,14 @@ interface ButtonProps {
     color?: string,
     widthFill?: boolean,
     active?: boolean,
-    variant?: 'outline' | 'fill' | 'shadow' | 'unstyle',
+    variant?: 'outline' | 'fill' | 'shadow' | 'unstyle' | 'dashed',
     Icon?: any,
     size?: 'lg' | 'md' | 'sm',
     colorScheme?: keyof typeof colorSchemes,
     jc?: 'start' | 'center' | 'end',
     fw?: '400' | '700'
     shape?: BtnShape,
+    bg?: string
 }
 
 type BtnShape = 'default' | 'icon'
