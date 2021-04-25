@@ -24,7 +24,7 @@ export const TooltipContent = styled.div<TooltipContentProps>`
     border: 1px var(--color-button-outline-resting) solid;
     border-radius: 8px;
     filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 0.05));
-    z-index: 99;
+    z-index: 9999;
 `
 
 export const TooltipCloseContainer = styled.div`

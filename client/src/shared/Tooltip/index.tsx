@@ -34,8 +34,8 @@ const Tooltip = ({content, children, direction}: React.PropsWithChildren<Tooltip
             {
                 show && (
                     <>
-                    <TooltipCloseContainer onTouchStart={handleClick}>
-                        <TooltipContent offsetX={offsetX} offsetY={offsetY}>
+                    <TooltipCloseContainer onClick={handleClick}>
+                        <TooltipContent onClick={(e) => e.stopPropagation()} offsetX={offsetX} offsetY={offsetY}>
                             {content}
                         </TooltipContent>
                     </TooltipCloseContainer>
