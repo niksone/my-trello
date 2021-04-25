@@ -13,6 +13,7 @@ const rotations = {
     'left': 0,
 }
 export const ArrowIconContainer = styled.span<ArrowIconProps>`
+    display: flex;
     transform: rotateZ(${({direction}) => rotations[direction]}deg);
 `
 
