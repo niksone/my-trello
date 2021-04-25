@@ -24,6 +24,8 @@ import MenuIcon from '../shared/icons/Menu/MenuIcon'
 import Tooltip from '../shared/Tooltip'
 import ButtonGroup from '../shared/Buttons/ButtonGroup'
 import MoreIcon from '../shared/icons/More/MoreIcon'
+import TrashcanIcon from '../shared/icons/Trashcan/TrashcanIcon'
+import OrderIcon from '../shared/icons/Order/OrderIcon'
 
 export const AppContainer = styled.div`
     height: 100%;
@@ -286,14 +288,17 @@ const HomePage = () => {
                             <Tooltip 
                                 content={
                                     <ButtonGroup direction='column' spacing={2}>
-                                        <Button onClick={() => {}}>
+                                        <Button onClick={() => {}}
+                                        Icon={AddIcon}>
                                             Add List
                                         </Button>
-                                        <Button onClick={() => {}}>
+                                        <Button onClick={() => {}}
+                                        Icon={OrderIcon}>
                                             Move List
                                         </Button>
                                         <Button 
                                             onClick={handleLogout}
+                                            Icon={TrashcanIcon}
                                             colorScheme='error'
                                         >
                                             Log Out
