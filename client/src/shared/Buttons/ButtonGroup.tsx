@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface ButtonGroupContainerProps {
     columns: number,
@@ -8,22 +8,31 @@ interface ButtonGroupContainerProps {
     direction: 'row' | 'column'
 }
 
-const directionStyles = {
-    'row': 
-        'grid-template-columns: repeat(${({columns}) => columns}, 1fr);' +
-        'grid-column-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0};',
-    'column': 
-        'grid-template-columns: repeat(${({columns}) => columns}, 1fr);' +
-        'grid-row-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0};',
+const directionColumn = css<ButtonGroupContainerProps>`
+    grid-template-rows: repeat(${({columns}) => columns}, 1fr);
+    grid-row-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0};
+`
 
+const directionRow = css<ButtonGroupContainerProps>`
+    grid-template-columns: repeat(${({columns}) => columns}, 1fr);
+    grid-column-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0};
+`
+
+
+
+
+const directionStyles = {
+    'row': directionRow,
+    'column': directionColumn
 }
 
 const ButtonGroupContainer = styled.div<ButtonGroupContainerProps>`
     display: grid;
     /* ${({direction}) => direction} */
-    grid-column-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0};
-    grid-template-columns: repeat(${({columns}) => columns}, 1fr);
-    /* ${({direction}) => directionStyles[direction]}  */
+    /* grid-column-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0}; */
+    /* grid-template-rows: repeat(${({columns}) => columns}, 1fr); */
+    ${({direction}) => directionStyles[direction]} 
+    
 
     /* display: inline-flex;
     flex-direction: ${({direction}) => direction};
