@@ -66,10 +66,21 @@ export const BoardColumnWrapper = styled.div<BoardColumnWrapperProps>`
   `} */
 `
 
-export const BoardColumnFooter = styled.div`
+export const BoardFooterContainer = styled.div`
   width: 100%;
-  padding: 16px 0 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 32px 20px;
   background-color: #fff;
+`
+
+const BoardFooterTitle = styled.h4`
+  font-size: var(--text-h4);
+`
+
+const BoardFooterNav = styled.div`
+
 `
 
 export interface BoardProps {
@@ -113,6 +124,17 @@ const BeautifulBoard = ({data}: BoardProps) => {
         const sourceIndex = source.index
         const destIndex = destination.index
         dispatch(moveCard(boardId, data, sourceDroppableId, sourceIndex, destDroppableId, destIndex))
+      }
+    }
+
+    const slide = (index: any) => {
+      if(lists[index]){
+        boardRef.current?.scrollTo({
+          top: 0,
+          left: window.innerWidth * (index)| 0,
+          behavior: 'smooth'
+        })
+        setCurrentListId(prev => lists[index]._id)
       }
     }
 
@@ -201,33 +223,24 @@ const BeautifulBoard = ({data}: BoardProps) => {
         breakpoints.forEach((breakpoint, index, arr) => {
           console.log(breakpoint.scrollStart, breakpoint.scrollEnd, currentScrollPosition);
           if(breakpoint.scrollEnd < currentScrollPosition && arr[index + 1].scrollStart > currentScrollPosition && currentScrollPosition > initialScrollPosition){
-              boardRef.current?.scrollTo({
-                top: 0,
-                left: window.innerWidth * (index +1 )| 0,
-                behavior: 'smooth'
-              })
-              setCurrentListId(prev => lists[index + 1]._id)
+              slide(index + 1)
               return
           } 
 
           else if(breakpoint.scrollStart - 50 >= currentScrollPosition && arr[index - 1].scrollEnd < currentScrollPosition  && currentScrollPosition < initialScrollPosition) {
-            boardRef.current?.scrollTo({
-              top: 0,
-              left: window.innerWidth * (index - 1 )| 0,
-              behavior: 'smooth'
-            })
-            console.log('back', breakpoint.scrollStart - 50, currentScrollPosition);
+            slide(index - 1)
+            // boardRef.current?.scrollTo({
+            //   top: 0,
+            //   left: window.innerWidth * (index - 1 )| 0,
+            //   behavior: 'smooth'
+            // })
+            // console.log('back', breakpoint.scrollStart - 50, currentScrollPosition);
             setCurrentListId(prev => lists[index - 1]._id)
             return
           }
 
           if (breakpoint.scrollStart <= currentScrollPosition && breakpoint.scrollEnd >= currentScrollPosition){
-            boardRef.current?.scrollTo({
-                top: 0,
-                left: window.innerWidth * (index)| 0,
-                behavior: 'smooth'
-              })
-            setCurrentListId(prev => lists[index]._id)
+            slide(index)
             return
           }
 
@@ -332,21 +345,26 @@ const BeautifulBoard = ({data}: BoardProps) => {
         {/* </BoardWrapper> */}
         </BoardContainer>
       </BoardSectionWrapper>
-      <BoardColumnFooter>
         <ShowContainer mobile={true} show={true}>
-          <FormBlock>
-            <FormBlockTitle>{lists[findListIndex()]?.title}</FormBlockTitle>
-            <ButtonGroup spacing={2} widthFill={false}>
-              <Button shape='icon' size='lg' variant='outline'>
-                <ArrowIcon direction='left'/>
-              </Button>
-              <Button shape='icon' size='lg' variant='outline'>
-                <ArrowIcon direction='right'/>
-              </Button>
-            </ButtonGroup>
-          </FormBlock>
+          <BoardFooterContainer>
+            <BoardFooterTitle>{lists[findListIndex()]?.title}</BoardFooterTitle>
+            <BoardFooterNav>
+              <ButtonGroup spacing={2} widthFill={false}>
+                <Button shape='icon' size='lg' variant='outline'
+                  onClick={() => slide(findListIndex() - 1)}
+                >
+                  <ArrowIcon direction='left'/>
+                </Button>
+                <Button shape='icon' size='lg' variant='outline'
+                  onClick={() => slide(findListIndex() + 1)}
+
+                >
+                  <ArrowIcon direction='right'/>
+                </Button>
+              </ButtonGroup>
+            </BoardFooterNav>
+          </BoardFooterContainer>
         </ShowContainer>
-      </BoardColumnFooter>
       </>
     )
 
