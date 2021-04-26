@@ -39,4 +39,9 @@ export const ModalContent = styled.div`
     height: 100%;
     min-width: 20%;
     z-index: 10;
+
+
+    @media screen and(max-width: 425px){
+        width: 100%;
+    }
 `
