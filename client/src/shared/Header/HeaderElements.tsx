@@ -6,6 +6,7 @@ export const HeaderContainer = styled.div`
 
     @media screen and (max-width: 425px){
         padding: 0 20px;
+        background-color: #fff;
     }
     /* grid-area: 'header' */
 `
