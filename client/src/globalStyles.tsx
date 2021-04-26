@@ -38,8 +38,12 @@ export const GlobalStyles = createGlobalStyle`
         --text-h4: 1.8rem;
         --text-h5: 1.6rem;
 
-        --text-caption: 1.4rem;
         --text-regular: 1.4rem;
+        --text-caption: 1.2rem;
+    }
+
+    body{
+        font-size: 1.4rem;
     }
 
     p, span, div, input{
