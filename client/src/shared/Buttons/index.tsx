@@ -101,6 +101,11 @@ const dashedStyles = css`
     border: 1px dashed var(--color-resting-outline);
 `
 
+const invisibleStyles = css`
+    opacity: 0;
+`
+
+
 type stylesOptions = {
     [key: string]: FlattenInterpolation<ThemedStyledProps<ButtonProps, any>>
 }
@@ -110,7 +115,8 @@ const styles: stylesOptions = {
     fill: fillStyles,
     shadow: shadowStyles,
     unstyle: unstyleStyles,
-    dashed: dashedStyles
+    dashed: dashedStyles,
+    invisible: invisibleStyles
 }
 
 const sizes = {
@@ -169,7 +175,7 @@ interface ButtonProps {
     color?: string,
     widthFill?: boolean,
     active?: boolean,
-    variant?: 'outline' | 'fill' | 'shadow' | 'unstyle' | 'dashed',
+    variant?: 'outline' | 'fill' | 'shadow' | 'unstyle' | 'dashed' | 'invisible',
     Icon?: any,
     size?: 'lg' | 'md' | 'sm',
     colorScheme?: keyof typeof colorSchemes,
