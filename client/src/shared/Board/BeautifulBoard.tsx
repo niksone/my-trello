@@ -16,7 +16,6 @@ import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
 import { useSwipeable } from 'react-swipeable'
 import { ShowContainer } from '../../HomePage'
-import { FormBlock, FormBlockTitle } from '../Column/AddCardForm'
 import { BoardSectionWrapper } from '../../BoardPage'
 
 import {debounce} from 'lodash'
@@ -138,64 +137,9 @@ const BeautifulBoard = ({data}: BoardProps) => {
       }
     }
 
-
-    const slideListNext = () => {
-      const currListIndex = lists.findIndex(list => list._id === currentListId)
-      const resultListIndex = currListIndex + 1 < lists.length ? currListIndex + 1 : currListIndex
-
-      // if(myRef.current){ 
-
-      //   myRef.current.scrollTo({
-      //     top: 0,
-      //     left: window.innerWidth * resultListIndex | 0,
-      //     behavior: 'smooth'
-      //   })
-      // }
-      return lists[resultListIndex]?._id
-    }
-
-    const slideListPrev = () => {
-      const currListIndex = lists.findIndex(list => list._id === currentListId)
-      const resultListIndex = currListIndex - 1 >= 0 ? currListIndex - 1 : currListIndex
-      
-      // if(myRef.current){ 
-
-      //   myRef.current.scrollTo({
-      //     top: 0,
-      //     left: window.innerWidth * resultListIndex | 0,
-      //     behavior: 'smooth'
-      //   })
-      // }
-      return lists[resultListIndex]._id
-    }
-
     const findListIndex = () => {
-      // console.log(lists.findIndex(list => list._id === currentListId));
-      // setCurrentScroll(prev => boardRef.current?.scrollLeft || prev)
-
       return lists.findIndex(list => list._id === currentListId)
     }
-    
-    // // const scrollListPosition = () => {
-      
-    // // }
-
-    // const myRef = useRef<HTMLElement>()
-
-
-    // const scroll = (direction: 'prev' | 'next') => {
-    //   console.log(`slide ${direction}`);
-
-    //   // dispatch(slide(direction))
-
-    //     direction === 'prev' && setCurrentListId(prev => slideListPrev())
-    //     direction === 'next' && setCurrentListId(prev => slideListNext())
-      
-    //   setTimeout(
-    //     () => console.log(myRef.current?.scrollLeft, window.innerWidth, window.innerWidth * findListIndex())
-    //   ,1000)
-    
-    //   }
 
     const getDirection = (start: number, end: number) => {
       console.log('sign',Math.sign(end - start), end, start);
@@ -203,11 +147,11 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     const getPosition = () => {
-      console.log('test');
       // console.log(boardRef.current, boardRef.current?.scrollLeft);
       if( boardRef.current && boardRef.current?.scrollLeft !== null){
         const currentScrollPosition = Math.floor(boardRef.current.scrollLeft)
         const initialScrollPosition = Math.floor(boardRef.current.initialScroll)
+
         if(currentScrollPosition === initialScrollPosition) return
         // console.log(currentScrollPosition);
         const breakpoints = lists.map((list, index, arr) => ({
@@ -229,24 +173,14 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
           else if(breakpoint.scrollStart - 50 >= currentScrollPosition && arr[index - 1].scrollEnd < currentScrollPosition  && currentScrollPosition < initialScrollPosition) {
             slide(index - 1)
-            // boardRef.current?.scrollTo({
-            //   top: 0,
-            //   left: window.innerWidth * (index - 1 )| 0,
-            //   behavior: 'smooth'
-            // })
-            // console.log('back', breakpoint.scrollStart - 50, currentScrollPosition);
-            setCurrentListId(prev => lists[index - 1]._id)
+            // setCurrentListId(prev => lists[index - 1]._id)
             return
           }
 
-          if (breakpoint.scrollStart <= currentScrollPosition && breakpoint.scrollEnd >= currentScrollPosition){
-            slide(index)
-            return
-          }
-
-          // console.log(index, 'curr index');
-          // console.log(lists[index].title)
-          // setCurrentListId(prev => lists[index]._id)
+            if (breakpoint.scrollStart <= currentScrollPosition && breakpoint.scrollEnd >= currentScrollPosition){
+              slide(index)
+              return
+            }
           })
 
         console.log(currentScrollPosition, boardRef.current.initialScroll, breakpoints)
