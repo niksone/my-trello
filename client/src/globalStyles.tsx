@@ -42,6 +42,10 @@ export const GlobalStyles = createGlobalStyle`
         --text-caption: 1.2rem;
     }
 
+    button{
+        -webkit-tap-highlight-color: transparent;
+    }
+
     body{
         font-size: 1.4rem;
     }
