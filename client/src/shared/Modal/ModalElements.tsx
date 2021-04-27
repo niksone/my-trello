@@ -24,9 +24,11 @@ export const ModalWrapper = styled.div`
     height: 100%;
     width: 100%;
     background-color: var(--color-primary-grey);
-    mix-blend-mode: normal;
     opacity: 0.45;
+    cursor: pointer;
     z-index: 1;
+
+
 `
 
 
@@ -36,12 +38,11 @@ export const ModalContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    min-width: 20%;
     z-index: 10;
 
 
     @media screen and (max-width: 425px){
+        height: 100%;
         width: 100%;
     }
 `

@@ -47,6 +47,7 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
 export const ColumnTitleContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    padding-bottom: 22px;
 
     /* padding: 10px; */
     cursor: pointer;

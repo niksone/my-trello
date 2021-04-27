@@ -7,6 +7,7 @@ export const EditableItemContainer = styled.span`
     /* height: 100%; */
     /* width: 100%; */
     cursor: text;
+    font-size: inherit;
 `
 export const EditableItemWrapper = styled.div`
     display: flex;
