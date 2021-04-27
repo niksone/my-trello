@@ -9,13 +9,19 @@ import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
 import Button from '../shared/Buttons'
 import ButtonGroup from '../shared/Buttons/ButtonGroup'
-import {FormContainer, FormBlock, FormSubtitle,
+import {FormContainer, FormWrapper, FormBlock, FormSubtitle,
      FormTitle, FormTitleContainer, FormContent, FormButtonsContainer,
-      FormListItems, FormListItem, DeleteIconWrapper } from '../shared/Column/AddCardForm'
+      FormListItems, FormListItem, FormHeaderContainer, FormHeaderWrapper } from '../shared/Forms/FormElements'
 import EditableItem from '../shared/EditableItem'
 import AddIcon from '../shared/icons/Add/AddIcon'
 import EditIcon from '../shared/icons/Edit/EditIcon'
 import TrashcanIcon from '../shared/icons/Trashcan/TrashcanIcon'
+import { DeleteIconWrapper } from '../shared/Forms/AddCardForm/AddCardFormElements'
+import ArrowIcon from '../shared/icons/Arrow/Arrow'
+import { BoardName } from '.'
+import Tooltip from '../shared/Tooltip'
+import MoreIcon from '../shared/icons/More/MoreIcon'
+import SaveIcon from '../shared/icons/Save/SaveIcon'
 
 interface EditBoardFormProps {
     onExit: () => void,
@@ -28,6 +34,11 @@ export const EditBoardFormContainer = styled.div`
     width: 350px;
     height: 500px;
     background-color: #fff;
+
+    @media screen and (max-width: 425px){
+        height: 100%;
+        width: 100%;
+    }
 `
 
 export const FormBoardItem = styled.div`
@@ -54,9 +65,6 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
     const dispatch = useDispatch()
     // const [editBoards, setEditBoards] = useState<SimpleBoard[]>(boards)
 
-    // const handleSave = () => {
-    //     onSave(editBoards)
-    // }
 
     // const updateBoards = (boards: SimpleBoard[]) => {
     //     setEditBoards(prev => boards)
@@ -79,14 +87,31 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
 
     return (
         <EditBoardFormContainer>
-            <FormContainer>
+            <FormWrapper>
+            <FormHeaderContainer>
+                <FormContainer>
+                    <FormHeaderWrapper>
+                        <Button shape='icon' variant='outline' size='lg'
+                            onClick={onExit}>
+                            <ArrowIcon direction='left' />
+                        </Button>
+                        <BoardName>Edit Boards</BoardName>
+
+                        
+                        <Button shape='icon' variant='invisible' size='lg' >
+                            <SaveIcon />
+                        </Button>
+                    </FormHeaderWrapper>
+                </FormContainer>
+            </FormHeaderContainer>
+                <FormTitleContainer>
+                    <FormContainer>
+                        <FormTitle>Edit Board</FormTitle>
+                        <FormSubtitle>Rename, add or delete a board</FormSubtitle>
+                    </FormContainer>
+                </FormTitleContainer>
                 <FormContent>
-                    <FormBlock>
-                        <FormTitleContainer>
-                            <FormTitle>Edit Board</FormTitle>
-                            <FormSubtitle>Rename, add or delete a board</FormSubtitle>
-                        </FormTitleContainer>
-                    </FormBlock>
+                    <FormContainer>
                     <FormBlock>
                         <FormListItems>
                             <FormListItem >
@@ -103,7 +128,7 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
                             {boards?.map(board => (
                                 <FormListItem key={board._id}>
                                     <FormBoardItem>
-                                        <DeleteIconWrapper 
+                                        <DeleteIconWrapper
                                             onClick={() => 
                                                 // updateBoards(deleteBoard(board._id))
                                                 dispatch(deleteBoard(userId, board._id))
@@ -123,22 +148,23 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
                                                 editItem={() => {}}
                                             />
                                         </FormBoardItemName>
-                                        <EditIconWrapper onClick={() => {}}>
+                                        {/* <EditIconWrapper onClick={() => {}}>
                                             <EditIcon />
-                                        </EditIconWrapper>
+                                        </EditIconWrapper> */}
                                     </FormBoardItem>
                                 </FormListItem>
                             ))}
                         </FormListItems>
                     </FormBlock>
+                    </FormContainer>
                 </FormContent>
-                <FormButtonsContainer>
+                {/* <FormButtonsContainer>
                     <ButtonGroup spacing={10}>
                         <Button onClick={onExit}>Close</Button>
                         <Button >Save</Button>
                     </ButtonGroup>
-                </FormButtonsContainer>
-            </FormContainer>
+                </FormButtonsContainer> */}
+            </FormWrapper>
         </EditBoardFormContainer>
     )
 }
