@@ -11,11 +11,11 @@ import {ReactComponent as ChecklistIcon} from '../icons/tasks.svg'
 import Button from '../Buttons'
 import {ReactComponent as MoreIcon} from '../icons/more.svg'
 import {Modal, ModalHandle} from '../Modal'
-import CardForm from '../Column/AddCardForm'
 import Tooltip from '../Tooltip'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import EditIcon from '../icons/Edit/EditIcon'
 import TrashcanIcon from '../icons/Trashcan/TrashcanIcon'
+import CardForm from '../Forms/AddCardForm'
 
 interface CardPropsI {
     cardId: string,
@@ -131,7 +131,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
             </CardContainer>
             {showModal &&
               <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                <CardForm 
+                <CardForm
                   columnId={listId}
                   cardId={card._id}
                   title={card.title}

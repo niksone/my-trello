@@ -10,10 +10,11 @@ import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
 import { BoardColumnWrapper } from '../Board/BeautifulBoard'
 import Button from '../Buttons'
 import BeautifulCard from '../Card/BeautifulCard'
+import { CardContainer } from '../Card/CardElements'
 import EditableItem from '../EditableItem'
+import CardForm from '../Forms/AddCardForm'
 import AddIcon from '../icons/Add/AddIcon'
 import {Modal, ModalHandle } from '../Modal'
-import CardForm from './AddCardForm'
 import { AddCardContainer, ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
 
 interface ColumnPropsI {
@@ -57,11 +58,8 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                     {...provided.dragHandleProps}
                     {...provided.draggableProps}
                   >
-                    <Droppable droppableId={list._id}>
-                      {(provided, snapshot) => (
                         <ColumnWrapper
-                          ref={provided.innerRef}
-                          {...provided.droppableProps}
+
                         >
                           <ColumnTitleContainer>
                           <ColumnTitle>
@@ -82,20 +80,25 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                               ADD NEW CARD
                             </Button>
                           </ColumnTitleContainer>                     
-                          <ColumnCardContainer >
-                            <ColumnCardWrapper>
-                            {
-                              cards?.map((card: Card, index: number) => (
-                                <BeautifulCard 
-                                  cardId={card._id}
-                                  card={card}
-                                  key={card._id}
-                                  listId={id}
-                                />
-                              ))
-                            }
-                            {provided.placeholder}
-                            </ColumnCardWrapper>
+                        <Droppable droppableId={list._id}>
+                          {(provided, snapshot) => (
+                            <ColumnCardContainer 
+                              ref={provided.innerRef}
+                              {...provided.droppableProps}
+                            >
+                              <ColumnCardWrapper>
+                              {
+                                cards?.map((card: Card, index: number) => (
+                                  <BeautifulCard 
+                                    cardId={card._id}
+                                    card={card}
+                                    key={card._id}
+                                    listId={id}
+                                  />
+                                ))
+                              }
+                                {provided.placeholder}
+                              </ColumnCardWrapper>
                             {
                               showModal &&
                                 <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
@@ -116,6 +119,9 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                                 </Modal>
                             }
                           </ColumnCardContainer>
+                          )}
+                          </Droppable>
+
                           <ShowContainer show={true} mobile={true}>
                             <AddCardContainer>
                               <Button
@@ -131,8 +137,6 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                             </AddCardContainer>
                           </ShowContainer>
                         </ColumnWrapper>
-                      )}
-                    </Droppable>
                   </ColumnContainer>
             )}
         </Draggable>
