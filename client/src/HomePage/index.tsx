@@ -14,8 +14,6 @@ import PickIcon from '../shared/icons/Pick/PickIcon'
 import { HeaderContainer, HeaderWrapper, LogoWrapper } from '../shared/Header/HeaderElements'
 import {ReactComponent as LogoImg} from '../shared/icons/Logo.svg'
 import AddIcon from '../shared/icons/Add/AddIcon'
-import AddNewItem from '../shared/AddNewItem'
-import AddNewItemBtn from '../shared/AddNewItem/AddNewItemBtn'
 import AddItemForm from '../shared/AddNewItem/AddItemForm'
 import { Modal, ModalHandle } from '../shared/Modal'
 import EditIcon from '../shared/icons/Edit/EditIcon'
@@ -29,7 +27,7 @@ import OrderIcon from '../shared/icons/Order/OrderIcon'
 
 export const AppContainer = styled.div`
     height: 100%;
-    /* width: 100%; */
+    width: 100%;
     display: flex;
 `
 export const BoardSectionContainer = styled.div`
@@ -145,7 +143,7 @@ interface ShowContainerProps {
 }
 export const ShowContainer = styled.div<ShowContainerProps>`
     display: ${({show, mobile}) => show && !mobile ? 'flex' : 'none'};
-
+ 
     @media screen and (max-width: 425px){
         display: ${({show, mobile}) => show && mobile? 'flex' : 'none'};
     }
