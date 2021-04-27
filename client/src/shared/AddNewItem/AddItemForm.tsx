@@ -32,7 +32,7 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
         switch(variant){
             case 'default': {
                 return (
-                    <AddItemFormContainer>
+                    <AddItemFormContainer  item={item}>
                         <AddItemFormWrapper item={item}>
                             <ResizableTextArea ref={test} placeholder={placeholder}/>
                         </AddItemFormWrapper>
@@ -45,7 +45,7 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
 
             case 'icon': {
                 return (
-                    <AddItemFormContainer fd='row' alignItems='center'>
+                    <AddItemFormContainer fd='row' alignItems='center' item={item}>
                         {Icon && 
                             <FormIcon onClick={handleAddItem}>
                                 <Icon />

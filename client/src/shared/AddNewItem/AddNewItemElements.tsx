@@ -25,7 +25,12 @@ export type AddItemContainerTypes =
 
 export const AddItemContainer = styled.div<AddItemContainerProps>`
     min-width: ${({item}) => item === 'CARD' ? '300px' : '100%'};
+    /* min-width: 300px; */
     padding: ${({item}) => item === 'CARD' ? '5px 10px' : '0'};
+
+    @media screen and (max-width: 425px){
+
+    }
 `
 
 export const AddItemButton = styled.button`
@@ -38,26 +43,36 @@ export const AddItemButton = styled.button`
     text-align: left;
 `
 
-interface AddItemFormContainerProps {
+interface AddItemFormContainerProps extends AddItemContainerProps{
     fd?: 'column' | 'row'
     alignItems?: 'start' | 'center' | 'end'
 }
 
 export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
     /* padding-top: 10px; */
-    width: 100%;
+    min-width: ${({item}) => item === 'FORM' ? '300px' : '100%'};
     display: flex;
     flex-direction: ${({fd}) => fd ? fd : 'column'};
     align-items: ${({alignItems}) => alignItems ? alignItems : 'start'};
+
+
+    @media screen and (max-width: 425px){
+        width: 80%;
+    }
 `
 
 export const AddItemFormWrapper= styled.div<AddItemContainerProps>`
     width: 100%;
+    /* min-width: 300px; */
     padding: ${({item}) => item ? containerType[item] : '0'};
     outline: none;
     border: none;
     border-radius: 5px;
     background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 `
 
 
