@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Redirect, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { authApi } from '../api'
 import BoardPage from '../BoardPage'
@@ -24,7 +24,8 @@ import ButtonGroup from '../shared/Buttons/ButtonGroup'
 import MoreIcon from '../shared/icons/More/MoreIcon'
 import TrashcanIcon from '../shared/icons/Trashcan/TrashcanIcon'
 import OrderIcon from '../shared/icons/Order/OrderIcon'
-
+import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
+// import NoBoardImg from '../shared/icons/no-board.svg'
 export const AppContainer = styled.div`
     height: 100%;
     width: 100%;
@@ -153,6 +154,43 @@ export const BoardSectionFooterContainer = styled.div`
 
 `
 
+export const NoBoardSection = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-size: contain; 
+    background-color: var(--color-background-light);
+
+    & > svg{
+        /* width: 80%;
+        height: 80%; */
+
+        margin-bottom: 35px;
+
+    }
+
+    @media screen and (max-width: 425px){
+        & > svg{
+            width: 80%;
+            height: 80%; 
+        }
+    }
+`
+
+export const NoBoardTitle =styled.h2`
+    font-size: var(--text-h2);
+    padding-bottom: 8px;
+`
+
+export const NoBoardSubtitle =styled.p`
+    font-size: var(--text-regular);
+    color: var(--color-primary-grey);
+`
+
+
 const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
     const [showModal, setShowModal] = useState(false)
@@ -163,7 +201,7 @@ const HomePage = () => {
 
     const [showSidebar, setShowSidebar] = useState(false)
 
-    const {boards} = useSelector((state: RootReducerType) => state.boards)
+    const {boards, isLoading} = useSelector((state: RootReducerType) => state.boards)
     const dispatch = useDispatch()
 
     const {id} = useParams<{id: string}>()
@@ -186,10 +224,21 @@ const HomePage = () => {
 
     useEffect(() => {
         dispatch(getBoards(user))
+        // boards.length > 0 && <Redirect to={`/board/${boards[0]._id}`}/>
     }, [dispatch, user])
+
+    if(boards.length > 0 && !id){
+        return <Redirect to={`/board/${boards[0]._id}`}/>
+    } 
+
+    if(isLoading){
+        return <div></div>
+    }
+
     return (
         
         <AppContainer>
+            <p>{isLoading && 'jopa'}</p>
             <BoardSidebarContainer show={showSidebar}>
                 <BoardSidebarClose onClick={() => setShowSidebar(false)} show={showSidebar}>
 
@@ -280,7 +329,7 @@ const HomePage = () => {
                                     <MenuIcon />
                                 </Button>
                             </ShowContainer>
-                            <BoardName>{currentBoard.name}</BoardName>
+                            <BoardName>{currentBoard.name || 'No Board Found'}</BoardName>
 
                             <ShowContainer show={true} mobile={true}>
                             <Tooltip 
@@ -324,7 +373,17 @@ const HomePage = () => {
                         </HeaderWrapper>
                     </HeaderContainer>
                 {/* <BoardSectionWrapper> */}
-                    {currentBoard._id && <BoardPage />   } 
+                    {currentBoard._id && <BoardPage />   }
+                    {
+                    
+                        boards.length <= 0 
+                        && <NoBoardSection>
+                            <NoBoardImg /> 
+                            
+                            <NoBoardTitle>{isLoading && 'jopa'}</NoBoardTitle>
+                            {/* <NoBoardSubtitle>Create One</NoBoardSubtitle> */}
+                        </NoBoardSection>
+                    }
                 {/* </BoardSectionWrapper> */}
             </BoardSectionContainer>
             <BoardSectionFooterContainer>
