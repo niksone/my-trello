@@ -21,10 +21,10 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
     const test = useRef<HTMLSpanElement>(null)
     // const FormIcon = Icon
     const handleAddItem = () => {
-        const text = test?.current?.innerText || '';
+        const text = (test?.current?.innerText || '').trim();
         console.log(text);
         console.log(title);
-        text.trim() !== '' && onAdd(text)
+        text !== '' && onAdd(text)
         test.current && (test.current.innerText = "")
     }
 
