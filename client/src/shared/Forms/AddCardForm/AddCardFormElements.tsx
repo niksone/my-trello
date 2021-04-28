@@ -5,7 +5,7 @@ export const AddCardFormContainer = styled.div`
     height: 85vh;
 
     @media screen and (max-width: 425px){
-        width: 100%;
+        width: 100vw;
         height: 100%;
         flex: 1;
         background-color: var(--color-background-light);
