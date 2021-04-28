@@ -8,9 +8,9 @@ export const FormContainer = styled.form`
     height: fit-content;
 
     @media(max-width: 976px){
-        width: 325px;
+        width: 100%;
         padding-top: 20px;
-        padding-bottom: 40px;
+        padding-bottom: 20px;
     }
 `
 
