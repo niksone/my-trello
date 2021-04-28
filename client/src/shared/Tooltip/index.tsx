@@ -21,7 +21,6 @@ const Tooltip = ({content, children, direction}: React.PropsWithChildren<Tooltip
               offsetX = elemRect && (window.innerWidth - elemRect.right) || 0
         
         setOffset(prev => ({offsetX, offsetY}) || prev) 
-        console.log(offsetX, offsetY);  
         setShow(prev => !prev)
     }
 
@@ -35,7 +34,7 @@ const Tooltip = ({content, children, direction}: React.PropsWithChildren<Tooltip
                 show && (
                     <>
                     <TooltipCloseContainer onClick={handleClick}>
-                        <TooltipContent onClick={(e) => e.stopPropagation()} offsetX={offsetX} offsetY={offsetY}>
+                        <TooltipContent onClick={handleClick} offsetX={offsetX} offsetY={offsetY}>
                             {content}
                         </TooltipContent>
                     </TooltipCloseContainer>
