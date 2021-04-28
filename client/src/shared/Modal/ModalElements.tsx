@@ -24,7 +24,7 @@ export const ModalWrapper = styled.div`
     height: 100%;
     width: 100%;
     background-color: var(--color-primary-grey);
-    opacity: 0.45;
+    opacity: 0.55;
     cursor: pointer;
     z-index: 1;
 
@@ -41,8 +41,8 @@ export const ModalContent = styled.div`
     z-index: 10;
 
 
-    @media screen and (max-width: 425px){
+    /* @media screen and (max-width: 425px){
         height: 100%;
         width: 100%;
-    }
+    } */
 `
