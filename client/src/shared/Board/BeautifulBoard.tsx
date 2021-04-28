@@ -180,7 +180,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
             return
           }
 
-            if (breakpoint.scrollStart <= currentScrollPosition && breakpoint.scrollEnd >= currentScrollPosition){
+            if (breakpoint.scrollStart - 50 <= currentScrollPosition && breakpoint.scrollEnd + 50 >= currentScrollPosition){
               slide(index)
               return
             }
