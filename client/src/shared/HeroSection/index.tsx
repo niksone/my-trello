@@ -59,6 +59,7 @@ export const HeroLeftWrapper = styled.div`
     width: fit-content;
 
     @media(max-width:1280px){
+        width: 90%;
         transform: translate(0);
     }
 `
