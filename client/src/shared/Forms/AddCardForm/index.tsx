@@ -21,6 +21,8 @@ import ProgressBar from '../../ProgressBar'
 import Tooltip from '../../Tooltip'
 import { AddCardFormContainer, AddCardFormWrapper, DeleteIconWrapper, FormMobileBlock, FormMobileTitleContainer, MobileFormContainer } from './AddCardFormElements'
 import SaveIcon from '../../icons/Save/SaveIcon'
+import Div100vh from '../../Div100vh'
+import ConditionalWrapper from '../../ConditionalWrapper'
 
 interface CardFormProps {
     columnId: string,
@@ -69,7 +71,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
     }
     
     return (
-        <>
+        <ConditionalWrapper Wrapper={Div100vh} condition={window.innerWidth <= 425}>
         {/* <ShowContainer mobile={false} show={true}> */}
         <AddCardFormContainer>
         <AddCardFormWrapper>
@@ -336,7 +338,7 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
         </MobileFormContainer> */}
         {/* </ShowContainer> */}
 
-        </ >
+        </ ConditionalWrapper>
 
     )
 }

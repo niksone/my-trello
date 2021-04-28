@@ -22,6 +22,8 @@ import { BoardName } from '.'
 import Tooltip from '../shared/Tooltip'
 import MoreIcon from '../shared/icons/More/MoreIcon'
 import SaveIcon from '../shared/icons/Save/SaveIcon'
+import ConditionalWrapper from '../shared/ConditionalWrapper'
+import Div100vh from '../shared/Div100vh'
 
 interface EditBoardFormProps {
     onExit: () => void,
@@ -37,7 +39,7 @@ export const EditBoardFormContainer = styled.div`
 
     @media screen and (max-width: 425px){
         height: 100%;
-        width: 100%;
+        width: 100vw;
     }
 `
 
@@ -86,6 +88,7 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
     // }
 
     return (
+        <ConditionalWrapper Wrapper={Div100vh} condition={window.innerWidth <= 425}>
         <EditBoardFormContainer>
             <FormWrapper>
             <FormHeaderContainer>
@@ -166,6 +169,7 @@ const EditBoardForm = ({boards, onSave, onExit, userId}: EditBoardFormProps) => 
                 </FormButtonsContainer> */}
             </FormWrapper>
         </EditBoardFormContainer>
+        </ConditionalWrapper>
     )
 }
 
