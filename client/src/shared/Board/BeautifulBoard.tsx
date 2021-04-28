@@ -146,15 +146,16 @@ const BeautifulBoard = ({data}: BoardProps) => {
       return Math.sign(end - start)
     }
 
-    const getPosition = () => {
+    const getPosition = (posLists: List[]) => {
       // console.log(boardRef.current, boardRef.current?.scrollLeft);
       if( boardRef.current && boardRef.current?.scrollLeft !== null){
         const currentScrollPosition = Math.floor(boardRef.current.scrollLeft)
         const initialScrollPosition = Math.floor(boardRef.current.initialScroll)
 
-        if(currentScrollPosition === initialScrollPosition) return
-        // console.log(currentScrollPosition);
-        const breakpoints = lists.map((list, index, arr) => ({
+        // if(currentScrollPosition === initialScrollPosition) return
+        // console.log(currentScrollPosition)
+
+        const breakpoints = posLists.map((list, index, arr) => ({
               scrollStart: index * window.innerWidth,
               scrollEnd: (index) * window.innerWidth + 50 ,
             }))
@@ -163,9 +164,11 @@ const BeautifulBoard = ({data}: BoardProps) => {
           //   scrollEnd: (index) * window.innerWidth ,
           // }))
         
-        console.log('start');
+        // console.log('start');
+        // console.log(breakpoints);
+        // if(breakpoints.map(breakpoint => breakpoint.scrollStart).includes(undefined))
         breakpoints.forEach((breakpoint, index, arr) => {
-          console.log(breakpoint.scrollStart, breakpoint.scrollEnd, currentScrollPosition);
+          // console.log(breakpoint.scrollStart, breakpoint.scrollEnd, currentScrollPosition);
           if(breakpoint.scrollEnd < currentScrollPosition && arr[index + 1].scrollStart > currentScrollPosition && currentScrollPosition > initialScrollPosition){
               slide(index + 1)
               return
@@ -194,24 +197,25 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     useEffect(() => {
+      const debounceFunc = debounce(() => getPosition(lists), 100)
+        // debounce(( ) => {}, 100, { 'leading': true, 'trailing': false })
+        
+
       if(window.innerWidth <= 425){
-        setCurrentListId(prev => lists.length > 0 ? lists[0]._id : '')
+        console.log(lists, 'lists')
+        // slide(lists.length - 1)
+        checkPos()
+        getPosition(lists)  
+        boardRef.current?.addEventListener('touchstart',checkPos, {passive: true  })
+       
 
-        boardRef.current?.addEventListener('touchstart',checkPos
-        )
-
-        boardRef.current?.addEventListener('scroll',
-          debounce(() => {}, 100,
-          { 'leading': true, 'trailing': false })
-        ) 
-
-        boardRef.current?.addEventListener('scroll',
-          debounce(getPosition, 100,)
-        ) 
-        console.log(boardRef.current?.scrollLeft, 'test');
-        // setCurrentScroll(prev => boardRef.current?.scrollLeft)
-        // console.log(currentScroll);
+        boardRef.current?.addEventListener('scroll', debounceFunc)
         console.log(currentListId);
+      }
+
+      return () => {
+        boardRef.current?.removeEventListener('scroll', debounceFunc)
+        // boardRef.current?.removeEventListener('touchstart', checkPos)
       }
     }, [lists])
 
