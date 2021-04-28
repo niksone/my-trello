@@ -25,6 +25,8 @@ import MoreIcon from '../shared/icons/More/MoreIcon'
 import TrashcanIcon from '../shared/icons/Trashcan/TrashcanIcon'
 import OrderIcon from '../shared/icons/Order/OrderIcon'
 import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
+import LogoutIcon from '../shared/icons/Logout/LogoutIcon'
+import { addList } from '../redux/AddItem/actionCreators'
 // import NoBoardImg from '../shared/icons/no-board.svg'
 export const AppContainer = styled.div`
     height: 100%;
@@ -71,6 +73,8 @@ export const BoardLinksContainer = styled.div`
 
 export const BoardLinkWrapper = styled.div<BoardLinkContainer>`
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80%;
 
     &::after{
@@ -135,7 +139,7 @@ interface LogoI {
 }
 
 export const LogoImgWrapper = styled.div`
-    margin-right: 30px;
+    margin-right: 15px;
 `
 
 interface ShowContainerProps {
@@ -194,6 +198,8 @@ export const NoBoardSubtitle =styled.p`
 const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
     const [showModal, setShowModal] = useState(false)
+    const [showListModal, setShowListModal] = useState(false)
+
     const modalRef = useRef<ModalHandle>(null)
 
     const [showEditBoardModal, setShowEditBoardModal] = useState(false)
@@ -218,12 +224,18 @@ const HomePage = () => {
         setShowModal(false)
     }
 
+    const handleAddList = (text: string) => {
+        dispatch(addList(currentBoard._id, text))
+        setShowListModal(false)
+    }
+
     const handleSave = (boards: Board[]) => {
         console.log(boards);
     }
 
     useEffect(() => {
         dispatch(getBoards(user))
+        console.log('rerendre home');
         // boards.length > 0 && <Redirect to={`/board/${boards[0]._id}`}/>
     }, [dispatch, user])
 
@@ -238,7 +250,6 @@ const HomePage = () => {
     return (
         
         <AppContainer>
-            <p>{isLoading && 'jopa'}</p>
             <BoardSidebarContainer show={showSidebar}>
                 <BoardSidebarClose onClick={() => setShowSidebar(false)} show={showSidebar}>
 
@@ -296,7 +307,7 @@ const HomePage = () => {
                                     <EditBoardForm 
                                         onExit={() => setShowEditBoardModal(false)}
                                         boards={boards}
-                                        onSave={() => {}}
+                                        onSave={() => setShowEditBoardModal(false)}
                                         userId={user}
                                         // onSave={(boards: SimpleBoard[]) => handleSave()}
                                     />
@@ -335,17 +346,23 @@ const HomePage = () => {
                             <Tooltip 
                                 content={
                                     <ButtonGroup direction='column' spacing={2}>
-                                        <Button onClick={() => {}}
-                                        Icon={AddIcon}>
-                                            Add List
-                                        </Button>
-                                        <Button onClick={() => {}}
-                                        Icon={OrderIcon}>
-                                            Move List
-                                        </Button>
+                                        {
+                                            currentBoard._id && (
+                                                <>
+                                            <Button onClick={() => setShowListModal(true)}
+                                            Icon={AddIcon}>
+                                                Add List
+                                            </Button>
+                                            <Button onClick={() => {}}
+                                            Icon={OrderIcon}>
+                                                Move List
+                                            </Button>
+                                            </>
+                                            )
+                                        }
                                         <Button 
                                             onClick={handleLogout}
-                                            Icon={TrashcanIcon}
+                                            Icon={LogoutIcon}
                                             colorScheme='error'
                                         >
                                             Log Out
@@ -376,7 +393,7 @@ const HomePage = () => {
                     {currentBoard._id && <BoardPage />   }
                     {
                     
-                        boards.length <= 0 
+                        !currentBoard._id 
                         && <NoBoardSection>
                             <NoBoardImg /> 
                             
@@ -386,10 +403,14 @@ const HomePage = () => {
                     }
                 {/* </BoardSectionWrapper> */}
             </BoardSectionContainer>
-            <BoardSectionFooterContainer>
-                
-            </BoardSectionFooterContainer>
+            {
+                showListModal && 
+                <Modal ref={modalRef} show={showListModal} exit={() => setShowListModal(false)}>
+                    <AddItemForm btnItem='ADD' item='FORM' title='Add List' onAdd={(title: string) => handleAddList(title)} /> 
+                </Modal>
+            }
         </AppContainer>
+        
     )
 }
 
