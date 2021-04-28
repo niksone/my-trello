@@ -57,7 +57,7 @@ export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
 
 
     @media screen and (max-width: 425px){
-        width: 80%;
+        min-width: 80vw;
     }
 `
 
