@@ -46,17 +46,16 @@ const ButtonGroupContainer = styled.div<ButtonGroupContainerProps>`
 `
 
 interface ButtonGroupProps{
-    children: JSX.Element[],
     spacing: number,
     widthFill?: boolean
     direction?: 'row' | 'column'
 }
 
-const ButtonGroup = ({children, spacing, widthFill = false, direction}: ButtonGroupProps) => {
+const ButtonGroup = ({children, spacing, widthFill = false, direction}: React.PropsWithChildren<ButtonGroupProps>) => {
 
     return (
         <ButtonGroupContainer 
-            columns={children.length} 
+            columns={React.Children.count(children)} 
             spacing={spacing} 
             direction={direction || 'row'}
             widthFill={widthFill}
