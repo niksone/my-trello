@@ -152,7 +152,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
         const currentScrollPosition = Math.floor(boardRef.current.scrollLeft)
         const initialScrollPosition = Math.floor(boardRef.current.initialScroll)
 
-        // if(currentScrollPosition === initialScrollPosition) return
+        if(currentScrollPosition === initialScrollPosition) return
         // console.log(currentScrollPosition)
 
         const breakpoints = posLists.map((list, index, arr) => ({
