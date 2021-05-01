@@ -4,6 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import { store } from './redux/store';
+import smoothscroll from 'smoothscroll-polyfill';
+
+smoothscroll.polyfill()
 
 ReactDOM.render(
   <Provider store={store}>
