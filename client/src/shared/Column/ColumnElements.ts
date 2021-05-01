@@ -75,7 +75,7 @@ export const ColumnCardContainer = styled.div`
     justify-content: space-between;
     /* padding: 10px; */
     padding-top: 0;
-    overflow: auto;
+    /* overflow-y: auto; */
 
     @media screen and (max-width: 425px){
         height: auto;
