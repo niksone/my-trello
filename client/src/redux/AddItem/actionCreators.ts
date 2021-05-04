@@ -80,15 +80,6 @@ export const updateListTitle = (boardId: string, listId: string, title: string) 
     }
 }
 
-// export const updateTaskText = (boardId: string, listId: string, taskId: string, text: string) => async (dispatch: Dispatch<AddItemAction>) => {
-//     try {
-//         dispatch({type: 'EDIT_CARD', payload: {listId, taskId, text}})
-//         await boardApi.editTaskText(boardId, listId, taskId, text)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
 export const moveList = (boardId: string, sourceIndex: number, destinationIndex: number) => async (dispatch: Dispatch<AddItemAction>) => {
     try {
         dispatch({type: 'MOVE_LIST', payload: {sourceIndex, destIndex: destinationIndex}})

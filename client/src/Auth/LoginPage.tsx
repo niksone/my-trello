@@ -1,6 +1,4 @@
-import axios from 'axios'
 import React, { useContext, useState } from 'react'
-import { AuthContainer, AuthForm, AuthFormButton, AuthFormInput, AuthFormLink, AuthFormTitle } from './AuthElements'
 import { userContext } from '../Context';
 import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, HeroRight, HeroRightTextWrapper, HeroSubtitle, HeroTextWrapper, HeroTitle } from '../shared/HeroSection';
 import { FormContainer, FormError, FormInputsContainer } from '../shared/FormControl';

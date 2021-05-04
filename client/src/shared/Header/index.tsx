@@ -8,15 +8,6 @@ import { HeaderContainer } from './HeaderElements'
 const Header = () => {
     const {isAuth, getAuth} = useContext(userContext)
 
-    const logout = async () => {
-        axios({
-            method: 'POST',
-            url: `/logout`
-        }).then(res => {
-            getAuth()
-            console.log(res.data);
-        })
-    }
     return (
         <HeaderContainer>
             
