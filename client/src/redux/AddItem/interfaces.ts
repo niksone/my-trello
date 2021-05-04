@@ -27,8 +27,6 @@ export interface AddItemState {
     name: string,
     lists: List[],
     cardIds: string[],
-    draggedListId: string,
-    draggedCardId: string,
     isLoading?: boolean
 }
 

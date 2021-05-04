@@ -22,8 +22,6 @@ const initialState = {
     name: '',
     lists: [],
     cardIds: [],
-    draggedListId: '',
-    draggedCardId: '',
     isLoading: true
 }
 
@@ -122,21 +120,6 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
             moveItemBetweenLists(state.lists[sourceArrIndex].cards, state.lists[destArrIndex].cards, sourceCardIndex, destCardIndex)
             state.cardIds = getCards(state.lists)
             return {...state}
-        }
-
-        case 'SET_DRAGGED_LIST':{
-            console.log(`dragged Lsit ${action.payload}`)
-            return {
-                ...state,
-                draggedListId: action.payload
-            }
-        }
-
-        case 'SET_DRAGGED_CARD': {
-            return {
-                ...state,
-                draggedCardId: action.payload
-            }
         }
 
         case 'UPDATE_TASK':{
