@@ -113,10 +113,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
         return
       } 
       if(type === 'COLUMN'){
-        const sourceIndex = source.index
-        const destIndex = destination.index
-        dispatch(moveList(boardId, sourceIndex, destIndex))
-        return 
+        return dispatch(moveList(boardId, source.index, destination.index))
       }else{
         const sourceDroppableId = source.droppableId
         const destDroppableId = destination.droppableId
@@ -126,7 +123,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
       }
     }
 
-    const slide = (index: any) => {
+    const slide = (index: number) => {
       if(lists[index]){
         boardRef.current?.scrollTo({
           top: 0,
@@ -139,11 +136,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
     const findListIndex = () => {
       return lists.findIndex(list => list._id === currentListId)
-    }
-
-    const getDirection = (start: number, end: number) => {
-      console.log('sign',Math.sign(end - start), end, start);
-      return Math.sign(end - start)
     }
 
     const getPosition = (posLists: List[]) => {
@@ -198,12 +190,14 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
     useEffect(() => {
       const debounceFunc = debounce(() => getPosition(lists), 100)
+      console.log('board')
         // debounce(( ) => {}, 100, { 'leading': true, 'trailing': false })
         
 
       if(window.innerWidth <= 425){
         console.log(lists, 'lists')
         // slide(lists.length - 1)
+        setCurrentListId(prev => lists[0]?._id || prev)
         checkPos()
         getPosition(lists)  
         boardRef.current?.addEventListener('touchstart',checkPos, {passive: true  })
@@ -215,16 +209,13 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
       return () => {
         boardRef.current?.removeEventListener('scroll', debounceFunc)
-        // boardRef.current?.removeEventListener('touchstart', checkPos)
+        boardRef.current?.removeEventListener('touchstart', checkPos)
       }
     }, [lists])
 
     return (
       <>
-      <BoardSectionWrapper
-      //  {...handlers}  ref={e => refPassthrough(e as HTMLElement)} 
-      ref={boardRef}
-       >
+      <BoardSectionWrapper ref={boardRef}>
         <BoardContainer >
           {/* <BoardWrapper> */}
           <DragDropContext onDragEnd={res => handleDrop(res)}>
@@ -303,6 +294,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
             </BoardFooterNav>
           </BoardFooterContainer>
         </ShowContainer>
+
       </>
     )
 
