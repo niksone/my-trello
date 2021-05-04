@@ -7,7 +7,7 @@ type FormVariant = 'icon' | 'default'
 
 
 interface AddItemFormProps {
-    title: string,
+    title?: string,
     placeholder?: string
     onAdd(text: string): void
     item?: AddItemContainerTypes,
