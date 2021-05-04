@@ -38,28 +38,29 @@ class UserController {
                 res.status(500).send('Wrong values')
                 return
             }
-        
-            User.findOne({email}, async (err: Error, user:  UserI) => {
-                if(err) throw err
-                if(user) res.status(500).send({message: 'User already exist'})
-                if(!user){
-                    const hashedPassword = await bcrypt.hash(password, 10)
-                    const newUser = new User({
-                        email,
-                        password: hashedPassword,
-                        boardIds: []
-                    })
-        
-                    await newUser.save()
-                    req.logIn(newUser, (err: Error) => {
-                        if(err) next(err)
-                        req.session.save(err => {
-                            console.log(req.session)
-                            res.redirect('/user')
+            else{
+                User.findOne({email}, async (err: Error, user:  UserI) => {
+                    if(err) throw err
+                    if(user) res.status(500).send({message: 'User already exist'})
+                    if(!user){
+                        const hashedPassword = await bcrypt.hash(password, 10)
+                        const newUser = new User({
+                            email,
+                            password: hashedPassword,
+                            boardIds: []
                         })
-                    })
-                }          
-            })
+            
+                        await newUser.save()
+                        req.logIn(newUser, (err: Error) => {
+                            if(err) next(err)
+                            req.session.save(err => {
+                                console.log(req.session)
+                                res.redirect('/user')
+                            })
+                        })
+                    }          
+                })
+            }
         } catch (error) {
             console.log(error)
         }
@@ -68,7 +69,6 @@ class UserController {
     async checkUserExist(req: Request, res: Response) {
         try {
             const {email, password} = req?.body;
-
             User.findOne({email}, async (err: Error, user:  UserI) => {
                 if(err) throw err
                 if(user) res.send(true)
