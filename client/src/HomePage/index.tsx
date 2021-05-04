@@ -26,7 +26,9 @@ import TrashcanIcon from '../shared/icons/Trashcan/TrashcanIcon'
 import OrderIcon from '../shared/icons/Order/OrderIcon'
 import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
 import LogoutIcon from '../shared/icons/Logout/LogoutIcon'
-import { addList } from '../redux/AddItem/actionCreators'
+import { addList, moveList } from '../redux/AddItem/actionCreators'
+import MoveItemsForm from '../shared/Forms/MoveItemsForm'
+import EditListsForm from './EditListsForm'
 // import NoBoardImg from '../shared/icons/no-board.svg'
 export const AppContainer = styled.div`
     height: 100%;
@@ -47,20 +49,6 @@ export const BoardSectionContainer = styled.div`
         padding: 0;
     }
 `
-
-// export const BoardSectionWrapper = styled.div`
-//     width: 100%;
-//     height: calc(100% - 85px);
-//     background-color: #fff;
-
-//     & > {
-//         padding-right: 10px;
-//     }
-
-//     @media screen and (max-width: 425px){
-//         background-color:var(--color-background-light);
-//     }
-// `
 
 
 export const BoardLinksContainer = styled.div`
@@ -169,11 +157,7 @@ export const NoBoardSection = styled.div`
     background-color: var(--color-background-light);
 
     & > svg{
-        /* width: 80%;
-        height: 80%; */
-
         margin-bottom: 35px;
-
     }
 
     @media screen and (max-width: 425px){
@@ -197,18 +181,25 @@ export const NoBoardSubtitle =styled.p`
 
 const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
+    const dispatch = useDispatch()
+
+
     const [showModal, setShowModal] = useState(false)
     const [showListModal, setShowListModal] = useState(false)
-
-    const modalRef = useRef<ModalHandle>(null)
-
+    const [showMoveListModal, setShowMoveListModal] = useState(false)
     const [showEditBoardModal, setShowEditBoardModal] = useState(false)
-    const editBoardModalRef = useRef<ModalHandle>(null);
+    const [showEditListModal, setShowEditListModal] = useState(false)
+
 
     const [showSidebar, setShowSidebar] = useState(false)
 
+    const modalRef = useRef<ModalHandle>(null)
+
+    const editBoardModalRef = useRef<ModalHandle>(null);
+
     const {boards, isLoading} = useSelector((state: RootReducerType) => state.boards)
-    const dispatch = useDispatch()
+
+    const {lists} = useSelector((state: RootReducerType) => state.addItem)
 
     const {id} = useParams<{id: string}>()
 
@@ -229,14 +220,13 @@ const HomePage = () => {
         setShowListModal(false)
     }
 
-    const handleSave = (boards: Board[]) => {
-        console.log(boards);
+
+    const handleListMove = (sourceIndex: number, destIndex: number) => {
+        dispatch(moveList(currentBoard._id, sourceIndex, destIndex))
     }
 
     useEffect(() => {
         dispatch(getBoards(user))
-        console.log('rerendre home');
-        // boards.length > 0 && <Redirect to={`/board/${boards[0]._id}`}/>
     }, [dispatch, user])
 
     if(boards.length > 0 && !id){
@@ -349,15 +339,19 @@ const HomePage = () => {
                                         {
                                             currentBoard._id && (
                                                 <>
-                                            <Button onClick={() => setShowListModal(true)}
-                                            Icon={AddIcon}>
-                                                Add List
-                                            </Button>
-                                            <Button onClick={() => {}}
-                                            Icon={OrderIcon}>
-                                                Move List
-                                            </Button>
-                                            </>
+                                                    <Button onClick={() => setShowListModal(true)}
+                                                    Icon={AddIcon}>
+                                                        Add List
+                                                    </Button>
+                                                    <Button onClick={() => setShowEditListModal(true)}
+                                                    Icon={EditIcon}>
+                                                        Edit Lists
+                                                    </Button>
+                                                    <Button onClick={() => setShowMoveListModal(true)}
+                                                    Icon={OrderIcon}>
+                                                        Move Lists
+                                                    </Button>
+                                                </>
                                             )
                                         }
                                         <Button 
@@ -389,19 +383,15 @@ const HomePage = () => {
 
                         </HeaderWrapper>
                     </HeaderContainer>
-                {/* <BoardSectionWrapper> */}
-                    {currentBoard._id && <BoardPage />   }
-                    {
-                    
-                        !currentBoard._id 
-                        && <NoBoardSection>
+                    {currentBoard._id 
+                        ? <BoardPage />   
+                        : <NoBoardSection>
                             <NoBoardImg /> 
                             
                             <NoBoardTitle>{isLoading && 'jopa'}</NoBoardTitle>
                             {/* <NoBoardSubtitle>Create One</NoBoardSubtitle> */}
                         </NoBoardSection>
                     }
-                {/* </BoardSectionWrapper> */}
             </BoardSectionContainer>
             {
                 showListModal && 
@@ -409,6 +399,31 @@ const HomePage = () => {
                     <AddItemForm btnItem='ADD' item='FORM' title='Add List' onAdd={(title: string) => handleAddList(title)} /> 
                 </Modal>
             }
+            {
+                showMoveListModal && 
+                <Modal ref={modalRef} show={showMoveListModal} exit={() => setShowMoveListModal(false)}>
+                    <MoveItemsForm 
+                        headerTitle='Move Lists'
+                        title='Move List'
+                        subtitle='Simply change lists order using Drag and Drop'
+                        items={currentBoard.lists}
+                        itemLabelField='title'
+                        onUpdate={(sourceIndex: number, destIndex: number) => handleListMove(sourceIndex, destIndex)}
+                        onExit={() => setShowMoveListModal(false)}
+                    />
+                </Modal>
+            }
+            { showEditListModal &&
+                <Modal ref={modalRef} show={showEditListModal} exit={() => setShowEditListModal(false)}>
+                    <EditListsForm 
+                        onExit={() => setShowEditListModal(false)}
+                        lists={lists}
+                        boardId={currentBoard._id}
+                        // onSave={(boards: SimpleBoard[]) => handleSave()}
+                    />
+                </Modal>
+            }   
+            
         </AppContainer>
         
     )
