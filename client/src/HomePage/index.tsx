@@ -406,7 +406,7 @@ const HomePage = () => {
                         headerTitle='Move Lists'
                         title='Move List'
                         subtitle='Simply change lists order using Drag and Drop'
-                        items={currentBoard.lists}
+                        items={lists}
                         itemLabelField='title'
                         onUpdate={(sourceIndex: number, destIndex: number) => handleListMove(sourceIndex, destIndex)}
                         onExit={() => setShowMoveListModal(false)}
