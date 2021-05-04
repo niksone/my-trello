@@ -16,19 +16,13 @@ export const ColumnContainer = styled.div<ColumnContainerProps>`
 `
 
 export const ColumnWrapper = styled.div<ColumnContainerProps>`
-/* display: flex; */
-    /* flex-direction: column; */
     display: flex;
     flex-direction: column;
     width: 400px;
     background: #fff;
-    height: 100%;
     opacity: ${({isOver}) => isOver ? '0.3' : '1'};
     border: 2px var(--color-resting-outline) dashed;
-    /* transform: rotateZ(${({isDragging}) => isDragging ? '5deg' : '0'}); */
-    /* height: max-content; */
     padding:20px;
-    /* padding-bottom: 10px; */
     border-radius: 5px;
     z-index: 1;
 
