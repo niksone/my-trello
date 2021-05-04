@@ -23,6 +23,7 @@ import { AddCardFormContainer, AddCardFormWrapper, DeleteIconWrapper, FormMobile
 import SaveIcon from '../../icons/Save/SaveIcon'
 import Div100vh from '../../Div100vh'
 import ConditionalWrapper from '../../ConditionalWrapper'
+import FormHeader from '../FormHeader'
 
 interface CardFormProps {
     columnId: string,
@@ -72,7 +73,6 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
     
     return (
         <ConditionalWrapper Wrapper={Div100vh} condition={window.innerWidth <= 425}>
-        {/* <ShowContainer mobile={false} show={true}> */}
         <AddCardFormContainer>
         <AddCardFormWrapper>
         <FormWrapper>
@@ -102,32 +102,15 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                 </FormContainer>
             </FormHeaderContainer>
                     
-                <FormTitleContainer>
-                    <FormContainer>
-                    <FormTitle>
-                        <EditableItem
-                            initialText={card.title}
-                            deleteItem={() => {}}
-                            editItem={() => {}}
-                            placeholder='Enter Title'
-                            updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
-                        />
-                    </FormTitle>
-                    <FormSubtitle>
-                        <EditableItem
-                            initialText={card.subtitle}
-                            deleteItem={() => {}}
-                            editItem={() => {}}
-                            placeholder='Enter subtitle'
-                            updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
-                        />
-                    </FormSubtitle>
-                    </FormContainer>
-                </FormTitleContainer>
+                <FormHeader
+                    title={card.title}
+                    handleTitleUpdate={(title) => handleUpdate(title, card.subtitle, card.description, card.tasks)}
+                    subtitle={card.subtitle}
+                    handleSubtitleUpdate={(subtitle) => handleUpdate(card.title, subtitle, card.description, card.tasks)}
+                    // editable
+                />
                     <FormContent>
                 <FormContainer>
-                        {/* <FormBlock> */}
-                        {/* </FormBlock> */}
                         <FormBlock>
                             <FormDescriptionContainer>
                                 <FormBlockTitle>
@@ -191,152 +174,9 @@ const CardForm = ({columnId, cardId, title, subtitle, description, tasks, onExit
                     }
                     </FormContainer>
                     </FormContent>
-
-                {/* <FormButtonsContainer>
-                    <ButtonGroup spacing={10}>
-                        <Button onClick={onExit}>Close</Button>
-                        <Button onClick={handleSave}>Save</Button>
-                    </ButtonGroup>
-                </FormButtonsContainer> */}
             </FormWrapper>
             </AddCardFormWrapper>
             </AddCardFormContainer>
-            {/* </ShowContainer> */}
-        
-
-
-
-                {/* MOBILE props -> boardName */}
-        {/* <ShowContainer show={true} mobile={true}> */}
-        {/* <MobileFormContainer>
-            <AppContainer>
-            <BoardSectionContainer>
-            <AddCardFormContainer>
-            <AddCardFormWrapper>
-            <FormWrapper>
-                                <FormHeaderContainer>
-                        <FormHeaderWrapper>
-                            <Button shape='icon' variant='outline' size='lg'
-                            onClick={onExit}>
-                                <ArrowIcon direction='left' />
-                            </Button>
-                        <BoardName>Edit Card</BoardName>
-
-                        <Tooltip
-                            content={
-                                    <Button onClick={() => {}}
-                                    Icon={TrashcanIcon}>
-                                        Delete Card
-                                    </Button>
-                            } 
-                            direction='bottom'
-                            >
-                            <Button shape='icon' variant='outline' size='lg'>
-                                <MoreIcon />
-                            </Button>
-                        </Tooltip>
-                    </FormHeaderWrapper>
-                </FormHeaderContainer>
-                <FormMobileTitleContainer>
-                    <FormMobileBlock>
-                    <FormContainer>
-
-                        <FormTitle>
-                            <EditableItem
-                                initialText={card.title}
-                                deleteItem={() => {}}
-                                editItem={() => {}}
-                                placeholder='Enter Title'
-                                updateItem={(text) => handleUpdate(text, card.subtitle, card.description, card.tasks)}
-                                />
-                        </FormTitle>
-                        <FormSubtitle>
-                            <EditableItem
-                                initialText={card.subtitle}
-                                deleteItem={() => {}}
-                                editItem={() => {}}
-                                placeholder='Enter subtitle'
-                                updateItem={(text) => handleUpdate(card.title, text, card.description, card.tasks)}
-                                />
-                        </FormSubtitle>
-                        </FormContainer>
-                    </FormMobileBlock>
-                </FormMobileTitleContainer>
-                <FormContent>
-
-                <FormBlock>
-                        <FormDescriptionContainer>
-                            <FormBlockTitle>
-                                Description
-                            </FormBlockTitle>
-                            <FormDescription>
-                                <EditableItem
-                                    initialText={card.description}
-                                    deleteItem={() => {}}
-                                    editItem={() => {}}
-                                    placeholder='Enter Description'
-                                    updateItem={(text) => handleUpdate(card.title, card.subtitle, text, card.tasks)}
-                                />
-                            </FormDescription>
-                        </FormDescriptionContainer>
-                    </FormBlock>
-                {card.tasks &&
-                    <FormBlock>
-                        <FormChecklistContainer>
-                            <FormChecklistTitle>
-                                <FormBlockTitle>Checklist</FormBlockTitle>
-                                <FormChecklistDone>{getCompletedTasks(card.tasks)} / {card.tasks.length}</FormChecklistDone>
-                            </FormChecklistTitle>  
-                            <ProgressBar variant='default' value={getCompletedTasks(card.tasks) / card.tasks.length * 100 || getCompletedTasks(card.tasks)}/>
-                            <FormChecklistItemsWrapper>
-                                <FormListItems>
-                                    {card.tasks?.map(task =>
-                                        <FormListItem
-                                            key={task._id} 
-                                        >
-                                            <Checkbox 
-                                                checked={task.completed} 
-                                                key={task._id} 
-                                                onChange={() => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, task.text, !task.completed))}
-                                            >
-                                                <EditableItem 
-                                                    initialText={task.text}
-                                                    deleteItem={() => {}}
-                                                    editItem={(text: string) => {}}
-                                                    placeholder='Enter task text'
-                                                    updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
-                                                />
-                                            </Checkbox>
-                                            <DeleteIconWrapper onClick={() => handleUpdate(card.title, card.subtitle, card.description, removeTask(task._id, card.tasks))}>
-                                                <TrashcanIcon />
-                                            </DeleteIconWrapper>
-                                        </FormListItem>
-
-                                    )}
-                                    <AddItemForm 
-                                        title='Add new Task' 
-                                        placeholder='Start Typing...'
-                                        item='TASK'
-                                        onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}
-                                    />
-                                </FormListItems>
-                            </FormChecklistItemsWrapper>
-                        </FormChecklistContainer>
-    
-                    </FormBlock>
-                }
-                </FormContent>
-                
-                {/* <FormContainer>
-                    <Button onClick={handleSave} widthFill>Save</Button>
-                </FormContainer> 
-                </FormWrapper>
-            </AddCardFormWrapper>
-            </AddCardFormContainer>
-            </BoardSectionContainer>
-            </AppContainer>
-        </MobileFormContainer> */}
-        {/* </ShowContainer> */}
 
         </ ConditionalWrapper>
 
