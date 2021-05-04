@@ -29,10 +29,6 @@ export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
 
   & > div{
     margin: 0 8px;
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateX(${({count}) => count ? `${count * 100}%` + `${4 * count}px` : 0}); */
   } 
 
   @media screen and (max-width:425px){
@@ -55,14 +51,6 @@ interface BoardColumnWrapperProps {
 export const BoardColumnWrapper = styled.div<BoardColumnWrapperProps>`
   display: flex;
   flex-direction: column;
-    /* ${({isDragging, isOver, count}) => !isDragging && count && `
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      transform: translateX(calc(${count * 100}% + ${16 * count}px));
-      z-index: 0;
-  `} */
 `
 
 export const BoardFooterContainer = styled.div`
@@ -139,64 +127,46 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     const getPosition = (posLists: List[]) => {
-      // console.log(boardRef.current, boardRef.current?.scrollLeft);
       if( boardRef.current && boardRef.current?.scrollLeft !== null){
         const currentScrollPosition = Math.floor(boardRef.current.scrollLeft)
         const initialScrollPosition = Math.floor(boardRef.current.initialScroll)
 
         if(currentScrollPosition === initialScrollPosition) return
-        // console.log(currentScrollPosition)
 
         const breakpoints = posLists.map((list, index, arr) => ({
-              scrollStart: index * window.innerWidth,
-              scrollEnd: (index) * window.innerWidth + 50 ,
-            }))
-          // : lists.map((list, index, arr) => ({
-          //   scrollStart: (iwwndex + 1) * window.innerWidth - 50,
-          //   scrollEnd: (index) * window.innerWidth ,
-          // }))
-        
-        // console.log('start');
-        // console.log(breakpoints);
-        // if(breakpoints.map(breakpoint => breakpoint.scrollStart).includes(undefined))
+          scrollStart: index * window.innerWidth,
+          scrollEnd: (index) * window.innerWidth + 50 ,
+        }))
+
         breakpoints.forEach((breakpoint, index, arr) => {
-          // console.log(breakpoint.scrollStart, breakpoint.scrollEnd, currentScrollPosition);
           if(breakpoint.scrollEnd < currentScrollPosition && arr[index + 1].scrollStart > currentScrollPosition && currentScrollPosition > initialScrollPosition){
-              slide(index + 1)
-              return
+              return slide(index + 1)
           } 
 
-          else if(breakpoint.scrollStart - 50 >= currentScrollPosition && arr[index - 1].scrollEnd < currentScrollPosition  && currentScrollPosition < initialScrollPosition) {
-            slide(index - 1)
-            // setCurrentListId(prev => lists[index - 1]._id)
-            return
+          if(breakpoint.scrollStart - 50 >= currentScrollPosition && arr[index - 1].scrollEnd < currentScrollPosition  && currentScrollPosition < initialScrollPosition) {
+            return slide(index - 1)
           }
 
-            if (breakpoint.scrollStart - 50 <= currentScrollPosition && breakpoint.scrollEnd + 50 >= currentScrollPosition){
-              slide(index)
-              return
-            }
-          })
+          if (breakpoint.scrollStart - 50 <= currentScrollPosition && breakpoint.scrollEnd + 50 >= currentScrollPosition){
+            return slide(index)
+          }
+        })
 
         console.log(currentScrollPosition, boardRef.current.initialScroll, breakpoints)
       }
     }
 
     const checkPos = () => {
-      // setCurrentScroll(prev => boardRef.current?.scrollLeft || prev)
       boardRef.current && (boardRef.current.initialScroll = boardRef.current?.scrollLeft )
-      // alert( boardRef.current?.scrollLeft +  'curr scroll')
     }
 
     useEffect(() => {
       const debounceFunc = debounce(() => getPosition(lists), 100)
       console.log('board')
-        // debounce(( ) => {}, 100, { 'leading': true, 'trailing': false })
         
 
       if(window.innerWidth <= 425){
         console.log(lists, 'lists')
-        // slide(lists.length - 1)
         setCurrentListId(prev => lists[0]?._id || prev)
         checkPos()
         getPosition(lists)  
@@ -217,7 +187,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
       <>
       <BoardSectionWrapper ref={boardRef}>
         <BoardContainer >
-          {/* <BoardWrapper> */}
           <DragDropContext onDragEnd={res => handleDrop(res)}>
             <Droppable droppableId='droppable' type='COLUMN' direction='horizontal' >
               {(provided, snapshot) => (
@@ -228,7 +197,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 >
                   <BoardColumnContainer>
                   {lists?.map((list: List, index: number) => (
-                    // <BoardColumnWrapper count={index} key={list._id}>
                       <BeautifulDragColumn 
                         list={list}
                         index={index}
@@ -238,7 +206,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
                         key={list._id}
                         onAdd={(text: string)=>dispatch(addCard(_id, list._id, text))}
                       />
-                    // </BoardColumnWrapper>
                   ))}
                   {provided.placeholder}
                   </BoardColumnContainer>
@@ -248,7 +215,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
         </DragDropContext>
         <ShowContainer mobile={false} show={true}>
         <BoardColumnContainer>
-          {/* <BoardColumnWrapper count={lists.length - 1}> */}
             <ColumnWrapper>
               <AddColumnContainer>
               <Button 
@@ -268,10 +234,8 @@ const BeautifulBoard = ({data}: BoardProps) => {
               }
               </AddColumnContainer>
             </ColumnWrapper>
-          {/* </BoardColumnWrapper> */}
         </BoardColumnContainer>
         </ShowContainer>
-        {/* </BoardWrapper> */}
         </BoardContainer>
       </BoardSectionWrapper>
         <ShowContainer mobile={true} show={true}>
