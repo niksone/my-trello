@@ -10,7 +10,7 @@ import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
 import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
 import Tooltip from '../../Tooltip'
-import { AddCardFormContainer, AddCardFormWrapper } from '../AddCardForm/AddCardFormElements'
+import { CardFormContainer, CardFormWrapper } from '../CardForm/CardFormElements'
 import { FormBlock, FormBlockTitle, FormChecklistContainer, FormChecklistDone, FormChecklistTitle, FormContainer, FormContent, FormDescription, FormDescriptionContainer, FormHeaderContainer, FormHeaderWrapper, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
 

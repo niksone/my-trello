@@ -11,7 +11,7 @@ import AddIcon from '../../icons/Add/AddIcon'
 import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
 import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
-import { DeleteIconWrapper } from '../AddCardForm/AddCardFormElements'
+import { DeleteIconWrapper } from '../CardForm/CardFormElements'
 import { FormBlock, FormContainer, FormContent, FormHeaderContainer, FormHeaderWrapper, FormListItem, FormListItems, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
 

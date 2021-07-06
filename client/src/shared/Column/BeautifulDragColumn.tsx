@@ -12,7 +12,7 @@ import Button from '../Buttons'
 import BeautifulCard from '../Card/BeautifulCard'
 import { CardContainer } from '../Card/CardElements'
 import EditableItem from '../EditableItem'
-import CardForm from '../Forms/AddCardForm'
+import CardForm from '../Forms/CardForm'
 import AddIcon from '../icons/Add/AddIcon'
 import {Modal, ModalHandle } from '../Modal'
 import { AddCardContainer, ColumnCardContainer, ColumnCardWrapper, ColumnContainer, ColumnTitle, ColumnTitleContainer, ColumnWrapper } from './ColumnElements'
@@ -103,6 +103,7 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                               showModal &&
                                 <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
                                   <CardForm 
+                                    boardName='Add Card'
                                     title=''
                                     subtitle=''
                                     description=''
