@@ -15,7 +15,9 @@ import Tooltip from '../Tooltip'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import EditIcon from '../icons/Edit/EditIcon'
 import TrashcanIcon from '../icons/Trashcan/TrashcanIcon'
-import CardForm from '../Forms/AddCardForm'
+import CardForm from '../Forms/CardForm'
+
+import CardHeader from './CardHeader'
 
 interface CardPropsI {
     cardId: string,
@@ -69,7 +71,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
           > 
             <CardContainer onClick={() => setShowModal(true)} isDragging={snapshot.isDragging}>
               <CardContainerBlock>
-                <CardTitleContainer>
+                {/* <CardTitleContainer>
                   <CardTitleWrapper>
                     <CardTitle>{card.title}</CardTitle>
                     <CardSubtitle>{card.subtitle}</CardSubtitle>
@@ -102,7 +104,14 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                       <MoreIcon />
                     </Button>
                   </Tooltip>
-                </CardTitleContainer>
+                </CardTitleContainer> */}
+                <CardHeader
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  headerTitle='Edit Card'
+                  onClick={() => setShowModal(true)}
+                  onDelete={handleDeleteCard}
+                />
               </CardContainerBlock>
               {
                 card.description !== '' &&
@@ -132,6 +141,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
             {showModal &&
               <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
                 <CardForm
+                boardName='Edit Card'
                   columnId={listId}
                   cardId={card._id}
                   title={card.title}
@@ -140,7 +150,6 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                   tasks={card.tasks}
                   onExit={() => modalRef.current.close()}
                   onSave={(savedCard: SimpleCard) => handleSave(savedCard)}
-                  
                 />
               </Modal>
             }
