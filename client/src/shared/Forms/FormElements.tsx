@@ -94,7 +94,11 @@ line-height: 3.2rem;
 export const FormDescriptionContainer = styled.div``
 
 export const FormDescription = styled.p`
-font-size: var(--text-regular);
+    font-size: var(--text-regular);
+`
+
+export const FormText = styled.p`
+    font-size: var(--text-regular);
 `
 
 export const FormBlock = styled.div`
