@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-export const ResizeableTextAreaContainer = styled.span`
+
+interface ResizeableTextAreaContainerProps {
+    placeholderColor?: string
+}
+export const ResizeableTextAreaContainer = styled.span<ResizeableTextAreaContainerProps>`
     display: block;
     width: 100%;
     overflow: hidden;
@@ -18,7 +22,7 @@ export const ResizeableTextAreaContainer = styled.span`
 
     &:empty::before {
     content: attr(data-placeholder);
-    color: gray;
+    color: ${({placeholderColor}) => placeholderColor ? placeholderColor : 'gray'};
     
   }
 `
@@ -32,10 +36,11 @@ export const ResizeableTextAreaContainer = styled.span`
 interface ResizableTextAreaProps {
     children?: React.ReactChildren,
     placeholder?: string,
+    placeholderColor?: string
     onChange?: () => void
 }
 
-const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, placeholder, onChange}, ref) => {
+const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, placeholder,placeholderColor, onChange}, ref) => {
     return (
         <ResizeableTextAreaContainer 
             contentEditable 
@@ -43,6 +48,7 @@ const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaPro
             ref={ref} 
             onChange={onChange}
             data-placeholder={placeholder || ''}
+            placeholderColor={placeholderColor}
         >
             {children}
         </ResizeableTextAreaContainer>

@@ -10,11 +10,12 @@ interface EditableItemProps {
     editItem: (text: string) => void,
     Wrapper?: any,
     placeholder: string
+    placeholderColor?: string
 }
 
 
 
-const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, Wrapper}: EditableItemProps) => {
+const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor, Wrapper}: EditableItemProps) => {
     const [isEdit, setIsEdit] = useState(false)
     const test = useRef<HTMLSpanElement>(null)
 
@@ -50,6 +51,7 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
                 ref={test}
                 onChange={() => {}}
                 placeholder={placeholder}
+                placeholderColor={placeholderColor}
             />
         </EditableItemContainer>
     )
