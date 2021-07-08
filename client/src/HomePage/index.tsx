@@ -261,8 +261,8 @@ const HomePage = () => {
                         {
                             boards?.map((board: Board) => 
                             <BoardLinkContainer key={board._id}>
-                                <BoardLinkWrapper active={board._id == id}>
-                                    <BoardLink to={`/board/${board._id}`} key={board._id}>
+                                <BoardLinkWrapper active={board._id === id}>
+                                    <BoardLink to={`/board/${board._id}`} key={board._id} onClick={() => setShowSidebar(false)}>
                                         <BoardButtonWrapper>
                                             <Button jc='start' widthFill variant='shadow' active={board._id === id}>
                                                 <BoardLinkIconWrapper>
