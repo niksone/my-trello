@@ -58,6 +58,8 @@ const CardForm = ({
         tasks,
     });
 
+    const [isValid, setIsValid] = useState<boolean>(true)
+
     const handleUpdateCard = (
         title: string,
         subtitle: string,
@@ -104,8 +106,13 @@ const CardForm = ({
 
     const handleSave = () => {
         console.log(card);
-        onSave(card);
-        onExit();
+        if(card.title.trim() === ''){
+            setIsValid(false)
+        }else{
+            setIsValid(true)
+            onSave(card);
+            onExit();
+        }
     };
 
     return (
@@ -161,6 +168,7 @@ const CardForm = ({
                                 )
                             }
                             editable
+                            placeholderColor={!isValid ? 'var(--color-error)': ''}
                         />
                         <FormContent>
                             <FormContainer>
