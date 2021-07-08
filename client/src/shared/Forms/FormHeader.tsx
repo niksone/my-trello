@@ -9,10 +9,11 @@ interface FormHeaderProps {
     subtitle: string
     handleSubtitleUpdate?: (text: string) => void
     editable?: boolean
+    placeholderColor?: string
 
 }
 
-const FormHeader = ({title, handleTitleUpdate, subtitle, handleSubtitleUpdate, editable = false}: FormHeaderProps) => {
+const FormHeader = ({title, handleTitleUpdate, subtitle, handleSubtitleUpdate, editable = false, placeholderColor}: FormHeaderProps) => {
     console.log(subtitle, title);
     return (
         <FormTitleContainer>
@@ -27,6 +28,7 @@ const FormHeader = ({title, handleTitleUpdate, subtitle, handleSubtitleUpdate, e
                             editItem={() => {}}
                             placeholder='Enter Title'
                             updateItem={(text) => handleTitleUpdate && handleTitleUpdate(text)}
+                            placeholderColor={placeholderColor}
                         />
                     : title
                 }
