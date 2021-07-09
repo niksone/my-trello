@@ -375,7 +375,7 @@ const HomePage = () => {
                                 <Button 
                                     onClick={handleLogout}
                                     size='md'
-                                    colorScheme='errorLight'
+                                    colorScheme='error'
                                 >
                                     logout
                                 </Button>
