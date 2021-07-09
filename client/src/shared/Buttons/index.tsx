@@ -6,12 +6,33 @@ const colorSchemes = {
     primary: {
         resting: 'var(--color-primary-light)',
         hover: 'var(--color-button-hover)',
-        active: 'var(--color-primary)'
+        active: 'var(--color-primary)',
+        textColor: 'var(--color-primary)',
+        textColorHover: '#fff'
     },
-    error: {
+
+    primaryError: {
         resting: 'var(--color-primary-light)',
         hover: 'var(--color-error)',
-        active: 'var(--color-error)'
+        active: 'var(--color-primary)',
+        textColor: 'var(--color-error)',
+        textColorHover: '#fff'
+    },
+
+    errorLight: {
+        resting: 'var(--color-error-light)',
+        hover: 'var(--color-error)',
+        active: 'var(--color-error)',
+        textColor: 'var(--color-error)',
+        textColorHover: '#fff'
+    },
+
+    error: {
+        resting: 'var(--color-error)',
+        hover: 'var(--color-error-hover)',
+        active: 'var(--color-error-hover)',
+        textColor: '#fff',
+        textColorHover: '#fff'
     }
 }
 
@@ -67,8 +88,14 @@ const fillStyles = css<ButtonProps>`
     background: ${({colorScheme}) => colorScheme 
         ? colorSchemes[colorScheme].resting 
         : colorSchemes.primary.resting};
-    color: var(${({color}) => color ? color : '--color-primary'});
-    border: none;
+        color: ${({color, colorScheme}) => 
+            color 
+                ? color 
+                : colorScheme 
+                    ? colorSchemes[colorScheme].textColor
+                    : colorSchemes.primary.textColor};
+
+        border: none;
     ${({active}) => active && fillStylesActive}
 
 
@@ -76,7 +103,12 @@ const fillStyles = css<ButtonProps>`
         background: ${({colorScheme}) => colorScheme 
             ? colorSchemes[colorScheme].hover 
             : colorSchemes.primary.hover};
-        color: #fff;
+        color: ${({color, colorScheme}) => 
+            color 
+                ? color 
+                : colorScheme 
+                    ? colorSchemes[colorScheme].textColorHover
+                    : colorSchemes.primary.textColorHover};
     }
 
     &:active{
