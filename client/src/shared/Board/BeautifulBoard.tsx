@@ -114,7 +114,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
     const slide = (index: number) => {
       if(lists[index]){
         boardRef.current?.scrollTo({
-          top: 0,
           left: window.innerWidth * (index)| 0,
           behavior: 'smooth'
         })
