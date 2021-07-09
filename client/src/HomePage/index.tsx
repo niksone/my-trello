@@ -357,7 +357,7 @@ const HomePage = () => {
                                         <Button 
                                             onClick={handleLogout}
                                             Icon={LogoutIcon}
-                                            colorScheme='error'
+                                            colorScheme='errorLight'
                                         >
                                             Log Out
                                         </Button>
@@ -375,7 +375,7 @@ const HomePage = () => {
                                 <Button 
                                     onClick={handleLogout}
                                     size='md'
-                                    colorScheme='error'
+                                    colorScheme='errorLight'
                                 >
                                     logout
                                 </Button>
