@@ -97,7 +97,6 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                                   />
                                 ))
                               }
-                                {provided.placeholder}
                               </ColumnCardWrapper>
                             {
                               showModal &&
@@ -108,10 +107,9 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                                     subtitle=''
                                     description=''
                                     columnId={id}
-                                    cardId={''}
+                                    cardId=''
                                     onSave={
                                       (card: SimpleCard) => 
-                                      // {console.log(...Object.values(card))}
                                       dispatch(addCard(boardId, id, card.title, card.subtitle, card.description, card.tasks))
                                     }                                  
                                     onExit={() => modalRef.current.close()}
@@ -119,7 +117,9 @@ const BeautifulDragColumn = ({title, id, list, index, cardIds, cards, onAdd}: Co
                                   />
                                 </Modal>
                             }
+                            {provided.placeholder}
                           </ColumnCardContainer>
+                          
                           )}
                           </Droppable>
 
