@@ -34,7 +34,7 @@ const CardHeader = ({title, subtitle, headerTitle, onClick, onDelete}: CardTitle
                         </Button>
                         <Button
                             size="lg"
-                            colorScheme="error"
+                            colorScheme="errorLight"
                             Icon={TrashcanIcon}
                             onClick={onDelete}
                             fw="700"
