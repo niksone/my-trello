@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const BoardContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  height: 100%;
+  /* height: 100%; */
   padding: 28px 0 36px 30px;
   position: relative;
 
