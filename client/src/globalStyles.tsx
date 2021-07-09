@@ -20,6 +20,8 @@ export const GlobalStyles = createGlobalStyle`
         --color-primary-light: rgba(94, 129, 244, 0.1);
         --color-outline: #F0F0F3;
         --color-error: #ff4848;
+        --color-error-hover: #FF1515;
+        --color-error-light: rgba(255, 128, 139, 0.1);
         --color-warning: #F4BE5E;
         --color-success: #7CE7AC;
         --color-background-light: #F5F5FA;
