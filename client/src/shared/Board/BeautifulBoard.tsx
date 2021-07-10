@@ -14,11 +14,10 @@ import AddItemForm from '../AddNewItem/AddItemForm'
 import { Ref, useEffect, useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
-import { useSwipeable } from 'react-swipeable'
 import { ShowContainer } from '../../HomePage'
 import { BoardSectionWrapper } from '../../BoardPage'
 
-import {debounce} from 'lodash'
+import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import ArrowIcon from '../icons/Arrow/Arrow'
 
