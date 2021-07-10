@@ -6,7 +6,6 @@ import BoardPage from './BoardPage';
 import LoginPage from './Auth/LoginPage';
 import UserContext, { userContext } from './Context';
 import ProtectedRoute from './ProtectedRoute';
-import ProtectedAuthRoute from './ProtectedAuthRoute';
 import HomePage from './HomePage';
 import Div100vh from './shared/Div100vh';
 
@@ -21,8 +20,8 @@ function App() {
             <Switch>
               <ProtectedRoute path='/board' exact component={() => <HomePage />} />
               <ProtectedRoute path='/board/:id' children={() => <HomePage />} />
-              <ProtectedAuthRoute path='/register' component={() => <RegisterPage />} />
-              <ProtectedAuthRoute path='/login' component={() => <LoginPage />} />
+              <ProtectedRoute auth path='/register' component={() => <RegisterPage />} />
+              <ProtectedRoute auth path='/login' component={() => <LoginPage />} />
               <Redirect to='/board' />
             </Switch>
             </Router>
