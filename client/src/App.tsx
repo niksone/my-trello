@@ -21,8 +21,8 @@ function App() {
             <Switch>
               <ProtectedRoute path='/board' exact component={() => <HomePage />} />
               <ProtectedRoute path='/board/:id' children={() => <HomePage />} />
-              <ProtectedAuthRoute path='/register' component={() => <RegisterPage />} />
-              <ProtectedAuthRoute path='/login' component={() => <LoginPage />} />
+              <ProtectedRoute auth path='/register' component={() => <RegisterPage />} />
+              <ProtectedRoute auth path='/login' component={() => <LoginPage />} />
               <Redirect to='/board' />
             </Switch>
             </Router>
