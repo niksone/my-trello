@@ -26,13 +26,9 @@ const ProtectedRoute = ({component: Component, ...rest}: any) => {
 
     return (
             isLoading
-                ?
-                    <div>is Loading</div>
-                :
-                getRoute(rest.auth, isAuth)
+                ? <div>is Loading</div>
+                : getRoute(rest.auth, isAuth)
                     
-                        // : <div></div>
-
     )
 }
 
