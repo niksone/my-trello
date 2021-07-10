@@ -46,7 +46,7 @@ const schema = Yup.object().shape({
 const checkUserExist = async (email: string, password: string) => {
     try {
         const checkUserExist = await authApi.checkUserExist(email, password)
-        console.log(checkUserExist);
+        console.log(checkUserExist.data, 'user exist');
         return checkUserExist.data 
                 ? {userExist: true, error: 'User Already Exist'}
                 : {userExist: false, error: ''}
@@ -65,12 +65,18 @@ export const useRegisterValidation = () => {
     })
 
 
+    // let validation = {
+    //     isValid: false,
+    //     error: {
+    //         value: '',
+    //         fieldName: ''
+    //     }
+    // }
     
     const checkValid = async ({email, password, confirmedPassword, error}: RegisterState) => {
         schemaMessages.email.fieldName = email.fieldName
         schemaMessages.password.fieldName = password.fieldName
         schemaMessages.confirmedPassword.fieldName = confirmedPassword.fieldName
-
 
         try {
             const res = schema
@@ -79,19 +85,30 @@ export const useRegisterValidation = () => {
                     password: password.value, 
                     confirmedPassword: confirmedPassword.value})
             const {userExist, error} = await checkUserExist(email.value, password.value)
-            setValidation({
-                isValid: !userExist, 
-                error: {value: 'User Already Exist', fieldName: email.fieldName}
-            })    
-        return validation
+            console.log(userExist, 'user Exist final');
+        
+        const result = !userExist 
+            ? {...validation, isValid: true} 
+            : {isValid: false, error: {value: 'User Already Exist', fieldName: email.fieldName}}
+            
+        setValidation( prev => result)
+        console.log(validation, 'validation')
+        return result
+        // return validation
         } catch (error) {
             const res = error.errors
             console.log(res)
-            setValidation({isValid: false, error: {
-                value: res,
-                fieldName: findFieldByError(res[0])
-            }})
-            return validation
+
+            const result = {
+                isValid: false, 
+                error: {
+                    value: res,
+                    fieldName: findFieldByError(res[0])
+                }
+            }
+
+            setValidation(prev => result)
+            return result
         }
     }
 
