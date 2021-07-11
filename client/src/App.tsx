@@ -1,12 +1,8 @@
-import React, { Suspense, useContext, useEffect, useRef } from 'react';
+import React, { Suspense} from 'react';
 import { GlobalStyles } from './globalStyles';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-// import RegisterPage from './Auth/RegisterPage';
-// import BoardPage from './BoardPage';
-// import LoginPage from './Auth/LoginPage';
-import UserContext, { userContext } from './Context';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import UserContext from './Context';
 import ProtectedRoute from './ProtectedRoute';
-// import HomePage from './HomePage';
 import Div100vh from './shared/Div100vh';
 import AppLoader from './shared/Loaders/AppLoader';
 
@@ -16,7 +12,6 @@ const LoginPage = React.lazy(() => import('./Auth/LoginPage'))
 
 
 function App() {
-  const {isAuth, isLoading} = useContext(userContext)
 
   return (
     <Div100vh>
@@ -24,9 +19,6 @@ function App() {
         <UserContext>
             <Router>
             <Switch>
-                {/* {isLoading 
-                  ? <Rings />
-                  :  */}
                   <Suspense fallback={<AppLoader />}>
                     <ProtectedRoute path='/board' exact component={() => <HomePage />} />
                     <ProtectedRoute path='/board/:id' children={() => <HomePage />} />
@@ -34,7 +26,6 @@ function App() {
                     <ProtectedRoute auth path='/login' component={() => <LoginPage />} />
                     <Redirect to='/board' />
                   </Suspense>
-                {/* } */}
               </Switch>
             </Router>
         </UserContext>
