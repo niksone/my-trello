@@ -127,7 +127,7 @@ export function cssValue(value: number | string): string {
 //   }
 // }
 
-const Loader = ({size}: LoaderSizeProps) => {
+const RingLoader = ({size}: LoaderSizeProps) => {
   const [{loading, color, css, speedMultiplier}, setLoader] = useState({
     loading: true,
     color: "var(--color-primary)",
@@ -148,4 +148,4 @@ const Loader = ({size}: LoaderSizeProps) => {
   )
 }
 
-export default Loader;
+export default RingLoader;
