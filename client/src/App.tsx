@@ -12,7 +12,6 @@ const LoginPage = React.lazy(() => import('./Auth/LoginPage'))
 
 
 function App() {
-
   return (
     <Div100vh>
         <GlobalStyles />
