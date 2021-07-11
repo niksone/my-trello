@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { userContext } from './Context'
+import AppLoader from './shared/Loaders/AppLoader'
 
 const ProtectedRoute = ({component: Component, ...rest}: any) => {
     const {isAuth, isLoading} = useContext(userContext)
@@ -25,10 +26,10 @@ const ProtectedRoute = ({component: Component, ...rest}: any) => {
 
 
     return (
-            isLoading
-                ? <div>is Loading</div>
-                : getRoute(rest.auth, isAuth)
-                    
+        isLoading 
+            ? <AppLoader />
+            :  
+        getRoute(rest.auth, isAuth)  
     )
 }
 
