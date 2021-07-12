@@ -1,7 +1,4 @@
-import axios from 'axios'
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import LoginPage from '../../Auth/LoginPage'
+import { useContext } from 'react'
 import { userContext } from '../../Context'
 import { HeaderContainer } from './HeaderElements'
 

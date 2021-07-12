@@ -1,6 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
 import { BoardName } from '../../../HomePage/HomePageElements'
 import AddItemForm from '../../AddNewItem/AddItemForm'
 import Button from '../../Buttons'

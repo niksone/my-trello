@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import Button from '../Buttons'
+import { useState } from 'react'
 import {Modal} from '../Modal'
-import AddItemForm from './AddItemForm'
-import { AddItemButton, AddItemContainer, AddItemContainerProps, AddItemContainerTypes } from './AddNewItemElements'
+import {AddItemContainer, AddItemContainerTypes } from './AddNewItemElements'
 
 interface AddNewItemProps {
     text: string,

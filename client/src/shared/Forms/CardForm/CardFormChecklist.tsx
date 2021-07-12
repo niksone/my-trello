@@ -5,7 +5,6 @@ import EditableItem from '../../EditableItem'
 import { FormBlock, FormBlockTitle, 
     FormChecklistContainer, FormChecklistDone, FormChecklistItemsWrapper,
     FormChecklistTitle, FormListItem, FormListItems} from '../FormElements'
-// import { HeaderContainer, HeaderWrapper } from '../../Header/HeaderElements'
 import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
 import ProgressBar from '../../ProgressBar'
 import {DeleteIconWrapper,  } from './CardFormElements'

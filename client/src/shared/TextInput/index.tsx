@@ -1,6 +1,4 @@
-import React, { ChangeEventHandler, ReactNode } from 'react'
-import styled from 'styled-components'
-import UserIcon from '../icons/User/UserIcon'
+import { ChangeEventHandler } from 'react'
 import { IconWrapper, StyledTextInput, TextInputContainer, TextInputLabel, TextInputWrapper } from './TextInputElements';
 
 

@@ -1,12 +1,8 @@
 import ObjectID from "bson-objectid";
 import { useState } from "react";
-import { Card, SimpleCard, Task } from "../../../redux/AddItem/interfaces";
-import AddItemForm from "../../AddNewItem/AddItemForm";
+import { SimpleCard, Task } from "../../../redux/AddItem/interfaces";
 import Button from "../../Buttons";
-import ButtonGroup from "../../Buttons/ButtonGroup";
-import { getCompletedTasks } from "../../Card/BeautifulCard";
-import Checkbox from "../../Checkbox";
-import EditableItem from "../../EditableItem";
+
 import {
     FormContent,
     FormWrapper,
@@ -14,7 +10,6 @@ import {
     FormHeaderContainer,
     FormHeaderWrapper,
 } from "../FormElements";
-// import { HeaderContainer, HeaderWrapper } from '../../Header/HeaderElements'
 import ArrowIcon from "../../icons/Arrow/Arrow";
 import {
     CardFormContainer,

@@ -1,11 +1,10 @@
 import { useContext, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components'
 import { userContext } from '../Context'
 import { setBoard } from '../redux/AddItem/reducer'
 import { Board } from '../redux/Board/interfaces'
-import { RootReducerType, store } from '../redux/store'
+import { RootReducerType } from '../redux/store'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 
 

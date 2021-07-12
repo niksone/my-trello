@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { number } from "yup";
+import styled from "styled-components";
 
 interface ProgressValueProps {
     value: number

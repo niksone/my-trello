@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { authApi } from '../api'
 import { userContext } from '../Context'
 import Button from '../shared/Buttons'

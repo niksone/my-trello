@@ -1,5 +1,3 @@
-import React from 'react'
-import ConditionalWrapper from '../ConditionalWrapper'
 import EditableItem from '../EditableItem'
 import { FormContainer, FormSubtitle, FormTitle, FormTitleContainer } from './FormElements'
 

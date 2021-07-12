@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import Button from '../Buttons'
 import ResizableTextArea from '../ResizableTextArea'
-import { AddItemContainerTypes, AddItemFormButton, AddItemFormButtonContainer, AddItemFormButtonContainerTypes, AddItemFormContainer,AddItemFormWrapper, FormIcon } from './AddNewItemElements'
+import { AddItemContainerTypes, AddItemFormButtonContainer, AddItemFormButtonContainerTypes, AddItemFormContainer,AddItemFormWrapper, FormIcon } from './AddNewItemElements'
 
 type FormVariant = 'icon' | 'default'
 

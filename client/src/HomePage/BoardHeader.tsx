@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addList, deleteList, moveList, updateListTitle } from "../redux/AddItem/actionCreators";
 import { List } from "../redux/AddItem/interfaces";
@@ -10,7 +9,6 @@ import { HeaderContainer, HeaderWrapper } from "../shared/Header/HeaderElements"
 import LogoutIcon from "../shared/icons/Logout/LogoutIcon";
 import MenuIcon from "../shared/icons/Menu/MenuIcon";
 import MoreIcon from "../shared/icons/More/MoreIcon";
-import { ModalHandle } from "../shared/Modal";
 import Tooltip from "../shared/Tooltip";
 import { BoardName, ShowContainer } from "./HomePageElements";
 

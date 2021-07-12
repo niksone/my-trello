@@ -1,5 +1,4 @@
 import React from 'react'
-import styled, {css, FlattenInterpolation, ThemedStyledProps} from 'styled-components'
 import { BtnIconContainer, ButtonContainer, ButtonIconContainer, colorSchemes } from './ButtonElements'
 
 

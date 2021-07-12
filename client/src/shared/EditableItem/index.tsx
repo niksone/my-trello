@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import {useEffect, useRef, useState } from 'react'
 import ResizableTextArea from '../ResizableTextArea'
-import { EditableItemContainer, EditButton, EditableItemWrapper, SubmitEditButton } from './EditableItemElements'
+import { EditableItemContainer } from './EditableItemElements'
 
 interface EditableItemProps {
     // children: React.ReactChild,

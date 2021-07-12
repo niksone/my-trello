@@ -1,4 +1,3 @@
-import { boards } from "../../data";
 import { BoardAction } from "./actions"
 import { Board, BoardReducerProps } from './interfaces';
 

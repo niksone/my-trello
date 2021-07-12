@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, Ref, useEffect, useImperativeHandle, useState } from 'react'
+import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from 'react'
 import { createPortal } from 'react-dom';
 import { ModalContainer, ModalContent, ModalWrapper } from './ModalElements'
 

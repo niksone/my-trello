@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
 import { deleteBoard, editBoardName, addBoard} from '../redux/Board/actionCreators'
 import { Board} from '../redux/Board/interfaces'
 import EditItemsForm from '../shared/Forms/EditItemsForm'

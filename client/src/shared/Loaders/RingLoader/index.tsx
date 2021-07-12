@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-import { CommonProps, LengthObject, LengthType, LoaderSizeProps } from "./interfaces";
+import { CommonProps, LengthObject, LoaderSizeProps } from "./interfaces";
 import { SpinnerRing, SpinnerWrapper } from "./RingLoaderElements";
 
 const commonValues: Required<CommonProps> = {
