@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { BoardName } from '../../../HomePage'
+import { BoardName } from '../../../HomePage/HomePageElements'
 import AddItemForm from '../../AddNewItem/AddItemForm'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
@@ -17,7 +17,7 @@ import FormHeader from '../FormHeader'
 
 
 
-interface EditBoardFormProps {
+export interface EditItemsFormProps {
     onExit: () => void,
     onAdd: (name: string) => void
     onEdit: (id:string, name: string) => void
@@ -60,7 +60,7 @@ export const EditIconWrapper = styled.span`
     display: flex;
 `
 
-const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel, formPlaceholder, onExit, onAdd, onDelete, onEdit}: EditBoardFormProps) => {
+const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel, formPlaceholder, onExit, onAdd, onDelete, onEdit}: EditItemsFormProps) => {
 
     return (
         <ConditionalWrapper Wrapper={Div100vh} condition={window.innerWidth <= 425}>
