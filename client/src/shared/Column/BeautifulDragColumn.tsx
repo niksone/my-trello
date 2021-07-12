@@ -1,7 +1,7 @@
 import { MutableRefObject, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { ShowContainer } from '../../HomePage'
+import { ShowContainer } from '../../HomePage/HomePageElements'
 import { addCard, deleteList, updateListTitle } from '../../redux/AddItem/actionCreators'
 import { Card, List, SimpleCard, Task } from '../../redux/AddItem/interfaces'
 import { RootReducerType } from '../../redux/store'

@@ -14,12 +14,12 @@ import AddItemForm from '../AddNewItem/AddItemForm'
 import { Ref, useEffect, useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
-import { ShowContainer } from '../../HomePage'
 import { BoardSectionWrapper } from '../../BoardPage'
 
 import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import ArrowIcon from '../icons/Arrow/Arrow'
+import { ShowContainer } from '../../HomePage/HomePageElements'
 
 export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
   display: flex;
@@ -211,29 +211,31 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 )}
             </Droppable>
         </DragDropContext>
+
         <ShowContainer mobile={false} show={true}>
-        <BoardColumnContainer>
-            <ColumnWrapper>
-              <AddColumnContainer>
-              <Button 
-                  widthFill 
-                  Icon={AddIcon}
-                  onClick={() => setShowModal(true)}
-                  variant='unstyle'
-                  fw='700'
-              >
-                  ADD NEW LIST
-              </Button>
-              {
-              showModal && 
-                  <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                      <AddItemForm btnItem='ADD' item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
-                  </Modal>
-              }
-              </AddColumnContainer>
-            </ColumnWrapper>
-        </BoardColumnContainer>
+          <BoardColumnContainer>
+              <ColumnWrapper>
+                <AddColumnContainer>
+                <Button 
+                    widthFill 
+                    Icon={AddIcon}
+                    onClick={() => setShowModal(true)}
+                    variant='unstyle'
+                    fw='700'
+                >
+                    ADD NEW LIST
+                </Button>
+                {
+                showModal && 
+                    <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
+                        <AddItemForm btnItem='ADD' item='FORM' title='add list' onAdd={(title: string) => handleAddItem(title)} /> 
+                    </Modal>
+                }
+                </AddColumnContainer>
+              </ColumnWrapper>
+          </BoardColumnContainer>
         </ShowContainer>
+
         </BoardContainer>
       </BoardSectionWrapper>
         <ShowContainer mobile={true} show={true}>

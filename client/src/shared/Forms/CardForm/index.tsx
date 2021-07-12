@@ -1,6 +1,5 @@
 import ObjectID from "bson-objectid";
 import { useState } from "react";
-import { BoardName } from "../../../HomePage";
 import { Card, SimpleCard, Task } from "../../../redux/AddItem/interfaces";
 import AddItemForm from "../../AddNewItem/AddItemForm";
 import Button from "../../Buttons";
@@ -27,6 +26,7 @@ import ConditionalWrapper from "../../ConditionalWrapper";
 import FormHeader from "../FormHeader";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
+import { BoardName } from "../../../HomePage/HomePageElements";
 
 interface CardFormProps {
     boardName: string;

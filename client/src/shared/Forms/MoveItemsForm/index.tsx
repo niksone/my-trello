@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
-import { BoardName } from '../../../HomePage'
+import { BoardName } from '../../../HomePage/HomePageElements'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
 import Div100vh from '../../Div100vh'
@@ -60,21 +60,11 @@ const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onU
                                     onClick={onExit}>
                                     <ArrowIcon direction='left' />
                                 </Button>
-                                <BoardName>Move Lists</BoardName>
+                                <BoardName >{headerTitle}</BoardName>
 
-                                <Tooltip
-                                    content={
-                                        <Button onClick={() => {}}
-                                        Icon={TrashcanIcon}>
-                                                Delete Card
-                                            </Button>
-                                    } 
-                                    direction='bottom'
-                                    >
-                                    <Button shape='icon' variant='invisible' size='lg'>
-                                        <SaveIcon />
-                                    </Button>
-                                </Tooltip>
+                                <Button shape='icon' variant='invisible' size='lg'>
+                                    <SaveIcon />
+                                </Button>
                             </FormHeaderWrapper>
                         </FormContainer>
                     </FormHeaderContainer>
@@ -88,7 +78,7 @@ const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onU
                     <FormContent>
                         <FormContainer>
                             <DragDropContext onDragEnd={(res) => handleUpdate(res)}>
-                                <Droppable droppableId='move-list'>
+                                <Droppable droppableId='move-item'>
                                 {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef} 
