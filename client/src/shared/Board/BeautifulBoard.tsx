@@ -14,7 +14,7 @@ import AddItemForm from '../AddNewItem/AddItemForm'
 import { Ref, useEffect, useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
-import { BoardSectionWrapper } from '../../BoardPage'
+import { BoardSectionWrapper } from '../../BoardSection'
 
 import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'

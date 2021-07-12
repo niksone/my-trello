@@ -24,12 +24,12 @@ export const BoardSectionWrapper = styled.div`
         background-color: var(--color-background-light);
     }
 `
-// export interface BoardPageProps {
+// export interface BoardSectionProps {
 //     // data: AddItemState
 //     boards: Board[]
 // }
 
-const BoardPage = () => {
+const BoardSection = () => {
     const dispatch = useDispatch()
     const {id} = useParams<{id: string}>()
 
@@ -50,4 +50,4 @@ const BoardPage = () => {
     )
 }
 
-export default BoardPage
+export default BoardSection

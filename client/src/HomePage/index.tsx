@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { authApi } from '../api'
-import BoardPage from '../BoardPage'
-import { BoardSidebarClose, BoardSidebarContainer, BoardSidebarWrapper } from '../BoardPage/BoardElements'
+import BoardSection from '../BoardSection'
+import { BoardSidebarClose, BoardSidebarContainer, BoardSidebarWrapper } from '../BoardSection/BoardElements'
 import { userContext } from '../Context'
 import {addBoard, getBoards } from '../redux/Board/actionCreators'
 import { Board } from '../redux/Board/interfaces'
@@ -41,10 +41,6 @@ const HomePage = () => {
     const {user, getAuth} = useContext(userContext)
     const dispatch = useDispatch()
 
-    const [showListModal, setShowListModal] = useState(false)
-    const [showMoveListModal, setShowMoveListModal] = useState(false)
-    const [showEditListModal, setShowEditListModal] = useState(false)
-
     const [showSidebar, setShowSidebar] = useState(false)
 
     const modalRef = useRef<ModalHandle>(null)
@@ -60,15 +56,6 @@ const HomePage = () => {
     const handleLogout = async () => {
         await authApi.logout()
         getAuth()
-    }
-
-    const handleAddList = (text: string) => {
-        dispatch(addList(currentBoard._id, text))
-        setShowListModal(false)
-    }
-
-    const handleListMove = (sourceIndex: number, destIndex: number) => {
-        dispatch(moveList(currentBoard._id, sourceIndex, destIndex))
     }
 
     const handleAddBoard = (text: string) => {
@@ -107,8 +94,9 @@ const HomePage = () => {
                         handleLogout={handleLogout}
                         lists={lists}
                     />
-                    {currentBoard._id 
-                        ? <BoardPage />   
+                    {
+                    currentBoard._id 
+                        ? <BoardSection />   
                         : <NoBoardSection>
                             <NoBoardImg /> 
                             
