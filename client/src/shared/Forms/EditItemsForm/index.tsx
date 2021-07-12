@@ -12,8 +12,9 @@ import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
 import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
 import { DeleteIconWrapper } from '../CardForm/CardFormElements'
-import { FormBlock, FormContainer, FormContent, FormHeaderContainer, FormHeaderWrapper, FormListItem, FormListItems, FormWrapper } from '../FormElements'
+import { FormBlock, FormBoardItem, FormBoardItemName, FormContainer, FormContent, FormHeaderContainer, FormHeaderWrapper, FormListItem, FormListItems, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
+import { EditBoardFormContainer } from './EditBoardFormElements'
 
 
 
@@ -30,35 +31,6 @@ export interface EditItemsFormProps {
     formItemFieldLabel: 'name' | 'title'
 }
 
-export const EditBoardFormContainer = styled.div`
-    width: 350px;
-    height: 500px;
-    background-color: #fff;
-
-    @media screen and (max-width: 425px){
-        height: 100%;
-        width: 100vw;
-    }
-`
-
-export const FormBoardItem = styled.div`
-    display: flex;
-    width: 100%;
-    color: var(--color-primary-dark);
-    font-weight: 700;
-
-    & > *{
-        margin-right: 13px;
-    }
-`
-
-export const FormBoardItemName = styled.div`
-    flex-basis: 100%;
-`
-
-export const EditIconWrapper = styled.span`
-    display: flex;
-`
 
 const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel, formPlaceholder, onExit, onAdd, onDelete, onEdit}: EditItemsFormProps) => {
 

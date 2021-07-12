@@ -168,3 +168,22 @@ justify-content: space-between;
 width: 100%;
 color: var(--color-primary-grey);
 `
+
+export const FormBoardItem = styled.div`
+    display: flex;
+    width: 100%;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+
+    & > *{
+        margin-right: 13px;
+    }
+`
+
+export const FormBoardItemName = styled.div`
+    flex-basis: 100%;
+`
+
+export const EditIconWrapper = styled.span`
+    display: flex;
+`

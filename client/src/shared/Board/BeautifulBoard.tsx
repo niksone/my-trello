@@ -7,67 +7,21 @@ import AddNewItem from '../AddNewItem'
 import Button from '../Buttons'
 import BeautifulDragColumn from '../Column/BeautifulDragColumn'
 import { ColumnContainer, ColumnWrapper } from '../Column/ColumnElements'
-import { AddColumnContainer, BoardContainer, BoardWrapper } from './BoardContainer'
 import AddIcon from '../icons/Add/AddIcon'
 import AddNewItemBtn from '../AddNewItem/AddNewItemBtn'
 import AddItemForm from '../AddNewItem/AddItemForm'
 import { Ref, useEffect, useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
 import { addBoard } from '../../redux/Board/actionCreators'
-import { BoardSectionWrapper } from '../../BoardSection'
 
 import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import ArrowIcon from '../icons/Arrow/Arrow'
 import { ShowContainer } from '../../HomePage/HomePageElements'
+import { BoardSectionWrapper } from '../../BoardSection/BoardElements'
+import { AddColumnContainer, BoardColumnContainer, BoardColumnWrapper, BoardContainer, BoardFooterContainer, BoardFooterNav, BoardFooterTitle } from './BoardElements'
 
-export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
-  display: flex;
-  height: 100%;
-  position: relative;
 
-  & > div{
-    margin: 0 8px;
-  } 
-
-  @media screen and (max-width:425px){
-    & > div{
-      margin: 0 calc((100vw - (100vw - 40px)) / 2);
-    }
-
-    & > div:first-child{
-      margin-left: 0;
-    }
-  }
-`
-
-interface BoardColumnWrapperProps {
-  count?: number,
-  isDragging?: boolean,
-  isOver?: boolean
-}
-
-export const BoardColumnWrapper = styled.div<BoardColumnWrapperProps>`
-  display: flex;
-  flex-direction: column;
-`
-
-export const BoardFooterContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px 32px 20px;
-  background-color: #fff;
-`
-
-const BoardFooterTitle = styled.h4`
-  font-size: var(--text-h4);
-`
-
-const BoardFooterNav = styled.div`
-
-`
 
 export interface BoardProps {
   data: AddItemState

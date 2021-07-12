@@ -2,12 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import ResizableTextArea from '../ResizableTextArea'
-import { CardContainer } from './CardElements'
-
-const EditCardContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-`
+import { CardContainer, EditCardContainer } from './CardElements'
 
 interface EditCardProps {
     listId: string,

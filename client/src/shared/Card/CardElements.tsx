@@ -76,3 +76,10 @@ export const CardProgressLabel = styled.span`
 export const CardProgressStage = styled.span`
     font-size: var(--text-regular);
 `
+
+// Edit card
+
+export const EditCardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`

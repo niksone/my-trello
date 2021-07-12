@@ -16,12 +16,6 @@ import {ReactComponent as RegisterImg} from '../shared/icons/authentication.svg'
 import bgPattern from '../shared/icons/bgPattern.svg'
 import mobileBgPattern from '../shared/icons/bgPattern2.svg'
 
-
-const AuthWrapper = styled.div`
-    height: calc(100vh - calc(100vh - 100%));
-    width: 100%;
-`
-
 export interface RegisterState {
     email: {value: string, fieldName: 'email'},
     password: {value: string, fieldName: 'password'},

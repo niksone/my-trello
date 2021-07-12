@@ -8,22 +8,7 @@ import { Board } from '../redux/Board/interfaces'
 import { RootReducerType, store } from '../redux/store'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 
-export const AppContainer = styled.div`
-  height: 100%;
-  display: flex;
-`
 
-export const BoardSectionWrapper = styled.div`
-    height: 100%; 
-    width: 100%;
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: auto;
-    @media screen and (max-width: 425px){
-        border-radius: 0;
-        background-color: var(--color-background-light);
-    }
-`
 // export interface BoardSectionProps {
 //     // data: AddItemState
 //     boards: Board[]

@@ -13,6 +13,7 @@ import Tooltip from '../../Tooltip'
 import { CardFormContainer, CardFormWrapper } from '../CardForm/CardFormElements'
 import { FormBlock, FormBlockTitle, FormChecklistContainer, FormChecklistDone, FormChecklistTitle, FormContainer, FormContent, FormDescription, FormDescriptionContainer, FormHeaderContainer, FormHeaderWrapper, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
+import { MoveItem, MoveItemFormContainer } from './MoveItensFormElements'
 
 interface MoveItemsFormProps {
     headerTitle: string
@@ -26,18 +27,7 @@ interface MoveItemsFormProps {
 
 }
 
-export const MoveItem = styled.div`
-    background-color: #fff;
-    padding: 12px 16px;
-    margin-bottom: 7px;
-    border-radius: 12px;
-    border: 1px solid var(--color-resting-outline);
-`
 
-export const MoveItemFormContainer = styled.div`
-    height: 100%;
-    width: 100vw;
-`
 
 const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onUpdate, onExit}: MoveItemsFormProps) => {
     const [moveItems, setMoveItems] = useState(items)
