@@ -20,7 +20,7 @@ function App() {
             <Switch>
                   <Suspense fallback={<AppLoader />}>
                     <ProtectedRoute path='/board' exact component={() => <HomePage />} />
-                    <ProtectedRoute path='/board/:id' children={() => <HomePage />} />
+                    <ProtectedRoute path='/board/:id' component={() => <HomePage />} />
                     <ProtectedRoute auth path='/register' component={() => <RegisterPage />} />
                     <ProtectedRoute auth path='/login' component={() => <LoginPage />} />
                     <Redirect to='/board' />
