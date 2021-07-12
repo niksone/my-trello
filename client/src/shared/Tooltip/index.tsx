@@ -17,10 +17,11 @@ const Tooltip = ({content, children, direction}: React.PropsWithChildren<Tooltip
         e.stopPropagation()
         const bodyRect = document.body.getBoundingClientRect(),
               elemRect = tooltipRef.current?.getBoundingClientRect(),
-              offsetY = elemRect && (elemRect.bottom + 7) || 0,
-              offsetX = elemRect && (window.innerWidth - elemRect.right) || 0
+              offsetY = (elemRect && (elemRect.bottom + 7)) || 0,
+              offsetX = (elemRect && (window.innerWidth - elemRect.right)) || 0
         
         setOffset(prev => ({offsetX, offsetY}) || prev) 
+        // setTimeout(() => setShow(prev => !prev), 1000)
         setShow(prev => !prev)
     }
 
@@ -30,17 +31,12 @@ const Tooltip = ({content, children, direction}: React.PropsWithChildren<Tooltip
             ref={tooltipRef}
         >
             {children}
-            {
-                show && (
-                    <>
-                    <TooltipCloseContainer onClick={handleClick}>
-                        <TooltipContent onClick={handleClick} offsetX={offsetX} offsetY={offsetY}>
-                            {content}
-                        </TooltipContent>
-                    </TooltipCloseContainer>
-                </>
-                )
-            }   
+                <TooltipCloseContainer onClick={handleClick} show={show}>
+                    <TooltipContent onClick={handleClick} offsetX={offsetX} offsetY={offsetY}>
+                        {content}
+                    </TooltipContent>
+                </TooltipCloseContainer>
+
         </TooltipContainer>
     )
 }

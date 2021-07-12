@@ -27,7 +27,8 @@ export const TooltipContent = styled.div<TooltipContentProps>`
     z-index: 9999;
 `
 
-export const TooltipCloseContainer = styled.div`
+export const TooltipCloseContainer = styled.div<{show: boolean}>`
+    display: ${({show}) => show ? 'block' : 'none'};
     position: fixed;
     top: 0;
     left: 0;
