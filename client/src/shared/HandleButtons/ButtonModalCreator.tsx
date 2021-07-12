@@ -4,7 +4,7 @@ import { Modal, ModalHandle } from "../Modal"
 
 interface ButtonModalCreatorProps {
     label: string
-    modalRef: Ref<ModalHandle>
+    // modalRef: Ref<ModalHandle>
     Icon: any
     Item: any
 }
@@ -14,9 +14,9 @@ export type ButtonModalCreatorRef = {
     close: () => void
 }
 
-const ButtonModalCreator = ({label, modalRef, Icon, Item}: ButtonModalCreatorProps, ref: Ref<ButtonModalCreatorRef>) => {
+const ButtonModalCreator = ({label, Icon, Item}: ButtonModalCreatorProps, ref: Ref<ButtonModalCreatorRef>) => {
     const [showModal, setShowModal] = useState(false)
-
+    const modalRef = useRef<ModalHandle>(null)
     const closeModal = () => {
         setShowModal(prev => false)
         console.log(`modal ${showModal}`)

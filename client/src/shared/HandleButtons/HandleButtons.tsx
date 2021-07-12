@@ -9,7 +9,7 @@ import { ModalHandle } from "../Modal"
 import { ButtonModalCreator, ButtonModalCreatorRef } from "./ButtonModalCreator"
 
 
-export const HandleAddItemButton = ({handleAddList, label, formTitle, modalRef}) => {
+export const HandleAddItemButton = ({handleAddList, label, formTitle}) => {
     const buttonRef = useRef<ButtonModalCreatorRef>(null)
 
     const handleAdd = (title: string) => {
@@ -28,12 +28,12 @@ export const HandleAddItemButton = ({handleAddList, label, formTitle, modalRef})
                     (title) => handleAdd(title)
                 } />
             }
-            modalRef={modalRef}
+            // modalRef={modalRef}
         />
     )
 }
 
-export const HandleMoveItemsButton = ({label, headerTitle, title, modalRef, subtitle, items, itemLabelField, onUpdate}) => {
+export const HandleMoveItemsButton = ({label, headerTitle, title, subtitle, items, itemLabelField, onUpdate}) => {
     const buttonRef = useRef<ButtonModalCreatorRef>(null)
 
     const handleExit = () => {
@@ -56,16 +56,16 @@ export const HandleMoveItemsButton = ({label, headerTitle, title, modalRef, subt
                     onExit={handleExit}
                 />
             }
-            modalRef={modalRef}
+            // modalRef={modalRef}
         />
     )
 }
 
 interface HandleEditItemsButtonProps extends Omit<EditItemsFormProps, 'onExit'> {
     label: string
-    modalRef: Ref<ModalHandle>
+    // modalRef: Ref<ModalHandle>
 }
-export const HandleEditItemsButton = ({label, modalRef, items, onDelete, onAdd, onEdit, headerTitle, title, subtitle, formPlaceholder, formItemFieldLabel}: HandleEditItemsButtonProps) => {
+export const HandleEditItemsButton = ({label, items, onDelete, onAdd, onEdit, headerTitle, title, subtitle, formPlaceholder, formItemFieldLabel}: HandleEditItemsButtonProps) => {
     const buttonRef = useRef<ButtonModalCreatorRef>(null)
 
     const handleExit = () => {
@@ -91,7 +91,7 @@ export const HandleEditItemsButton = ({label, modalRef, items, onDelete, onAdd, 
                     formItemFieldLabel={formItemFieldLabel} 
                 />
             }
-            modalRef={modalRef}
+            // modalRef={modalRef}
         />
     )
 }

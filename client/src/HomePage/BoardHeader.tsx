@@ -25,7 +25,7 @@ interface BoardHeaderProps {
 const BoardHeader = ({board, lists, sidebarOpen, handleLogout}: BoardHeaderProps) => {
     const dispatch = useDispatch()
 
-    const modalRef = useRef<ModalHandle>(null)
+    // const modalRef = useRef<ModalHandle>(null)
 
     const handleAddList = (title: string) => dispatch(addList(board._id, title))
     const handleDeleteList = (listId: string) => dispatch(deleteList(board._id, listId))
@@ -59,7 +59,7 @@ const BoardHeader = ({board, lists, sidebarOpen, handleLogout}: BoardHeaderProps
                                         label='Add List'
                                         formTitle='Add List'
                                         handleAddList={handleAddList}
-                                        modalRef={modalRef}
+                                        // modalRef={modalRef}
                                     />
 
                                     <HandleEditItemsButton 
@@ -73,7 +73,7 @@ const BoardHeader = ({board, lists, sidebarOpen, handleLogout}: BoardHeaderProps
                                         subtitle='Rename, add or delete a list'
                                         formPlaceholder='Add List'
                                         formItemFieldLabel='title'   
-                                        modalRef={modalRef}
+                                        // modalRef={modalRef}
  
                                     />
 
@@ -85,7 +85,7 @@ const BoardHeader = ({board, lists, sidebarOpen, handleLogout}: BoardHeaderProps
                                         items={lists}
                                         itemLabelField='title'
                                         onUpdate={(sourceIndex: number, destIndex: number) => handleListMove(sourceIndex, destIndex)}
-                                        modalRef={modalRef}
+                                        // modalRef={modalRef}
                                     />
                                         {/* <Button
                                             onClick={() =>
