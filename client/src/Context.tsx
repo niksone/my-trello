@@ -31,17 +31,6 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
         }
     }
 
-    const getUser = async () => {
-        try {
-            if(isAuth){
-                const user = await authApi.getUser()
-                setUser(user)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     useEffect(() => {
         getAuth()
     }, []) 

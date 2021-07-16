@@ -31,13 +31,8 @@ const progressStyles: ProgressStylesI =  {
 const getProgressColor = (value: number, styles: typeof progressStyles) => {
     let progressColor = progressStyles.danger.color
     for(const style of Object.values(styles)){
-        // console.log(value, style.breakpoint);
         progressColor = value >= style.breakpoint ? style.color : progressColor
-        // console.log(value, style.breakpoint, value >= style.breakpoint, progressColor);
     }
-
-    // progressColor = progressColor === '' ? styles.danger.color : progressColor
-    // console.log('res ' + progressColor);
     return progressColor
 }
 
@@ -66,7 +61,6 @@ export const ProgressValue = styled.div<ProgressValueProps>`
     top: 0;
     left: 0;
     height: 100%;
-    /* width: ${({value}) => value && value}%; */
     width: 100%;
     transform: translateX(${({value}) => value ? value - 100 : -100}%);
     background-color: ${({value}) => getProgressColor(value, progressStyles)};

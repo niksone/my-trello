@@ -81,7 +81,6 @@ export const HeroRight = styled.div<HeroRightProps>`
     align-items: center;
     background: ${({bgPattern}) => bgPattern ? `url(${bgPattern})`  : 'none'} 100% 100%;
     background-size: cover;
-    /* background-position: top 0 left -10%; */
 
     @media(max-width: 976px){
         width: 100%;
@@ -132,11 +131,6 @@ export const HeroTextWrapper = styled.div`
 
 const HeroSection = () => {
 
-    const getHeroText = () =>  {
-        <HeroTextWrapper>
-
-        </HeroTextWrapper>
-    }
     return (
     <div style={{height: '100%'}}>
         <Hero >

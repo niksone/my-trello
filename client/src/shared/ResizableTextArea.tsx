@@ -10,9 +10,6 @@ export const ResizeableTextAreaContainer = styled.span<ResizeableTextAreaContain
     display: block;
     width: 100%;
     overflow: hidden;
-    /* resize: both;
-    min-height: 40px;
-    line-height: 20px; */
     outline: none;
     border: none;
     background-color: transparent;
@@ -26,12 +23,6 @@ export const ResizeableTextAreaContainer = styled.span<ResizeableTextAreaContain
     
   }
 `
-
-  
-//   .textarea[contenteditable]:empty::before {
-//     content: "Placeholder still possible";
-//     color: gray;
-//   }
 
 interface ResizableTextAreaProps {
     children?: React.ReactChildren,

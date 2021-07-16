@@ -14,10 +14,6 @@ export const TooltipContent = styled.div<TooltipContentProps>`
     position: absolute;
     top: ${({offsetY}) => offsetY ? offsetY : 0}px;
     right: ${({offsetX}) => offsetX ? offsetX : 0}px;
-
-    /* bottom: -7px;
-    right: 0; */
-    /* transform: translateY(100%); */
     width: max-content;
     background: #fff;
     padding: 9px;

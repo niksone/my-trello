@@ -16,7 +16,6 @@ export const TextInputContainer = styled.div<TextInput>`
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* align-items: center; */
     padding-top: 10px;
 `
 
