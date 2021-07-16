@@ -16,19 +16,7 @@ interface EditableItemProps {
 
 
 const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor, Wrapper}: EditableItemProps) => {
-    const [isEdit, setIsEdit] = useState(false)
     const test = useRef<HTMLSpanElement>(null)
-
-    const handleIsEdit = () => {
-      setIsEdit(!isEdit)
-    }
-
-    const handleEdit = () => {
-        const text = test.current && (test.current.innerText)
-        if(text === null) return
-        editItem(text)
-        // setIsEdit(false)
-    }
 
     useEffect(() => {
         test.current && (test.current.innerText = initialText)

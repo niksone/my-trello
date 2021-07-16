@@ -9,7 +9,6 @@ export const HeaderContainer = styled.div`
         padding: 0 20px;
         background-color: #fff;
     }
-    /* grid-area: 'header' */
 `
 
 export const HeaderWrapper = styled.div`

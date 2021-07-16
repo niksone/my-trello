@@ -14,7 +14,6 @@ export const FormContainer = styled.div`
 export const FormWrapper= styled.div`
 display: flex;
 flex-direction: column;
-/* min-width: 30%; */
 height: 100%;
 width: 100%;
 border-radius: 4px;
@@ -69,13 +68,9 @@ line-height: 27px;
 
 export const FormTitleContainer = styled.div`
     background-color: #fff;
-    /* @media screen and (max-width: ${BREAKPOINTS.mobile}px){ */
         padding: 22px 0px 26px 0px;
-        /* margin-bottom: 14px; */
-    /* } */
-`
 
-// export const FormWrapper = styled.div``
+`
 
 export const FormSubtitle = styled.p`
 font-size: var(--text-regular);
@@ -103,18 +98,11 @@ export const FormText = styled.p`
 `
 
 export const FormBlock = styled.div`
-/* border-bottom: 1px solid var(--color-resting-outline); */
     background-color: #fff;
     border-radius: 6px;
     border-bottom: none;
     padding: 16px;
     margin-bottom: 4px;
-
-
-/* &:first-child {
-    /* padding-top: 0; 
-    padding-top: 12px;
- }  */
 
 &:last-child{
     border-bottom: none;

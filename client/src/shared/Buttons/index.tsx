@@ -22,7 +22,6 @@ export const sizes: ButtonSizes = {
 
 export interface ButtonProps {
     onClick?:  React.MouseEventHandler<HTMLButtonElement>;
-    // background?: string,
     color?: string,
     widthFill?: boolean,
     active?: boolean,

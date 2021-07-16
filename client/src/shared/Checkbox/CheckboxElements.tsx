@@ -37,7 +37,6 @@ export const CheckboxText= styled.p<CheckboxTextProps>`
     color: ${({checked}) => checked ? COLORS.primaryDark: COLORS.primaryGrey};
     transition: 0.2s all ease-in-out;
     width: fit-content;
-    /* background: red; */
 `
 
 
@@ -56,12 +55,6 @@ export const CheckboxWrapper = styled.label`
     ${CheckboxInput}:checked ~ ${Checkmark} > * {
         display: block;
     }
-
-    /* ${CheckboxInput}:checked{
-    /* ${CheckboxText} {
-         color: var(--color-primary-dark);
-         background: red
-    } */
 `
 
 export const CheckboxContainer = styled.div`
@@ -71,14 +64,6 @@ export const CheckboxContainer = styled.div`
     cursor: pointer;
     font-size: 22px;
     user-select: none;
-
-    /* ${CheckboxWrapper} > ${CheckboxInput}:checked ~ ${Checkmark} {
-        background-color: var(--color-primary);
-    }
-
-    ${CheckboxInput}:checked ~ ${Checkmark} > * {
-        display: block;
-    /* } */
 
     ${CheckboxWrapper} ~ ${CheckboxInput}:checked {
         color: var(--color-primary-dark);

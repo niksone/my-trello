@@ -94,9 +94,6 @@ export const BoardLinkIconWrapper = styled.span`
     padding-right: 30px;
     color: inherit;
 `
-interface LogoI {    
-    logoImg: any
-}
 
 export const LogoImgWrapper = styled.div`
     margin-right: 15px;

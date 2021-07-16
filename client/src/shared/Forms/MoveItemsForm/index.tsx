@@ -25,9 +25,7 @@ interface MoveItemsFormProps {
 
 
 
-const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onUpdate, onExit}: MoveItemsFormProps) => {
-    const [moveItems, setMoveItems] = useState(items)
-    
+const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onUpdate, onExit}: MoveItemsFormProps) => {    
 
     const handleUpdate = (res: any) => {
         const {source, destination} = res
@@ -71,7 +69,7 @@ const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onU
                                         {...provided.droppableProps}
                                     >
                                         {
-                                            moveItems.map((item, index) => 
+                                            items.map((item, index) => 
                                                 <Draggable draggableId={item._id} index={index} key={item._id}>      
                                                     {(provided, snapshot) => (
                                                         <div

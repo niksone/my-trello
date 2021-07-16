@@ -29,12 +29,6 @@ const BoardSidebar = ({boards, isShow, modalRef, boardId, userId, handleClose, h
     const editBoardModalRef = useRef<ModalHandle>(null);
     const [showModal, setShowModal] = useState(false)
 
-
-    // const handleAddItem = (text: string) => {
-    //     dispatch(addBoard(user, text))
-    //     setShowModal(false)
-    // }
-
     return (
         <BoardSidebarContainer show={isShow}>
             <BoardSidebarClose onClick={handleClose} show={isShow}>

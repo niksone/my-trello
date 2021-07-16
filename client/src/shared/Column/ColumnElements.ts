@@ -11,9 +11,6 @@ interface ColumnContainerProps  {
 export const ColumnContainer = styled.div<ColumnContainerProps>`
     height: 100%;
     width: 100%;
-    /* @media screen and(max-width:${BREAKPOINTS.mobile}px){
-        padding: 0;
-    } */
 `
 
 export const ColumnWrapper = styled.div<ColumnContainerProps>`
@@ -44,7 +41,6 @@ export const ColumnTitleContainer = styled.div`
     justify-content: space-between;
     padding-bottom: 22px;
 
-    /* padding: 10px; */
     cursor: pointer;
     z-index: 5;
 
@@ -64,13 +60,10 @@ export const ColumnTitle = styled.p`
 
 export const ColumnCardContainer = styled.div`
     height: 100%;
-    /* height: auto; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* padding: 10px; */
     padding-bottom: 0.1px;
-    /* overflow-y: auto; */
 
     @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         height: auto;

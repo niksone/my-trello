@@ -3,7 +3,6 @@ import { Board, BoardReducerProps } from './interfaces';
 
 const initialState: BoardReducerProps = {
     boards: [] as Board[],
-    // boards: boards,
     isLoading: true
 }
 

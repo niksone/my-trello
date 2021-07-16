@@ -9,12 +9,8 @@ export const CardContainer = styled.div<CardContainerProps>`
     position: relative;
     background: #fff;
     border: 1px var(--color-resting-outline) solid;
-    
-    /* opacity: ${({isOver}) => isOver ? '0.3' :'1' }; */
-    /* transform: rotateZ(${({isDragging}) => isDragging ? '5deg' : '0'}); */
     padding: 20px;
     border-radius: 12px;
-    /* max-width: 280px; */
     word-break: break-word;
     white-space: pre-line;
     cursor: pointer;
@@ -76,8 +72,6 @@ export const CardProgressLabel = styled.span`
 export const CardProgressStage = styled.span`
     font-size: var(--text-regular);
 `
-
-// Edit card
 
 export const EditCardContainer = styled.div`
     display: flex;

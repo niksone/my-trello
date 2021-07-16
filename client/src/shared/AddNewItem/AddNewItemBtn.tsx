@@ -8,16 +8,6 @@ const AddNewItemBtn = ({children, onAdd, title, Form, ...rest}: any) => {
         setShowForm(!showForm)
     }
 
-    const handleForm = (text: string) => {
-        const trimText = text.trim()
-        console.log(text);
-        if(trimText !== ''){
-            onAdd(trimText)
-            setShowForm(false)
-        }
-        // onAdd()
-    }
-
     return (
         <>
         <Button onClick={toggleForm} {...rest}>

@@ -16,7 +16,7 @@ import ArrowIcon from '../icons/Arrow/Arrow'
 import { ShowContainer } from '../../HomePage/HomePageElements'
 import { BoardSectionWrapper } from '../../BoardSection/BoardElements'
 import { AddColumnContainer, BoardColumnContainer, BoardColumnWrapper, BoardContainer, BoardFooterContainer, BoardFooterNav, BoardFooterTitle } from './BoardElements'
-import { BREAKPOINTS, isMobileWidth } from '../constants'
+import { isMobileWidth } from '../constants'
 
 
 

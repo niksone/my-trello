@@ -1,4 +1,3 @@
-import React from 'react'
 import { ProgressContainer, ProgressFill, ProgressValue } from './ProgressComponents'
 
 

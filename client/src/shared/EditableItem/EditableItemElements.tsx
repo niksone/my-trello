@@ -1,11 +1,6 @@
 import styled from "styled-components"
 
 export const EditableItemContainer = styled.span`
-    /* position: relative;
-    display: flex;
-    flex-direction: column;
-    /* height: 100%; */
-    /* width: 100%; */
     cursor: text;
     font-size: inherit;
 `
@@ -30,8 +25,5 @@ export const EditButton = styled.span`
     }
 `
 export const SubmitEditButton = styled.button`
-    /* position: absolute;
-    bottom: 0;
-    left: 0; */
     background-color: green;
 `

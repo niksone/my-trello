@@ -15,7 +15,7 @@ export const addBoard = (userId: string, boardName: string) => async (dispatch: 
     try {
         const board = (await boardApi.addBoard(userId, boardName)).data
         dispatch({type: 'ADD_BOARD', payload: {id: board._id, name: boardName}})
-        // dispatch({type: 'ADD_BOARD', payload: {id: new Date().toISOString(), name: boardName}})
+
     } catch (error) {
         console.log(error)
     }

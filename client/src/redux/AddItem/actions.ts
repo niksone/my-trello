@@ -3,14 +3,12 @@ import { Card, List } from './interfaces';
 export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
  SetDraggedList| AddBoard | SetBoard | AddList  | UpdateCard
 | DeleteCard | EditList | DeleteList | AddCard | UpdateTask
-// | AddTask
+
 interface AddList {type: 'ADD_LIST', payload: List}
 
 interface SetBoard {type: 'SET_BOARD', payload: Board}
 
 interface AddBoard {type: 'ADD_BOARD', payload: Board}
-
-// interface AddTask {type: 'ADD_TASK', payload: {task: Task, listId: string, cardId: string}}
 
 interface AddCard {type: 'ADD_CARD', payload: {listId: string, card: Card}}
 

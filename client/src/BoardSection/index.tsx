@@ -7,12 +7,6 @@ import { Board } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
 
-
-// export interface BoardSectionProps {
-//     // data: AddItemState
-//     boards: Board[]
-// }
-
 const BoardSection = () => {
     const dispatch = useDispatch()
     const {id} = useParams<{id: string}>()

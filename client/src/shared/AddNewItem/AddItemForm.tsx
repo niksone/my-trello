@@ -19,7 +19,7 @@ interface AddItemFormProps {
 
 const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon, variant = 'default'}: AddItemFormProps) => {
     const test = useRef<HTMLSpanElement>(null)
-    // const FormIcon = Icon
+
     const handleAddItem = () => {
         const text = (test?.current?.innerText || '').trim();
         console.log(text);

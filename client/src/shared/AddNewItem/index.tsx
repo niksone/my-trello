@@ -12,16 +12,9 @@ interface AddNewItemProps {
 
 const AddNewItem = ({text, formText, onAdd, item, Button}: AddNewItemProps) => {
     const [showForm, setShowForm] = useState(false)
+    
     const toggleForm = () => {
         setShowForm(!showForm)
-    }
-
-    const handleForm = (text: string) => {
-        const trimText = text.trim()
-        if(trimText !== ''){
-            onAdd(trimText)
-            setShowForm(false)
-        }
     }
 
     return (

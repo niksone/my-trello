@@ -11,10 +11,7 @@ import {
     FormHeaderWrapper,
 } from "../FormElements";
 import ArrowIcon from "../../icons/Arrow/Arrow";
-import {
-    CardFormContainer,
-    CardFormWrapper,
-} from "./CardFormElements";
+import { CardFormContainer, CardFormWrapper } from "./CardFormElements";
 import SaveIcon from "../../icons/Save/SaveIcon";
 import Div100vh from "../../Div100vh";
 import ConditionalWrapper from "../../ConditionalWrapper";
@@ -54,7 +51,7 @@ const CardForm = ({
         tasks,
     });
 
-    const [isValid, setIsValid] = useState<boolean>(true)
+    const [isValid, setIsValid] = useState<boolean>(true);
 
     const handleUpdateCard = (
         title: string,
@@ -82,40 +79,47 @@ const CardForm = ({
     const handleUpdateTask = (taskId: string, text: string) => {
         setCard((prev) => ({
             ...prev,
-            tasks: [...prev.tasks.map(task => task._id === taskId ? {...task, text} : task)]
-        }))
+            tasks: [
+                ...prev.tasks.map((task) =>
+                    task._id === taskId ? { ...task, text } : task
+                ),
+            ],
+        }));
     };
 
     const handleDeleteTask = (taskId: string) => {
         setCard((prev) => ({
             ...prev,
-            tasks: [...prev.tasks.filter(task => task._id !== taskId)]
-        }))
+            tasks: [...prev.tasks.filter((task) => task._id !== taskId)],
+        }));
     };
 
     const handleChangeTask = (taskId: string) => {
         setCard((prev) => ({
             ...prev,
-            tasks: [...prev.tasks.map(task => task._id === taskId ? {...task, completed: !task.completed} : task)]
-        }))
+            tasks: [
+                ...prev.tasks.map((task) =>
+                    task._id === taskId
+                        ? { ...task, completed: !task.completed }
+                        : task
+                ),
+            ],
+        }));
     };
 
     const handleSave = () => {
         console.log(card);
-        if(card.title.trim() === ''){
-            setIsValid(false)
-        }else{
-            setIsValid(true)
+        if (card.title.trim() === "") {
+            setIsValid(false);
+        } else {
+            setIsValid(true);
             onSave(card);
             onExit();
         }
     };
 
     return (
-        <ConditionalWrapper
-            Wrapper={Div100vh}
-            condition={isMobileWidth}
-        >
+        <ConditionalWrapper Wrapper={Div100vh} condition={isMobileWidth}>
             <CardFormContainer>
                 <CardFormWrapper>
                     <FormWrapper>
@@ -164,26 +168,10 @@ const CardForm = ({
                                 )
                             }
                             editable
-                            placeholderColor={!isValid ? COLORS.error : ''}
+                            placeholderColor={!isValid ? COLORS.error : ""}
                         />
                         <FormContent>
                             <FormContainer>
-                                {/* <FormBlock>
-                            <FormDescriptionContainer>
-                                <FormBlockTitle>
-                                    Description
-                                </FormBlockTitle>
-                                <FormDescription>
-                                    <EditableItem
-                                        initialText={card.description}
-                                        deleteItem={() => {}}
-                                        editItem={() => {}}
-                                        placeholder='Enter Description'
-                                        updateItem={(text) => handleUpdateCard(card.title, card.subtitle, text, card.tasks)}
-                                    />
-                                </FormDescription>
-                            </FormDescriptionContainer>
-                        </FormBlock> */}
                                 <CardFormDescription
                                     title="Description"
                                     initialText={card.description}
@@ -197,49 +185,6 @@ const CardForm = ({
                                     }
                                 />
                                 {card.tasks && (
-                                    // <FormBlock>
-                                    //     <FormChecklistContainer>
-                                    //         <FormChecklistTitle>
-                                    //             <FormBlockTitle>Checklist</FormBlockTitle>
-                                    //             <FormChecklistDone>{getCompletedTasks(card.tasks)} / {card.tasks.length}</FormChecklistDone>
-                                    //         </FormChecklistTitle>
-                                    //         <ProgressBar variant='default' value={getCompletedTasks(card.tasks) / card.tasks.length * 100 || getCompletedTasks(card.tasks)}/>
-                                    //         <FormChecklistItemsWrapper>
-                                    //             <FormListItems>
-                                    //                 {card.tasks?.map(task =>
-                                    //                     <FormListItem
-                                    //                         key={task._id}
-                                    //                     >
-                                    //                         <Checkbox
-                                    //                             checked={task.completed}
-                                    //                             key={task._id}
-                                    //                             onChange={() => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, task.text, !task.completed))}
-                                    //                         >
-                                    //                             <EditableItem
-                                    //                                 initialText={task.text}
-                                    //                                 deleteItem={() => {}}
-                                    //                                 editItem={(text: string) => {}}
-                                    //                                 placeholder='Enter task text'
-                                    //                                 updateItem={(text: string) => handleUpdate(card.title, card.subtitle, card.description, updateTask(card.tasks, task._id, text, task.completed))}
-                                    //                             />
-                                    //                         </Checkbox>
-                                    //                         <DeleteIconWrapper onClick={() => handleUpdate(card.title, card.subtitle, card.description, removeTask(task._id, card.tasks))}>
-                                    //                             <TrashcanIcon />
-                                    //                         </DeleteIconWrapper>
-                                    //                     </FormListItem>
-
-                                    //                 )}
-                                    //                 <AddItemForm
-                                    //                     title='Add new Task'
-                                    //                     placeholder='Start Typing...'
-                                    //                     item='TASK'
-                                    //                     onAdd={(text: string) => handleUpdate(card.title, card.subtitle, card.description, [...card.tasks, {_id: String(new ObjectID()), text, completed: false}])}
-                                    //                 />
-                                    //             </FormListItems>
-                                    //         </FormChecklistItemsWrapper>
-                                    //     </FormChecklistContainer>
-
-                                    // </FormBlock>
                                     <CardFormChecklist
                                         tasks={card.tasks}
                                         onAdd={handleAddTask}

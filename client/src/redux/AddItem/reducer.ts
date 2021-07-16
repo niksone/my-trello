@@ -55,20 +55,13 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
                 }
         }
 
-        // case 'EDIT_CARD': {
-        //     const columnIndex = findIndex(action.payload.listId, state.lists)
-        //     const cardIndex = findIndex(action.payload.cardId, state.lists[columnIndex].cards)
-        //     state.lists[columnIndex].cards[cardIndex].text = action.payload.text
-
-        //     return {...state}
-        // }
 
         case 'UPDATE_CARD': {
             const {listId, cardId, card} = action.payload
             console.log('update_Card')
             const columnIndex = findIndex(listId, state.lists)
             const cardIndex = findIndex(cardId, state.lists[columnIndex].cards)
-            // state.lists[columnIndex].cards[cardIndex] = action.payload
+
             state.lists[columnIndex].cards = state.lists[columnIndex].cards.map((stateCard, index) => {
                 return index === cardIndex ? card : stateCard
             })
@@ -130,9 +123,9 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
             const columnIndex = state.lists.findIndex(column => column._id === columnId)
             const cardIndex = state.lists[columnIndex].cards.findIndex(card => card._id === cardId)
 
-            // state.lists[columnIndex].cards[cardIndex].tasks.findIndex(task => task._id === taskId)
+
             state.lists[columnIndex].cards[cardIndex].tasks = state.lists[columnIndex].cards[cardIndex].tasks.map((task, index) => {
-                // task._id === taskId ? {...task, text, completed} : task
+
                 if(task._id === taskId){
                     console.log({...task, text, completed})
                     return {...task, text, completed}
@@ -140,7 +133,7 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
                     return task
                 }
             })
-            // console.log({...task, text, completed})
+
             console.log(state)
             return {...state, }
         }

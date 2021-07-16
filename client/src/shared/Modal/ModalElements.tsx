@@ -39,10 +39,4 @@ export const ModalContent = styled.div`
     justify-content: center;
     align-items: center;
     z-index: 10;
-
-
-    /* @media screen and (max-width: 425px){
-        height: 100%;
-        width: 100%;
-    } */
 `

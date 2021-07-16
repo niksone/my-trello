@@ -4,7 +4,6 @@ import { Modal, ModalHandle } from "../Modal"
 
 interface ButtonModalCreatorProps {
     label: string
-    // modalRef: Ref<ModalHandle>
     Icon: any
     Item: any
 }
@@ -32,8 +31,7 @@ const ButtonModalCreator = ({label, Icon, Item}: ButtonModalCreatorProps, ref: R
         () => ({
             open: openModal,
             close: closeModal,
-        }),
-        [],
+        })
     )
 
     return (

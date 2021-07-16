@@ -26,7 +26,6 @@ export type AddItemContainerTypes =
 
 export const AddItemContainer = styled.div<AddItemContainerProps>`
     min-width: ${({item}) => item === 'CARD' ? '300px' : '100%'};
-    /* min-width: 300px; */
     padding: ${({item}) => item === 'CARD' ? '5px 10px' : '0'};
 
     @media screen and (max-width: ${BREAKPOINTS.mobile}px){
@@ -50,7 +49,6 @@ interface AddItemFormContainerProps extends AddItemContainerProps{
 }
 
 export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
-    /* padding-top: 10px; */
     min-width: ${({item}) => item === 'FORM' ? '300px' : '100%'};
     display: flex;
     flex-direction: ${({fd}) => fd ? fd : 'column'};
@@ -64,7 +62,6 @@ export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
 
 export const AddItemFormWrapper= styled.div<AddItemContainerProps>`
     width: 100%;
-    /* min-width: 300px; */
     padding: ${({item}) => item ? containerType[item] : '0'};
     outline: none;
     border: none;

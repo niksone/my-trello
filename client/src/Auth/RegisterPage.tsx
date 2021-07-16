@@ -45,7 +45,7 @@ const RegisterPage = () => {
             await authApi.register(registerState.email.value, registerState.password.value)
                 .then(res => getAuth())
         } catch (error) {  
-            // console.log(error);
+            console.log(error);
         }
     }
 

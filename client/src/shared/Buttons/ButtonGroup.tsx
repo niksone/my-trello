@@ -28,16 +28,7 @@ const directionStyles = {
 
 const ButtonGroupContainer = styled.div<ButtonGroupContainerProps>`
     display: grid;
-    /* ${({direction}) => direction} */
-    /* grid-column-gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0}; */
-    /* grid-template-rows: repeat(${({columns}) => columns}, 1fr); */
     ${({direction}) => directionStyles[direction]} 
-    
-
-    /* display: inline-flex;
-    flex-direction: ${({direction}) => direction};
-    gap: ${({spacing}) => spacing ? `${spacing * 4}px` : 0}; 
-    width: 100%; */
 
     & > *{
         width: ${({widthFill}) => widthFill && '100%'};

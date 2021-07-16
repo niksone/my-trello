@@ -4,7 +4,6 @@ import { BREAKPOINTS } from '../constants'
 export const BoardContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  /* height: 100%; */
   padding: 28px 0 36px 30px;
   position: relative;
 
@@ -15,14 +14,9 @@ export const BoardContainer = styled.div`
   & > * {
     height:100%;  
   }
-  /* overflow-x: auto; */
-
-  /* display: flex; 
-  flex-direction: column; */
 `
 
 export const BoardWrapper = styled.div`
-  /* height: 100%; */
   display: flex;
   align-items: flex-start;
   height: 100%;

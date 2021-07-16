@@ -28,7 +28,7 @@ export const boardApi = {
     },
 
     async deleteList(boardId: string, listId: string) {
-        const list = await instance.delete<List>('/boards/removeList', {data: {boardId, listId}})
+        await instance.delete<List>('/boards/removeList', {data: {boardId, listId}})
     },
 
     async editListTitle(boardId: string, listId: string, title: string) {
@@ -58,12 +58,6 @@ export const boardApi = {
             )
             return updatedCard
     },
-
-    // async editCardText(boardId: string, listId: string, cardId: string, text: string) {
-    //     const updateCard = await instance.patch<Card>('/boards/updateCardTitle', {boardId,listId, cardId, text})
-    //     return updateCard
-    // },
-
     async moveCard(
         boardId: string, sourceListIndex: number, destListIndex: number, 
         sourceCardIndex: number, destCardIndex: number

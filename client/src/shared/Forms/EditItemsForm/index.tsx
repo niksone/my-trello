@@ -1,4 +1,3 @@
-import React from 'react'
 import { BoardName } from '../../../HomePage/HomePageElements'
 import AddItemForm from '../../AddNewItem/AddItemForm'
 import Button from '../../Buttons'

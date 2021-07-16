@@ -74,26 +74,17 @@ export const useRegisterValidation = () => {
         }
     })
 
-
-    // let validation = {
-    //     isValid: false,
-    //     error: {
-    //         value: '',
-    //         fieldName: ''
-    //     }
-    // }
-    
     const checkValid = async ({email, password, confirmedPassword, error}: RegisterState) => {
         schemaMessages.email.fieldName = email.fieldName
         schemaMessages.password.fieldName = password.fieldName
         schemaMessages.confirmedPassword.fieldName = confirmedPassword.fieldName
 
         try {
-            const res = schema
-                .validateSync({
-                    email: email.value, 
-                    password: password.value, 
-                    confirmedPassword: confirmedPassword.value})
+            schema.validateSync({
+                email: email.value, 
+                password: password.value, 
+                confirmedPassword: confirmedPassword.value
+            })
             const {userExist, error} = await checkUserExist(email.value, password.value)
             console.log(userExist, 'user Exist final');
         
@@ -104,8 +95,8 @@ export const useRegisterValidation = () => {
         setValidation( prev => result)
         console.log(validation, 'validation')
         return result
-        // return validation
-        } catch (error) {
+
+    } catch (error) {
             const res = error.errors
             console.log(res)
 
