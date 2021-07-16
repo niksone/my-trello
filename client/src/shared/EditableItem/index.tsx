@@ -14,10 +14,10 @@ interface EditableItemProps {
 
 
 const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor}: EditableItemProps) => {
-    const test = useRef<HTMLSpanElement>(null)
+    const textAreaRef = useRef<HTMLSpanElement>(null)
 
     useEffect(() => {
-        test.current && (test.current.innerText = initialText)
+        textAreaRef.current && (textAreaRef.current.innerText = initialText)
     })
 
 
@@ -25,7 +25,7 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
         console.log('handle click');
 
          const onExit = () => {
-            updateItem(test?.current?.innerText.trim() || '') 
+            updateItem(textAreaRef?.current?.innerText.trim() || '') 
             document.removeEventListener('focusout', onExit)            
         }
 
@@ -36,7 +36,7 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
     return (
         <EditableItemContainer onClick={handleClick}>
             <ResizableTextArea 
-                ref={test}
+                ref={textAreaRef}
                 onChange={() => {}}
                 placeholder={placeholder}
                 placeholderColor={placeholderColor}

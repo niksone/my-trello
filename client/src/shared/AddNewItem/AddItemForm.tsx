@@ -18,14 +18,14 @@ interface AddItemFormProps {
 }
 
 const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon, variant = 'default'}: AddItemFormProps) => {
-    const test = useRef<HTMLSpanElement>(null)
+    const textAreaRef = useRef<HTMLSpanElement>(null)
 
     const handleAddItem = () => {
-        const text = (test?.current?.innerText || '').trim();
+        const text = (textAreaRef?.current?.innerText || '').trim();
         console.log(text);
         console.log(title);
         text !== '' && onAdd(text)
-        test.current && (test.current.innerText = "")
+        textAreaRef.current && (textAreaRef.current.innerText = "")
     }
 
     const getForm = (variant: FormVariant) => {
@@ -34,7 +34,7 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
                 return (
                     <AddItemFormContainer  item={item}>
                         <AddItemFormWrapper item={item}>
-                            <ResizableTextArea ref={test} placeholder={placeholder}/>
+                            <ResizableTextArea ref={textAreaRef} placeholder={placeholder}/>
                         </AddItemFormWrapper>
                         <AddItemFormButtonContainer item={btnItem}>
                             <Button onClick={handleAddItem} size='md'>{title}</Button>
@@ -52,7 +52,7 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
                             </FormIcon> 
                         } 
                         <AddItemFormWrapper item={item}>
-                            <ResizableTextArea ref={test} placeholder={placeholder}/>
+                            <ResizableTextArea ref={textAreaRef} placeholder={placeholder}/>
                         </AddItemFormWrapper>
                     </AddItemFormContainer>
                 )
