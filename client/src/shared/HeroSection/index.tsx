@@ -59,7 +59,7 @@ export const HeroLeftWrapper = styled.div`
     transform: translate(10%, 0%);
     width: fit-content;
 
-    @media(max-width: ${BREAKPOINTS.tablet}){
+    @media(max-width: ${BREAKPOINTS.tablet}px){
         width: 90%;
         transform: translate(0);
     }
