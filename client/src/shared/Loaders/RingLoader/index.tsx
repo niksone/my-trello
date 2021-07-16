@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { COLORS } from "../../contants";
 
 import { CommonProps, LengthObject, LoaderSizeProps } from "./interfaces";
@@ -81,60 +80,7 @@ export function cssValue(value: number | string): string {
   return `${lengthWithunit.value}${lengthWithunit.unit}`;
 }
 
-
-// class Loader extends React.PureComponent<Required<LoaderSizeProps>> {
-//   public static defaultProps = sizeDefaults(60);
-
-//   public getSize = (): LengthType => {
-//     return this.props.size;
-//   };
-
-//   public style = (i: number): any => {
-//     const { color, speedMultiplier } = this.props;
-//     const { value, unit } = parseLengthAndUnit(this.getSize());
-
-  //   return css`
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     width: ${`${value}${unit}`};
-  //     height: ${`${value}${unit}`};
-  //     border: ${`${value / 10}${unit}`} solid ${color};
-  //     opacity: 0.4;
-  //     border-radius: 100%;
-  //     animation-fill-mode: forwards;
-  //     perspective: 800px;
-  //     animation: ${i === 1 ? right : left} ${2 / speedMultiplier}s 0s infinite linear;
-  //   `;
-  // };
-
-  // public wrapper = (): any => {
-  //   return css`
-  //     width: ${cssValue(this.getSize())};
-  //     height: ${cssValue(this.getSize())};
-  //     position: relative;
-  //   `;
-  // };
-
-//   public render(): JSX.Element | null {
-//     const { loading, css } = this.props;
-
-//     return loading ? (
-//       <span style={`${this.wrapper()} ${css}`}>
-//         <span style={this.style(1)} />
-//         <span style={this.style(2)} />
-//       </span>
-//     ) : null;
-//   }
-// }
-
-const RingLoader = ({size}: LoaderSizeProps) => {
-  const [{loading, color, css, speedMultiplier}, setLoader] = useState({
-    loading: true,
-    color: COLORS.primary,
-    css: "",
-    speedMultiplier: 1
-  })
+const RingLoader = ({size, loading = true, color = COLORS.primary, css='', speedMultiplier = 1}: LoaderSizeProps) => {
 
   const {value, unit} = {...parseLengthAndUnit(size)}
 
