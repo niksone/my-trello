@@ -104,30 +104,29 @@ const BeautifulBoard = ({data}: BoardProps) => {
       }
     }
 
-    const checkPos = () => {
+    const setPos = () => {
       boardRef.current && (boardRef.current.initialScroll = boardRef.current?.scrollLeft )
     }
 
     useEffect(() => {
       const debounceFunc = debounce(() => getPosition(lists), 100)
-      console.log('board')
-        
 
       if(window.innerWidth <= 425){
         console.log(lists, 'lists')
-        setCurrentListId(prev => lists[0]?._id || prev)
-        checkPos()
-        getPosition(lists)  
-        boardRef.current?.addEventListener('touchstart',checkPos, {passive: true  })
-       
 
+        setCurrentListId(prev => lists[0]?._id || prev)
+        setPos()
+        getPosition(lists)  
+
+        boardRef.current?.addEventListener('touchstart',setPos, {passive: true  })
         boardRef.current?.addEventListener('scroll', debounceFunc)
+
         console.log(currentListId);
       }
 
       return () => {
         boardRef.current?.removeEventListener('scroll', debounceFunc)
-        boardRef.current?.removeEventListener('touchstart', checkPos)
+        boardRef.current?.removeEventListener('touchstart', setPos)
       }
     }, [lists])
 
