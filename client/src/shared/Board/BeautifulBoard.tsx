@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
 import { addList, addCard, moveList, moveCard } from '../../redux/AddItem/actionCreators'
 import { AddItemState, List } from '../../redux/AddItem/interfaces'
@@ -44,7 +44,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
     const [currentListId, setCurrentListId] = useState('')
 
-    const handleDrop = (res: any) => {
+    const handleDrop = (res: DropResult) => {
       const {destination, source, draggableId, type} = res
       if(!destination || !source) return
       if(destination.index === source.index && destination.droppableId === source.droppableId){
@@ -168,7 +168,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 <AddColumnContainer>
                 <Button 
                     widthFill 
-                    Icon={AddIcon}
+                    Icon={<AddIcon />}
                     onClick={() => setShowModal(true)}
                     variant='unstyle'
                     fw='700'

@@ -29,8 +29,8 @@ interface CardFormProps {
     subtitle: string;
     description: string;
     tasks: Task[];
-    onExit?: any;
-    onSave?: any;
+    onExit?: () => void;
+    onSave?: (card: SimpleCard) => void;
 }
 
 const CardForm = ({
@@ -113,8 +113,8 @@ const CardForm = ({
             setIsValid(false);
         } else {
             setIsValid(true);
-            onSave(card);
-            onExit();
+            onSave && onSave(card);
+            onExit && onExit();
         }
     };
 

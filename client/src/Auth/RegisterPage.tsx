@@ -77,33 +77,33 @@ const RegisterPage = () => {
                                     placeholder='Enter your email' 
                                     fieldId='email-input'
                                     type='text'
-                                    onChange={(e: any) => setRegisterState(prev => (
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRegisterState(prev => (
                                         {...prev, email: {...prev.email, value: e.target.value}}
                                     ))}
                                     scheme={getValidationScheme(validation.error.fieldName, registerState.email.fieldName)}
-                                    Icon={MailIcon}
+                                    Icon={<MailIcon />}
                                 />
                                 <TextInput 
                                     label='Password' 
                                     placeholder='Enter your password' 
                                     fieldId='password-input'
                                     type='password'
-                                    onChange={(e: any) => setRegisterState(prev => (
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRegisterState(prev => (
                                         {...prev, password: {...prev.password, value: e.target.value}}
                                     ))}
                                     scheme={getValidationScheme(validation.error.fieldName, registerState.password.fieldName)}
-                                    Icon={LockIcon}
+                                    Icon={<LockIcon />}
                                 />
                                 <TextInput 
                                     label='Confirm password' 
                                     placeholder='Enter your password' 
                                     fieldId='confirmedpassword-input'
                                     type='password'
-                                    onChange={(e: any) => setRegisterState(prev => (
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRegisterState(prev => (
                                         {...prev, confirmedPassword: {...prev.confirmedPassword, value: e.target.value}}
                                     ))}  
                                     scheme={getValidationScheme(validation.error.fieldName, registerState.confirmedPassword.fieldName)}                         
-                                    Icon={LockIcon}
+                                    Icon={<LockIcon />}
                                 />
                             </FormInputsContainer>
                             <ButtonGroup spacing={3}>

@@ -26,7 +26,7 @@ const CardHeader = ({title, subtitle, headerTitle, onClick, onDelete}: CardTitle
                     <ButtonGroup spacing={2} direction="column">
                         <Button
                             size="lg"
-                            Icon={EditIcon}
+                            Icon={<EditIcon />}
                             onClick={onClick}
                             fw="700"
                         >
@@ -35,7 +35,7 @@ const CardHeader = ({title, subtitle, headerTitle, onClick, onDelete}: CardTitle
                         <Button
                             size="lg"
                             colorScheme="errorLight"
-                            Icon={TrashcanIcon}
+                            Icon={<TrashcanIcon />}
                             onClick={onDelete}
                             fw="700"
                         >

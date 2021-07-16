@@ -21,7 +21,7 @@ export const HandleAddItemButton = ({ handleAddList, label, formTitle }) => {
     return (
         <ButtonModalCreator
             label={label}
-            Icon={AddIcon}
+            Icon={<AddIcon />}
             ref={buttonRef}
             Item={
                 <AddItemForm
@@ -53,7 +53,7 @@ export const HandleMoveItemsButton = ({
     return (
         <ButtonModalCreator
             label={label}
-            Icon={OrderIcon}
+            Icon={<OrderIcon />}
             ref={buttonRef}
             Item={
                 <MoveItemsForm
@@ -95,7 +95,7 @@ export const HandleEditItemsButton = ({
     return (
         <ButtonModalCreator
             label={label}
-            Icon={EditIcon}
+            Icon={<EditIcon />}
             ref={buttonRef}
             Item={
                 <EditItemsForm

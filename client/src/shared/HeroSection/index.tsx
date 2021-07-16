@@ -71,9 +71,10 @@ export const HeroTitle = styled.h1`
 `
 
 interface HeroRightProps {
-    bgPattern?: any,
-    mobileBgPattern?: any
+    bgPattern?: SVGElement | string,
+    mobileBgPattern?: SVGElement | string
 }
+
 export const HeroRight = styled.div<HeroRightProps>`
     width: 50%;
     display: flex;

@@ -12,7 +12,7 @@ interface AddItemFormProps {
     onAdd(text: string): void
     item?: AddItemContainerTypes,
     btnItem?: AddItemFormButtonContainerTypes
-    Icon?: any
+    Icon?: JSX.Element
     variant?: FormVariant
 
 }
@@ -48,9 +48,9 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
                     <AddItemFormContainer fd='row' alignItems='center' item={item}>
                         {Icon && 
                             <FormIcon onClick={handleAddItem}>
-                                <Icon />
+                                {Icon}
                             </FormIcon> 
-                        }
+                        } 
                         <AddItemFormWrapper item={item}>
                             <ResizableTextArea ref={test} placeholder={placeholder}/>
                         </AddItemFormWrapper>

@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'
 import { BoardName } from '../../../HomePage/HomePageElements'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
@@ -9,13 +8,14 @@ import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
 import { FormContainer, FormContent,FormHeaderContainer, FormHeaderWrapper, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
+import { ItemWithId } from '../interfaces'
 import { MoveItem, MoveItemFormContainer } from './MoveItensFormElements'
 
 interface MoveItemsFormProps {
     headerTitle: string
     title: string
     subtitle: string
-    items: any[]
+    items: ItemWithId[]
     itemLabelField: 'title' | 'name'
     
     onExit: () => void,
@@ -27,10 +27,11 @@ interface MoveItemsFormProps {
 
 const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onUpdate, onExit}: MoveItemsFormProps) => {    
 
-    const handleUpdate = (res: any) => {
+    const handleUpdate = (res: DropResult) => {
         const {source, destination} = res
-        console.log(source.index, destination.index);
-        onUpdate(source.index, destination.index)
+        if(source.index !== destination?.index && destination){
+            onUpdate(source.index, destination.index)
+        }
     }
 
     return (

@@ -3,19 +3,17 @@ import ResizableTextArea from '../ResizableTextArea'
 import { EditableItemContainer } from './EditableItemElements'
 
 interface EditableItemProps {
-    // children: React.ReactChild,
     initialText: string,
     deleteItem: () => void,
     updateItem: (text: string) => void
     editItem: (text: string) => void,
-    Wrapper?: any,
     placeholder: string
     placeholderColor?: string
 }
 
 
 
-const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor, Wrapper}: EditableItemProps) => {
+const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor}: EditableItemProps) => {
     const test = useRef<HTMLSpanElement>(null)
 
     useEffect(() => {
@@ -25,10 +23,12 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
 
     const handleClick = () => {
         console.log('handle click');
-         const onExit = (e: any) => {
+
+         const onExit = () => {
             updateItem(test?.current?.innerText.trim() || '') 
             document.removeEventListener('focusout', onExit)            
         }
+
         document.addEventListener('focusout', onExit)
     }
 

@@ -151,7 +151,7 @@ const invisibleStyles = css`
 `;
 
 type stylesOptions = {
-    [key: string]: FlattenInterpolation<ThemedStyledProps<ButtonProps, any>>;
+    [key: string]: FlattenInterpolation<ThemedStyledProps<ButtonProps, {}>>;
 };
 
 const styles: stylesOptions = {

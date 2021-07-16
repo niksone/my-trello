@@ -96,7 +96,7 @@ const BoardSidebar = ({boards, isShow, modalRef, boardId, userId, handleClose, h
             <BoardLinkWrapper>
                 <Button 
                     widthFill 
-                    Icon={AddIcon}
+                    Icon={<AddIcon />}
                     onClick={() => setShowModal(true)}
                 >
                     Add board

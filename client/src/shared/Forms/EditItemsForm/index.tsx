@@ -12,6 +12,7 @@ import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
 import { DeleteIconWrapper } from '../CardForm/CardFormElements'
 import { FormBlock, FormBoardItem, FormBoardItemName, FormContainer, FormContent, FormHeaderContainer, FormHeaderWrapper, FormListItem, FormListItems, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
+import { ItemWithId } from '../interfaces'
 import { EditBoardFormContainer } from './EditBoardFormElements'
 
 
@@ -21,7 +22,7 @@ export interface EditItemsFormProps {
     onAdd: (name: string) => void
     onEdit: (id:string, name: string) => void
     onDelete: (id: string) => void
-    items: any[]
+    items: ItemWithId[]
     headerTitle: string
     title: string
     subtitle: string
@@ -65,11 +66,11 @@ const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel,
                                         onAdd={(name: string) => onAdd(name)}
                                         placeholder={formPlaceholder}
                                         variant='icon'
-                                        Icon={AddIcon}
+                                        Icon={<AddIcon />}
                                     />  
                                 </FormBoardItem>
                             </FormListItem>
-                            {items?.map((item: any) => (
+                            {items?.map((item: ItemWithId) => (
                                 <FormListItem key={item._id}>
                                     <FormBoardItem>
                                         <DeleteIconWrapper

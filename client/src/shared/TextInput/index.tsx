@@ -13,7 +13,7 @@ interface TextInputProps {
     placeholder: string,
     fieldId: string,
     scheme?:  OptionalTextInputSchemes
-    Icon?: any
+    Icon?: JSX.Element
 }
 
 
@@ -34,7 +34,7 @@ const TextInput = ({type, onChange, label, placeholder, fieldId, scheme, Icon}: 
 
                     Icon && 
                     <IconWrapper colorScheme={scheme}>
-                        <Icon />
+                        {Icon}
                     </IconWrapper>
                 }
             </TextInputWrapper>

@@ -3,7 +3,12 @@ import { Redirect, Route } from 'react-router-dom'
 import { userContext } from './Context'
 import AppLoader from './shared/Loaders/AppLoader'
 
-const ProtectedRoute = ({component: Component, ...rest}: any) => {
+interface ProtectedRouteProps {
+    component: React.ElementType
+    auth?: boolean
+    [key: string]: string | boolean | React.ElementType | undefined
+}
+const ProtectedRoute = ({component: Component, auth = false, ...rest}: ProtectedRouteProps) => {
     const {isAuth, isLoading} = useContext(userContext)
     
 
@@ -29,7 +34,7 @@ const ProtectedRoute = ({component: Component, ...rest}: any) => {
         isLoading 
             ? <AppLoader />
             :  
-        getRoute(rest.auth, isAuth)  
+        getRoute(auth, isAuth)  
     )
 }
 

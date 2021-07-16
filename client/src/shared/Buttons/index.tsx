@@ -26,7 +26,7 @@ export interface ButtonProps {
     widthFill?: boolean,
     active?: boolean,
     variant?: 'outline' | 'fill' | 'shadow' | 'unstyle' | 'dashed' | 'invisible',
-    Icon?: any,
+    Icon?: JSX.Element,
     size?: 'lg' | 'md' | 'sm',
     colorScheme?: keyof typeof colorSchemes,
     jc?: 'start' | 'center' | 'end',
@@ -52,7 +52,7 @@ const Button = ({children, onClick, ...rest}: React.PropsWithChildren<ButtonProp
                         {ButtonIcon && (
                             <ButtonIconContainer>
                                 {/* {rest.Icon} */}
-                                <ButtonIcon />
+                                {ButtonIcon}
                             </ButtonIconContainer>
                         )}
                         {children}

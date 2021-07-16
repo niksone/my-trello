@@ -6,7 +6,7 @@ export interface LengthObject {
   export interface CommonProps {
     color?: string;
     loading?: boolean;
-    css?: string | any;
+    css?: string;
     speedMultiplier?: number
   }
   

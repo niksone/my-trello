@@ -4,8 +4,8 @@ import { Modal, ModalHandle } from "../Modal"
 
 interface ButtonModalCreatorProps {
     label: string
-    Icon: any
-    Item: any
+    Icon: JSX.Element
+    Item: JSX.Element
 }
 
 export type ButtonModalCreatorRef = {

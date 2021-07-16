@@ -82,7 +82,7 @@ const BeautifulDragColumn = ({
                                 />
                             </ColumnTitle>
                             <Button
-                                Icon={AddIcon}
+                                Icon={<AddIcon />}
                                 onClick={() => setShowModal(true)}
                                 variant="unstyle"
                                 fw="700"
@@ -134,7 +134,7 @@ const BeautifulDragColumn = ({
                                                     )
                                                 }
                                                 onExit={() =>
-                                                    modalRef.current.close()
+                                                    modalRef?.current?.close()
                                                 }
                                                 tasks={[] as Task[]}
                                             />
@@ -148,7 +148,7 @@ const BeautifulDragColumn = ({
                         <ShowContainer show={true} mobile={true}>
                             <AddCardContainer>
                                 <Button
-                                    Icon={AddIcon}
+                                    Icon={<AddIcon />}
                                     onClick={() => setShowModal(true)}
                                     variant="dashed"
                                     bg="inherit"

@@ -5,6 +5,10 @@ import User from "./models/User"
 const bcrypt = require('bcryptjs')
 const localStrategy = require('passport-local').Strategy
 
+type User = {
+    id?: number
+}
+
 module.exports = (passport: PassportStatic) => {
     const authenticateUser: VerifyFunction = (email, password, done) => {
         User.findOne({email: email}, (err: Error, user: UserI) => {
@@ -26,7 +30,7 @@ module.exports = (passport: PassportStatic) => {
     }
     passport.use(new localStrategy({usernameField: 'email'}, authenticateUser))
 
-    passport.serializeUser((user: any, cb: any) => {
+    passport.serializeUser((user: User, cb: any) => {
         cb(null, user.id)
     })
     

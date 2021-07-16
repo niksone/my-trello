@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Button from '../Buttons'
 import {Modal} from '../Modal'
 import {AddItemContainer, AddItemContainerTypes } from './AddNewItemElements'
 
@@ -7,12 +8,12 @@ interface AddNewItemProps {
     formText: string,
     onAdd(text: string): void,
     item: AddItemContainerTypes,
-    Button: any
+    Button: typeof Button
 }
 
 const AddNewItem = ({text, formText, onAdd, item, Button}: AddNewItemProps) => {
     const [showForm, setShowForm] = useState(false)
-    
+
     const toggleForm = () => {
         setShowForm(!showForm)
     }

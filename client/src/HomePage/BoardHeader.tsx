@@ -44,7 +44,7 @@ const BoardHeader = ({
 
     const handleDeleteList = (listId: string) =>
         dispatch(deleteList(board._id, listId));
-        
+
     const handleEditList = (listId: string, title: string) =>
         dispatch(updateListTitle(board._id, listId, title));
 
@@ -113,7 +113,7 @@ const BoardHeader = ({
                                     )}
                                     <Button
                                         onClick={handleLogout}
-                                        Icon={LogoutIcon}
+                                        Icon={<LogoutIcon />}
                                         colorScheme="errorLight"
                                     >
                                         Log Out

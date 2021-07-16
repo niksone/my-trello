@@ -96,7 +96,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                   subtitle={card.subtitle}
                   description={card.description}
                   tasks={card.tasks}
-                  onExit={() => modalRef.current.close()}
+                  onExit={() => modalRef?.current?.close()}
                   onSave={(savedCard: SimpleCard) => handleSave(savedCard)}
                 />
               </Modal>

@@ -1,5 +1,6 @@
 import React, {
     forwardRef,
+    ReactNode,
     Ref,
     useEffect,
     useImperativeHandle,
@@ -10,15 +11,27 @@ import { ModalContainer, ModalContent, ModalWrapper } from "./ModalElements";
 
 const modalElement = document.getElementById("modal-root");
 
-const Modal = ({ children, exit, show = false }: any, ref: Ref<any>) => {
+interface ModalProps {
+    exit: () => void
+    show?: boolean
+    children?: ReactNode
+}
+
+interface ModalRef {
+    open: () => void
+    close: () => void
+}
+
+const Modal = ({ children, exit, show = false }: ModalProps, ref: Ref<ModalRef>) => {
     const [isOpen, setIsOpen] = useState(show);
 
     const handleExit = () => {
         setIsOpen(false);
         exit && exit();
     };
+
     useEffect(() => {
-        const modalListener = (e: any) => {
+        const modalListener = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
                 handleExit();
             }
@@ -36,10 +49,8 @@ const Modal = ({ children, exit, show = false }: any, ref: Ref<any>) => {
             open: () => setIsOpen(true),
             close: () => {
                 handleExit();
-                console.log("close");
             },
         }),
-        []
     );
 
     return (

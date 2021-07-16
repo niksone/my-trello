@@ -56,8 +56,8 @@ const LoginPage = () => {
                                         placeholder='Enter your email' 
                                         fieldId='email-input'
                                         type='text'
-                                        onChange={(e: any) => setEmail(e.target.value)}
-                                        Icon={MailIcon}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                                        Icon={<MailIcon />}
                                         scheme={error !== '' ? 'error' : null}
                                     />
                                     <TextInput 
@@ -65,12 +65,12 @@ const LoginPage = () => {
                                         placeholder='Enter your password' 
                                         fieldId='password-input'
                                         type='password'
-                                        onChange={(e: any) => setPassword(e.target.value)}
-                                        Icon={LockIcon}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                                        Icon={<LockIcon />}
                                     />
                                 </FormInputsContainer>
                                 <ButtonGroup spacing={3}>
-                                    <Button onClick={(e: any) => handleLogin(e)} widthFill>Sign In</Button>
+                                    <Button onClick={(e: React.MouseEvent) => handleLogin(e)} widthFill>Sign In</Button>
                                     <Link to='/register'><Button widthFill>Sign Up</Button></Link>
                                 </ButtonGroup>
                             </FormContainer>
