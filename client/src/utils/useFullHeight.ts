@@ -11,7 +11,7 @@ const useFullHeight = () => {
         measureHeight()
         window.addEventListener('resize', measureHeight)
         return () => window.removeEventListener('resize', measureHeight)
-    })
+    }, [])
 
     function isClient() {
         return typeof window !== 'undefined' && typeof document !== 'undefined'

@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState } from 'react'
+import {useEffect, useRef } from 'react'
 import ResizableTextArea from '../ResizableTextArea'
 import { EditableItemContainer } from './EditableItemElements'
 
@@ -18,7 +18,7 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
 
     useEffect(() => {
         textAreaRef.current && (textAreaRef.current.innerText = initialText)
-    })
+    }, [initialText])
 
 
     const handleClick = () => {

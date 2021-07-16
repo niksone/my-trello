@@ -45,7 +45,7 @@ export const addItemReducer = (state: AddItemState = initialState, action: AddIt
         }
 
         case 'ADD_CARD':{
-            const {listId, card} = action.payload
+            const {card} = action.payload
             const line = findIndex(action.payload.listId, state.lists)
             console.log(action.payload.listId, state.lists)
             state.lists[line].cards.push(card)

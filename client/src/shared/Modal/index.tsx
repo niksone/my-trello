@@ -41,7 +41,7 @@ const Modal = ({ children, exit, show = false }: ModalProps, ref: Ref<ModalRef>)
         return () => {
             document.removeEventListener("keydown", modalListener);
         };
-    });
+    }, []);
 
     useImperativeHandle(
         ref,

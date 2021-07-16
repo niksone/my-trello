@@ -45,7 +45,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
     const [currentListId, setCurrentListId] = useState('')
 
     const handleDrop = (res: DropResult) => {
-      const {destination, source, draggableId, type} = res
+      const {destination, source, type} = res
       if(!destination || !source) return
       if(destination.index === source.index && destination.droppableId === source.droppableId){
         return
@@ -110,6 +110,8 @@ const BeautifulBoard = ({data}: BoardProps) => {
     }
 
     useEffect(() => {
+      const ref = boardRef.current
+
       const debounceFunc = debounce(() => getPosition(lists), 100)
 
       if(isMobileWidth){
@@ -119,15 +121,16 @@ const BeautifulBoard = ({data}: BoardProps) => {
         setPos()
         getPosition(lists)  
 
-        boardRef.current?.addEventListener('touchstart',setPos, {passive: true  })
-        boardRef.current?.addEventListener('scroll', debounceFunc)
+        ref?.addEventListener('touchstart',setPos, {passive: true  })
+        ref?.addEventListener('scroll', debounceFunc)
 
         console.log(currentListId);
       }
 
+
       return () => {
-        boardRef.current?.removeEventListener('scroll', debounceFunc)
-        boardRef.current?.removeEventListener('touchstart', setPos)
+        ref?.removeEventListener('scroll', debounceFunc)
+        ref?.removeEventListener('touchstart', setPos)
       }
     }, [lists])
 
