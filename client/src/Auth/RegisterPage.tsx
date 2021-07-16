@@ -10,7 +10,7 @@ import { Hero, HeroImgContainer, HeroLeft, HeroLeftContainer, HeroLeftWrapper, H
 import LockIcon from '../shared/icons/LockIcon/LockIcon'
 import MailIcon from '../shared/icons/Mail/MailIcon'
 import TextInput from '../shared/TextInput'
-import {useRegisterValidation} from './useRegisterValidation'
+import {getValidationScheme, useRegisterValidation} from './useRegisterValidation'
 import {ReactComponent as RegisterImg} from '../shared/icons/authentication.svg'
 import bgPattern from '../shared/icons/bgPattern.svg'
 import mobileBgPattern from '../shared/icons/bgPattern2.svg'
@@ -80,7 +80,7 @@ const RegisterPage = () => {
                                     onChange={(e: any) => setRegisterState(prev => (
                                         {...prev, email: {...prev.email, value: e.target.value}}
                                     ))}
-                                    isError={validation.error.fieldName === registerState.email.fieldName}
+                                    scheme={getValidationScheme(validation.error.fieldName, registerState.email.fieldName)}
                                     Icon={MailIcon}
                                 />
                                 <TextInput 
@@ -91,7 +91,7 @@ const RegisterPage = () => {
                                     onChange={(e: any) => setRegisterState(prev => (
                                         {...prev, password: {...prev.password, value: e.target.value}}
                                     ))}
-                                    isError={validation.error.fieldName === registerState.password.fieldName}
+                                    scheme={getValidationScheme(validation.error.fieldName, registerState.password.fieldName)}
                                     Icon={LockIcon}
                                 />
                                 <TextInput 
@@ -102,7 +102,7 @@ const RegisterPage = () => {
                                     onChange={(e: any) => setRegisterState(prev => (
                                         {...prev, confirmedPassword: {...prev.confirmedPassword, value: e.target.value}}
                                     ))}  
-                                    isError={validation.error.fieldName === registerState.confirmedPassword.fieldName}                                 
+                                    scheme={getValidationScheme(validation.error.fieldName, registerState.confirmedPassword.fieldName)}                         
                                     Icon={LockIcon}
                                 />
                             </FormInputsContainer>

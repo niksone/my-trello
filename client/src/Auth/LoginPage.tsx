@@ -58,7 +58,7 @@ const LoginPage = () => {
                                         type='text'
                                         onChange={(e: any) => setEmail(e.target.value)}
                                         Icon={MailIcon}
-                                        isError={error !== ''}
+                                        scheme={error !== '' ? 'error' : null}
                                     />
                                     <TextInput 
                                         label='Password' 

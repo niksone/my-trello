@@ -1,7 +1,15 @@
 import styled from "styled-components"
-
+import { OptionalTextInputSchemes, TextInputSchemes } from "."
+import {COLORS} from '../constants'
 interface TextInput {
-    isError?: boolean
+    colorScheme?: OptionalTextInputSchemes
+}
+
+
+const schemesColors: Record<TextInputSchemes, string> = {
+    error: COLORS.error,
+    warning: COLORS.warning,
+    success: COLORS.success
 }
 
 export const TextInputContainer = styled.div<TextInput>`
@@ -45,8 +53,8 @@ export const StyledTextInput = styled.input`
 
 export const TextInputWrapper = styled.div<TextInput>`
     display: flex;
-    border-bottom: 2px ${({isError}) => isError ? 'var(--color-error)' : 'var(--color-outline)'} solid;
-    width: fit-content;
+    border-bottom: 2px ${({colorScheme}) => colorScheme ? schemesColors[colorScheme] : COLORS.outline} solid;
+    width: fit-content; 
     padding-bottom: 17px;
     width: 100%;
     transition: 0.5s all ease-in-out;
@@ -55,6 +63,6 @@ export const TextInputWrapper = styled.div<TextInput>`
 export const IconWrapper = styled.span<TextInput>`
     height: fit-content;
     display: flex;
-    color: ${({isError}) => isError ? 'var(--color-error)' : 'inherit'};
-    /* padding-left: 5px; */
+    color: ${({colorScheme}) => colorScheme ? schemesColors[colorScheme] : 'inherit'};
+    transition: 0.5s all ease-in-out;
 `

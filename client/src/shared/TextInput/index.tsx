@@ -2,7 +2,9 @@ import { ChangeEventHandler } from 'react'
 import { IconWrapper, StyledTextInput, TextInputContainer, TextInputLabel, TextInputWrapper } from './TextInputElements';
 
 
+export type TextInputSchemes = 'error' | 'warning' | 'success'
 
+export type OptionalTextInputSchemes = TextInputSchemes | null
 
 interface TextInputProps {
     type: 'text' | 'password',
@@ -10,16 +12,18 @@ interface TextInputProps {
     label: string,
     placeholder: string,
     fieldId: string,
-    isError?: boolean,
+    scheme?:  OptionalTextInputSchemes
     Icon?: any
 }
 
-const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}: TextInputProps) => {
-    console.log(isError);
+
+
+const TextInput = ({type, onChange, label, placeholder, fieldId, scheme, Icon}: TextInputProps) => {
+
     return (
-        <TextInputContainer isError={isError}>
+        <TextInputContainer colorScheme={scheme}>
             <TextInputLabel htmlFor={fieldId}>{label}</TextInputLabel>
-            <TextInputWrapper isError={isError}>
+            <TextInputWrapper colorScheme={scheme}>
                 <StyledTextInput 
                     type={type}
                     id={fieldId} 
@@ -29,7 +33,7 @@ const TextInput = ({type, onChange, label, placeholder, fieldId, isError, Icon}:
                 {
 
                     Icon && 
-                    <IconWrapper isError={isError}>
+                    <IconWrapper colorScheme={scheme}>
                         <Icon />
                     </IconWrapper>
                 }

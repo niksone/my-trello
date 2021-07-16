@@ -135,3 +135,7 @@ const findFieldByError = (error: string) => {
     }
     return ''
 }
+
+export const getValidationScheme = (validationField, field) => {
+    return validationField === field ? 'error' : null
+}
