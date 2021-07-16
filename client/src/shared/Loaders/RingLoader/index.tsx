@@ -1,19 +1,8 @@
 
-import { COLORS } from "../../contants";
+import { COLORS } from "../../constants";
 
-import { CommonProps, LengthObject, LoaderSizeProps } from "./interfaces";
+import { LengthObject, LoaderSizeProps } from "./interfaces";
 import { SpinnerRing, SpinnerWrapper } from "./RingLoaderElements";
-
-const commonValues: Required<CommonProps> = {
-  loading: true,
-  color: "#000000",
-  css: "",
-  speedMultiplier: 1
-};
-
-export function sizeDefaults(sizeValue: number): Required<LoaderSizeProps> {
-  return Object.assign({}, commonValues, { size: sizeValue });
-}
 
 const cssUnit: { [unit: string]: boolean } = {
   cm: true,

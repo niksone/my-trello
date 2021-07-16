@@ -1,10 +1,19 @@
 import styled, { css, FlattenInterpolation, ThemedStyledProps } from "styled-components";
 import { btnIconSizes, ButtonProps, sizes } from ".";
-import { COLORS } from "../contants";
+import { COLORS } from "../constants";
 
+type ColorSchemeValues = {
+    resting: string
+    hover: string
+    active: string
+    textColor: string
+    textColorHover: string
+}
+interface ColorSchemesI {
+    [key: string]: ColorSchemeValues
+}
 
-
-export const colorSchemes = {
+export const colorSchemes: ColorSchemesI = {
     primary: {
         resting: COLORS.primaryLight,
         hover: COLORS.buttonHover,

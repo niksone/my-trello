@@ -22,7 +22,7 @@ import FormHeader from "../FormHeader";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
 import { BoardName } from "../../../HomePage/HomePageElements";
-import { COLORS } from "../../contants";
+import { COLORS } from "../../constants";
 
 interface CardFormProps {
     boardName: string;

@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { COLORS } from "../constants"
 
 export const CheckboxInput = styled.input`
     position: absolute;
@@ -33,7 +34,7 @@ export const CheckboxText= styled.p<CheckboxTextProps>`
     font-size: var(--text-regular);
     line-height: 20px;
     font-weight: bold;
-    color: ${({checked}) => checked ? 'var(--color-primary-dark)': 'var(--color-primary-grey)'};
+    color: ${({checked}) => checked ? COLORS.primaryDark: COLORS.primaryGrey};
     transition: 0.2s all ease-in-out;
     width: fit-content;
     /* background: red; */

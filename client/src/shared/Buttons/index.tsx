@@ -2,14 +2,19 @@ import React from 'react'
 import { BtnIconContainer, ButtonContainer, ButtonIconContainer, colorSchemes } from './ButtonElements'
 
 
+interface ButtonSizes {
+    sm: string
+    md: string
+    lg: string
+}
 
-export const btnIconSizes = {
+export const btnIconSizes: ButtonSizes = {
     sm: '16px',
     md: '25px',
     lg: '36px'
 }
 
-export const sizes = {
+export const sizes: ButtonSizes = {
     sm: '4px 9px',
     md: '8px 19px',
     lg: '14px 29px'

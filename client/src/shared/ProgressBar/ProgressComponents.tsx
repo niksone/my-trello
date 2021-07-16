@@ -1,17 +1,25 @@
 import styled from "styled-components";
-import { COLORS } from "../contants";
+import { COLORS } from "../constants";
 
 interface ProgressValueProps {
     value: number
 }
 
-const progressStyles =  {
+type ProgressStylesValues = {
+    breakpoint: number
+    color: string
+}
+
+interface ProgressStylesI {
+    [key: string]: ProgressStylesValues
+}
+const progressStyles: ProgressStylesI =  {
     danger: {
-        breakpoint: 30,
+        breakpoint: 0,
         color: COLORS.error
     },
     warning: {
-        breakpoint: 31,
+        breakpoint: 30,
         color: COLORS.warning
     },
     success: {
@@ -24,7 +32,7 @@ const getProgressColor = (value: number, styles: typeof progressStyles) => {
     let progressColor = progressStyles.danger.color
     for(const style of Object.values(styles)){
         // console.log(value, style.breakpoint);
-        progressColor = value <= style.breakpoint ? progressColor : style.color
+        progressColor = value >= style.breakpoint ? style.color : progressColor
         // console.log(value, style.breakpoint, value >= style.breakpoint, progressColor);
     }
 

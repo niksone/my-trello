@@ -3,7 +3,17 @@ import * as Yup from 'yup'
 import { authApi } from '../api';
 import { RegisterState } from './RegisterPage';
 
-const schemaMessages = {
+type SchemaMessagesFields = {
+    empty: string
+    wrongValues: string
+    values: string[]
+    fieldName: string
+}
+interface SchemaMessagesI {
+    [key: string]: SchemaMessagesFields
+}
+
+const schemaMessages: SchemaMessagesI = {
     email: {
         empty: 'Please Enter your email',
         wrongValues: 'Field should be valid email',
