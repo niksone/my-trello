@@ -30,7 +30,7 @@ export const BoardLinksContainer = styled.div`
     width: 100%;
 `
 
-export const BoardLinkWrapper = styled.div<BoardLinkContainer>`
+export const BoardLinkWrapper = styled.div<BoardLinkContainerProps>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,11 +50,11 @@ export const BoardLinkWrapper = styled.div<BoardLinkContainer>`
 `
 
 
-interface BoardLinkContainer {
+interface BoardLinkContainerProps {
     active?: boolean
 }
 
-export const BoardLinkContainer = styled.div<BoardLinkContainer>`
+export const BoardLinkContainer = styled.div<BoardLinkContainerProps>`
     position: relative;
     width: 100%;
     display: flex;
