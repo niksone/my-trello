@@ -72,12 +72,12 @@ export const FormTitleContainer = styled.div`
 
 `
 
-export const FormSubtitle = styled.p`
+export const FormSubtitleWrapper = styled.p`
 font-size: var(--text-regular);
 color: var(--color-primary-grey);
 `
 
-export const FormTitle = styled.h3`
+export const FormTitleWrapper = styled.h3`
 font-size: var(--text-h3);
 color: var(--color-primary-dark);
 line-height: 3.2rem;

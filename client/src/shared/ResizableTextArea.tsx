@@ -28,7 +28,7 @@ interface ResizableTextAreaProps {
     children?: React.ReactChildren,
     placeholder?: string,
     placeholderColor?: string
-    onChange?: () => void
+    onChange?: (e) => void
 }
 
 const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, placeholder,placeholderColor, onChange}, ref) => {
@@ -37,9 +37,9 @@ const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaPro
             contentEditable 
             role="textbox" 
             ref={ref} 
-            onChange={onChange}
             data-placeholder={placeholder || ''}
             placeholderColor={placeholderColor}
+            onInput={onChange}
         >
             {children}
         </ResizeableTextAreaContainer>

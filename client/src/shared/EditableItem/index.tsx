@@ -1,4 +1,5 @@
 import {useEffect, useRef } from 'react'
+import { replaceCaret } from '../../utils/replaceCaret'
 import ResizableTextArea from '../ResizableTextArea'
 import { EditableItemContainer } from './EditableItemElements'
 
@@ -9,11 +10,12 @@ interface EditableItemProps {
     editItem: (text: string) => void,
     placeholder: string
     placeholderColor?: string
+    maxLength?: number
 }
 
 
 
-const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor}: EditableItemProps) => {
+const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholder, placeholderColor, maxLength}: EditableItemProps) => {
     const textAreaRef = useRef<HTMLSpanElement>(null)
 
     useEffect(() => {
@@ -32,14 +34,21 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
         document.addEventListener('focusout', onExit)
     }
 
+    const handleChange = () => {
+
+        if(maxLength && textAreaRef!.current!.innerText.length > maxLength){
+            textAreaRef.current!.innerText = textAreaRef.current!.innerText.substring(0,maxLength)
+            textAreaRef.current  && replaceCaret(textAreaRef.current)
+    }
+}
 
     return (
         <EditableItemContainer onClick={handleClick}>
             <ResizableTextArea 
                 ref={textAreaRef}
-                onChange={() => {}}
                 placeholder={placeholder}
                 placeholderColor={placeholderColor}
+                onChange={handleChange}
             />
         </EditableItemContainer>
     )

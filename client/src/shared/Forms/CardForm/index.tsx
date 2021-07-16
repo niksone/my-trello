@@ -9,6 +9,7 @@ import {
     FormContainer,
     FormHeaderContainer,
     FormHeaderWrapper,
+    FormTitleContainer,
 } from "../FormElements";
 import ArrowIcon from "../../icons/Arrow/Arrow";
 import { CardFormContainer, CardFormWrapper } from "./CardFormElements";
@@ -20,6 +21,8 @@ import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
 import { BoardName } from "../../../HomePage/HomePageElements";
 import { COLORS, isMobileWidth } from "../../constants";
+import FormTitle from "../FormTitle";
+import FormSubtitle from "../FormSubtitle";
 
 interface CardFormProps {
     boardName: string;
@@ -107,6 +110,32 @@ const CardForm = ({
         }));
     };
 
+    const handleUpdateTitle = (title: string) => {
+        const MAX_SIZE = 40
+        console.log('title');
+        if(title.length <= MAX_SIZE){
+            handleUpdateCard(
+                title,
+                card.subtitle,
+                card.description,
+                card.tasks
+            )
+        }
+    }
+
+    const handleUpdateSubtitle = (subtitle: string) => {
+        const MAX_SIZE = 70
+
+        if(subtitle.length <= MAX_SIZE){
+            handleUpdateCard(
+                card.title,
+                subtitle,
+                card.description,
+                card.tasks
+            )
+        }
+    }
+
     const handleSave = () => {
         console.log(card);
         if (card.title.trim() === "") {
@@ -148,28 +177,24 @@ const CardForm = ({
                             </FormContainer>
                         </FormHeaderContainer>
 
-                        <FormHeader
-                            title={card.title}
-                            handleTitleUpdate={(title) =>
-                                handleUpdateCard(
-                                    title,
-                                    card.subtitle,
-                                    card.description,
-                                    card.tasks
-                                )
-                            }
-                            subtitle={card.subtitle}
-                            handleSubtitleUpdate={(subtitle) =>
-                                handleUpdateCard(
-                                    card.title,
-                                    subtitle,
-                                    card.description,
-                                    card.tasks
-                                )
-                            }
-                            editable
-                            placeholderColor={!isValid ? COLORS.error : ""}
-                        />
+                        <FormTitleContainer>
+                            <FormContainer>
+                            <FormTitle
+                                title={card.title}
+                                handleTitleUpdate={handleUpdateTitle}
+                                editable
+                                placeholderColor={!isValid ? COLORS.error : ""}
+                                maxLength={35}
+                            />
+                            <FormSubtitle
+                                subtitle={subtitle}
+                                editable
+                                handleSubtitleUpdate={handleUpdateSubtitle}
+                                maxLength={70}
+                            />
+
+                            </FormContainer>
+                        </FormTitleContainer>
                         <FormContent>
                             <FormContainer>
                                 <CardFormDescription

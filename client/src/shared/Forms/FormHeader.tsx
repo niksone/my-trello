@@ -1,5 +1,7 @@
 import EditableItem from '../EditableItem'
-import { FormContainer, FormSubtitle, FormTitle, FormTitleContainer } from './FormElements'
+import { FormContainer, FormSubtitleWrapper, FormTitleContainer } from './FormElements'
+import FormSubtitle from './FormSubtitle';
+import FormTitle from './FormTitle';
 
 interface FormHeaderProps {
     title: string,
@@ -13,38 +15,22 @@ interface FormHeaderProps {
 
 const FormHeader = ({title, handleTitleUpdate, subtitle, handleSubtitleUpdate, editable = false, placeholderColor}: FormHeaderProps) => {
     console.log(subtitle, title);
+
     return (
         <FormTitleContainer>
             <FormContainer>
-            <FormTitle>
-                {
-                    editable 
-                    ?
-                        <EditableItem
-                            initialText={title}
-                            deleteItem={() => {}}
-                            editItem={() => {}}
-                            placeholder='Enter Title'
-                            updateItem={(text) => handleTitleUpdate && handleTitleUpdate(text)}
-                            placeholderColor={placeholderColor}
-                        />
-                    : title
-                }
-            </FormTitle>
-            <FormSubtitle>
-                {
-                    editable 
-                    ?
-                    <EditableItem
-                        initialText={subtitle}
-                        deleteItem={() => {}}
-                        editItem={() => {}}
-                        placeholder='Enter subtitle'
-                        updateItem={(text) => handleSubtitleUpdate && handleSubtitleUpdate(text)}
-                    />
-                    : subtitle
-                }   
-            </FormSubtitle>
+            <FormTitle
+                title={title}
+                handleTitleUpdate={handleTitleUpdate}
+                editable={editable}
+                placeholderColor={placeholderColor}
+            />
+            <FormSubtitle
+                subtitle={subtitle}
+                editable={editable}
+                handleSubtitleUpdate={handleSubtitleUpdate}
+            />
+
             </FormContainer>
         </FormTitleContainer>
     )
