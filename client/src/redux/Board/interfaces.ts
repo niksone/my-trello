@@ -1,4 +1,4 @@
-import { List } from "../AddItem/interfaces";
+import { List } from "../HandleItems/interfaces";
 
 export interface Board {
     _id: string,

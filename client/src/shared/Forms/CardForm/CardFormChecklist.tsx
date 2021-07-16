@@ -8,7 +8,7 @@ import { FormBlock, FormBlockTitle,
 import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
 import ProgressBar from '../../ProgressBar'
 import {DeleteIconWrapper,  } from './CardFormElements'
-import { Task } from '../../../redux/AddItem/interfaces'
+import { Task } from '../../../redux/HandleItems/interfaces'
 
 type CardFormChecklistProps = {
     tasks: Task[]

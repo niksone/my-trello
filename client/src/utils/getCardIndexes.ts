@@ -1,4 +1,4 @@
-import { Card, List } from "../redux/AddItem/interfaces"
+import { Card, List } from "../redux/HandleItems/interfaces"
 
 export const getMoveIndexes = <T extends List>(
     lists: T[], destDroppableId: string, sourceDroppableId: string, 

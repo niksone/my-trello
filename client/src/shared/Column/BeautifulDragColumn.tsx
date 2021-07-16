@@ -6,8 +6,8 @@ import {
     addCard,
     deleteList,
     updateListTitle,
-} from "../../redux/AddItem/actionCreators";
-import { Card, List, SimpleCard, Task } from "../../redux/AddItem/interfaces";
+} from "../../redux/HandleItems/actionCreators";
+import { Card, List, SimpleCard, Task } from "../../redux/HandleItems/interfaces";
 import { RootReducerType } from "../../redux/store";
 import Button from "../Buttons";
 import BeautifulCard from "../Card/BeautifulCard";

@@ -1,6 +1,6 @@
 import ObjectID from "bson-objectid";
 import { useState } from "react";
-import { SimpleCard, Task } from "../../../redux/AddItem/interfaces";
+import { SimpleCard, Task } from "../../../redux/HandleItems/interfaces";
 import Button from "../../Buttons";
 
 import {

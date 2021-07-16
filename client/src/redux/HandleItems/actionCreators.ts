@@ -1,4 +1,4 @@
-import { boardApi } from './../../api/index';
+import { boardApi } from '../../api/index';
 import ObjectID from "bson-objectid"
 import { Dispatch } from "react"
 import { AddItemAction } from "./actions"
