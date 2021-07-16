@@ -94,7 +94,7 @@ export const HeroRight = styled.div<HeroRightProps>`
 export const HeroRightTextWrapper = styled.div`
     display: none;
     text-align: center;
-
+    
     @media(max-width: ${BREAKPOINTS.tabletLg}px){
         display: flex;
         flex-direction: column;
@@ -106,6 +106,10 @@ export const HeroRightTextWrapper = styled.div`
             color: white !important;  
             font-weight: bold; 
         }
+    }
+
+    @media(max-width: ${BREAKPOINTS.mobile}px){
+        width: 90%;
     }
 `
 
