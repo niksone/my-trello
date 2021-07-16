@@ -3,6 +3,7 @@ import { BoardName } from '../../../HomePage/HomePageElements'
 import AddItemForm from '../../AddNewItem/AddItemForm'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
+import { isMobileWidth } from '../../constants'
 import Div100vh from '../../Div100vh'
 import EditableItem from '../../EditableItem'
 import AddIcon from '../../icons/Add/AddIcon'
@@ -33,7 +34,7 @@ export interface EditItemsFormProps {
 const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel, formPlaceholder, onExit, onAdd, onDelete, onEdit}: EditItemsFormProps) => {
 
     return (
-        <ConditionalWrapper Wrapper={Div100vh} condition={window.innerWidth <= 425}>
+        <ConditionalWrapper Wrapper={Div100vh} condition={isMobileWidth}>
         <EditBoardFormContainer>
             <FormWrapper>
             <FormHeaderContainer>

@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import { BREAKPOINTS } from "../../constants"
 
 export const CardFormContainer = styled.div`
     width: 650px;
     height: 85vh;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         width: 100vw;
         height: 100%;
         flex: 1;
@@ -32,7 +33,7 @@ export const CardFormWrapper = styled.div`
     background-color: #fff;
     height: 100%;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         background-color: var(--color-background-light);
     }
 `
@@ -40,7 +41,7 @@ export const CardFormWrapper = styled.div`
 export const FormMobileTitleContainer = styled.div`
     display: none;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         display: block;
     }
 
@@ -63,7 +64,7 @@ export const MobileFormContainer = styled.div`
         height: 100%;
     }
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         display: flex;
     }
 `

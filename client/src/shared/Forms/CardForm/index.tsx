@@ -22,7 +22,7 @@ import FormHeader from "../FormHeader";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
 import { BoardName } from "../../../HomePage/HomePageElements";
-import { COLORS } from "../../constants";
+import { COLORS, isMobileWidth } from "../../constants";
 
 interface CardFormProps {
     boardName: string;
@@ -114,7 +114,7 @@ const CardForm = ({
     return (
         <ConditionalWrapper
             Wrapper={Div100vh}
-            condition={window.innerWidth <= 425}
+            condition={isMobileWidth}
         >
             <CardFormContainer>
                 <CardFormWrapper>

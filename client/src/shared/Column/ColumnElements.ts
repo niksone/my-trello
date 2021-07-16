@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BREAKPOINTS } from '../constants'
 
 interface ColumnContainerProps  {
     isOver?: boolean
@@ -10,7 +11,7 @@ interface ColumnContainerProps  {
 export const ColumnContainer = styled.div<ColumnContainerProps>`
     height: 100%;
     width: 100%;
-    /* @media screen and(max-width:425px){
+    /* @media screen and(max-width:${BREAKPOINTS.mobile}px){
         padding: 0;
     } */
 `
@@ -26,7 +27,7 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
     border-radius: 5px;
     z-index: 1;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         width: calc(100vw - 20px * 2);
         background: none;
         border: none;
@@ -47,7 +48,7 @@ export const ColumnTitleContainer = styled.div`
     cursor: pointer;
     z-index: 5;
 
-    @media screen  and (max-width: 425px){
+    @media screen  and (max-width: ${BREAKPOINTS.mobile}px){
         display: none;
     }
 `
@@ -71,7 +72,7 @@ export const ColumnCardContainer = styled.div`
     padding-bottom: 0.1px;
     /* overflow-y: auto; */
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         height: auto;
     }
 `
@@ -82,7 +83,7 @@ export const ColumnCardWrapper = styled.div`
         margin-top:10px;
     }
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         & > *:not(:first-child){
             margin-top: 4px;
         }

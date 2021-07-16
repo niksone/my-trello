@@ -3,6 +3,7 @@ import {ReactComponent as LoginImg} from '../icons/accessAccount.svg'
 import Button from '../Buttons'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import { FormContainer, FormInputsContainer } from '../FormControl'
+import { BREAKPOINTS } from '../constants'
 
 interface HeroProps {
     reverse?: boolean
@@ -58,7 +59,7 @@ export const HeroLeftWrapper = styled.div`
     transform: translate(10%, 0%);
     width: fit-content;
 
-    @media(max-width:1280px){
+    @media(max-width: ${BREAKPOINTS.tablet}){
         width: 90%;
         transform: translate(0);
     }

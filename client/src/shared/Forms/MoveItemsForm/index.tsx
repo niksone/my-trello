@@ -3,6 +3,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { BoardName } from '../../../HomePage/HomePageElements'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
+import { isMobileWidth } from '../../constants'
 import Div100vh from '../../Div100vh'
 import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
@@ -35,7 +36,7 @@ const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onU
     }
 
     return (
-    <ConditionalWrapper Wrapper={Div100vh} condition={window.innerWidth <= 425}>
+    <ConditionalWrapper Wrapper={Div100vh} condition={isMobileWidth}>
     <MoveItemFormContainer>
                 <FormWrapper>
                     <FormHeaderContainer>

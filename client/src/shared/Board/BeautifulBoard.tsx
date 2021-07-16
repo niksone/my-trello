@@ -16,6 +16,7 @@ import ArrowIcon from '../icons/Arrow/Arrow'
 import { ShowContainer } from '../../HomePage/HomePageElements'
 import { BoardSectionWrapper } from '../../BoardSection/BoardElements'
 import { AddColumnContainer, BoardColumnContainer, BoardColumnWrapper, BoardContainer, BoardFooterContainer, BoardFooterNav, BoardFooterTitle } from './BoardElements'
+import { BREAKPOINTS, isMobileWidth } from '../constants'
 
 
 
@@ -111,7 +112,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
     useEffect(() => {
       const debounceFunc = debounce(() => getPosition(lists), 100)
 
-      if(window.innerWidth <= 425){
+      if(isMobileWidth){
         console.log(lists, 'lists')
 
         setCurrentListId(prev => lists[0]?._id || prev)

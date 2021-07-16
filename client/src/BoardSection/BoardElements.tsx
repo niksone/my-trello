@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAKPOINTS } from "../shared/constants";
 
 interface BoardSidebarProps {
     show?: boolean
@@ -9,7 +10,7 @@ export const BoardSidebarContainer = styled.div<BoardSidebarProps>`
     width: 250px;
 
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         position: absolute;
         width: 100%;
         top: 0;
@@ -38,7 +39,7 @@ export const BoardSidebarWrapper = styled.div`
 export const BoardSidebarClose = styled.div<BoardSidebarProps>`
     display: none;
     z-index: 0;
-    @media screen and (max-width: 425px){
+    @media screen and (max-width:  ${BREAKPOINTS.mobile}px){
         position: absolute;
         top: 0;
         left: 0;
@@ -73,7 +74,7 @@ export const BoardSectionWrapper = styled.div`
     background-color: #fff;
     border-radius: 12px;
     overflow: auto;
-    @media screen and (max-width: 425px){
+    @media screen and (max-width:  ${BREAKPOINTS.mobile}px){
         border-radius: 0;
         background-color: var(--color-background-light);
     }

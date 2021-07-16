@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { BREAKPOINTS } from "../../constants";
 
 export const EditBoardFormContainer = styled.div`
     width: 350px;
     height: 500px;
     background-color: #fff;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         height: 100%;
         width: 100vw;
     }

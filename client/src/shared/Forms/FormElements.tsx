@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import { BREAKPOINTS } from "../constants"
 
 
 export const FormContainer = styled.div`
     width: 100%;
     padding: 0 28px;
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         padding: 0px 12px;
     }
 
@@ -28,7 +29,7 @@ export const FormHeaderContainer = styled.div`
     background-color: #fff;
     border-bottom: 1px var(--color-outline) solid;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         height: 85px;
     }
 `
@@ -48,7 +49,7 @@ height: 100%;
 overflow: auto;
 margin: 14px 0;
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: ${BREAKPOINTS.mobile}px){
     height: 100%;
 }
 `
@@ -58,7 +59,7 @@ font-size: var(--text-h4);
 color: var(--color-primary-dark);
 line-height: 27px;
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: ${BREAKPOINTS.mobile}px){
     font-size: var(--text-h5);
     color: var(--color-primary-grey);
     padding-bottom: 12px;
@@ -68,7 +69,7 @@ line-height: 27px;
 
 export const FormTitleContainer = styled.div`
     background-color: #fff;
-    /* @media screen and (max-width: 425px){ */
+    /* @media screen and (max-width: ${BREAKPOINTS.mobile}px){ */
         padding: 22px 0px 26px 0px;
         /* margin-bottom: 14px; */
     /* } */
@@ -85,7 +86,7 @@ export const FormTitle = styled.h3`
 font-size: var(--text-h3);
 color: var(--color-primary-dark);
 line-height: 3.2rem;
-@media screen and (max-width: 425px){
+@media screen and (max-width: ${BREAKPOINTS.mobile}px){
 
 }
 `
@@ -119,7 +120,7 @@ export const FormBlock = styled.div`
     border-bottom: none;
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: ${BREAKPOINTS.mobile}px){
     background-color: #fff;
     border-radius: 6px;
     border-bottom: none;

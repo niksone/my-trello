@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BREAKPOINTS } from '../constants'
 
 export const BoardContainer = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const BoardContainer = styled.div`
   padding: 28px 0 36px 30px;
   position: relative;
 
-  @media screen and (max-width: 425px){
+  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
     padding: 0 20px;
   }
 
@@ -28,7 +29,7 @@ export const BoardWrapper = styled.div`
   padding: 28px 0 36px 30px;
   position: relative;
 
-  @media screen and (max-width: 425px){
+  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
     padding: 0 20px;
   }
 `
@@ -55,7 +56,7 @@ export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
     margin: 0 8px;
   } 
 
-  @media screen and (max-width:425px){
+  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
     & > div{
       margin: 0 calc((100vw - (100vw - 40px)) / 2);
     }

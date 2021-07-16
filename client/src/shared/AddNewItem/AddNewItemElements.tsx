@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BREAKPOINTS } from '../constants'
 
 
 export interface AddItemContainerProps {
@@ -28,7 +29,7 @@ export const AddItemContainer = styled.div<AddItemContainerProps>`
     /* min-width: 300px; */
     padding: ${({item}) => item === 'CARD' ? '5px 10px' : '0'};
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
 
     }
 `
@@ -56,7 +57,7 @@ export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
     align-items: ${({alignItems}) => alignItems ? alignItems : 'start'};
 
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         min-width: 80vw;
     }
 `

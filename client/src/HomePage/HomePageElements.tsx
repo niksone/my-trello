@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { BREAKPOINTS } from "../shared/constants"
 
 export const AppContainer = styled.div`
     height: 100%;
@@ -14,7 +15,7 @@ export const BoardSectionContainer = styled.div`
     background-color: var(--color-background-light);
     padding: 0 28px 28px 28px;
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width:  ${BREAKPOINTS.mobile}px){
         width: 100%;
         background: none;
         padding: 0;
@@ -108,7 +109,7 @@ interface ShowContainerProps {
 export const ShowContainer = styled.div<ShowContainerProps>`
     display: ${({show, mobile}) => show && !mobile ? 'flex' : 'none'};
  
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         display: ${({show, mobile}) => show && mobile? 'flex' : 'none'};
     }
 `
@@ -131,7 +132,7 @@ export const NoBoardSection = styled.div`
         margin-bottom: 35px;
     }
 
-    @media screen and (max-width: 425px){
+    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
         & > svg{
             width: 80%;
             height: 80%; 
