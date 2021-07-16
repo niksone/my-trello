@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { addList, deleteList, updateListTitle } from '../redux/AddItem/actionCreators'
-import { List } from '../redux/AddItem/interfaces'
+import { addList, deleteList, updateListTitle } from '../redux/HandleItems/actionCreators'
+import { List } from '../redux/HandleItems/interfaces'
 import EditItemsForm from '../shared/Forms/EditItemsForm'
 
 interface EditListsFormProps {

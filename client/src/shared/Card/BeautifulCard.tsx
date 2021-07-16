@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCard, updateCard } from '../../redux/AddItem/actionCreators'
-import { Card, SimpleCard, Task } from '../../redux/AddItem/interfaces'
+import { deleteCard, updateCard } from '../../redux/HandleItems/actionCreators'
+import { Card, SimpleCard, Task } from '../../redux/HandleItems/interfaces'
 import { RootReducerType } from '../../redux/store'
 import ProgressBar from '../ProgressBar'
 import { CardProgressContainer, CardContainer, CardContainerBlock, CardDescription,CardProgressInfo, CardProgressLabel, CardProgressStage, CardProgressIcon } from './CardElements'
@@ -23,8 +23,8 @@ export const getCompletedTasks = (tasks: Task[]) => {
 }
 
 const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
-  const {cardIds} = useSelector((state: RootReducerType) => state.addItem)
-  const boardId = useSelector((state: RootReducerType) => state.addItem)._id
+  const {cardIds} = useSelector((state: RootReducerType) => state.handleItems)
+  const boardId = useSelector((state: RootReducerType) => state.handleItems)._id
   const index = cardIds.findIndex(card => card === cardId)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()

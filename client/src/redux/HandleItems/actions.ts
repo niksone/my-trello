@@ -1,6 +1,6 @@
 import { Board } from '../Board/interfaces';
 import { Card, List } from './interfaces';
-export type AddItemAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
+export type HandleItemsAction = MoveList | MoveCardInList | MoveCardBetweenList | SetDraggedCard |
  SetDraggedList| AddBoard | SetBoard | AddList  | UpdateCard
 | DeleteCard | EditList | DeleteList | AddCard | UpdateTask
 

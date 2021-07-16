@@ -1,5 +1,5 @@
 import { instance } from ".";
-import { Card, List } from "../redux/AddItem/interfaces";
+import { Card, List } from "../redux/HandleItems/interfaces";
 import { Board } from "../redux/Board/interfaces";
 
 export const boardApi = {

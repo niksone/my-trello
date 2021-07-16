@@ -4,8 +4,8 @@ import {
     deleteList,
     moveList,
     updateListTitle,
-} from "../redux/AddItem/actionCreators";
-import { List } from "../redux/AddItem/interfaces";
+} from "../redux/HandleItems/actionCreators";
+import { List } from "../redux/HandleItems/interfaces";
 import { Board } from "../redux/Board/interfaces";
 import Button from "../shared/Buttons";
 import ButtonGroup from "../shared/Buttons/ButtonGroup";

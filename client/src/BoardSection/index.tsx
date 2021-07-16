@@ -2,7 +2,7 @@ import { useContext, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { userContext } from '../Context'
-import { setBoard } from '../redux/AddItem/reducer'
+import { setBoard } from '../redux/HandleItems/reducer'
 import { Board } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import BeautifulBoard from '../shared/Board/BeautifulBoard'
@@ -17,7 +17,7 @@ const BoardSection = () => {
 
     const currentBoard = boards.find(board => board._id === id) || {} as Board
 
-    const data = useSelector((state: RootReducerType) => state.addItem)
+    const data = useSelector((state: RootReducerType) => state.handleItems)
 
 
     useEffect(() => {

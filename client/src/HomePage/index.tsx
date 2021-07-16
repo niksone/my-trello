@@ -25,7 +25,7 @@ const HomePage = () => {
 
     const {boards, isLoading} = useSelector((state: RootReducerType) => state.boards)
 
-    const {lists} = useSelector((state: RootReducerType) => state.addItem)
+    const {lists} = useSelector((state: RootReducerType) => state.handleItems)
 
     const {id} = useParams<{id: string}>()
 
