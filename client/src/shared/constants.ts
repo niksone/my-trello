@@ -16,3 +16,12 @@ export const COLORS = {
     background: 'var(--color-background)',
     borderLight: 'var(--color-border-light)',
 }
+
+export const BREAKPOINTS = {
+    mobile: 425,
+    tablet: 768,
+    desktop: 1280,
+    desktopLg: 1920
+}
+
+export const isMobileWidth = window.innerWidth <= BREAKPOINTS.mobile
