@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BREAKPOINTS } from "../constants";
 
 
 export const FormContainer = styled.form`
@@ -7,7 +8,7 @@ export const FormContainer = styled.form`
     padding-bottom: 115px;
     height: fit-content;
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         width: 100%;
         padding-top: 20px;
         padding-bottom: 20px;

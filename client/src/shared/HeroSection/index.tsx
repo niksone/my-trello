@@ -17,7 +17,7 @@ export const Hero = styled.div<HeroProps>`
     width: 100%;
     height: 100%;
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         flex-direction: column-reverse;
     }
 `
@@ -32,7 +32,7 @@ export const HeroLeft = styled.div`
     width: 50%;
     height: 100%;
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         width: 100%;
         height: fit-content;    
     }
@@ -49,7 +49,7 @@ export const HeroLeftContainer = styled.div`
     height: 100%;
 
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         border-radius: 16px 16px 0 0;
     }
 `
@@ -83,7 +83,7 @@ export const HeroRight = styled.div<HeroRightProps>`
     background: ${({bgPattern}) => bgPattern ? `url(${bgPattern})`  : 'none'} 100% 100%;
     background-size: cover;
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         width: 100%;
         height: fill-available;  
         ${({mobileBgPattern}) => mobileBgPattern && `background: url(${mobileBgPattern})`};
@@ -95,7 +95,7 @@ export const HeroRightTextWrapper = styled.div`
     display: none;
     text-align: center;
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -113,7 +113,7 @@ export const HeroImgContainer = styled.div`
     height: fit-content;
     width: fit-content;
 
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         display: none;
     }
 `
@@ -125,7 +125,7 @@ export const HeroSubtitle = styled.p`
 `
 
 export const HeroTextWrapper = styled.div`
-    @media(max-width: 976px){
+    @media(max-width: ${BREAKPOINTS.tabletLg}px){
         display: none;
     }
 `
