@@ -1,9 +1,9 @@
 import { Board } from '../Board/interfaces';
 import { moveItem } from '../../utils/moveItem'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
-import { AddItemAction } from './actions'
+import { HandleItemsAction } from './actions'
 import { Dispatch } from 'redux';
-import { AddItemState, Card, List } from './interfaces';
+import { handleItemsState, Card, List } from './interfaces';
 
 const findIndex = <T extends List | Card>(id: string, array: T[]  ) => {
     return array.findIndex((item: T)=> item._id === id)
@@ -25,7 +25,7 @@ const initialState = {
     isLoading: true
 }
 
-export const addItemReducer = (state: AddItemState = initialState, action: AddItemAction): AddItemState => {
+export const handleItemsReducer = (state: handleItemsState = initialState, action: HandleItemsAction): handleItemsState => {
     switch(action.type) {
         case 'SET_BOARD': {
             console.log('reducer', action.payload)

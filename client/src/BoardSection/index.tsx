@@ -17,7 +17,7 @@ const BoardSection = () => {
 
     const currentBoard = boards.find(board => board._id === id) || {} as Board
 
-    const data = useSelector((state: RootReducerType) => state.addItem)
+    const data = useSelector((state: RootReducerType) => state.handleItems)
 
 
     useEffect(() => {

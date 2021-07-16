@@ -23,8 +23,8 @@ export const getCompletedTasks = (tasks: Task[]) => {
 }
 
 const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
-  const {cardIds} = useSelector((state: RootReducerType) => state.addItem)
-  const boardId = useSelector((state: RootReducerType) => state.addItem)._id
+  const {cardIds} = useSelector((state: RootReducerType) => state.handleItems)
+  const boardId = useSelector((state: RootReducerType) => state.handleItems)._id
   const index = cardIds.findIndex(card => card === cardId)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()

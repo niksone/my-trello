@@ -44,7 +44,7 @@ const BeautifulDragColumn = ({
     cards,
     onAdd,
 }: ColumnPropsI) => {
-    const boardId = useSelector((state: RootReducerType) => state.addItem)._id;
+    const boardId = useSelector((state: RootReducerType) => state.handleItems)._id;
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
 

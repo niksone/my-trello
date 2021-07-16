@@ -1,10 +1,10 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import { boardReducer } from './Board/reducer'
-import { addItemReducer } from './HandleItems/reducer'
+import { handleItemsReducer } from './HandleItems/reducer'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
-    addItem: addItemReducer,
+    handleItems: handleItemsReducer,
     boards: boardReducer
 })
 

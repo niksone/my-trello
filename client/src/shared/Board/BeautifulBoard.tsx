@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
 import { addList, addCard, moveList, moveCard } from '../../redux/HandleItems/actionCreators'
-import { AddItemState, List } from '../../redux/HandleItems/interfaces'
+import { handleItemsState, List } from '../../redux/HandleItems/interfaces'
 import Button from '../Buttons'
 import BeautifulDragColumn from '../Column/BeautifulDragColumn'
 import { ColumnWrapper } from '../Column/ColumnElements'
@@ -21,7 +21,7 @@ import { isMobileWidth } from '../constants'
 
 
 export interface BoardProps {
-  data: AddItemState
+  data: handleItemsState
 }
 
 interface BoardRef extends HTMLDivElement {

@@ -22,7 +22,7 @@ export interface List {
     cards: Card[],
 }
 
-export interface AddItemState {
+export interface handleItemsState {
     _id: string,
     name: string,
     lists: List[],
