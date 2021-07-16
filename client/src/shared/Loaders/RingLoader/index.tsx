@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { COLORS } from "../../contants";
 
 import { CommonProps, LengthObject, LoaderSizeProps } from "./interfaces";
 import { SpinnerRing, SpinnerWrapper } from "./RingLoaderElements";
@@ -130,7 +131,7 @@ export function cssValue(value: number | string): string {
 const RingLoader = ({size}: LoaderSizeProps) => {
   const [{loading, color, css, speedMultiplier}, setLoader] = useState({
     loading: true,
-    color: "var(--color-primary)",
+    color: COLORS.primary,
     css: "",
     speedMultiplier: 1
   })

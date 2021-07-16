@@ -1,37 +1,38 @@
 import styled, { css, FlattenInterpolation, ThemedStyledProps } from "styled-components";
 import { btnIconSizes, ButtonProps, sizes } from ".";
+import { COLORS } from "../contants";
 
 
 
 export const colorSchemes = {
     primary: {
-        resting: 'var(--color-primary-light)',
-        hover: 'var(--color-button-hover)',
-        active: 'var(--color-primary)',
-        textColor: 'var(--color-primary)',
+        resting: COLORS.primaryLight,
+        hover: COLORS.buttonHover,
+        active: COLORS.primary,
+        textColor: COLORS.primary,
         textColorHover: '#fff'
     },
 
     primaryError: {
-        resting: 'var(--color-primary-light)',
-        hover: 'var(--color-error)',
-        active: 'var(--color-primary)',
-        textColor: 'var(--color-error)',
+        resting: COLORS.primaryLight,
+        hover: COLORS.error,
+        active: COLORS.primary,
+        textColor: COLORS.error,
         textColorHover: '#fff'
     },
 
     errorLight: {
-        resting: 'var(--color-error-light)',
-        hover: 'var(--color-error)',
-        active: 'var(--color-error)',
-        textColor: 'var(--color-error)',
+        resting: COLORS.errorLight,
+        hover: COLORS.error,
+        active: COLORS.error,
+        textColor: COLORS.error,
         textColorHover: '#fff'
     },
 
     error: {
-        resting: 'var(--color-error)',
-        hover: 'var(--color-error-hover)',
-        active: 'var(--color-error-hover)',
+        resting: COLORS.error,
+        hover: COLORS.errorHover,
+        active: COLORS.errorHover,
         textColor: '#fff',
         textColorHover: '#fff'
     }
@@ -45,7 +46,7 @@ const shadowStylesActive = css`
 const shadowStyles = css<ButtonProps>`
     background: none;
     border: none;
-    color: var(${({ color }) => (color ? color : "--color-primary-grey")});
+    color: ${({ color }) => (color ? color : COLORS.primaryGrey)};
     ${({ active }) => active && shadowStylesActive}
 
     &:hover {
@@ -64,12 +65,8 @@ const outlineStylesActive = css`
 
 const outlineStyles = css<ButtonProps>`
     background: none;
-    border: 1px
-        var(
-            ${({ color }) => (color ? color : "--color-button-outline-resting")}
-        )
-        solid;
-    color: var(${({ color }) => (color ? color : "--color-primary-grey")});
+    border: 1px ${({ color }) => (color ? color : COLORS.buttonOutlineResting)} solid;
+    color: ${({ color }) => (color ? color : COLORS.primaryGrey)};
     ${({ active }) => active && outlineStylesActive}
 
     &:hover {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../contants";
 
 interface ProgressValueProps {
     value: number
@@ -7,15 +8,15 @@ interface ProgressValueProps {
 const progressStyles =  {
     danger: {
         breakpoint: 30,
-        color: 'var(--color-error)'
+        color: COLORS.error
     },
     warning: {
         breakpoint: 31,
-        color: 'var(--color-warning)'
+        color: COLORS.warning
     },
     success: {
         breakpoint: 70,
-        color: 'var(--color-success)'
+        color: COLORS.success
     }
 }
 

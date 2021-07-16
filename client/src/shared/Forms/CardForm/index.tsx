@@ -22,6 +22,7 @@ import FormHeader from "../FormHeader";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
 import { BoardName } from "../../../HomePage/HomePageElements";
+import { COLORS } from "../../contants";
 
 interface CardFormProps {
     boardName: string;
@@ -163,7 +164,7 @@ const CardForm = ({
                                 )
                             }
                             editable
-                            placeholderColor={!isValid ? 'var(--color-error)': ''}
+                            placeholderColor={!isValid ? COLORS.error : ''}
                         />
                         <FormContent>
                             <FormContainer>
