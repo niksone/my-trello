@@ -11,7 +11,9 @@ import { Request, Response } from "express"
 import userRouter from './routes/userRoute';
 import boardRouter from './routes/boardRoute';
 
-const PORT = process.env.PORT || 5000
+const dotenv = require('dotenv').config()
+
+const PORT = process.env.PORT
 
 const app = express()
 
@@ -22,13 +24,14 @@ if(process.env.NODE_ENV === 'production'){
 }
 app.set('trust proxy', 1)
 
-const link = 'mongodb+srv://niksone-ts:test1234@cluster0.cr0ko.mongodb.net/my-trello?retryWrites=true&w=majority'
-mongoose.connect(process.env.MONGODB_URI || link, {
+const link = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cr0ko.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+
+mongoose.connect(link, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true   
 }, (error: Error) => {
-    try {
+    try { 
         if(error){
             throw error
         }
