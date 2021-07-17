@@ -19,8 +19,6 @@ const directionRow = css<ButtonGroupContainerProps>`
 `
 
 
-
-
 const directionStyles = {
     'row': directionRow,
     'column': directionColumn
@@ -43,10 +41,13 @@ interface ButtonGroupProps{
 }
 
 const ButtonGroup = ({children, spacing, widthFill = false, direction}: React.PropsWithChildren<ButtonGroupProps>) => {
+    
+    const buttonChildren = React.Children.toArray(children).filter(Boolean)
+    const columns = React.Children.count(buttonChildren)
 
     return (
         <ButtonGroupContainer 
-            columns={React.Children.count(children)} 
+            columns={columns} 
             spacing={spacing} 
             direction={direction || 'row'}
             widthFill={widthFill}
