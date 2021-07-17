@@ -1,4 +1,5 @@
-import { useRef } from 'react'
+import { RefObject, useRef } from 'react'
+import useFocus from '../../utils/useFocus'
 import Button from '../Buttons'
 import ResizableTextArea from '../ResizableTextArea'
 import { AddItemContainerTypes, AddItemFormButtonContainer, AddItemFormButtonContainerTypes, AddItemFormContainer,AddItemFormWrapper, FormIcon } from './AddNewItemElements'
@@ -27,6 +28,8 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
         text !== '' && onAdd(text)
         textAreaRef.current && (textAreaRef.current.innerText = "")
     }
+
+    useFocus(textAreaRef as RefObject<HTMLElement>)
 
     const getForm = (variant: FormVariant) => {
         switch(variant){
