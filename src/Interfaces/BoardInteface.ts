@@ -6,7 +6,7 @@ interface Task {
     completed: boolean
 }
 
-interface Card {
+export interface Card {
     _id?: ObjectId,
     title: string, 
     subtitle: string,
@@ -14,7 +14,7 @@ interface Card {
     tasks: Task[]
 }
 
-interface List{
+export interface List{
     _id?: ObjectId,
     title: string,
     cards: Card[]
