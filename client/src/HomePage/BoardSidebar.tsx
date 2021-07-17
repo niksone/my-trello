@@ -103,7 +103,7 @@ const BoardSidebar = ({boards, isShow, modalRef, boardId, userId, handleClose, h
                 </Button>
                 {
                 showModal && 
-                    <Modal ref={modalRef} show={showModal} exit={handleClose}>
+                    <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
                         <AddItemForm btnItem='ADD' item='FORM' title='Add board' onAdd={handleAddBoard} /> 
                     </Modal>
                 }
