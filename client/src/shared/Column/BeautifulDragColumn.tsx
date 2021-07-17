@@ -28,6 +28,7 @@ import {
     ColumnTitleContainer,
     ColumnWrapper,
 } from "./ColumnElements";
+import ColumnHeader from "./ColumnHeader";
 
 interface ColumnPropsI {
     title?: string;
@@ -58,7 +59,7 @@ const BeautifulDragColumn = ({
         dispatch(deleteList(boardId, id));
     };
 
-    const editList = (title: string) => {
+    const handleEditList = (title: string) => {
         dispatch(updateListTitle(boardId, list._id, title));
     };
 
@@ -71,49 +72,13 @@ const BeautifulDragColumn = ({
                     {...provided.draggableProps}
                 >
                     <ColumnWrapper>
-                        <ColumnTitleContainer>
-                            <ColumnTitle>
-                                <EditableItem
-                                    deleteItem={handleDeleteList}
-                                    editItem={editList}
-                                    initialText={list.title}
-                                    placeholder="Enter List Title"
-                                    updateItem={(title: string) =>
-                                        dispatch(
-                                            updateListTitle(boardId, id, title)
-                                        )
-                                    }
-                                />
-                            </ColumnTitle>
-                            <Tooltip
-                                content={
-                                    <ButtonGroup spacing={2} direction="column">
-                                        <Button
-                                            size="lg"
-                                            Icon={<AddIcon />}
-                                            onClick={() => setShowModal(true)}
-                                            fw="700"
-                                        >
-                                            Add Card
-                                        </Button>
-                                        <Button
-                                            size="lg"
-                                            colorScheme="errorLight"
-                                            Icon={<TrashcanIcon />}
-                                            onClick={handleDeleteList}
-                                            fw="700"
-                                        >
-                                            Delete
-                                        </Button>
-                                    </ButtonGroup>
-                                }
-                                direction="bottom"
-                            >
-                                <Button shape="icon" variant="outline" size="lg">
-                                    <MoreIcon />
-                                </Button>
-                            </Tooltip>
-                        </ColumnTitleContainer>
+                        <ColumnHeader 
+                            title={list.title}
+                            handleEditList={handleEditList}
+                            handleDeleteList={handleDeleteList}
+                            handleAddCard={() => setShowModal(true)}
+                        />
+                        
                         <Droppable droppableId={list._id}>
                             {(provided, snapshot) => (
                                 <ColumnCardContainer
