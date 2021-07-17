@@ -10,11 +10,15 @@ import {
 import { Card, List, SimpleCard, Task } from "../../redux/HandleItems/interfaces";
 import { RootReducerType } from "../../redux/store";
 import Button from "../Buttons";
+import ButtonGroup from "../Buttons/ButtonGroup";
 import BeautifulCard from "../Card/BeautifulCard";
 import EditableItem from "../EditableItem";
 import CardForm from "../Forms/CardForm";
 import AddIcon from "../icons/Add/AddIcon";
+import MoreIcon from "../icons/More/MoreIcon";
+import TrashcanIcon from "../icons/Trashcan/TrashcanIcon";
 import { Modal, ModalHandle } from "../Modal";
+import Tooltip from "../Tooltip";
 import {
     AddCardContainer,
     ColumnCardContainer,
@@ -81,14 +85,34 @@ const BeautifulDragColumn = ({
                                     }
                                 />
                             </ColumnTitle>
-                            <Button
-                                Icon={<AddIcon />}
-                                onClick={() => setShowModal(true)}
-                                variant="unstyle"
-                                fw="700"
+                            <Tooltip
+                                content={
+                                    <ButtonGroup spacing={2} direction="column">
+                                        <Button
+                                            size="lg"
+                                            Icon={<AddIcon />}
+                                            onClick={() => setShowModal(true)}
+                                            fw="700"
+                                        >
+                                            Add Card
+                                        </Button>
+                                        <Button
+                                            size="lg"
+                                            colorScheme="errorLight"
+                                            Icon={<TrashcanIcon />}
+                                            onClick={handleDeleteList}
+                                            fw="700"
+                                        >
+                                            Delete
+                                        </Button>
+                                    </ButtonGroup>
+                                }
+                                direction="bottom"
                             >
-                                ADD NEW CARD
-                            </Button>
+                                <Button shape="icon" variant="outline" size="lg">
+                                    <MoreIcon />
+                                </Button>
+                            </Tooltip>
                         </ColumnTitleContainer>
                         <Droppable droppableId={list._id}>
                             {(provided, snapshot) => (
