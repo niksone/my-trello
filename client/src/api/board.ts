@@ -4,7 +4,7 @@ import { Board } from "../redux/Board/interfaces";
 
 export const boardApi = {
     async getBoards(userId: string) {
-        const boards = await instance.post<Board[]>('/getBoards', {userId})
+        const boards = await instance.get<Board[]>('/boards', {params: {userId: userId}})
         return boards
     },
 
@@ -23,16 +23,16 @@ export const boardApi = {
     },
 
     async addList(boardId: string, list: List){
-        const listItem = await instance.post<List>('/boards/addList', {boardId, list})
+        const listItem = await instance.post<List>('/boards/lists', {boardId, list})
         return listItem
     },
 
     async deleteList(boardId: string, listId: string) {
-        await instance.delete<List>('/boards/removeList', {data: {boardId, listId}})
+        await instance.delete<List>('/boards/list', {data: {boardId, listId}})
     },
 
     async editListTitle(boardId: string, listId: string, title: string) {
-        const updateList = await instance.patch<List>('/boards/updateListTitle', {boardId,listId,title})
+        const updateList = await instance.patch<List>('/boards/list/title', {boardId,listId,title})
         return updateList
     },
 
@@ -42,18 +42,18 @@ export const boardApi = {
     },
 
     async addCard(boardId: string, listId: string, card: Card){
-        const listItem = await instance.post<Card>('/boards/addCard', {boardId, listId, card})
+        const listItem = await instance.post<Card>('/boards/card', {boardId, listId, card})
         return listItem
     },
 
     async deleteCard(boardId: string, listId: string, cardId: string) {
-            const list = await instance.delete<Card>('/boards/removeCard', {data: {boardId, listId, cardId}})
+            const list = await instance.delete<Card>('/boards/card', {data: {boardId, listId, cardId}})
             return list
     },
 
     async updateCard(boardId: string, listId: string, cardId: string, card: Card){
             const updatedCard = await instance.patch<Card>(
-                '/boards/updateCard', 
+                '/boards/card', 
                 {boardId, listId, cardId, card}
             )
             return updatedCard

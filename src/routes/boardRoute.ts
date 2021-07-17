@@ -4,7 +4,7 @@ const Router = require('express').Router
 
 const boardRouter = new Router()
 
-boardRouter.post('/getBoards', BoardController.getUserBoards)
+boardRouter.get('/boards', BoardController.getUserBoards)
 
 boardRouter.post('/boards', BoardController.addBoard)
 
@@ -12,19 +12,19 @@ boardRouter.delete('/boards', BoardController.deleteBoard)
 
 boardRouter.patch('/boards', BoardController.editBoardName)
 
-boardRouter.post('/boards/addList', BoardController.addList)
+boardRouter.post('/boards/lists', BoardController.addList)
 
-boardRouter.patch('/boards/updateListTitle', BoardController.updateListTitle)
+boardRouter.delete('/boards/list', BoardController.removeList)
+
+boardRouter.patch('/boards/list/title', BoardController.updateListTitle)
 
 boardRouter.patch('/boards/moveList', BoardController.moveList)
-    
-boardRouter.delete('/boards/removeList', BoardController.removeList)
 
-boardRouter.post('/boards/addCard', BoardController.addCard)
+boardRouter.post('/boards/card', BoardController.addCard)
 
-boardRouter.delete('/boards/removeCard', BoardController.removeCard)
+boardRouter.delete('/boards/card', BoardController.removeCard)
 
-boardRouter.patch('/boards/updateCard', BoardController.updateCard)
+boardRouter.patch('/boards/card', BoardController.updateCard)
 
 boardRouter.patch('/boards/moveCard', BoardController.moveCard)
 

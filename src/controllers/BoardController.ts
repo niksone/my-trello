@@ -8,13 +8,13 @@ import Board from '../models/Board';
 class BoardController {
     async getUserBoards(req: Request, res: Response) {
         try {
-            const {userId} = req?.body
-            // console.log(req.body, 'body')
+            const {userId} = req?.query
+            console.log(req.query)
+            console.log(userId)
             if(!userId) {
                 res.send({message: 'Wrong values'})
                 return 
             }
-            // console.log(userId, 'userId')
             else{
                 await User.findById(userId, async (err: Error, user: UserI) => {
                     if(err) res.send(err)
