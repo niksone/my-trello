@@ -36,8 +36,7 @@ class UserController {
     
             if(!email || !password || typeof email !== 'string' || typeof password !== 'string'){
                 return res.status(500).send({message: 'Wrong values'})
-            }
-            else{
+            } else{
                 const user = await UserService.registerUser(email, password)
                 if(user){
                     return req.logIn(user, (err: Error) => {
@@ -63,7 +62,8 @@ class UserController {
                 return res.status(500).send({message: 'Wrong values'})
             }
             else{
-                const user = await UserService.checkUserExist(email)
+                const lowerEmail = email.trim().toLowerCase()
+                const user = await UserService.checkUserExist(lowerEmail)
                 return res.send(!!user)
             }
         } catch (error) {

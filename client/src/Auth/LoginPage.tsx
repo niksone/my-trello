@@ -24,7 +24,8 @@ const LoginPage = () => {
         e.preventDefault()
 
         try {
-            await authApi.login(email, password)
+            const lowerEmail = email.trim().toLowerCase()
+            await authApi.login(lowerEmail, password)
             getAuth()
         } catch (error) {
             setError(error.response.data.message)

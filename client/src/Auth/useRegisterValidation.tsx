@@ -55,6 +55,7 @@ const schema = Yup.object().shape({
 
 const checkUserExist = async (email: string) => {
     try {
+        email = email.trim().toLowerCase()
         const checkUserExist = await authApi.checkUserExist(email)
         return checkUserExist.data 
                 ? {userExist: true, error: 'User Already Exist'}
