@@ -12,12 +12,8 @@ import userRouter from './routes/userRoute';
 import boardRouter from './routes/boardRoute';
 
 const dotenv = require('dotenv').config()
-<<<<<<< HEAD
 // const expressStaticGzip = require('express-static-gzip');
-const compression = require('compression')
-=======
-const expressStaticGzip = require('express-static-gzip');
->>>>>>> 99c5a335d4b3a7c05e0f747060c23b4058debdcc
+const compression = require('compression') 
 
 const PORT = process.env.PORT
 
