@@ -15,8 +15,8 @@ export const authApi = {
         await instance.post('/logout')
     },
     
-    async checkUserExist(email: string, password: string) {
-        const checkUserExist = instance.post('/checkUserExist', {email, password})
+    async checkUserExist(email: string) {
+        const checkUserExist = instance.post('/checkUserExist', {email})
         return checkUserExist;
     },
 

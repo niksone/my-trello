@@ -53,9 +53,9 @@ const schema = Yup.object().shape({
 
 })
 
-const checkUserExist = async (email: string, password: string) => {
+const checkUserExist = async (email: string) => {
     try {
-        const checkUserExist = await authApi.checkUserExist(email, password)
+        const checkUserExist = await authApi.checkUserExist(email)
         console.log(checkUserExist.data, 'user exist');
         return checkUserExist.data 
                 ? {userExist: true, error: 'User Already Exist'}
@@ -85,7 +85,7 @@ export const useRegisterValidation = () => {
                 password: password.value, 
                 confirmedPassword: confirmedPassword.value
             })
-            const {userExist, error} = await checkUserExist(email.value, password.value)
+            const {userExist, error} = await checkUserExist(email.value)
             console.log(userExist, 'user Exist final');
         
         const result = !userExist 
