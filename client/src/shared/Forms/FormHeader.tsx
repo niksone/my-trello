@@ -1,5 +1,4 @@
-import EditableItem from '../EditableItem'
-import { FormContainer, FormSubtitleWrapper, FormTitleContainer } from './FormElements'
+import { FormContainer, FormTitleContainer } from './FormElements'
 import FormSubtitle from './FormSubtitle';
 import FormTitle from './FormTitle';
 
@@ -14,7 +13,6 @@ interface FormHeaderProps {
 }
 
 const FormHeader = ({title, handleTitleUpdate, subtitle, handleSubtitleUpdate, editable = false, placeholderColor}: FormHeaderProps) => {
-    console.log(subtitle, title);
 
     return (
         <FormTitleContainer>

@@ -9,7 +9,6 @@ import AddIcon from '../icons/Add/AddIcon'
 import AddItemForm from '../AddNewItem/AddItemForm'
 import { useEffect, useRef, useState } from 'react'
 import { Modal, ModalHandle } from '../Modal'
-
 import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import ArrowIcon from '../icons/Arrow/Arrow'

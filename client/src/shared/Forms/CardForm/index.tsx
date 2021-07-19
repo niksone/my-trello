@@ -16,7 +16,6 @@ import { CardFormContainer, CardFormWrapper } from "./CardFormElements";
 import SaveIcon from "../../icons/Save/SaveIcon";
 import Div100vh from "../../Div100vh";
 import ConditionalWrapper from "../../ConditionalWrapper";
-import FormHeader from "../FormHeader";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
 import { BoardName } from "../../../HomePage/HomePageElements";

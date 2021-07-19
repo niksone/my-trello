@@ -1,6 +1,4 @@
 import Board from '../models/Board';
-import { UserI } from '../Interfaces/UserInterface';
-import User from '../models/User';
 import { BoardI, List, Card} from '../Interfaces/BoardInteface';
 import { findUserById } from '../utils/findUserById';
 
