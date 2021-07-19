@@ -44,6 +44,14 @@ export const colorSchemes: ColorSchemesI = {
         active: COLORS.errorHover,
         textColor: '#fff',
         textColorHover: '#fff'
+    },
+
+    light: {
+        resting: '#fff',
+        hover: '#fff',
+        active: '#fff',
+        textColor: COLORS.primaryGrey,
+        textColorHover: COLORS.primaryGrey
     }
 }
 
