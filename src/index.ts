@@ -12,13 +12,23 @@ import userRouter from './routes/userRoute';
 import boardRouter from './routes/boardRoute';
 
 const dotenv = require('dotenv').config()
+const expressStaticGzip = require('express-static-gzip');
 
 const PORT = process.env.PORT
 
 const app = express()
 
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, "client")))
+    const buildPath = path.join(__dirname, 'client');
+    app.use(
+    '/',
+    expressStaticGzip(buildPath, {
+        enableBrotli: true,
+        orderPreference: ['br', 'gz']
+    })
+    );
+
+    // app.use(express.static(path.join(__dirname, "client")))
 }else{
     app.use(cors({url: 'http://localhost:3000', credentials: true}))
 }
