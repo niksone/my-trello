@@ -18,10 +18,12 @@ export const COLORS = {
 }
 
 export const BREAKPOINTS = {
-    mobile: 425,
+    mobile: 325,
+    mobileLg: 475,
     tablet: 768,
     tabletLg: 976,
-    desktop: 1280,
+    laptop: 1180,
+    desktop: 1440,
     desktopLg: 1920
 }
 
