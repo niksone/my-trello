@@ -7,7 +7,7 @@ export const BoardContainer = styled.div`
   padding: 28px 0 36px 30px;
   position: relative;
 
-  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+  @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     padding: 0 20px;
   }
 
@@ -23,7 +23,7 @@ export const BoardWrapper = styled.div`
   padding: 28px 0 36px 30px;
   position: relative;
 
-  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+  @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     padding: 0 20px;
   }
 `
@@ -50,7 +50,7 @@ export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
     margin: 0 8px;
   } 
 
-  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+  @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     & > div{
       margin: 0 calc((100vw - (100vw - 40px)) / 2);
     }

@@ -24,7 +24,7 @@ export const ColumnWrapper = styled.div<ColumnContainerProps>`
     border-radius: 5px;
     z-index: 1;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         width: calc(100vw - 20px * 2);
         background: none;
         border: none;
@@ -44,7 +44,7 @@ export const ColumnTitleContainer = styled.div`
     cursor: pointer;
     z-index: 5;
 
-    @media screen  and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen  and (max-width: ${BREAKPOINTS.mobileLg}px){
         display: none;
     }
 `
@@ -65,7 +65,7 @@ export const ColumnCardContainer = styled.div`
     justify-content: space-between;
     padding-bottom: 0.1px;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         height: auto;
     }
 `
@@ -76,7 +76,7 @@ export const ColumnCardWrapper = styled.div`
         margin-top:10px;
     }
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         & > *:not(:first-child){
             margin-top: 4px;
         }

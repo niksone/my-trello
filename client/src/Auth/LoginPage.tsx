@@ -38,16 +38,16 @@ const LoginPage = () => {
                 <HeroLeft>
                     <HeroLeftContainer>
                         <HeroLeftWrapper>
-                        <HeroTextWrapper>
-                            <HeroTitle >
-                                    Welcome to React Trello.
-                                    <br />
-                                    Sign In to see latest updates.
-                            </HeroTitle>
-                            <HeroSubtitle>
-                                Enter your details to proceed further
-                            </HeroSubtitle>
-                        </HeroTextWrapper>  
+                            <HeroTextWrapper>
+                                <HeroTitle >
+                                        Welcome to React Trello.
+                                        <br />
+                                        Sign In to see latest updates.
+                                </HeroTitle>
+                                <HeroSubtitle>
+                                    Enter your details to proceed further
+                                </HeroSubtitle>
+                            </HeroTextWrapper>  
 
                             <FormContainer>
                                 <FormError isError={error !== ''}>{error}</FormError>

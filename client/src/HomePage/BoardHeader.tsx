@@ -23,6 +23,7 @@ import MenuIcon from "../shared/icons/Menu/MenuIcon";
 import MoreIcon from "../shared/icons/More/MoreIcon";
 import Tooltip from "../shared/Tooltip";
 import { BoardName, ShowContainer } from "./HomePageElements";
+import { BREAKPOINTS } from "../shared/constants";
 
 interface BoardHeaderProps {
     board: Board;
@@ -55,7 +56,7 @@ const BoardHeader = ({
         <>
             <HeaderContainer>
                 <HeaderWrapper>
-                    <ShowContainer show={true} mobile={true}>
+                    <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Button
                             shape="icon"
                             variant="outline"
@@ -67,7 +68,7 @@ const BoardHeader = ({
                     </ShowContainer>
                     <BoardName>{board.name || "No Board Found"}</BoardName>
 
-                    <ShowContainer show={true} mobile={true}>
+                    <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Tooltip
                             content={
                                 <ButtonGroup direction="column" spacing={2}>
@@ -128,7 +129,7 @@ const BoardHeader = ({
                         </Tooltip>
                     </ShowContainer>
 
-                    <ShowContainer show={true} mobile={false}>
+                    <ShowContainer widthFrom={BREAKPOINTS.laptop}>
                         <Button
                             onClick={handleLogout}
                             size="md"

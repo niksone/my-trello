@@ -17,7 +17,7 @@ export const Hero = styled.div<HeroProps>`
     width: 100%;
     height: 100%;
 
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         flex-direction: column-reverse;
     }
 `
@@ -32,7 +32,16 @@ export const HeroLeft = styled.div`
     width: 50%;
     height: 100%;
 
+    @media(max-width: ${BREAKPOINTS.laptop}px){
+        width: 70%;
+    }
+
     @media(max-width: ${BREAKPOINTS.tabletLg}px){
+        width: 80%;
+    }
+
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         width: 100%;
         height: fit-content;    
     }
@@ -49,8 +58,10 @@ export const HeroLeftContainer = styled.div`
     height: 100%;
 
 
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         border-radius: 16px 16px 0 0;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 `
 
@@ -58,9 +69,11 @@ export const HeroLeftContainer = styled.div`
 export const HeroLeftWrapper = styled.div`
     transform: translate(10%, 0%);
     width: fit-content;
+    padding-bottom: 115px;
 
-    @media(max-width: ${BREAKPOINTS.tablet}px){
+    @media(max-width: ${BREAKPOINTS.laptop}px){
         width: 90%;
+        padding-bottom: 0;
         transform: translate(0);
     }
 `
@@ -68,6 +81,11 @@ export const HeroLeftWrapper = styled.div`
 export const HeroTitle = styled.h1`
     font-size: var(--text-h1);
     white-space: pre-line;
+
+    @media(max-width: ${BREAKPOINTS.tablet}px){
+        font-size: var(--text-h2);
+    }
+
 `
 
 interface HeroRightProps {
@@ -84,6 +102,10 @@ export const HeroRight = styled.div<HeroRightProps>`
     background-size: cover;
 
     @media(max-width: ${BREAKPOINTS.tabletLg}px){
+        width: 20%;
+    }
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         width: 100%;
         height: fill-available;  
         ${({mobileBgPattern}) => mobileBgPattern && `background: url(${mobileBgPattern})`};
@@ -95,7 +117,7 @@ export const HeroRightTextWrapper = styled.div`
     display: none;
     text-align: center;
     
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -108,17 +130,28 @@ export const HeroRightTextWrapper = styled.div`
         }
     }
 
-    @media(max-width: ${BREAKPOINTS.mobile}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         width: 90%;
     }
 `
 
 export const HeroImgContainer = styled.div`
     height: fit-content;
-    width: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media (max-width: ${BREAKPOINTS.tabletLg}px){
         display: none;
+    }
+
+    @media screen and (max-width: ${BREAKPOINTS.laptop}px){
+        width: 90%;
+    }
+
+    & > *{
+        width: 90%;
     }
 `
 
@@ -129,7 +162,13 @@ export const HeroSubtitle = styled.p`
 `
 
 export const HeroTextWrapper = styled.div`
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    padding-bottom: 70px;
+
+    @media(max-width: ${BREAKPOINTS.tablet}px){
+        padding-bottom: 30px;
+    }
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         display: none;
     }
 `

@@ -11,6 +11,7 @@ import { Card, List, SimpleCard, Task } from "../../redux/HandleItems/interfaces
 import { RootReducerType } from "../../redux/store";
 import Button from "../Buttons";
 import BeautifulCard from "../Card/BeautifulCard";
+import { BREAKPOINTS } from "../constants";
 import CardForm from "../Forms/CardForm";
 import AddIcon from "../icons/Add/AddIcon";
 import { Modal, ModalHandle } from "../Modal";
@@ -127,7 +128,7 @@ const BeautifulDragColumn = ({
                             )}
                         </Droppable>
 
-                        <ShowContainer show={true} mobile={true}>
+                        <ShowContainer widthTo={BREAKPOINTS.mobileLg}>
                             <AddCardContainer>
                                 <Button
                                     Icon={<AddIcon />}

@@ -1,18 +1,7 @@
 import styled from "styled-components";
-import { BREAKPOINTS } from "../constants";
-
 
 export const FormContainer = styled.form`
-    max-width: 365px;
-    padding-top: 70px;
-    padding-bottom: 115px;
     height: fit-content;
-
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
-        width: 100%;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
 `
 
 export const FormInputsContainer = styled.div`

@@ -15,7 +15,11 @@ export const BoardSectionContainer = styled.div`
     background-color: var(--color-background-light);
     padding: 0 28px 28px 28px;
 
-    @media screen and (max-width:  ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width:  ${BREAKPOINTS.laptop}px){
+        width: 100%;
+    }
+
+    @media screen and (max-width:  ${BREAKPOINTS.mobileLg}px){
         width: 100%;
         background: none;
         padding: 0;
@@ -100,14 +104,18 @@ export const LogoImgWrapper = styled.div`
 `
 
 interface ShowContainerProps {
-    show: boolean
-    mobile: boolean
+    widthFrom?: number
+    widthTo?: number
 }
 export const ShowContainer = styled.div<ShowContainerProps>`
-    display: ${({show, mobile}) => show && !mobile ? 'flex' : 'none'};
- 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
-        display: ${({show, mobile}) => show && mobile? 'flex' : 'none'};
+    display: none;
+
+    @media screen and (min-width: ${({widthFrom}) => widthFrom}px){
+        display: flex;
+    }
+
+    @media screen and (max-width: ${({widthTo}) => widthTo}px){
+        display: flex;
     }
 `
 
@@ -129,7 +137,7 @@ export const NoBoardSection = styled.div`
         margin-bottom: 35px;
     }
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         & > svg{
             width: 80%;
             height: 80%; 

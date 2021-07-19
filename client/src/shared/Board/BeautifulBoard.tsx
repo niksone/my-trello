@@ -15,7 +15,7 @@ import ArrowIcon from '../icons/Arrow/Arrow'
 import { ShowContainer } from '../../HomePage/HomePageElements'
 import { BoardSectionWrapper } from '../../BoardSection/BoardElements'
 import { AddColumnContainer, BoardColumnContainer, BoardColumnWrapper, BoardContainer, BoardFooterContainer, BoardFooterNav, BoardFooterTitle } from './BoardElements'
-import { isMobileWidth } from '../constants'
+import { BREAKPOINTS, isMobileWidth } from '../constants'
 
 
 
@@ -158,7 +158,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
             </Droppable>
         </DragDropContext>
 
-        <ShowContainer mobile={false} show={true}>
+        <ShowContainer widthFrom={BREAKPOINTS.mobileLg}>
           <BoardColumnContainer>
               <ColumnWrapper>
                 <AddColumnContainer>
@@ -184,7 +184,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
         </BoardContainer>
       </BoardSectionWrapper>
-        <ShowContainer mobile={true} show={true}>
+        <ShowContainer widthTo={BREAKPOINTS.mobileLg}>
           <BoardFooterContainer>
             <BoardFooterTitle>{lists[findListIndex()]?.title}</BoardFooterTitle>
             <BoardFooterNav>
