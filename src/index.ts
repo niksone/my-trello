@@ -51,7 +51,7 @@ app.use(session({
     maxAge: 1000 * 24 * 60 * 60,
     store: MongoStore.create({mongoUrl: link}),
     cookie: {
-        // secure: true
+        secure: true
     }
 }))
 
