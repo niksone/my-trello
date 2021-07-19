@@ -23,7 +23,7 @@ import MenuIcon from "../shared/icons/Menu/MenuIcon";
 import MoreIcon from "../shared/icons/More/MoreIcon";
 import Tooltip from "../shared/Tooltip";
 import { BoardName, ShowContainer } from "./HomePageElements";
-import { BREAKPOINTS } from "../shared/constants";
+import { BREAKPOINTS, isMobileWidth } from "../shared/constants";
 
 interface BoardHeaderProps {
     board: Board;
@@ -59,9 +59,10 @@ const BoardHeader = ({
                     <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Button
                             shape="icon"
-                            variant="outline"
+                            variant={isMobileWidth ? 'outline' : 'fill'}
                             size="lg"
                             onClick={sidebarOpen}
+                            colorScheme={isMobileWidth ? '' : 'light'}
                         >
                             <MenuIcon />
                         </Button>
@@ -123,7 +124,12 @@ const BoardHeader = ({
                             }
                             direction="bottom"
                         >
-                            <Button shape="icon" variant="outline" size="lg">
+                            <Button 
+                                shape="icon" 
+                                size="lg"
+                                variant={isMobileWidth ? 'outline' : 'fill'}
+                                colorScheme={isMobileWidth ? '' : 'light'}
+                            >
                                 <MoreIcon />
                             </Button>
                         </Tooltip>
