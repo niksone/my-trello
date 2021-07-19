@@ -13,7 +13,7 @@ import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import ArrowIcon from '../icons/Arrow/Arrow'
 import { ShowContainer } from '../../HomePage/HomePageElements'
-import { BoardSectionWrapper } from '../../BoardSection/BoardElements'
+import { BoardSectionWrapper } from '../../BoardSection/BoardSectionElements'
 import { AddColumnContainer, BoardColumnContainer, BoardColumnWrapper, BoardContainer, BoardFooterContainer, BoardFooterNav, BoardFooterTitle } from './BoardElements'
 import { BREAKPOINTS, isMobileWidth } from '../constants'
 

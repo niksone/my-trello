@@ -1,4 +1,4 @@
-import { BoardSidebarClose, BoardSidebarContainer, BoardSidebarWrapper } from '../BoardSection/BoardElements'
+import { BoardSidebarClose, BoardSidebarContainer, BoardSidebarWrapper } from '../BoardSection/BoardSectionElements'
 import PickIcon from '../shared/icons/Pick/PickIcon'
 import { HeaderContainer, LogoWrapper } from '../shared/Header/HeaderElements'
 import {ReactComponent as LogoImg} from '../shared/icons/Logo.svg'
