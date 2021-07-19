@@ -34,7 +34,6 @@ class UserService {
                 boardIds: []
             })
             await newUser.save()
-            console.log(user)
             return newUser
         }else{
             throw new Error('User Already Exist')

@@ -100,8 +100,6 @@ const BeautifulBoard = ({data}: BoardProps) => {
             return slide(index)
           }
         })
-
-        console.log(currentScrollPosition, boardRef.current.initialScroll, breakpoints)
       }
     }
 
@@ -115,16 +113,12 @@ const BeautifulBoard = ({data}: BoardProps) => {
       const debounceFunc = debounce(() => getPosition(lists), 100)
 
       if(isMobileWidth){
-        console.log(lists, 'lists')
-
         setCurrentListId(prev => lists[0]?._id || prev)
         setPos()
         getPosition(lists)  
 
         ref?.addEventListener('touchstart',setPos, {passive: true  })
         ref?.addEventListener('scroll', debounceFunc)
-
-        console.log(currentListId);
       }
 
 

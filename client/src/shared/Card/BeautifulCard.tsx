@@ -36,7 +36,6 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
   }
 
   const handleSave = (savedCard: SimpleCard) => {
-    console.log('handlesave');
     dispatch(updateCard(boardId, listId, cardId, {_id: card._id, ...savedCard}))
   }
 

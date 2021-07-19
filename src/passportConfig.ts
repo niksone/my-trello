@@ -12,13 +12,10 @@ type User = {
 module.exports = (passport: PassportStatic) => {
     const authenticateUser: VerifyFunction = (email, password, done) => {
         User.findOne({email: email}, (err: Error, user: UserI) => {
-            console.log('user-------------------');
-            console.log(user);
             if(err) done(err)
             if(!user) return done(null, false, {message: 'wrong values'})
             bcrypt.compare(password, user.password, (err: Error, result: Boolean) => {
                 if(err) done(err);
-                console.log(result)
                 if(result) {
                     return done(null, user)
                 } else{

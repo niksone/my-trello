@@ -27,13 +27,11 @@ export const boardReducer = (state: BoardReducerProps = initialState, action: Bo
                 draggedCardId: ''
             }
             state.boards.push(newBoard)
-            console.log(state)
             return {...state, isLoading: false}
         }
 
         case 'DELETE_BOARD': {
             const {id} = action.payload
-            console.log(`delete board payload${action.payload}`)
             state.boards = state.boards.filter(board => board._id !== id)
             return {...state}
         }

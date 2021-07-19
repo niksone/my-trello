@@ -56,7 +56,6 @@ const schema = Yup.object().shape({
 const checkUserExist = async (email: string) => {
     try {
         const checkUserExist = await authApi.checkUserExist(email)
-        console.log(checkUserExist.data, 'user exist');
         return checkUserExist.data 
                 ? {userExist: true, error: 'User Already Exist'}
                 : {userExist: false, error: ''}
@@ -86,19 +85,16 @@ export const useRegisterValidation = () => {
                 confirmedPassword: confirmedPassword.value
             })
             const {userExist, error} = await checkUserExist(email.value)
-            console.log(userExist, 'user Exist final');
         
         const result = !userExist 
             ? {...validation, isValid: true} 
             : {isValid: false, error: {value: 'User Already Exist', fieldName: email.fieldName}}
             
         setValidation( prev => result)
-        console.log(validation, 'validation')
         return result
 
     } catch (error) {
             const res = error.errors
-            console.log(res)
 
             const result = {
                 isValid: false, 
@@ -117,10 +113,8 @@ export const useRegisterValidation = () => {
 }
 
 const findFieldByError = (error: string) => {
-    console.log(error);
     for(const [field, value] of Object.entries(schemaMessages)){
         if(value.values.includes(error)){
-            console.log(value.fieldName);
             return value.fieldName
         } 
     }

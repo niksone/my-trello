@@ -23,7 +23,6 @@ const UserContext = ({children}: PropsWithChildren<{}>) => {
             if(authData){
                 const user = await authApi.getUser()
                 setUser(user)
-                console.log(user, 'user');
             }
             setIsLoading(false)
         } catch (error) {

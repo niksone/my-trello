@@ -23,8 +23,6 @@ const AddItemForm = ({title, placeholder, item, btnItem = 'DEFAULT', onAdd, Icon
 
     const handleAddItem = () => {
         const text = (textAreaRef?.current?.innerText || '').trim();
-        console.log(text);
-        console.log(title);
         text !== '' && onAdd(text)
         textAreaRef.current && (textAreaRef.current.innerText = "")
     }

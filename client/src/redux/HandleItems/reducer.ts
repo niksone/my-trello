@@ -28,7 +28,6 @@ const initialState = {
 export const handleItemsReducer = (state: handleItemsState = initialState, action: HandleItemsAction): handleItemsState => {
     switch(action.type) {
         case 'SET_BOARD': {
-            console.log('reducer', action.payload)
             const lists = action.payload.lists
             const cardIds = getCards(lists)
             return {...state,...action.payload, isLoading: false, cardIds}
@@ -47,7 +46,6 @@ export const handleItemsReducer = (state: handleItemsState = initialState, actio
         case 'ADD_CARD':{
             const {card} = action.payload
             const line = findIndex(action.payload.listId, state.lists)
-            console.log(action.payload.listId, state.lists)
             state.lists[line].cards.push(card)
             state.cardIds = getCards(state.lists)
             return{   
@@ -58,14 +56,12 @@ export const handleItemsReducer = (state: handleItemsState = initialState, actio
 
         case 'UPDATE_CARD': {
             const {listId, cardId, card} = action.payload
-            console.log('update_Card')
             const columnIndex = findIndex(listId, state.lists)
             const cardIndex = findIndex(cardId, state.lists[columnIndex].cards)
 
             state.lists[columnIndex].cards = state.lists[columnIndex].cards.map((stateCard, index) => {
                 return index === cardIndex ? card : stateCard
             })
-            console.log(state)
 
             return {...state}
         }
@@ -92,10 +88,9 @@ export const handleItemsReducer = (state: handleItemsState = initialState, actio
         }
 
         case 'MOVE_LIST': {
-            const {sourceIndex, destIndex} = action.payload
-
-            
+            const {sourceIndex, destIndex} = action.payload            
             moveItem(state.lists, sourceIndex, destIndex)
+
             return {...state}
         }
 
@@ -117,8 +112,6 @@ export const handleItemsReducer = (state: handleItemsState = initialState, actio
 
         case 'UPDATE_TASK':{
             const {columnId, cardId, taskId, text, completed} = action.payload
-            console.log(action.payload)
-            console.log(state)
 
             const columnIndex = state.lists.findIndex(column => column._id === columnId)
             const cardIndex = state.lists[columnIndex].cards.findIndex(card => card._id === cardId)
@@ -127,14 +120,11 @@ export const handleItemsReducer = (state: handleItemsState = initialState, actio
             state.lists[columnIndex].cards[cardIndex].tasks = state.lists[columnIndex].cards[cardIndex].tasks.map((task, index) => {
 
                 if(task._id === taskId){
-                    console.log({...task, text, completed})
                     return {...task, text, completed}
                 }else{
                     return task
                 }
             })
-
-            console.log(state)
             return {...state, }
         }
 

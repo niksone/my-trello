@@ -24,8 +24,6 @@ const EditableItem = ({deleteItem, editItem, updateItem, initialText, placeholde
 
 
     const handleClick = () => {
-        console.log('handle click');
-
          const onExit = () => {
             updateItem(textAreaRef?.current?.innerText.trim() || '') 
             document.removeEventListener('focusout', onExit)            

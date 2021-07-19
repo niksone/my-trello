@@ -6,6 +6,5 @@ export const useFetching = (someFetchActionCreator: () => void) => {
 
     useEffect(() => {
         dispatch(someFetchActionCreator());
-        console.log('fetching');
     }, [dispatch])
 }

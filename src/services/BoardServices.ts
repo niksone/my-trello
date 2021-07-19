@@ -55,7 +55,6 @@ class BoardService{
             if(!board) throw new Error('Board not found')
 
             const listIndex = board.lists.findIndex(list => String(list._id) === listId)
-            console.log(listIndex)
             if(listIndex < 0){
                 throw new Error('List didn`t found')
             }else{
@@ -123,7 +122,6 @@ class BoardService{
             const listIndex = board.lists.findIndex(list => String(list._id) === listId)
             const cardIndex = board.lists[listIndex].cards.findIndex(card => String(card._id) === cardId)
 
-            console.log(listIndex, cardIndex)
             if(listIndex < 0 || cardIndex < 0){
                 throw new Error('List or card didn`t found')
             }else{

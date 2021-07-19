@@ -23,7 +23,6 @@ export const deleteList = (boardId: string, listId: string) => async (dispatch: 
     try {
         dispatch({type: 'DELETE_LIST', payload: {listId}})
         await boardApi.deleteList( boardId, listId)
-        // console.log(list , 'list')
     } catch (error) {
         console.log(error)
     }
@@ -55,7 +54,6 @@ export const deleteCard = (boardId: string, listId: string, cardId: string) => a
     try {
         dispatch({type: 'DELETE_CARD', payload: {listId, cardId}})
         await boardApi.deleteCard( boardId, listId, cardId)
-        // console.log(list , 'list')
     } catch (error) {
         console.log(error)
     }

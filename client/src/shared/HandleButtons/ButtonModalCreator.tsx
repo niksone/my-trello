@@ -18,12 +18,10 @@ const ButtonModalCreator = ({label, Icon, Item}: ButtonModalCreatorProps, ref: R
     const modalRef = useRef<ModalHandle>(null)
     const closeModal = () => {
         setShowModal(prev => false)
-        console.log(`modal ${showModal}`)
     }
 
     const openModal = () => {
         setShowModal(prev => true)
-        console.log(`modal ${showModal}`)
     }
 
     useImperativeHandle(

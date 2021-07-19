@@ -43,7 +43,6 @@ class UserController {
                     return req.logIn(user, (err: Error) => {
                         if(err) next(err)
                         return req.session.save(err => {
-                            console.log(req.session)
                             res.redirect('/user')
                         })
                     })
@@ -51,7 +50,7 @@ class UserController {
                 return user
             }
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
             res.status(500).send({message: error.message})
         }
     }

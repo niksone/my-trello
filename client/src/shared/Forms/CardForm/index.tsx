@@ -112,7 +112,6 @@ const CardForm = ({
 
     const handleUpdateTitle = (title: string) => {
         const MAX_SIZE = 40
-        console.log('title');
         if(title.length <= MAX_SIZE){
             handleUpdateCard(
                 title,
@@ -137,7 +136,6 @@ const CardForm = ({
     }
 
     const handleSave = () => {
-        console.log(card);
         if (card.title.trim() === "") {
             setIsValid(false);
         } else {

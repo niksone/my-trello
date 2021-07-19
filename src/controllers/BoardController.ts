@@ -11,7 +11,6 @@ class BoardController {
             }
             else{
                 const boards = await BoardServices.getUserBoards(userId as string)
-                console.log(boards)
                 res.send(boards)
             }
         } catch (error) {
@@ -65,7 +64,6 @@ class BoardController {
     async updateListTitle(req: Request, res: Response) {
         try {
             const {boardId, listId, title} = req.body
-            console.log(req.body)
             if(!boardId || !listId || !title) res.status(500).send({message: 'Wrong values'})
             else{
                 const list = await BoardServices.updateListTitle(boardId, listId, title)
@@ -81,7 +79,6 @@ class BoardController {
     async moveList(req: Request, res: Response){
         try {
             const {boardId, sourceIndex, destinationIndex} = req.body
-            console.log(req.body)
             if(!boardId || sourceIndex === null || !destinationIndex === null)  res.status(500).send({message: 'Wrong values'})
             else{
                 const board = await BoardServices.moveList(boardId, sourceIndex, destinationIndex)
@@ -169,7 +166,6 @@ class BoardController {
     async moveCard(req: Request, res: Response){
         try {
             const {boardId, sourceListIndex, destListIndex, sourceCardIndex, destCardIndex} = req.body
-            console.log(req.body)
             if(!boardId || sourceListIndex === null || !destListIndex === null
                 || sourceCardIndex === null || destCardIndex === null
             )  res.status(500).send({message: 'Wrong values'})
