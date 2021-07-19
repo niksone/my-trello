@@ -1,8 +1,7 @@
 const passport = require('passport')
 import { NextFunction, Request, Response } from "express"
-import User from "../models/User";
-const bcrypt = require('bcryptjs')
 import { UserI } from '../Interfaces/UserInterface';
+import UserService from "../services/UserService";
 
 declare module 'express-session' {
     export interface SessionData {
@@ -27,6 +26,7 @@ class UserController {
             })(req, res, next)
         } catch (error) {
             console.log(error)
+            res.status(500).send({message: error.message})   
         }
     }
 
@@ -35,49 +35,41 @@ class UserController {
             const {email, password} = req?.body;
     
             if(!email || !password || typeof email !== 'string' || typeof password !== 'string'){
-                res.status(500).send('Wrong values')
-                return
+                return res.status(500).send({message: 'Wrong values'})
             }
             else{
-                User.findOne({email}, async (err: Error, user:  UserI) => {
-                    if(err) throw err
-                    if(user) res.status(500).send({message: 'User already exist'})
-                    if(!user){
-                        const hashedPassword = await bcrypt.hash(password, 10)
-                        const newUser = new User({
-                            email,
-                            password: hashedPassword,
-                            boardIds: []
+                const user = await UserService.registerUser(email, password)
+                if(user){
+                    return req.logIn(user, (err: Error) => {
+                        if(err) next(err)
+                        return req.session.save(err => {
+                            console.log(req.session)
+                            res.redirect('/user')
                         })
-            
-                        await newUser.save()
-                        req.logIn(newUser, (err: Error) => {
-                            if(err) next(err)
-                            req.session.save(err => {
-                                console.log(req.session)
-                                res.redirect('/user')
-                            })
-                        })
-                    }          
-                })
+                    })
+                }
+                return user
             }
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
+            res.status(500).send({message: error.message})
         }
     }
 
     async checkUserExist(req: Request, res: Response) {
         try {
-            const {email, password} = req?.body;
-            User.findOne({email}, async (err: Error, user:  UserI) => {
-                if(err) throw err
-                if(user) res.send(true)
-                if(!user){
-                    res.send(false)
-                }      
-            })
+            const {email} = req?.body;
+                
+            if(!email || typeof email !== 'string'){
+                return res.status(500).send({message: 'Wrong values'})
+            }
+            else{
+                const user = await UserService.checkUserExist(email)
+                return res.send(!!user)
+            }
         } catch (error) {
             console.log(error)
+            return res.status(500).send({message: error.message})
         }
     }
 
@@ -87,6 +79,7 @@ class UserController {
             res.send({message: 'log out'})
         } catch (error) {
             console.log(error)
+            res.status(500).send({message: error.message})
         }
     }
 
@@ -95,6 +88,7 @@ class UserController {
             res.send(req.session)
         } catch (error) {
             console.log(error)
+            res.status(500).send({message: error.message})
         }
     }
 
@@ -103,6 +97,7 @@ class UserController {
             res.send(req.isAuthenticated())
         } catch (error) {
             console.log(error)
+            res.status(500).send({message: error.message})
         }
     }
 }
