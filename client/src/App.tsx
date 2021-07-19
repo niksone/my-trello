@@ -1,44 +1,34 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import styled from 'styled-components'
+import React, { Suspense} from 'react';
 import { GlobalStyles } from './globalStyles';
-import {useSelector} from 'react-redux'
-import { RootReducerType } from './redux/store';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import RegisterPage from './Auth/RegisterPage';
-import BoardPage from './BoardPage';
-import LoginPage from './Auth/LoginPage';
-import UserContext, { userContext } from './Context';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import UserContext from './Context';
 import ProtectedRoute from './ProtectedRoute';
-import ProtectedAuthRoute from './ProtectedAuthRoute';
+import Div100vh from './shared/Div100vh';
+import AppLoader from './shared/Loaders/AppLoader';
 
+const HomePage = React.lazy(() => import('./HomePage'))
+const RegisterPage = React.lazy(() => import('./Auth/RegisterPage'))
+const LoginPage = React.lazy(() => import('./Auth/LoginPage'))
 
 
 function App() {
-  const data = useSelector((state: RootReducerType) => state.addItem)
-
   return (
-    <>
+    <Div100vh>
         <GlobalStyles />
         <UserContext>
             <Router>
             <Switch>
-              <ProtectedRoute path='/' exact component={() => <BoardPage data={data} />} />
-              <ProtectedAuthRoute path='/register' component={() => <RegisterPage />} />
-              <ProtectedAuthRoute path='/login' component={() => <LoginPage />} />
-              {/* {
-              ctx._id ?
-                <Route to='/'>
-                  <BoardPage data={data} />
-                </Route>
-                :
-              <Route to='/login'>
-                <LoginPage />
-              </Route>
-              }  */}
-            </Switch>
+                  <Suspense fallback={<AppLoader />}>
+                    <ProtectedRoute path='/board' exact component={() => <HomePage />} />
+                    <ProtectedRoute path='/board/:id' component={() => <HomePage />} />
+                    <ProtectedRoute auth path='/register' component={() => <RegisterPage />} />
+                    <ProtectedRoute auth path='/login' component={() => <LoginPage />} />
+                    <Redirect to='/board' />
+                  </Suspense>
+              </Switch>
             </Router>
         </UserContext>
-      </>
+      </Div100vh>
       
   );
 }

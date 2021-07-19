@@ -1,21 +1,19 @@
-import { UserI } from './Interfaces/UserInterface';
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const passport = require('passport')
-const passportLocal = require('passport-local')
-const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const cookieSession = require('cookie-session')
-const bcrypt = require('bcryptjs')
-const dotenv = require('dotenv')
 const passportConfig = require('./passportConfig')
 const path = require("path")
-const MongoStore = require('connect-mongo').default
-import { NextFunction, Request, Response } from "express"
-import User from "./User"
 
-const PORT = process.env.PORT || 5000
+import MongoStore from 'connect-mongo'
+import { Request, Response } from "express"
+import userRouter from './routes/userRoute';
+import boardRouter from './routes/boardRoute';
+
+const dotenv = require('dotenv').config()
+
+const PORT = process.env.PORT
 
 const app = express()
 
@@ -26,17 +24,21 @@ if(process.env.NODE_ENV === 'production'){
 }
 app.set('trust proxy', 1)
 
-const link = 'mongodb+srv://niksone-ts:test1234@cluster0.cr0ko.mongodb.net/my-trello?retryWrites=true&w=majority'
-mongoose.connect(process.env.MONGODB_URI || link, {
+const link = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cr0ko.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+
+mongoose.connect(link, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true   
 }, (error: Error) => {
-    if(error){
+    try { 
+        if(error){
+            throw error
+        }
+        console.log('connect to mongodb')
+    } catch (error) {
         console.log(error)
-        throw error
     }
-    console.log('connect to mongodb')
 })
 
 app.use(express.urlencoded({extended: true}))
@@ -49,96 +51,20 @@ app.use(session({
     maxAge: 1000 * 24 * 60 * 60,
     store: MongoStore.create({mongoUrl: link}),
     cookie: {
-        // secure: true
+        secure: true
     }
 }))
-// app.use(cookieParser('secretcode'))
 
 app.use(passport.initialize())
 app.use(passport.session())
 passportConfig(passport)
-// require('./passportConfig.ts')(passport)
-// Passport
 
-
-// Routes
-
-app.post('/login', (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('local', (err: Error, user: UserI, info: any) => {
-        if( err) next(err)  
-        !user
-            ? res.send('No user')
-            : req.logIn(user, (err: Error) => {
-                if(err) next(err)
-                // if(req.session.user){
-                //     req.session.user = user
-                // }else{
-                //     req.session.user = {}
-                // }
-                req.session.save(err => {
-                    console.log(req.session)
-                    res.send(user)
-                })
-            })
-    })(req, res, next)
-})
-
-app.post('/register', async (req: Request, res: Response) => {
-    const {email, password} = req?.body;
-
-    if(!email || !password || typeof email !== 'string' || typeof password !== 'string'){
-        res.send('Wrong values')
-        return
-    }
-
-    User.findOne({email}, async (err: Error, user:  UserI) => {
-        if(err) throw err
-        if(user) res.send('User already exist')
-        if(!user){
-            const hashedPassword = await bcrypt.hash(password, 10)
-            const newUser = new User({
-                email,
-                password: hashedPassword
-            })
-        
-            await newUser.save()
-            res.send(newUser)        
-        }
-    })
-
-})
-
-app.get('/isAuth', (req: Request, res: Response) => {
-    console.log(req.isAuthenticated(), 'auth')
-    res.send(req.isAuthenticated())
-})
-
-app.get('/user', (req: Request, res: Response) => {
-    res.send(req.session)
-})
-
-app.post('/logout', (req: Request, res: Response) => {
-    req.logOut()
-    res.send('log out')
-})
+app.use('', userRouter)
+app.use('', boardRouter)
 
 if(process.env.NODE_ENV === 'production')
     app.get("*", (req: Request, res: Response) => {
         res.sendFile(path.join(__dirname, "client", "index.html"));
     });
-
-
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//     console.log('------------', req.user)
-//     next()
-// })
-
-// if(process.env.NODE_ENV === 'production'){
-//     app.use(express.static('../../client/build/'))
-// }
-
-// app.get('*', (req: Request, res: Response) => {
-//     res.sendFile('../../client/build')  
-// })
 
 app.listen(PORT, () => console.log(`app is running on ${PORT}`))

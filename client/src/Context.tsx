@@ -1,35 +1,41 @@
-import axios from 'axios'
-import React, { createContext, PropsWithChildren, useEffect, useState } from 'react'
+import { createContext, PropsWithChildren, useEffect, useState } from 'react'
+import { authApi } from './api'
 
-export const userContext = createContext<any>({})
+interface UserContextI {
+    user: string,
+    isAuth: boolean,
+    isLoading: boolean,
+    getAuth(): void
+}
+
+export const userContext = createContext<UserContextI>({} as UserContextI)
 
 const UserContext = ({children}: PropsWithChildren<{}>) => {
     const [user, setUser] = useState('')
+    const [isAuth, setIsAuth] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    
-    const getUser = async () => {
+        
+    const getAuth = async () => {
         try {
-            const currentUser = await axios({
-                method: 'GET',
-                withCredentials: true,
-                url: `/user`
-            })
-
-            const userData = currentUser.data.passport.user
-            setUser(userData)
+            setIsLoading(true)
+            const authData = await authApi.isAuth()
+            setIsAuth(authData)
+            if(authData){
+                const user = await authApi.getUser()
+                setUser(user)
+            }
             setIsLoading(false)
-            console.log(currentUser);
         } catch (error) {
             console.log(error);
         }
     }
 
     useEffect(() => {
-        getUser()
+        getAuth()
     }, []) 
 
     return (
-        <userContext.Provider value={{user, getUser, isLoading}}>
+        <userContext.Provider value={{user, isAuth, getAuth, isLoading}}>
             {children}
         </userContext.Provider>
     )
