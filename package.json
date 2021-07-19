@@ -13,8 +13,7 @@
     "start": "node dist/index.js",
     "install-client": "cd client && yarn install",
     "build-client": "cd client && yarn build",
-    "heroku-postbuild": "yarn run install-client && yarn run build-client && tsc && cp -r client/build dist/client",
-    "gitHerokuPush": "git subtree push --prefix server heroku master"
+    "heroku-postbuild": "yarn run install-client && yarn run build-client && tsc && cp -r client/build dist/client"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +26,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "express-static-gzip": "^2.1.1",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.5",
     "passport": "^0.4.1",
