@@ -27,4 +27,4 @@ export const BREAKPOINTS = {
     desktopLg: 1920
 }
 
-export const isMobileWidth = window.innerWidth <= BREAKPOINTS.mobile
+export const isMobileWidth = window.innerWidth <= BREAKPOINTS.mobileLg
