@@ -36,11 +36,6 @@ const HomePage = () => {
         getAuth()
     }
 
-    const handleAddBoard = (text: string) => {
-        dispatch(addBoard(user, text))
-        setShowSidebar(false)
-    }
-
     useEffect(() => {
         dispatch(getBoards(user))
     }, [dispatch, user])
@@ -62,7 +57,6 @@ const HomePage = () => {
                 boardId={id}
                 userId={user}
                 handleClose={() => setShowSidebar(false)}
-                handleAddBoard={handleAddBoard}
             />
             <BoardSectionContainer>
                 

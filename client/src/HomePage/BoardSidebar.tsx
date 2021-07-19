@@ -20,10 +20,9 @@ interface BoardSidebarProps {
     boardId: string
     userId: string
     handleClose: () => void
-    handleAddBoard: (name: string) => void
 }
 
-const BoardSidebar = ({boards, isShow, modalRef, boardId, userId, handleClose, handleAddBoard}: BoardSidebarProps) => {
+const BoardSidebar = ({boards, isShow, modalRef, boardId, userId, handleClose}: BoardSidebarProps) => {
     
     const [showEditBoardModal, setShowEditBoardModal] = useState(false)
     const editBoardModalRef = useRef<ModalHandle>(null);
