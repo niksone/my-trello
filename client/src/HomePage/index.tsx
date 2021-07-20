@@ -9,10 +9,11 @@ import { Board } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import { ModalHandle } from '../shared/Modal'
 import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
-import BoardSidebar from './BoardSidebar'
 import { AppContainer, BoardSectionContainer, NoBoardSection, NoBoardTitle } from './HomePageElements'
 import AppLoader from '../shared/Loaders/AppLoader'
 import Header from '../shared/Header'
+import Sidebar from '../shared/Sidebar'
+import {ReactComponent as LogoImg} from '../shared/icons/Logo.svg'
 
 
 const HomePage = () => {
@@ -50,7 +51,9 @@ const HomePage = () => {
 
     return (
         <AppContainer>
-            <BoardSidebar 
+            <Sidebar
+                title='React Trello'
+                Img={<LogoImg />} 
                 boards={boards}
                 isShow={showSidebar}
                 modalRef={modalRef}
