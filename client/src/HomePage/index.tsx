@@ -5,14 +5,15 @@ import { authApi } from '../api'
 import BoardSection from '../BoardSection'
 import { userContext } from '../Context'
 import {addBoard, getBoards } from '../redux/Board/actionCreators'
-import { Board } from '../redux/Board/interfaces'
+import { BoardI } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import { ModalHandle } from '../shared/Modal'
 import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
-import BoardSidebar from './BoardSidebar'
 import { AppContainer, BoardSectionContainer, NoBoardSection, NoBoardTitle } from './HomePageElements'
 import AppLoader from '../shared/Loaders/AppLoader'
-import BoardHeader from './BoardHeader'
+import Header from '../shared/Header'
+import Sidebar from '../shared/Sidebar'
+import {ReactComponent as LogoImg} from '../shared/icons/Logo.svg'
 
 
 const HomePage = () => {
@@ -29,16 +30,15 @@ const HomePage = () => {
 
     const {id} = useParams<{id: string}>()
 
-    const currentBoard = boards.find(board => board._id === id) || {} as Board
+    const currentBoard = boards.find(board => board._id === id) || {} as BoardI
 
     const handleLogout = async () => {
         await authApi.logout()
         getAuth()
     }
 
-    const handleAddBoard = (text: string) => {
-        dispatch(addBoard(user, text))
-        setShowSidebar(false)
+    const handleAddBoard = (boardName: string) => {
+        dispatch(addBoard(user, boardName))
     }
 
     useEffect(() => {
@@ -55,18 +55,20 @@ const HomePage = () => {
 
     return (
         <AppContainer>
-            <BoardSidebar 
+            <Sidebar
+                title='React Trello'
+                Img={<LogoImg />} 
                 boards={boards}
                 isShow={showSidebar}
                 modalRef={modalRef}
                 boardId={id}
                 userId={user}
                 handleClose={() => setShowSidebar(false)}
-                handleAddBoard={handleAddBoard}
+                handleAdd={handleAddBoard}
             />
             <BoardSectionContainer>
                 
-                    <BoardHeader 
+                    <Header
                         board={currentBoard}
                         sidebarOpen={() => setShowSidebar(true)}
                         handleLogout={handleLogout}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BtnIconContainer, ButtonContainer, ButtonIconContainer, colorSchemes } from './ButtonElements'
+import { BtnIconContainer, ButtonContainer, ButtonIconContainer, ColorScheme } from './ButtonElements'
 
 
 interface ButtonSizes {
@@ -20,15 +20,17 @@ export const sizes: ButtonSizes = {
     lg: '14px 29px'
 }
 
+export type ButtonVariants = 'outline' | 'fill' | 'shadow' | 'unstyle' | 'dashed' | 'invisible'
+
 export interface ButtonProps {
     onClick?:  React.MouseEventHandler<HTMLButtonElement>;
     color?: string,
     widthFill?: boolean,
     active?: boolean,
-    variant?: 'outline' | 'fill' | 'shadow' | 'unstyle' | 'dashed' | 'invisible',
+    variant?: ButtonVariants,
     Icon?: JSX.Element,
     size?: 'lg' | 'md' | 'sm',
-    colorScheme?: keyof typeof colorSchemes,
+    colorScheme?: ColorScheme,
     jc?: 'start' | 'center' | 'end',
     fw?: '400' | '700'
     shape?: BtnShape,
@@ -41,7 +43,8 @@ const Button = ({children, onClick, ...rest}: React.PropsWithChildren<ButtonProp
     rest.variant = rest.variant ? rest.variant : 'fill'
     rest.shape = rest.shape ? rest.shape : 'default'
     rest.fw = rest.fw ? rest.fw : '400'
-
+    rest.colorScheme = rest.colorScheme ? rest.colorScheme : 'primary'
+    console.log(rest.active);
     const ButtonIcon = rest.Icon
 
     const getButtonStyles = (shape: BtnShape) => {

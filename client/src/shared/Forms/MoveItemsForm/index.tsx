@@ -1,22 +1,22 @@
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'
-import { BoardName } from '../../../HomePage/HomePageElements'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
 import { isMobileWidth } from '../../constants'
 import Div100vh from '../../Div100vh'
+import { HeaderTitle } from '../../Header/HeaderElements'
 import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
 import { FormContainer, FormContent,FormHeaderContainer, FormHeaderWrapper, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
-import { ItemWithId } from '../interfaces'
+import { ItemI, ItemLabelField } from '../interfaces'
 import { MoveItem, MoveItemFormContainer } from './MoveItensFormElements'
 
 interface MoveItemsFormProps {
     headerTitle: string
     title: string
     subtitle: string
-    items: ItemWithId[]
-    itemLabelField: 'title' | 'name'
+    items: ItemI[]
+    itemLabelField: ItemLabelField
     
     onExit: () => void,
     onUpdate: (sourceIndex: number, destIndex: number) => void,
@@ -45,7 +45,7 @@ const MoveItemsForm = ({headerTitle, title, subtitle, items, itemLabelField, onU
                                     onClick={onExit}>
                                     <ArrowIcon direction='left' />
                                 </Button>
-                                <BoardName >{headerTitle}</BoardName>
+                                <HeaderTitle >{headerTitle}</HeaderTitle>
 
                                 <Button shape='icon' variant='invisible' size='lg'>
                                     <SaveIcon />

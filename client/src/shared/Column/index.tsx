@@ -1,31 +1,25 @@
 import { useRef, useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { ShowContainer } from "../../HomePage/HomePageElements";
 import {
     addCard,
     deleteList,
     updateListTitle,
 } from "../../redux/HandleItems/actionCreators";
-import { Card, List, SimpleCard, Task } from "../../redux/HandleItems/interfaces";
+import { CardI, List, SimpleCardI, Task } from "../../redux/HandleItems/interfaces";
 import { RootReducerType } from "../../redux/store";
 import Button from "../Buttons";
-import ButtonGroup from "../Buttons/ButtonGroup";
-import BeautifulCard from "../Card/BeautifulCard";
-import EditableItem from "../EditableItem";
+import Card from "../Card";
+import { BREAKPOINTS } from "../constants";
 import CardForm from "../Forms/CardForm";
 import AddIcon from "../icons/Add/AddIcon";
-import MoreIcon from "../icons/More/MoreIcon";
-import TrashcanIcon from "../icons/Trashcan/TrashcanIcon";
 import { Modal, ModalHandle } from "../Modal";
-import Tooltip from "../Tooltip";
+import { ShowContainer } from "../ShowContainer";
 import {
     AddCardContainer,
     ColumnCardContainer,
     ColumnCardWrapper,
     ColumnContainer,
-    ColumnTitle,
-    ColumnTitleContainer,
     ColumnWrapper,
 } from "./ColumnElements";
 import ColumnHeader from "./ColumnHeader";
@@ -36,11 +30,11 @@ interface ColumnPropsI {
     list: List;
     index: number;
     cardIds: string[];
-    cards: Card[];
+    cards: CardI[];
     onAdd(text: string): void;
 }
 
-const BeautifulDragColumn = ({
+const Column = ({
     title,
     id,
     list,
@@ -87,8 +81,8 @@ const BeautifulDragColumn = ({
                                 >
                                     <ColumnCardWrapper>
                                         {cards?.map(
-                                            (card: Card, index: number) => (
-                                                <BeautifulCard
+                                            (card: CardI, index: number) => (
+                                                <Card
                                                     cardId={card._id}
                                                     card={card}
                                                     key={card._id}
@@ -108,9 +102,7 @@ const BeautifulDragColumn = ({
                                                 title=""
                                                 subtitle=""
                                                 description=""
-                                                columnId={id}
-                                                cardId=""
-                                                onSave={(card: SimpleCard) =>
+                                                onSave={(card: SimpleCardI) =>
                                                     dispatch(
                                                         addCard(
                                                             boardId,
@@ -134,7 +126,7 @@ const BeautifulDragColumn = ({
                             )}
                         </Droppable>
 
-                        <ShowContainer show={true} mobile={true}>
+                        <ShowContainer widthTo={BREAKPOINTS.mobileLg}>
                             <AddCardContainer>
                                 <Button
                                     Icon={<AddIcon />}
@@ -155,4 +147,4 @@ const BeautifulDragColumn = ({
     );
 };
 
-export default BeautifulDragColumn;
+export default Column;

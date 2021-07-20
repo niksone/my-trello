@@ -16,7 +16,7 @@ class UserService {
         return user
     }
 
-    async registerUser (email, password) {
+    async registerUser (email: string, password: string) {
         email = email.trim().toLowerCase()
         const user = await this.checkUserExist(email)
         if(!user){

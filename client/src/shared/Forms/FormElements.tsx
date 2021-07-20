@@ -5,7 +5,7 @@ import { BREAKPOINTS } from "../constants"
 export const FormContainer = styled.div`
     width: 100%;
     padding: 0 28px;
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         padding: 0px 12px;
     }
 
@@ -28,7 +28,7 @@ export const FormHeaderContainer = styled.div`
     background-color: #fff;
     border-bottom: 1px var(--color-outline) solid;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         height: 85px;
     }
 `
@@ -48,7 +48,7 @@ height: 100%;
 overflow: auto;
 margin: 14px 0;
 
-@media screen and (max-width: ${BREAKPOINTS.mobile}px){
+@media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     height: 100%;
 }
 `
@@ -58,7 +58,7 @@ font-size: var(--text-h4);
 color: var(--color-primary-dark);
 line-height: 27px;
 
-@media screen and (max-width: ${BREAKPOINTS.mobile}px){
+@media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     font-size: var(--text-h5);
     color: var(--color-primary-grey);
     padding-bottom: 12px;
@@ -81,7 +81,7 @@ export const FormTitleWrapper = styled.h3`
 font-size: var(--text-h3);
 color: var(--color-primary-dark);
 line-height: 3.2rem;
-@media screen and (max-width: ${BREAKPOINTS.mobile}px){
+@media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
 
 }
 `
@@ -108,7 +108,7 @@ export const FormBlock = styled.div`
     border-bottom: none;
 }
 
-@media screen and (max-width: ${BREAKPOINTS.mobile}px){
+@media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     background-color: #fff;
     border-radius: 6px;
     border-bottom: none;

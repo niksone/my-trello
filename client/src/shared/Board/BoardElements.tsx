@@ -6,25 +6,14 @@ export const BoardContainer = styled.div`
   align-items: flex-start;
   padding: 28px 0 36px 30px;
   position: relative;
+  height: 100%;
 
-  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+  @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     padding: 0 20px;
   }
 
   & > * {
-    height:100%;  
-  }
-`
-
-export const BoardWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  height: 100%;
-  padding: 28px 0 36px 30px;
-  position: relative;
-
-  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
-    padding: 0 20px;
+    /* height:100%;   */
   }
 `
 
@@ -50,7 +39,7 @@ export const BoardColumnContainer = styled.div<BoardColumnWrapperProps>`
     margin: 0 8px;
   } 
 
-  @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+  @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
     & > div{
       margin: 0 calc((100vw - (100vw - 40px)) / 2);
     }

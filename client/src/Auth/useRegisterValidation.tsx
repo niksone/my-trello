@@ -122,6 +122,6 @@ const findFieldByError = (error: string) => {
     return ''
 }
 
-export const getValidationScheme = (validationField, field) => {
+export const getValidationScheme = (validationField: string, field: string) => {
     return validationField === field ? 'error' : null
 }

@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { deleteBoard, editBoardName, addBoard} from '../redux/Board/actionCreators'
-import { Board} from '../redux/Board/interfaces'
+import { BoardI} from '../redux/Board/interfaces'
 import EditItemsForm from '../shared/Forms/EditItemsForm'
 
 interface EditBoardFormProps {
     onExit: () => void,
-    onSave: (boards: Board[]) => void
-    boards: Board[]
+    onSave: (boards: BoardI[]) => void
+    boards: BoardI[]
     userId: string
 }
 

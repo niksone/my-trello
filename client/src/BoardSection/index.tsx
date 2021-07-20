@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { userContext } from '../Context'
 import { setBoard } from '../redux/HandleItems/reducer'
-import { Board } from '../redux/Board/interfaces'
+import { BoardI } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
-import BeautifulBoard from '../shared/Board/BeautifulBoard'
+import Board from '../shared/Board'
 
 const BoardSection = () => {
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const BoardSection = () => {
 
     const {boards} = useSelector((state: RootReducerType) => state.boards)
 
-    const currentBoard = boards.find(board => board._id === id) || {} as Board
+    const currentBoard = boards.find(board => board._id === id) || {} as BoardI
 
     const data = useSelector((state: RootReducerType) => state.handleItems)
 
@@ -24,7 +24,7 @@ const BoardSection = () => {
         dispatch(setBoard(currentBoard))
     }, [dispatch, currentBoard._id, user])
     return (
-        <BeautifulBoard data={data} />
+        <Board data={data} />
     )
 }
 

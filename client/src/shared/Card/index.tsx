@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteCard, updateCard } from '../../redux/HandleItems/actionCreators'
-import { Card, SimpleCard, Task } from '../../redux/HandleItems/interfaces'
+import { CardI, SimpleCardI, Task } from '../../redux/HandleItems/interfaces'
 import { RootReducerType } from '../../redux/store'
 import ProgressBar from '../ProgressBar'
 import { CardProgressContainer, CardContainer, CardContainerBlock, CardDescription,CardProgressInfo, CardProgressLabel, CardProgressStage, CardProgressIcon } from './CardElements'
@@ -14,7 +14,7 @@ import CardHeader from './CardHeader'
 
 interface CardPropsI {
     cardId: string,
-    card: Card,
+    card: CardI,
     listId: string
 }
 
@@ -22,7 +22,7 @@ export const getCompletedTasks = (tasks: Task[]) => {
   return tasks.filter(task => task.completed === true).length
 }
 
-const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
+const Card = ({cardId, card, listId}: CardPropsI) => {
   const {cardIds} = useSelector((state: RootReducerType) => state.handleItems)
   const boardId = useSelector((state: RootReducerType) => state.handleItems)._id
   const index = cardIds.findIndex(card => card === cardId)
@@ -35,7 +35,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
     dispatch(deleteCard(boardId, listId, cardId))
   }
 
-  const handleSave = (savedCard: SimpleCard) => {
+  const handleSave = (savedCard: SimpleCardI) => {
     dispatch(updateCard(boardId, listId, cardId, {_id: card._id, ...savedCard}))
   }
 
@@ -89,14 +89,12 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
               <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
                 <CardForm
                 boardName='Edit Card'
-                  columnId={listId}
-                  cardId={card._id}
                   title={card.title}
                   subtitle={card.subtitle}
                   description={card.description}
                   tasks={card.tasks}
                   onExit={() => modalRef?.current?.close()}
-                  onSave={(savedCard: SimpleCard) => handleSave(savedCard)}
+                  onSave={(savedCard: SimpleCardI) => handleSave(savedCard)}
                 />
               </Modal>
             }
@@ -106,4 +104,4 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
     )
 }
 
-export default BeautifulCard
+export default Card

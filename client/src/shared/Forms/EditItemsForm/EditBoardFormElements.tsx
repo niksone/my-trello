@@ -6,7 +6,7 @@ export const EditBoardFormContainer = styled.div`
     height: 500px;
     background-color: #fff;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         height: 100%;
         width: 100vw;
     }

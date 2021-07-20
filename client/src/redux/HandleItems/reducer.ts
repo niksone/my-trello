@@ -1,11 +1,11 @@
-import { Board } from '../Board/interfaces';
+import { BoardI } from '../Board/interfaces';
 import { moveItem } from '../../utils/moveItem'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
 import { HandleItemsAction } from './actions'
 import { Dispatch } from 'redux';
-import { handleItemsState, Card, List } from './interfaces';
+import { handleItemsState, CardI, List } from './interfaces';
 
-const findIndex = <T extends List | Card>(id: string, array: T[]  ) => {
+const findIndex = <T extends List | CardI>(id: string, array: T[]  ) => {
     return array.findIndex((item: T)=> item._id === id)
 }
 
@@ -13,7 +13,7 @@ const getCards = (lists: List[]) => {
     return lists?.map(list => list.cards).flat().map(card => card._id)
 }
 
-export const setBoard = (board: Board) => (dispatch: Dispatch) => {
+export const setBoard = (board: BoardI) => (dispatch: Dispatch) => {
     dispatch({type: 'SET_BOARD', payload: board})
 }
 

@@ -1,10 +1,10 @@
-import { BoardName } from '../../../HomePage/HomePageElements'
 import AddItemForm from '../../AddNewItem/AddItemForm'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
 import { isMobileWidth } from '../../constants'
 import Div100vh from '../../Div100vh'
 import EditableItem from '../../EditableItem'
+import { HeaderTitle } from '../../Header/HeaderElements'
 import AddIcon from '../../icons/Add/AddIcon'
 import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
@@ -12,7 +12,7 @@ import TrashcanIcon from '../../icons/Trashcan/TrashcanIcon'
 import { DeleteIconWrapper } from '../CardForm/CardFormElements'
 import { FormBlock, FormBoardItem, FormBoardItemName, FormContainer, FormContent, FormHeaderContainer, FormHeaderWrapper, FormListItem, FormListItems, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
-import { ItemWithId } from '../interfaces'
+import { ItemI, ItemLabelField } from '../interfaces'
 import { EditBoardFormContainer } from './EditBoardFormElements'
 
 
@@ -22,12 +22,12 @@ export interface EditItemsFormProps {
     onAdd: (name: string) => void
     onEdit: (id:string, name: string) => void
     onDelete: (id: string) => void
-    items: ItemWithId[]
+    items: ItemI[]
     headerTitle: string
     title: string
     subtitle: string
     formPlaceholder: string
-    formItemFieldLabel: 'name' | 'title'
+    formItemFieldLabel: ItemLabelField
 }
 
 
@@ -44,7 +44,7 @@ const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel,
                             onClick={onExit}>
                             <ArrowIcon direction='left' />
                         </Button>
-                        <BoardName>{headerTitle}</BoardName>
+                        <HeaderTitle>{headerTitle}</HeaderTitle>
                         
                         <Button shape='icon' variant='invisible' size='lg' >
                             <SaveIcon />
@@ -70,7 +70,7 @@ const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel,
                                     />  
                                 </FormBoardItem>
                             </FormListItem>
-                            {items?.map((item: ItemWithId) => (
+                            {items?.map((item: ItemI) => (
                                 <FormListItem key={item._id}>
                                     <FormBoardItem>
                                         <DeleteIconWrapper
@@ -80,7 +80,7 @@ const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel,
                                         </DeleteIconWrapper>
                                         <FormBoardItemName>
                                             <EditableItem
-                                                initialText={item[formItemFieldLabel]}
+                                                initialText={item[formItemFieldLabel] || ''}
                                                 placeholder={''}
                                                 deleteItem={() => {}}
                                                 updateItem={(name: string) => 

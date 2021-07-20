@@ -5,7 +5,7 @@ export const HeaderContainer = styled.div`
     height: 85px;
     width: 100%;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         padding: 0 20px;
         background-color: #fff;
     }
@@ -27,4 +27,8 @@ export const LogoWrapper = styled.div`
     font-size: var(--text-h3);
     font-weight: bold;
     color: var(--color-primary);
+`
+
+export const HeaderTitle = styled.h3`
+    font-size: var(--text-h3);
 `

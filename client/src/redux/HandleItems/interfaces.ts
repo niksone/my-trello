@@ -5,21 +5,21 @@ export interface Task {
     _id: string
 }
 
-export interface SimpleCard {
+export interface SimpleCardI {
     title: string,
     subtitle: string,
     description: string,
     tasks: Task[]
 }
 
-export interface Card extends SimpleCard{
+export interface CardI extends SimpleCardI{
     _id: string,
 }
 
 export interface List {
     _id: string,
     title: string,
-    cards: Card[],
+    cards: CardI[],
 }
 
 export interface handleItemsState {

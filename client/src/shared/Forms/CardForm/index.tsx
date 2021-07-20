@@ -1,6 +1,6 @@
 import ObjectID from "bson-objectid";
 import { useState } from "react";
-import { SimpleCard, Task } from "../../../redux/HandleItems/interfaces";
+import { SimpleCardI, Task } from "../../../redux/HandleItems/interfaces";
 import Button from "../../Buttons";
 
 import {
@@ -18,27 +18,23 @@ import Div100vh from "../../Div100vh";
 import ConditionalWrapper from "../../ConditionalWrapper";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
-import { BoardName } from "../../../HomePage/HomePageElements";
 import { COLORS, isMobileWidth } from "../../constants";
 import FormTitle from "../FormTitle";
 import FormSubtitle from "../FormSubtitle";
+import { HeaderTitle } from "../../Header/HeaderElements";
 
 interface CardFormProps {
     boardName: string;
-    columnId: string;
-    cardId: string;
     title: string;
     subtitle: string;
     description: string;
     tasks: Task[];
     onExit?: () => void;
-    onSave?: (card: SimpleCard) => void;
+    onSave?: (card: SimpleCardI) => void;
 }
 
 const CardForm = ({
     boardName,
-    columnId,
-    cardId,
     title,
     subtitle,
     description,
@@ -46,7 +42,7 @@ const CardForm = ({
     onExit,
     onSave,
 }: CardFormProps) => {
-    const [card, setCard] = useState<SimpleCard>({
+    const [card, setCard] = useState<SimpleCardI>({
         title,
         subtitle,
         description,
@@ -160,7 +156,7 @@ const CardForm = ({
                                     >
                                         <ArrowIcon direction="left" />
                                     </Button>
-                                    <BoardName>{boardName}</BoardName>
+                                    <HeaderTitle>{boardName}</HeaderTitle>
 
                                     <Button
                                         shape="icon"

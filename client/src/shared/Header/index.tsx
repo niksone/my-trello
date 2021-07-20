@@ -1,37 +1,27 @@
 import { useDispatch } from "react-redux";
-import {
-    addList,
-    deleteList,
-    moveList,
-    updateListTitle,
-} from "../redux/HandleItems/actionCreators";
-import { List } from "../redux/HandleItems/interfaces";
-import { Board } from "../redux/Board/interfaces";
-import Button from "../shared/Buttons";
-import ButtonGroup from "../shared/Buttons/ButtonGroup";
-import {
-    HandleAddItemButton,
-    HandleEditItemsButton,
-    HandleMoveItemsButton,
-} from "../shared/HandleButtons/HandleButtons";
-import {
-    HeaderContainer,
-    HeaderWrapper,
-} from "../shared/Header/HeaderElements";
-import LogoutIcon from "../shared/icons/Logout/LogoutIcon";
-import MenuIcon from "../shared/icons/Menu/MenuIcon";
-import MoreIcon from "../shared/icons/More/MoreIcon";
-import Tooltip from "../shared/Tooltip";
-import { BoardName, ShowContainer } from "./HomePageElements";
+import { BoardI } from "../../redux/Board/interfaces";
+import { addList, deleteList, moveList, updateListTitle } from "../../redux/HandleItems/actionCreators";
+import { List } from "../../redux/HandleItems/interfaces";
+import Button from "../Buttons";
+import ButtonGroup from "../Buttons/ButtonGroup";
+import { BREAKPOINTS } from "../constants";
+import { HandleAddItemButton, HandleEditItemsButton, HandleMoveItemsButton } from "../HandleButtons/HandleButtons";
+import LogoutIcon from "../icons/Logout/LogoutIcon";
+import MenuIcon from "../icons/Menu/MenuIcon";
+import MoreIcon from "../icons/More/MoreIcon";
+import { ShowContainer } from "../ShowContainer";
+import Tooltip from "../Tooltip";
+import { HeaderContainer, HeaderTitle, HeaderWrapper } from "./HeaderElements";
+
 
 interface BoardHeaderProps {
-    board: Board;
+    board: BoardI;
     lists: List[];
     sidebarOpen: () => void;
     handleLogout: () => void;
 }
 
-const BoardHeader = ({
+const Header = ({
     board,
     lists,
     sidebarOpen,
@@ -55,19 +45,20 @@ const BoardHeader = ({
         <>
             <HeaderContainer>
                 <HeaderWrapper>
-                    <ShowContainer show={true} mobile={true}>
+                    <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Button
                             shape="icon"
-                            variant="outline"
                             size="lg"
                             onClick={sidebarOpen}
+                            variant='outline'
+                            bg='#fff'
                         >
                             <MenuIcon />
                         </Button>
                     </ShowContainer>
-                    <BoardName>{board.name || "No Board Found"}</BoardName>
+                    <HeaderTitle>{board.name || "No Board Found"}</HeaderTitle>
 
-                    <ShowContainer show={true} mobile={true}>
+                    <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Tooltip
                             content={
                                 <ButtonGroup direction="column" spacing={2}>
@@ -114,7 +105,7 @@ const BoardHeader = ({
                                     <Button
                                         onClick={handleLogout}
                                         Icon={<LogoutIcon />}
-                                        colorScheme="errorLight"
+                                        colorScheme="error"
                                     >
                                         Log Out
                                     </Button>
@@ -122,17 +113,22 @@ const BoardHeader = ({
                             }
                             direction="bottom"
                         >
-                            <Button shape="icon" variant="outline" size="lg">
+                            <Button 
+                                shape="icon" 
+                                size="lg"
+                                variant='outline'
+                                bg='#fff'
+                            >
                                 <MoreIcon />
                             </Button>
                         </Tooltip>
                     </ShowContainer>
 
-                    <ShowContainer show={true} mobile={false}>
+                    <ShowContainer widthFrom={BREAKPOINTS.laptop}>
                         <Button
                             onClick={handleLogout}
                             size="md"
-                            colorScheme="error"
+                            colorScheme="errorLight"
                         >
                             logout
                         </Button>
@@ -143,4 +139,4 @@ const BoardHeader = ({
     );
 };
 
-export default BoardHeader;
+export default Header;

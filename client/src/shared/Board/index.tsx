@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { addList, addCard, moveList, moveCard } from '../../redux/HandleItems/actionCreators'
 import { handleItemsState, List } from '../../redux/HandleItems/interfaces'
 import Button from '../Buttons'
-import BeautifulDragColumn from '../Column/BeautifulDragColumn'
+import Column from '../Column'
 import { ColumnWrapper } from '../Column/ColumnElements'
 import AddIcon from '../icons/Add/AddIcon'
 import AddItemForm from '../AddNewItem/AddItemForm'
@@ -12,10 +12,10 @@ import { Modal, ModalHandle } from '../Modal'
 import {debounce} from '../../utils/debounce'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import ArrowIcon from '../icons/Arrow/Arrow'
-import { ShowContainer } from '../../HomePage/HomePageElements'
-import { BoardSectionWrapper } from '../../BoardSection/BoardElements'
+import { BoardSectionWrapper } from '../../BoardSection/BoardSectionElements'
 import { AddColumnContainer, BoardColumnContainer, BoardColumnWrapper, BoardContainer, BoardFooterContainer, BoardFooterNav, BoardFooterTitle } from './BoardElements'
-import { isMobileWidth } from '../constants'
+import { BREAKPOINTS, isMobileWidth } from '../constants'
+import { ShowContainer } from '../ShowContainer'
 
 
 
@@ -27,7 +27,7 @@ interface BoardRef extends HTMLDivElement {
   initialScroll: number
 }
 
-const BeautifulBoard = ({data}: BoardProps) => {
+const Board = ({data}: BoardProps) => {
     const dispatch = useDispatch()
     const {lists, cardIds, _id} = data
     const boardId = _id
@@ -141,7 +141,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 >
                   <BoardColumnContainer>
                   {lists?.map((list: List, index: number) => (
-                      <BeautifulDragColumn 
+                      <Column 
                         list={list}
                         index={index}
                         cards={list.cards}
@@ -158,7 +158,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
             </Droppable>
         </DragDropContext>
 
-        <ShowContainer mobile={false} show={true}>
+        <ShowContainer widthFrom={BREAKPOINTS.mobileLg}>
           <BoardColumnContainer>
               <ColumnWrapper>
                 <AddColumnContainer>
@@ -184,7 +184,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
         </BoardContainer>
       </BoardSectionWrapper>
-        <ShowContainer mobile={true} show={true}>
+        <ShowContainer widthTo={BREAKPOINTS.mobileLg}>
           <BoardFooterContainer>
             <BoardFooterTitle>{lists[findListIndex()]?.title}</BoardFooterTitle>
             <BoardFooterNav>
@@ -210,4 +210,4 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
 }
 
-export default BeautifulBoard
+export default Board

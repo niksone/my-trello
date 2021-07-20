@@ -1,9 +1,9 @@
-import { Board } from "./interfaces";
+import { BoardI } from "./interfaces";
 
 export type BoardAction = SetBoards | AddBoard | SetLoading
     | DeleteBoard | EditBoardName
 
-interface SetBoards {type: 'SET_BOARDS', payload: Board[]}
+interface SetBoards {type: 'SET_BOARDS', payload: BoardI[]}
 
 interface AddBoard {type: 'ADD_BOARD', payload: {id: string, name: string}}
 

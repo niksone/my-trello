@@ -1,8 +1,4 @@
 import styled from 'styled-components'
-import {ReactComponent as LoginImg} from '../icons/accessAccount.svg'
-import Button from '../Buttons'
-import ButtonGroup from '../Buttons/ButtonGroup'
-import { FormContainer, FormInputsContainer } from '../FormControl'
 import { BREAKPOINTS } from '../constants'
 
 interface HeroProps {
@@ -17,7 +13,7 @@ export const Hero = styled.div<HeroProps>`
     width: 100%;
     height: 100%;
 
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         flex-direction: column-reverse;
     }
 `
@@ -32,11 +28,19 @@ export const HeroLeft = styled.div`
     width: 50%;
     height: 100%;
 
+    @media(max-width: ${BREAKPOINTS.laptop}px){
+        width: 70%;
+    }
+
     @media(max-width: ${BREAKPOINTS.tabletLg}px){
+        width: 80%;
+    }
+
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         width: 100%;
         height: fit-content;    
     }
-    /* background-color: #fff; */
 `
 
 export const HeroLeftContainer = styled.div`
@@ -49,25 +53,37 @@ export const HeroLeftContainer = styled.div`
     height: 100%;
 
 
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         border-radius: 16px 16px 0 0;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 `
 
 
 export const HeroLeftWrapper = styled.div`
-    transform: translate(10%, 0%);
     width: fit-content;
 
-    @media(max-width: ${BREAKPOINTS.tablet}px){
-        width: 90%;
+    @media(max-width: ${BREAKPOINTS.laptop}px){
+        padding-bottom: 0;
         transform: translate(0);
+    }
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
+        width: 90%;
+        display: flex;
+        justify-content: center;
     }
 `
 
 export const HeroTitle = styled.h1`
     font-size: var(--text-h1);
     white-space: pre-line;
+
+    @media(max-width: ${BREAKPOINTS.tablet}px){
+        font-size: var(--text-h2);
+    }
+
 `
 
 interface HeroRightProps {
@@ -84,6 +100,10 @@ export const HeroRight = styled.div<HeroRightProps>`
     background-size: cover;
 
     @media(max-width: ${BREAKPOINTS.tabletLg}px){
+        width: 20%;
+    }
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         width: 100%;
         height: fill-available;  
         ${({mobileBgPattern}) => mobileBgPattern && `background: url(${mobileBgPattern})`};
@@ -95,7 +115,7 @@ export const HeroRightTextWrapper = styled.div`
     display: none;
     text-align: center;
     
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -108,17 +128,28 @@ export const HeroRightTextWrapper = styled.div`
         }
     }
 
-    @media(max-width: ${BREAKPOINTS.mobile}px){
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         width: 90%;
     }
 `
 
 export const HeroImgContainer = styled.div`
     height: fit-content;
-    width: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    @media (max-width: ${BREAKPOINTS.tabletLg}px){
         display: none;
+    }
+
+    @media screen and (max-width: ${BREAKPOINTS.laptop}px){
+        width: 90%;
+    }
+
+    & > *{
+        width: 90%;
     }
 `
 
@@ -129,52 +160,13 @@ export const HeroSubtitle = styled.p`
 `
 
 export const HeroTextWrapper = styled.div`
-    @media(max-width: ${BREAKPOINTS.tabletLg}px){
+    padding-bottom: 50px;
+
+    @media(max-width: ${BREAKPOINTS.tablet}px){
+        padding-bottom: 30px;
+    }
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
         display: none;
     }
 `
-
-const HeroSection = () => {
-
-    return (
-    <div style={{height: '100%'}}>
-        <Hero >
-            <HeroLeft>
-                <HeroLeftContainer>
-                    <HeroLeftWrapper>
-                        <HeroTitle>
-                            Welcome to React Trello.
-                            <br />
-                            Sign In to see latest updates.
-                        </HeroTitle>
-                        <HeroSubtitle>
-                            Enter your details to proceed further
-                        </HeroSubtitle>
-
-                        <FormContainer>
-                            <FormInputsContainer>
-
-                            </FormInputsContainer>
-                            <ButtonGroup spacing={4}>
-                                <Button widthFill>Sign In</Button>
-                                <Button widthFill>Sign Up</Button>
-                            </ButtonGroup>
-                        </FormContainer>
-
-
-                    </HeroLeftWrapper>
-                </HeroLeftContainer>
-
-            </HeroLeft>
-
-            <HeroRight>
-                <HeroImgContainer>
-                    <LoginImg />
-                </HeroImgContainer>
-            </HeroRight>
-        </Hero>
-    </div>
-    )
-}
-
-export default HeroSection

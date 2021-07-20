@@ -28,7 +28,7 @@ export const AddItemContainer = styled.div<AddItemContainerProps>`
     min-width: ${({item}) => item === 'CARD' ? '300px' : '100%'};
     padding: ${({item}) => item === 'CARD' ? '5px 10px' : '0'};
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
 
     }
 `
@@ -55,7 +55,7 @@ export const AddItemFormContainer = styled.div<AddItemFormContainerProps>`
     align-items: ${({alignItems}) => alignItems ? alignItems : 'start'};
 
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}px){
+    @media screen and (max-width: ${BREAKPOINTS.mobileLg}px){
         min-width: 80vw;
     }
 `

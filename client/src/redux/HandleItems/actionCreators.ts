@@ -2,7 +2,7 @@ import { boardApi } from '../../api/index';
 import ObjectID from "bson-objectid"
 import { Dispatch } from "react"
 import { HandleItemsAction } from "./actions"
-import { handleItemsState, Card, List, Task } from "./interfaces"
+import { handleItemsState, CardI, List, Task } from "./interfaces"
 import { getMoveIndexes } from '../../utils/getCardIndexes';
 
 export const addList = (boardId: string, title: string) => async (dispatch: Dispatch<HandleItemsAction>) => {
@@ -33,7 +33,7 @@ export const deleteList = (boardId: string, listId: string) => async (dispatch: 
 export const addCard = (boardId: string, listId: string, title: string, subtitle: string = '', description: string = '', tasks: Task[] = []) => 
     async (dispatch: Dispatch<HandleItemsAction>) => {
         try {
-            const card: Card = {
+            const card: CardI = {
                 _id: String(new ObjectID()),
                 title,
                 subtitle,
@@ -59,7 +59,7 @@ export const deleteCard = (boardId: string, listId: string, cardId: string) => a
     }
 }
 
-export const updateCard = (boardId: string, listId: string, cardId: string, card: Card) => 
+export const updateCard = (boardId: string, listId: string, cardId: string, card: CardI) => 
     async (dispatch: Dispatch<HandleItemsAction>) => {
         try {
             dispatch({type: 'UPDATE_CARD', payload: {listId, cardId, card}})

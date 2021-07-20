@@ -1,6 +1,6 @@
 import {CardSubtitle, CardTitle, CardTitleContainer, CardTitleWrapper} from './CardElements'
 import Button from '../Buttons'
-import {ReactComponent as MoreIcon} from '../icons/more.svg'
+import MoreIcon from '../icons/More/MoreIcon'
 import Tooltip from '../Tooltip'
 import ButtonGroup from '../Buttons/ButtonGroup'
 import EditIcon from '../icons/Edit/EditIcon'
@@ -34,7 +34,7 @@ const CardHeader = ({title, subtitle, headerTitle, onClick, onDelete}: CardTitle
                         </Button>
                         <Button
                             size="lg"
-                            colorScheme="errorLight"
+                            colorScheme="error"
                             Icon={<TrashcanIcon />}
                             onClick={onDelete}
                             fw="700"

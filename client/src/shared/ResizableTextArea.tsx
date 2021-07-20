@@ -28,7 +28,7 @@ interface ResizableTextAreaProps {
     children?: React.ReactChildren,
     placeholder?: string,
     placeholderColor?: string
-    onChange?: (e) => void
+    onChange?: (e: React.ChangeEvent<HTMLSpanElement>) => void
 }
 
 const ResizableTextArea = React.forwardRef<HTMLSpanElement, ResizableTextAreaProps>(({children, placeholder,placeholderColor, onChange}, ref) => {

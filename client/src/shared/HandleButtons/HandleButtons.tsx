@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import AddItemForm from "../AddNewItem/AddItemForm";
 import EditItemsForm, { EditItemsFormProps } from "../Forms/EditItemsForm";
+import { ItemI, ItemLabelField } from "../Forms/interfaces";
 import MoveItemsForm from "../Forms/MoveItemsForm";
 import AddIcon from "../icons/Add/AddIcon";
 import EditIcon from "../icons/Edit/EditIcon";
@@ -10,7 +11,13 @@ import {
     ButtonModalCreatorRef,
 } from "./ButtonModalCreator";
 
-export const HandleAddItemButton = ({ handleAddList, label, formTitle }) => {
+interface HandleAddItemProps {
+    handleAddList: (title: string) => void
+    label: string
+    formTitle: string
+}
+
+export const HandleAddItemButton = ({ handleAddList, label, formTitle }: HandleAddItemProps) => {
     const buttonRef = useRef<ButtonModalCreatorRef>(null);
 
     const handleAdd = (title: string) => {
@@ -35,6 +42,16 @@ export const HandleAddItemButton = ({ handleAddList, label, formTitle }) => {
     );
 };
 
+interface HandleMoveItemsButtonProps{
+    label: string
+    headerTitle: string
+    title: string
+    subtitle: string
+    items: ItemI[]
+    itemLabelField: ItemLabelField
+    onUpdate: (sourceIndex: number, destinationIndex: number) => void
+}
+
 export const HandleMoveItemsButton = ({
     label,
     headerTitle,
@@ -42,8 +59,8 @@ export const HandleMoveItemsButton = ({
     subtitle,
     items,
     itemLabelField,
-    onUpdate,
-}) => {
+    onUpdate
+}: HandleMoveItemsButtonProps) => {
     const buttonRef = useRef<ButtonModalCreatorRef>(null);
 
     const handleExit = () => {
