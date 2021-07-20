@@ -68,6 +68,12 @@ export const HeroLeftWrapper = styled.div`
         padding-bottom: 0;
         transform: translate(0);
     }
+
+    @media(max-width: ${BREAKPOINTS.mobileLg}px){
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
 `
 
 export const HeroTitle = styled.h1`
