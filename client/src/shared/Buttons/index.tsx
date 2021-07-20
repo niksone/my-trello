@@ -1,5 +1,5 @@
 import React from 'react'
-import { BtnIconContainer, ButtonContainer, ButtonIconContainer, ColorScheme, colorSchemes, ColorSchemesStyles, ColorSchemeValues } from './ButtonElements'
+import { BtnIconContainer, ButtonContainer, ButtonIconContainer, ColorScheme } from './ButtonElements'
 
 
 interface ButtonSizes {

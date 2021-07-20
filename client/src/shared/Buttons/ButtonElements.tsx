@@ -209,8 +209,6 @@ export const ButtonContainer = styled.button<ButtonProps>`
         ${({bg}) => bg ?`background: ${bg}` : ''}
     }
     ${({ variant, colorScheme, active}) => getStyle(variant, colorScheme, active)}
-
-    /* color: ${({active, variant, colorScheme}) => active && variant && colorScheme ? colorSchemes[variant][colorScheme]?.textColorActive : ''}; */
 `;
 
 export const ButtonIconContainer = styled.div`
