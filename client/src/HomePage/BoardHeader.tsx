@@ -139,7 +139,7 @@ const BoardHeader = ({
                         <Button
                             onClick={handleLogout}
                             size="md"
-                            colorScheme="error"
+                            colorScheme="errorLight"
                         >
                             logout
                         </Button>
