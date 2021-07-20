@@ -89,8 +89,6 @@ const Card = ({cardId, card, listId}: CardPropsI) => {
               <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
                 <CardForm
                 boardName='Edit Card'
-                  columnId={listId}
-                  cardId={card._id}
                   title={card.title}
                   subtitle={card.subtitle}
                   description={card.description}

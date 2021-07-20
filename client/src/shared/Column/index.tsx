@@ -102,8 +102,6 @@ const Column = ({
                                                 title=""
                                                 subtitle=""
                                                 description=""
-                                                columnId={id}
-                                                cardId=""
                                                 onSave={(card: SimpleCardI) =>
                                                     dispatch(
                                                         addCard(

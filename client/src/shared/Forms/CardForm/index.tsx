@@ -25,8 +25,6 @@ import { HeaderTitle } from "../../Header/HeaderElements";
 
 interface CardFormProps {
     boardName: string;
-    columnId: string;
-    cardId: string;
     title: string;
     subtitle: string;
     description: string;
@@ -37,8 +35,6 @@ interface CardFormProps {
 
 const CardForm = ({
     boardName,
-    columnId,
-    cardId,
     title,
     subtitle,
     description,
