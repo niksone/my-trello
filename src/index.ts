@@ -13,12 +13,10 @@ import boardRouter from './routes/boardRoute';
 
 const dotenv = require('dotenv').config()
 const expressStaticGzip = require('express-static-gzip');
-const compression = require('compression') 
 
 const PORT = process.env.PORT
 
 const app = express()
-// app.use(compression())
 
 if(process.env.NODE_ENV === 'production'){
     const buildPath = path.join(__dirname, 'client');
