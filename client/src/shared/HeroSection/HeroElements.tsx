@@ -1,8 +1,4 @@
 import styled from 'styled-components'
-import {ReactComponent as LoginImg} from '../icons/accessAccount.svg'
-import Button from '../Buttons'
-import ButtonGroup from '../Buttons/ButtonGroup'
-import { FormContainer, FormInputsContainer } from '../FormControl'
 import { BREAKPOINTS } from '../constants'
 
 interface HeroProps {
@@ -45,7 +41,6 @@ export const HeroLeft = styled.div`
         width: 100%;
         height: fit-content;    
     }
-    /* background-color: #fff; */
 `
 
 export const HeroLeftContainer = styled.div`
@@ -67,12 +62,9 @@ export const HeroLeftContainer = styled.div`
 
 
 export const HeroLeftWrapper = styled.div`
-    transform: translate(10%, 0%);
     width: fit-content;
-    padding-bottom: 115px;
 
     @media(max-width: ${BREAKPOINTS.laptop}px){
-        width: 90%;
         padding-bottom: 0;
         transform: translate(0);
     }
@@ -162,7 +154,7 @@ export const HeroSubtitle = styled.p`
 `
 
 export const HeroTextWrapper = styled.div`
-    padding-bottom: 70px;
+    padding-bottom: 50px;
 
     @media(max-width: ${BREAKPOINTS.tablet}px){
         padding-bottom: 30px;
@@ -172,48 +164,3 @@ export const HeroTextWrapper = styled.div`
         display: none;
     }
 `
-
-const HeroSection = () => {
-
-    return (
-    <div style={{height: '100%'}}>
-        <Hero >
-            <HeroLeft>
-                <HeroLeftContainer>
-                    <HeroLeftWrapper>
-                        <HeroTitle>
-                            Welcome to React Trello.
-                            <br />
-                            Sign In to see latest updates.
-                        </HeroTitle>
-                        <HeroSubtitle>
-                            Enter your details to proceed further
-                        </HeroSubtitle>
-
-                        <FormContainer>
-                            <FormInputsContainer>
-
-                            </FormInputsContainer>
-                            <ButtonGroup spacing={4}>
-                                <Button widthFill>Sign In</Button>
-                                <Button widthFill>Sign Up</Button>
-                            </ButtonGroup>
-                        </FormContainer>
-
-
-                    </HeroLeftWrapper>
-                </HeroLeftContainer>
-
-            </HeroLeft>
-
-            <HeroRight>
-                <HeroImgContainer>
-                    <LoginImg />
-                </HeroImgContainer>
-            </HeroRight>
-        </Hero>
-    </div>
-    )
-}
-
-export default HeroSection
