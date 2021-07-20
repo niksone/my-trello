@@ -2,11 +2,12 @@ import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { btnIconSizes, ButtonProps, ButtonVariants, sizes } from ".";
 import { COLORS } from "../constants";
 
-export type ColorScheme = 'primary'  | 'error'
+export type ColorScheme = 'primary'  | 'error' | 'errorLight'
 
 export type ColorSchemeValues = {
     primary: ColorSchemesStyles | null
     error: ColorSchemesStyles | null,
+    errorLight: ColorSchemesStyles | null,
     advanced?: FlattenSimpleInterpolation 
 }
 
@@ -45,6 +46,16 @@ export const colorSchemes: ColorSchemesI = {
             textColorActive: '#fff',
             border: 'none',
             borderHover: 'none'
+        },
+        errorLight: {
+            bg: COLORS.error,
+            bgHover: COLORS.errorHover,
+            bgActive: COLORS.errorHover,
+            textColor: '#fff',
+            textColorHover: '#fff',
+            textColorActive: '#fff',
+            border: 'none',
+            borderHover: 'none'
         }
     },
     outline: {
@@ -67,7 +78,8 @@ export const colorSchemes: ColorSchemesI = {
             textColorActive: COLORS.error,
             border: `1px solid ${COLORS.buttonOutlineResting}`,
             borderHover: `1px solid ${COLORS.error}`
-        }
+        },
+        errorLight: null
     },
     shadow: {
         primary: {
@@ -90,6 +102,7 @@ export const colorSchemes: ColorSchemesI = {
             border: 'none',
             borderHover: 'none'
         },
+        errorLight: null
     },
 
     dashed: {
@@ -113,11 +126,13 @@ export const colorSchemes: ColorSchemesI = {
             border: `1px dashed ${COLORS.restingOutline}`,
             borderHover: `1px dashed ${COLORS.error}`
         },
+        errorLight: null,
     },
 
     unstyle: {
         primary: null,
         error: null,
+        errorLight: null,
         advanced: 
             css`
                 border: none;
@@ -131,12 +146,22 @@ export const colorSchemes: ColorSchemesI = {
     invisible: {
         primary: null,
         error: null,
+        errorLight: null,
         advanced: 
             css`
                 opacity: 0;
             `
     },
 }
+
+
+
+const getActiveStyles = (bgActive, textColorActive)=>
+ css`
+    background: ${bgActive};
+    color: ${textColorActive};
+`
+
 
 const getStyle = (variant = 'fill', colorScheme = 'primary', active = false) => {
     const {bg, bgHover, bgActive, textColor, textColorHover, textColorActive, border, borderHover} = colorSchemes[variant][colorScheme] || {}
@@ -147,10 +172,7 @@ const getStyle = (variant = 'fill', colorScheme = 'primary', active = false) => 
         background: ${bg};
         color: ${textColor};
         border: ${border};
-        ${active &&             
-            `background: ${bgActive};
-            color: ${textColorActive};`
-        }
+        ${active && getActiveStyles(bgActive, textColorActive)}
         
 
         &:hover{
@@ -160,8 +182,7 @@ const getStyle = (variant = 'fill', colorScheme = 'primary', active = false) => 
         }
 
         &:active{
-            background: ${bgActive};
-            color: ${textColorActive};
+            ${ getActiveStyles(bgActive, textColorActive)}
         }
 
         ${advanced}
