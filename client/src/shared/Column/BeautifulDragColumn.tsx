@@ -9,7 +9,7 @@ import {
 import { CardI, List, SimpleCardI, Task } from "../../redux/HandleItems/interfaces";
 import { RootReducerType } from "../../redux/store";
 import Button from "../Buttons";
-import BeautifulCard from "../Card/BeautifulCard";
+import Card from "../Card";
 import { BREAKPOINTS } from "../constants";
 import CardForm from "../Forms/CardForm";
 import AddIcon from "../icons/Add/AddIcon";
@@ -82,7 +82,7 @@ const BeautifulDragColumn = ({
                                     <ColumnCardWrapper>
                                         {cards?.map(
                                             (card: CardI, index: number) => (
-                                                <BeautifulCard
+                                                <Card
                                                     cardId={card._id}
                                                     card={card}
                                                     key={card._id}

@@ -1,5 +1,5 @@
 import AddItemForm from '../../AddNewItem/AddItemForm'
-import { getCompletedTasks } from '../../Card/BeautifulCard'
+import { getCompletedTasks } from '../../Card'
 import Checkbox from '../../Checkbox'
 import EditableItem from '../../EditableItem'
 import { FormBlock, FormBlockTitle, 

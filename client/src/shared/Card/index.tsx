@@ -22,7 +22,7 @@ export const getCompletedTasks = (tasks: Task[]) => {
   return tasks.filter(task => task.completed === true).length
 }
 
-const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
+const Card = ({cardId, card, listId}: CardPropsI) => {
   const {cardIds} = useSelector((state: RootReducerType) => state.handleItems)
   const boardId = useSelector((state: RootReducerType) => state.handleItems)._id
   const index = cardIds.findIndex(card => card === cardId)
@@ -106,4 +106,4 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
     )
 }
 
-export default BeautifulCard
+export default Card
