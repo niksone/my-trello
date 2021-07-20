@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { addList, addCard, moveList, moveCard } from '../../redux/HandleItems/actionCreators'
 import { handleItemsState, List } from '../../redux/HandleItems/interfaces'
 import Button from '../Buttons'
-import BeautifulDragColumn from '../Column/BeautifulDragColumn'
+import Column from '../Column'
 import { ColumnWrapper } from '../Column/ColumnElements'
 import AddIcon from '../icons/Add/AddIcon'
 import AddItemForm from '../AddNewItem/AddItemForm'
@@ -141,7 +141,7 @@ const BeautifulBoard = ({data}: BoardProps) => {
                 >
                   <BoardColumnContainer>
                   {lists?.map((list: List, index: number) => (
-                      <BeautifulDragColumn 
+                      <Column 
                         list={list}
                         index={index}
                         cards={list.cards}

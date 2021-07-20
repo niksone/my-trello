@@ -34,7 +34,7 @@ interface ColumnPropsI {
     onAdd(text: string): void;
 }
 
-const BeautifulDragColumn = ({
+const Column = ({
     title,
     id,
     list,
@@ -149,4 +149,4 @@ const BeautifulDragColumn = ({
     );
 };
 
-export default BeautifulDragColumn;
+export default Column;
