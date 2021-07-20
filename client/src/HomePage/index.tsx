@@ -4,7 +4,7 @@ import { Redirect, useParams } from 'react-router-dom'
 import { authApi } from '../api'
 import BoardSection from '../BoardSection'
 import { userContext } from '../Context'
-import {getBoards } from '../redux/Board/actionCreators'
+import {addBoard, getBoards } from '../redux/Board/actionCreators'
 import { BoardI } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import { ModalHandle } from '../shared/Modal'
@@ -37,6 +37,10 @@ const HomePage = () => {
         getAuth()
     }
 
+    const handleAddBoard = (boardName: string) => {
+        dispatch(addBoard(user, boardName))
+    }
+
     useEffect(() => {
         dispatch(getBoards(user))
     }, [dispatch, user])
@@ -60,6 +64,7 @@ const HomePage = () => {
                 boardId={id}
                 userId={user}
                 handleClose={() => setShowSidebar(false)}
+                handleAdd={handleAddBoard}
             />
             <BoardSectionContainer>
                 

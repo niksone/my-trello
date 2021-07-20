@@ -11,7 +11,7 @@ import { Modal, ModalHandle } from "../Modal";
 import { LogoImgWrapper, SidebarButtonWrapper, SidebarClose, SidebarContainer, SidebarLink, SidebarLinkContainer, SidebarLinkIconWrapper, SidebarLinksContainer, SidebarLinkWrapper, SidebarWrapper } from "./SidebarElements";
 
 
-interface BoardSidebarProps {
+interface SidebarProps {
     title: string
     Img: JSX.Element
     boards: BoardI[]
@@ -20,13 +20,19 @@ interface BoardSidebarProps {
     boardId: string
     userId: string
     handleClose: () => void
+    handleAdd: (title: string) => void
 }
 
-const Sidebar = ({title, Img, boards, isShow, modalRef, boardId, userId, handleClose}: BoardSidebarProps) => {
+const Sidebar = ({title, Img, boards, isShow, modalRef, boardId, userId, handleClose, handleAdd}: SidebarProps) => {
     
     const [showEditBoardModal, setShowEditBoardModal] = useState(false)
     const editBoardModalRef = useRef<ModalHandle>(null);
     const [showModal, setShowModal] = useState(false)
+
+    const handleAddBoard = (title: string) => {
+        setShowModal(false)
+        handleAdd(title)
+    }
 
     return (
         <SidebarContainer show={isShow}>
@@ -103,7 +109,7 @@ const Sidebar = ({title, Img, boards, isShow, modalRef, boardId, userId, handleC
                 {
                 showModal && 
                     <Modal ref={modalRef} show={showModal} exit={() => setShowModal(false)}>
-                        <AddItemForm btnItem='ADD' item='FORM' title='Add board' onAdd={() => setShowModal(false)} /> 
+                        <AddItemForm btnItem='ADD' item='FORM' title='Add board' onAdd={handleAddBoard} /> 
                     </Modal>
                 }
             </SidebarLinkWrapper>
