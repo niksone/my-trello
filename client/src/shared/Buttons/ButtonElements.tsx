@@ -1,175 +1,173 @@
-import styled, { css, FlattenInterpolation, ThemedStyledProps } from "styled-components";
-import { btnIconSizes, ButtonProps, sizes } from ".";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
+import { btnIconSizes, ButtonProps, ButtonVariants, sizes } from ".";
 import { COLORS } from "../constants";
 
-type ColorSchemeValues = {
-    resting: string
-    hover: string
-    active: string
-    textColor: string
-    textColorHover: string
-}
-interface ColorSchemesI {
-    [key: string]: ColorSchemeValues
+export type ColorScheme = 'primary'  | 'error'
+
+export type ColorSchemeValues = {
+    primary: ColorSchemesStyles | null
+    error: ColorSchemesStyles | null,
+    advanced?: FlattenSimpleInterpolation 
 }
 
-export const colorSchemes: ColorSchemesI = {
-    primary: {
-        resting: COLORS.primaryLight,
-        hover: COLORS.buttonHover,
-        active: COLORS.primary,
-        textColor: COLORS.primary,
-        textColorHover: '#fff'
-    },
-
-    primaryError: {
-        resting: COLORS.primaryLight,
-        hover: COLORS.error,
-        active: COLORS.primary,
-        textColor: COLORS.error,
-        textColorHover: '#fff'
-    },
-
-    errorLight: {
-        resting: COLORS.errorLight,
-        hover: COLORS.error,
-        active: COLORS.error,
-        textColor: COLORS.error,
-        textColorHover: '#fff'
-    },
-
-    error: {
-        resting: COLORS.error,
-        hover: COLORS.errorHover,
-        active: COLORS.errorHover,
-        textColor: '#fff',
-        textColorHover: '#fff'
-    },
-
-    light: {
-        resting: '#fff',
-        hover: '#fff',
-        active: '#fff',
-        textColor: COLORS.primaryGrey,
-        textColorHover: COLORS.primaryGrey
-    }
+export type ColorSchemesStyles = {
+    bg: string
+    bgHover: string,
+    bgActive: string,
+    textColor: string,
+    textColorHover: string,
+    textColorActive: string,
+    border: string,
+    borderHover: string
 }
 
-const shadowStylesActive = css`
-    background-color: var(--color-primary-light);
-    color: var(--color-primary);
-`;
 
-const shadowStyles = css<ButtonProps>`
-    background: none;
-    border: none;
-    color: ${({ color }) => (color ? color : COLORS.primaryGrey)};
-    ${({ active }) => active && shadowStylesActive}
+type ColorSchemesI = Record<ButtonVariants, ColorSchemeValues>
 
-    &:hover {
-        background-color: var(--color-primary-light);
-    }
+export const colorSchemes: ColorSchemesI = { 
+    fill: {
+        primary: {
+            bg: COLORS.primaryLight,
+            bgHover: COLORS.buttonHover,
+            bgActive: COLORS.primary,
+            textColor: COLORS.primary,
+            textColorHover: '#fff',
+            textColorActive: '#fff',
+            border: 'none',
+            borderHover: 'none'
+        },
+        error: {
+            bg: COLORS.errorLight,
+            bgHover: COLORS.errorHover,
+            bgActive: COLORS.error,
+            textColor: COLORS.error,
+            textColorHover: '#fff',
+            textColorActive: '#fff',
+            border: 'none',
+            borderHover: 'none'
+        }
+    },
+    outline: {
+        primary: {
+            bg: 'none',
+            bgHover: 'none',
+            bgActive: 'none',
+            textColor: COLORS.primaryGrey,
+            textColorHover: COLORS.primary,
+            textColorActive: COLORS.primary,
+            border: `1px solid ${COLORS.buttonOutlineResting}`,
+            borderHover: `1px solid ${COLORS.primary}`
+        },
+        error: {
+            bg: 'none',
+            bgHover: 'none',
+            bgActive: COLORS.error,
+            textColor: COLORS.primaryGrey,
+            textColorHover: COLORS.error,
+            textColorActive: COLORS.error,
+            border: `1px solid ${COLORS.buttonOutlineResting}`,
+            borderHover: `1px solid ${COLORS.error}`
+        }
+    },
+    shadow: {
+        primary: {
+            bg: 'none',
+            bgHover: COLORS.primaryLight,
+            bgActive: COLORS.primaryLight,
+            textColor: COLORS.primaryGrey,
+            textColorHover: COLORS.primaryGrey,
+            textColorActive: COLORS.primary,
+            border: 'none',
+            borderHover: 'none'
+        },
+        error: {
+            bg: 'none',
+            bgHover: COLORS.errorLight,
+            bgActive: COLORS.errorLight,
+            textColor: COLORS.primaryGrey,
+            textColorHover: COLORS.primaryGrey,
+            textColorActive: COLORS.error,
+            border: 'none',
+            borderHover: 'none'
+        },
+    },
 
-    &:active {
-        ${shadowStylesActive}
-    }
-`;
+    dashed: {
+        primary: {
+            bg: 'none',
+            bgHover: 'none',
+            bgActive: 'none',
+            textColor: COLORS.primaryDark,
+            textColorHover: COLORS.primary,
+            textColorActive: COLORS.primary,
+            border: `1px dashed ${COLORS.restingOutline}`,
+            borderHover: `1px dashed ${COLORS.primary}`
+        },
+        error: {
+            bg: 'none',
+            bgHover: 'none',
+            bgActive: 'none', 
+            textColor: COLORS.primaryDark,
+            textColorHover: COLORS.error,
+            textColorActive: COLORS.error,
+            border: `1px dashed ${COLORS.restingOutline}`,
+            borderHover: `1px dashed ${COLORS.error}`
+        },
+    },
 
-const outlineStylesActive = css`
-    border: 1px var(--color-primary) solid;
-    color: var(--color-primary);
-`;
+    unstyle: {
+        primary: null,
+        error: null,
+        advanced: 
+            css`
+                border: none;
+                outline: none;
+                background: none;
+                padding: 0;
+                margin: 0;
+            `
+    },
 
-const outlineStyles = css<ButtonProps>`
-    background: none;
-    border: 1px ${({ color }) => (color ? color : COLORS.buttonOutlineResting)} solid;
-    color: ${({ color }) => (color ? color : COLORS.primaryGrey)};
-    ${({ active }) => active && outlineStylesActive}
+    invisible: {
+        primary: null,
+        error: null,
+        advanced: 
+            css`
+                opacity: 0;
+            `
+    },
+}
 
-    &:hover {
-        border: 1px var(--color-primary) solid;
-        color: black;
-    }
+const getStyle = (variant = 'fill', colorScheme = 'primary', active = false) => {
+    const {bg, bgHover, bgActive, textColor, textColorHover, textColorActive, border, borderHover} = colorSchemes[variant][colorScheme] || {}
+    
+    const {advanced} = colorSchemes[variant]
 
-    &:active {
-        ${outlineStylesActive}
-    }
-`;
+    return css`
+        background: ${bg};
+        color: ${textColor};
+        border: ${border};
+        ${active &&             
+            `background: ${bgActive};
+            color: ${textColorActive};`
+        }
+        
 
-const fillStylesActive = css<ButtonProps>`
-    background: ${({ colorScheme }) =>
-        colorScheme
-            ? colorSchemes[colorScheme].active
-            : colorSchemes.primary.active};
-    color: #fff;
-`;
+        &:hover{
+            background: ${bgHover};
+            color: ${textColorHover};
+            border: ${borderHover};
+        }
 
-const fillStyles = css<ButtonProps>`
-    background: ${({ colorScheme }) =>
-        colorScheme
-            ? colorSchemes[colorScheme].resting
-            : colorSchemes.primary.resting};
-    color: ${({ color, colorScheme }) =>
-        color
-            ? color
-            : colorScheme
-            ? colorSchemes[colorScheme].textColor
-            : colorSchemes.primary.textColor};
+        &:active{
+            background: ${bgActive};
+            color: ${textColorActive};
+        }
 
-    border: none;
-    ${({ active }) => active && fillStylesActive}
+        ${advanced}
+    `
+}
 
-    &:hover {
-        background: ${({ colorScheme }) =>
-            colorScheme
-                ? colorSchemes[colorScheme].hover
-                : colorSchemes.primary.hover};
-        color: ${({ color, colorScheme }) =>
-            color
-                ? color
-                : colorScheme
-                ? colorSchemes[colorScheme].textColorHover
-                : colorSchemes.primary.textColorHover};
-    }
-
-    &:active {
-        ${fillStylesActive}
-    }
-
-    &:disabled {
-        background: var(--color-background);
-        color: var(--color-primary-grey);
-    }
-`;
-
-const unstyleStyles = css`
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-`;
-
-const dashedStyles = css`
-    border: 1px dashed var(--color-resting-outline);
-`;
-
-const invisibleStyles = css`
-    opacity: 0;
-`;
-
-type stylesOptions = {
-    [key: string]: FlattenInterpolation<ThemedStyledProps<ButtonProps, {}>>;
-};
-
-const styles: stylesOptions = {
-    outline: outlineStyles,
-    fill: fillStyles,
-    shadow: shadowStyles,
-    unstyle: unstyleStyles,
-    dashed: dashedStyles,
-    invisible: invisibleStyles,
-};
 export const ButtonContainer = styled.button<ButtonProps>`
     display: flex;
     justify-content: ${({ jc }) => (jc ? jc : "center")};
@@ -182,10 +180,16 @@ export const ButtonContainer = styled.button<ButtonProps>`
     outline: none;
     transition: 0.2s all ease-in-out;
     width: ${({ widthFill }) => (widthFill ? "100%" : "auto")};
-    ${({ variant }) => (variant ? styles[variant] : "fill")};
     font-size: var(--text-regular);
     font-weight: ${({ fw }) => fw};
-    background: ${({ bg }) => bg && bg};
+    ${({bg}) => bg ?`background: ${bg}` : ''}
+    
+    &:hover{
+        ${({bg}) => bg ?`background: ${bg}` : ''}
+    }
+    ${({ variant, colorScheme, active}) => getStyle(variant, colorScheme, active)}
+
+    /* color: ${({active, variant, colorScheme}) => active && variant && colorScheme ? colorSchemes[variant][colorScheme]?.textColorActive : ''}; */
 `;
 
 export const ButtonIconContainer = styled.div`
@@ -199,11 +203,16 @@ export const BtnIconContainer = styled.button<ButtonProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${({ variant }) => (variant ? styles[variant] : "fill")};
     height: ${({ size }) => (size ? btnIconSizes[size] : btnIconSizes.md)};
     width: ${({ size }) => (size ? btnIconSizes[size] : btnIconSizes.md)};
     cursor: pointer;
     border-radius: 8px;
     outline: none;
     transition: 0.2s all ease-in-out;
+    ${({ variant, colorScheme}) =>getStyle(variant, colorScheme)}
+    background: ${({bg}) => bg ?`${bg}` : ''};
+
+    &:hover{
+        ${({bg}) => bg ? `background: ${bg} ` : ''}
+    }
 `;

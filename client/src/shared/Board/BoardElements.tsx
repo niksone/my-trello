@@ -13,7 +13,7 @@ export const BoardContainer = styled.div`
   }
 
   & > * {
-    height:100%;  
+    /* height:100%;   */
   }
 `
 

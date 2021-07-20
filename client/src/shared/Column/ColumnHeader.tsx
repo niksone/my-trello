@@ -40,7 +40,7 @@ const ColumnHeader = ({title, handleDeleteList, handleEditList, handleAddCard}: 
                         </Button>
                         <Button
                             size="lg"
-                            colorScheme="errorLight"
+                            colorScheme="error"
                             Icon={<TrashcanIcon />}
                             onClick={handleDeleteList}
                             fw="700"

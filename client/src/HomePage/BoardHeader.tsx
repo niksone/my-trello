@@ -59,10 +59,10 @@ const BoardHeader = ({
                     <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Button
                             shape="icon"
-                            variant={isMobileWidth ? 'outline' : 'fill'}
                             size="lg"
                             onClick={sidebarOpen}
-                            colorScheme={isMobileWidth ? '' : 'light'}
+                            variant='outline'
+                            bg='#fff'
                         >
                             <MenuIcon />
                         </Button>
@@ -116,7 +116,7 @@ const BoardHeader = ({
                                     <Button
                                         onClick={handleLogout}
                                         Icon={<LogoutIcon />}
-                                        colorScheme="errorLight"
+                                        colorScheme="error"
                                     >
                                         Log Out
                                     </Button>
@@ -127,8 +127,8 @@ const BoardHeader = ({
                             <Button 
                                 shape="icon" 
                                 size="lg"
-                                variant={isMobileWidth ? 'outline' : 'fill'}
-                                colorScheme={isMobileWidth ? '' : 'light'}
+                                variant='outline'
+                                bg='#fff'
                             >
                                 <MoreIcon />
                             </Button>
