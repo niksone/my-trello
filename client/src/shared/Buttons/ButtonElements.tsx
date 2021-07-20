@@ -156,14 +156,14 @@ export const colorSchemes: ColorSchemesI = {
 
 
 
-const getActiveStyles = (bgActive, textColorActive)=>
+const getActiveStyles = (bgActive: string = '', textColorActive: string = '')=>
  css`
     background: ${bgActive};
     color: ${textColorActive};
 `
 
 
-const getStyle = (variant = 'fill', colorScheme = 'primary', active = false) => {
+const getStyle = (variant: ButtonVariants = 'fill', colorScheme: ColorScheme = 'primary', active = false) => {
     const {bg, bgHover, bgActive, textColor, textColorHover, textColorActive, border, borderHover} = colorSchemes[variant][colorScheme] || {}
     
     const {advanced} = colorSchemes[variant]

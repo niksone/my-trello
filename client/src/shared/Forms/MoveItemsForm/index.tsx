@@ -8,15 +8,15 @@ import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
 import { FormContainer, FormContent,FormHeaderContainer, FormHeaderWrapper, FormWrapper } from '../FormElements'
 import FormHeader from '../FormHeader'
-import { ItemWithId } from '../interfaces'
+import { ItemI, ItemLabelField } from '../interfaces'
 import { MoveItem, MoveItemFormContainer } from './MoveItensFormElements'
 
 interface MoveItemsFormProps {
     headerTitle: string
     title: string
     subtitle: string
-    items: ItemWithId[]
-    itemLabelField: 'title' | 'name'
+    items: ItemI[]
+    itemLabelField: ItemLabelField
     
     onExit: () => void,
     onUpdate: (sourceIndex: number, destIndex: number) => void,
