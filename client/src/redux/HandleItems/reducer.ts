@@ -1,4 +1,4 @@
-import { Board } from '../Board/interfaces';
+import { BoardI } from '../Board/interfaces';
 import { moveItem } from '../../utils/moveItem'
 import { moveItemBetweenLists } from '../../utils/moveItemBetweenLists'
 import { HandleItemsAction } from './actions'
@@ -13,7 +13,7 @@ const getCards = (lists: List[]) => {
     return lists?.map(list => list.cards).flat().map(card => card._id)
 }
 
-export const setBoard = (board: Board) => (dispatch: Dispatch) => {
+export const setBoard = (board: BoardI) => (dispatch: Dispatch) => {
     dispatch({type: 'SET_BOARD', payload: board})
 }
 

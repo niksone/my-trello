@@ -1,24 +1,24 @@
 import { instance } from ".";
 import { CardI, List } from "../redux/HandleItems/interfaces";
-import { Board } from "../redux/Board/interfaces";
+import { BoardI } from "../redux/Board/interfaces";
 
 export const boardApi = {
     async getBoards(userId: string) {
-        const boards = await instance.get<Board[]>('/boards', {params: {userId: userId}})
+        const boards = await instance.get<BoardI[]>('/boards', {params: {userId: userId}})
         return boards
     },
 
     async addBoard(userId: string, boardName: string) {
-        const board = await instance.post<Board>('/boards', {userId, boardName})
+        const board = await instance.post<BoardI>('/boards', {userId, boardName})
         return board
     },
 
     async deleteBoard(userId: string, boardId: string) {
-        const board = await instance.delete<Board>('/boards', {data: {userId, boardId}})
+        const board = await instance.delete<BoardI>('/boards', {data: {userId, boardId}})
         return board
     },
     async editBoardName(boardId: string, boardName: string) {
-        const board = await instance.patch<Board>('/boards', {boardId, boardName})
+        const board = await instance.patch<BoardI>('/boards', {boardId, boardName})
         return board
     },
 
@@ -37,7 +37,7 @@ export const boardApi = {
     },
 
     async moveList(boardId: string, sourceIndex: number, destinationIndex: number) {
-        const updateBoard = await instance.patch<Board>('/boards/moveList', {boardId,sourceIndex,destinationIndex})
+        const updateBoard = await instance.patch<BoardI>('/boards/moveList', {boardId,sourceIndex,destinationIndex})
         return updateBoard
     },
 
@@ -62,7 +62,7 @@ export const boardApi = {
         boardId: string, sourceListIndex: number, destListIndex: number, 
         sourceCardIndex: number, destCardIndex: number
     ) {
-        const updateBoard = await instance.patch<Board>(
+        const updateBoard = await instance.patch<BoardI>(
             '/boards/moveCard', 
             {boardId, sourceListIndex, destListIndex, sourceCardIndex, destCardIndex}
         )

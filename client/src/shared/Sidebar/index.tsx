@@ -1,6 +1,6 @@
 import { Ref, useRef, useState } from "react";
 import EditBoardForm from "../../HomePage/EditBoardForm";
-import { Board } from "../../redux/Board/interfaces";
+import { BoardI } from "../../redux/Board/interfaces";
 import AddItemForm from "../AddNewItem/AddItemForm";
 import Button from "../Buttons";
 import { HeaderContainer, LogoWrapper } from "../Header/HeaderElements";
@@ -14,7 +14,7 @@ import { LogoImgWrapper, SidebarButtonWrapper, SidebarClose, SidebarContainer, S
 interface BoardSidebarProps {
     title: string
     Img: JSX.Element
-    boards: Board[]
+    boards: BoardI[]
     isShow: boolean
     modalRef: Ref<ModalHandle>
     boardId: string
@@ -48,7 +48,7 @@ const Sidebar = ({title, Img, boards, isShow, modalRef, boardId, userId, handleC
                     </LogoWrapper>
                 </HeaderContainer>
                     {
-                        boards?.map((board: Board) => 
+                        boards?.map((board: BoardI) => 
                         <SidebarLinkContainer key={board._id}>
                             <SidebarLinkWrapper active={board._id === boardId}>
                                 <SidebarLink to={`/board/${board._id}`} key={board._id} onClick={handleClose}>

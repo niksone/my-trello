@@ -1,6 +1,6 @@
 import { List } from "../HandleItems/interfaces";
 
-export interface Board {
+export interface BoardI {
     _id: string,
     name: string,
     lists: List[],
@@ -10,6 +10,6 @@ export interface Board {
 }
 
 export interface BoardReducerProps {
-    boards: Board[],
+    boards: BoardI[],
     isLoading: boolean
 }

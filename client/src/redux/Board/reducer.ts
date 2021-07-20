@@ -1,8 +1,8 @@
 import { BoardAction } from "./actions"
-import { Board, BoardReducerProps } from './interfaces';
+import { BoardI, BoardReducerProps } from './interfaces';
 
 const initialState: BoardReducerProps = {
-    boards: [] as Board[],
+    boards: [] as BoardI[],
     isLoading: true
 }
 

@@ -5,7 +5,7 @@ import { authApi } from '../api'
 import BoardSection from '../BoardSection'
 import { userContext } from '../Context'
 import {getBoards } from '../redux/Board/actionCreators'
-import { Board } from '../redux/Board/interfaces'
+import { BoardI } from '../redux/Board/interfaces'
 import { RootReducerType } from '../redux/store'
 import { ModalHandle } from '../shared/Modal'
 import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
@@ -30,7 +30,7 @@ const HomePage = () => {
 
     const {id} = useParams<{id: string}>()
 
-    const currentBoard = boards.find(board => board._id === id) || {} as Board
+    const currentBoard = boards.find(board => board._id === id) || {} as BoardI
 
     const handleLogout = async () => {
         await authApi.logout()

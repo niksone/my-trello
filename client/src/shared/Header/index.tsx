@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Board } from "../../redux/Board/interfaces";
+import { BoardI } from "../../redux/Board/interfaces";
 import { addList, deleteList, moveList, updateListTitle } from "../../redux/HandleItems/actionCreators";
 import { List } from "../../redux/HandleItems/interfaces";
 import Button from "../Buttons";
@@ -15,7 +15,7 @@ import { HeaderContainer, HeaderTitle, HeaderWrapper } from "./HeaderElements";
 
 
 interface BoardHeaderProps {
-    board: Board;
+    board: BoardI;
     lists: List[];
     sidebarOpen: () => void;
     handleLogout: () => void;
