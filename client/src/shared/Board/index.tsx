@@ -27,7 +27,7 @@ interface BoardRef extends HTMLDivElement {
   initialScroll: number
 }
 
-const BeautifulBoard = ({data}: BoardProps) => {
+const Board = ({data}: BoardProps) => {
     const dispatch = useDispatch()
     const {lists, cardIds, _id} = data
     const boardId = _id
@@ -210,4 +210,4 @@ const BeautifulBoard = ({data}: BoardProps) => {
 
 }
 
-export default BeautifulBoard
+export default Board
