@@ -22,8 +22,9 @@ import LogoutIcon from "../shared/icons/Logout/LogoutIcon";
 import MenuIcon from "../shared/icons/Menu/MenuIcon";
 import MoreIcon from "../shared/icons/More/MoreIcon";
 import Tooltip from "../shared/Tooltip";
-import { BoardName, ShowContainer } from "./HomePageElements";
+import { BoardName } from "./HomePageElements";
 import { BREAKPOINTS, isMobileWidth } from "../shared/constants";
+import { ShowContainer } from "../shared/ShowContainer";
 
 interface BoardHeaderProps {
     board: Board;

@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { ShowContainer } from "../../HomePage/HomePageElements";
 import {
     addCard,
     deleteList,
@@ -15,6 +14,7 @@ import { BREAKPOINTS } from "../constants";
 import CardForm from "../Forms/CardForm";
 import AddIcon from "../icons/Add/AddIcon";
 import { Modal, ModalHandle } from "../Modal";
+import { ShowContainer } from "../ShowContainer";
 import {
     AddCardContainer,
     ColumnCardContainer,
