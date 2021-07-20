@@ -12,7 +12,7 @@ import {ReactComponent as NoBoardImg} from '../shared/icons/no-board.svg'
 import BoardSidebar from './BoardSidebar'
 import { AppContainer, BoardSectionContainer, NoBoardSection, NoBoardTitle } from './HomePageElements'
 import AppLoader from '../shared/Loaders/AppLoader'
-import BoardHeader from './BoardHeader'
+import Header from '../shared/Header'
 
 
 const HomePage = () => {
@@ -60,7 +60,7 @@ const HomePage = () => {
             />
             <BoardSectionContainer>
                 
-                    <BoardHeader 
+                    <Header
                         board={currentBoard}
                         sidebarOpen={() => setShowSidebar(true)}
                         handleLogout={handleLogout}

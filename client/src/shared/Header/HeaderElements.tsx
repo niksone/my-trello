@@ -28,3 +28,7 @@ export const LogoWrapper = styled.div`
     font-weight: bold;
     color: var(--color-primary);
 `
+
+export const HeaderTitle = styled.h3`
+    font-size: var(--text-h3);
+`

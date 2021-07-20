@@ -1,30 +1,18 @@
 import { useDispatch } from "react-redux";
-import {
-    addList,
-    deleteList,
-    moveList,
-    updateListTitle,
-} from "../redux/HandleItems/actionCreators";
-import { List } from "../redux/HandleItems/interfaces";
-import { Board } from "../redux/Board/interfaces";
-import Button from "../shared/Buttons";
-import ButtonGroup from "../shared/Buttons/ButtonGroup";
-import {
-    HandleAddItemButton,
-    HandleEditItemsButton,
-    HandleMoveItemsButton,
-} from "../shared/HandleButtons/HandleButtons";
-import {
-    HeaderContainer,
-    HeaderWrapper,
-} from "../shared/Header/HeaderElements";
-import LogoutIcon from "../shared/icons/Logout/LogoutIcon";
-import MenuIcon from "../shared/icons/Menu/MenuIcon";
-import MoreIcon from "../shared/icons/More/MoreIcon";
-import Tooltip from "../shared/Tooltip";
-import { BoardName } from "./HomePageElements";
-import { BREAKPOINTS, isMobileWidth } from "../shared/constants";
-import { ShowContainer } from "../shared/ShowContainer";
+import { Board } from "../../redux/Board/interfaces";
+import { addList, deleteList, moveList, updateListTitle } from "../../redux/HandleItems/actionCreators";
+import { List } from "../../redux/HandleItems/interfaces";
+import Button from "../Buttons";
+import ButtonGroup from "../Buttons/ButtonGroup";
+import { BREAKPOINTS } from "../constants";
+import { HandleAddItemButton, HandleEditItemsButton, HandleMoveItemsButton } from "../HandleButtons/HandleButtons";
+import LogoutIcon from "../icons/Logout/LogoutIcon";
+import MenuIcon from "../icons/Menu/MenuIcon";
+import MoreIcon from "../icons/More/MoreIcon";
+import { ShowContainer } from "../ShowContainer";
+import Tooltip from "../Tooltip";
+import { HeaderContainer, HeaderTitle, HeaderWrapper } from "./HeaderElements";
+
 
 interface BoardHeaderProps {
     board: Board;
@@ -33,7 +21,7 @@ interface BoardHeaderProps {
     handleLogout: () => void;
 }
 
-const BoardHeader = ({
+const Header = ({
     board,
     lists,
     sidebarOpen,
@@ -68,7 +56,7 @@ const BoardHeader = ({
                             <MenuIcon />
                         </Button>
                     </ShowContainer>
-                    <BoardName>{board.name || "No Board Found"}</BoardName>
+                    <HeaderTitle>{board.name || "No Board Found"}</HeaderTitle>
 
                     <ShowContainer widthTo={BREAKPOINTS.laptop}>
                         <Tooltip
@@ -151,4 +139,4 @@ const BoardHeader = ({
     );
 };
 
-export default BoardHeader;
+export default Header;

@@ -1,10 +1,10 @@
-import { BoardName } from '../../../HomePage/HomePageElements'
 import AddItemForm from '../../AddNewItem/AddItemForm'
 import Button from '../../Buttons'
 import ConditionalWrapper from '../../ConditionalWrapper'
 import { isMobileWidth } from '../../constants'
 import Div100vh from '../../Div100vh'
 import EditableItem from '../../EditableItem'
+import { HeaderTitle } from '../../Header/HeaderElements'
 import AddIcon from '../../icons/Add/AddIcon'
 import ArrowIcon from '../../icons/Arrow/Arrow'
 import SaveIcon from '../../icons/Save/SaveIcon'
@@ -44,7 +44,7 @@ const EditItemsForm = ({items, headerTitle, title, subtitle, formItemFieldLabel,
                             onClick={onExit}>
                             <ArrowIcon direction='left' />
                         </Button>
-                        <BoardName>{headerTitle}</BoardName>
+                        <HeaderTitle>{headerTitle}</HeaderTitle>
                         
                         <Button shape='icon' variant='invisible' size='lg' >
                             <SaveIcon />

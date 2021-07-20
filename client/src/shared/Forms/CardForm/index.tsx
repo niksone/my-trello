@@ -18,10 +18,10 @@ import Div100vh from "../../Div100vh";
 import ConditionalWrapper from "../../ConditionalWrapper";
 import CardFormChecklist from "./CardFormChecklist";
 import CardFormDescription from "./CardFormDescription";
-import { BoardName } from "../../../HomePage/HomePageElements";
 import { COLORS, isMobileWidth } from "../../constants";
 import FormTitle from "../FormTitle";
 import FormSubtitle from "../FormSubtitle";
+import { HeaderTitle } from "../../Header/HeaderElements";
 
 interface CardFormProps {
     boardName: string;
@@ -160,7 +160,7 @@ const CardForm = ({
                                     >
                                         <ArrowIcon direction="left" />
                                     </Button>
-                                    <BoardName>{boardName}</BoardName>
+                                    <HeaderTitle>{boardName}</HeaderTitle>
 
                                     <Button
                                         shape="icon"
