@@ -6,7 +6,7 @@ import {
     deleteList,
     updateListTitle,
 } from "../../redux/HandleItems/actionCreators";
-import { Card, List, SimpleCard, Task } from "../../redux/HandleItems/interfaces";
+import { CardI, List, SimpleCardI, Task } from "../../redux/HandleItems/interfaces";
 import { RootReducerType } from "../../redux/store";
 import Button from "../Buttons";
 import BeautifulCard from "../Card/BeautifulCard";
@@ -30,7 +30,7 @@ interface ColumnPropsI {
     list: List;
     index: number;
     cardIds: string[];
-    cards: Card[];
+    cards: CardI[];
     onAdd(text: string): void;
 }
 
@@ -81,7 +81,7 @@ const BeautifulDragColumn = ({
                                 >
                                     <ColumnCardWrapper>
                                         {cards?.map(
-                                            (card: Card, index: number) => (
+                                            (card: CardI, index: number) => (
                                                 <BeautifulCard
                                                     cardId={card._id}
                                                     card={card}
@@ -104,7 +104,7 @@ const BeautifulDragColumn = ({
                                                 description=""
                                                 columnId={id}
                                                 cardId=""
-                                                onSave={(card: SimpleCard) =>
+                                                onSave={(card: SimpleCardI) =>
                                                     dispatch(
                                                         addCard(
                                                             boardId,

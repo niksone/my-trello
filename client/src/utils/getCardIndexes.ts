@@ -1,4 +1,4 @@
-import { Card, List } from "../redux/HandleItems/interfaces"
+import { CardI, List } from "../redux/HandleItems/interfaces"
 
 export const getMoveIndexes = <T extends List>(
     lists: T[], destDroppableId: string, sourceDroppableId: string, 
@@ -8,11 +8,11 @@ export const getMoveIndexes = <T extends List>(
     const sourceArrIndex = lists.findIndex((list: List) => list._id === sourceDroppableId)
     
     const sourceCardIndex = lists[sourceArrIndex].cards.findIndex(
-        (card: Card) => card._id === cardIds[sourceIndex]
+        (card: CardI) => card._id === cardIds[sourceIndex]
     )
 
     const destCardIndex = lists[destArrIndex].cards.findIndex(
-        (card: Card) => card._id === (cardIds[destIndex] && cardIds[destIndex])
+        (card: CardI) => card._id === (cardIds[destIndex] && cardIds[destIndex])
     )
 
     return {destArrIndex, sourceArrIndex, sourceCardIndex, destCardIndex}

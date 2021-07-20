@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteCard, updateCard } from '../../redux/HandleItems/actionCreators'
-import { Card, SimpleCard, Task } from '../../redux/HandleItems/interfaces'
+import { CardI, SimpleCardI, Task } from '../../redux/HandleItems/interfaces'
 import { RootReducerType } from '../../redux/store'
 import ProgressBar from '../ProgressBar'
 import { CardProgressContainer, CardContainer, CardContainerBlock, CardDescription,CardProgressInfo, CardProgressLabel, CardProgressStage, CardProgressIcon } from './CardElements'
@@ -14,7 +14,7 @@ import CardHeader from './CardHeader'
 
 interface CardPropsI {
     cardId: string,
-    card: Card,
+    card: CardI,
     listId: string
 }
 
@@ -35,7 +35,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
     dispatch(deleteCard(boardId, listId, cardId))
   }
 
-  const handleSave = (savedCard: SimpleCard) => {
+  const handleSave = (savedCard: SimpleCardI) => {
     dispatch(updateCard(boardId, listId, cardId, {_id: card._id, ...savedCard}))
   }
 
@@ -96,7 +96,7 @@ const BeautifulCard = ({cardId, card, listId}: CardPropsI) => {
                   description={card.description}
                   tasks={card.tasks}
                   onExit={() => modalRef?.current?.close()}
-                  onSave={(savedCard: SimpleCard) => handleSave(savedCard)}
+                  onSave={(savedCard: SimpleCardI) => handleSave(savedCard)}
                 />
               </Modal>
             }

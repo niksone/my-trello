@@ -1,6 +1,6 @@
 import ObjectID from "bson-objectid";
 import { useState } from "react";
-import { SimpleCard, Task } from "../../../redux/HandleItems/interfaces";
+import { SimpleCardI, Task } from "../../../redux/HandleItems/interfaces";
 import Button from "../../Buttons";
 
 import {
@@ -32,7 +32,7 @@ interface CardFormProps {
     description: string;
     tasks: Task[];
     onExit?: () => void;
-    onSave?: (card: SimpleCard) => void;
+    onSave?: (card: SimpleCardI) => void;
 }
 
 const CardForm = ({
@@ -46,7 +46,7 @@ const CardForm = ({
     onExit,
     onSave,
 }: CardFormProps) => {
-    const [card, setCard] = useState<SimpleCard>({
+    const [card, setCard] = useState<SimpleCardI>({
         title,
         subtitle,
         description,

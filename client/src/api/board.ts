@@ -1,5 +1,5 @@
 import { instance } from ".";
-import { Card, List } from "../redux/HandleItems/interfaces";
+import { CardI, List } from "../redux/HandleItems/interfaces";
 import { Board } from "../redux/Board/interfaces";
 
 export const boardApi = {
@@ -41,18 +41,18 @@ export const boardApi = {
         return updateBoard
     },
 
-    async addCard(boardId: string, listId: string, card: Card){
-        const listItem = await instance.post<Card>('/boards/card', {boardId, listId, card})
+    async addCard(boardId: string, listId: string, card: CardI){
+        const listItem = await instance.post<CardI>('/boards/card', {boardId, listId, card})
         return listItem
     },
 
     async deleteCard(boardId: string, listId: string, cardId: string) {
-            const list = await instance.delete<Card>('/boards/card', {data: {boardId, listId, cardId}})
+            const list = await instance.delete<CardI>('/boards/card', {data: {boardId, listId, cardId}})
             return list
     },
 
-    async updateCard(boardId: string, listId: string, cardId: string, card: Card){
-            const updatedCard = await instance.patch<Card>(
+    async updateCard(boardId: string, listId: string, cardId: string, card: CardI){
+            const updatedCard = await instance.patch<CardI>(
                 '/boards/card', 
                 {boardId, listId, cardId, card}
             )
